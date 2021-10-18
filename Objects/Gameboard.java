@@ -17,9 +17,12 @@ public class Gameboard {
 	public ArrayList<Tile> getTiles() {
 		return tiles;
 	}
-	public void setTiles(Tile tile) {
+	public void addTile(Tile tile) {
 		this.tiles.add(tile);
 		// Called from Tile object
+	}
+	public void removeTile(int ID) {
+		tiles.remove(findByID(ID));
 	}
 	public int getID() {
 		return ID;
@@ -35,9 +38,16 @@ public class Gameboard {
 	public Tile getNext(Tile tile) {
 		//
 	}
+	
+	
 	*/
+	
 	private void to_json(Gameboard current) {
 		//persistence method
+	}
+	
+	public Tile findByID(int ID) {
+	    return this.tiles.stream().filter(id -> id.ID == ID).findFirst().orElse(null);
 	}
 	
 	
