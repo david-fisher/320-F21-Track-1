@@ -47,7 +47,7 @@ public class Gameboard {
 	}
 	
 	public Tile findByID(int ID) {
-	    return this.tiles.stream().filter(id -> id.ID == ID).findFirst().orElse(null);
+	    return this.tiles.stream().filter(tile -> tile.ID == ID).findFirst().orElse(null);
 	}
 	
 	
