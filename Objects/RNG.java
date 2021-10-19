@@ -1,12 +1,12 @@
 package Objects;
-import java.util.Random;
 import java.util.*;
+import Objects.*;
 
 /* 
 Class return an array of generated random elements
 */
 public class RNG{
-    int id, num, seed; int[] range; Random rand;
+    int ID, num, seed; int[] range; Random rand;
     /*
     Attributes:
         ID: every random generator has an unique ID
@@ -16,7 +16,7 @@ public class RNG{
     */
 
     public RNG(int id){
-        this.id = id;
+        this.ID = id;
         this.range[0] = 0;
         this.range[1] = 1;
         this.num = -1;
@@ -25,7 +25,7 @@ public class RNG{
     }
 
     public RNG(int id, int[] range){
-        this.id = id;
+        this.ID = id;
         this.range = range;
         this.num = -1;
         this.seed = -1;
@@ -33,7 +33,7 @@ public class RNG{
     }
     
     public RNG(int id, int[] range, int seed){
-        this.id = id;
+        this.ID = id;
         this.range = range;
         this.seed = seed;
         this.num = -1;
@@ -41,12 +41,31 @@ public class RNG{
     }
     
     public RNG(int id, int[] range, int seed, int num){
-        this.id = id;
+        this.ID = id;
         this.range = range;
         this.seed = seed;
         this.num = num;
         this.rand = new Random(this.seed);
     }
+
+    public int get_id(){return this.ID;}
+
+    public int get_seed(){return this.seed;}
+
+    public int delete_seed(){
+        int current_seed = this.seed;
+        this.seed = -1;
+        this.rand = new Random();
+        return current_seed;
+    }
+
+    public int replace_seed(int new_seed){
+        int current_seed = this.seed;
+        this.seed = new_seed;
+        this.rand = new Random(this.seed);
+        return current_seed;
+    }
+
 
     public double[] ran_double(){
         double[] result; result = new double[this.num];
@@ -74,7 +93,7 @@ public class RNG{
 
     public Hashtable<String, Integer> to_json(){
         Hashtable<String, Integer> result = new Hashtable<String, Integer>();
-        result.put("id", this.id);
+        result.put("id", this.ID);
         result.put("min", this.range[0]);
         result.put("max", this.range[1]);
         result.put("num", this.num);
