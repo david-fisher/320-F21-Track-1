@@ -1,14 +1,15 @@
+package MainMenu;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.SequentialTransition;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.*;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -16,191 +17,25 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
-import javafx.scene.text.*;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import MainMenu.Helpers.*;
+import javafx.util.Duration;
 
-public class Menu extends Application {
-    public static void main(String[] args) {launch(args); }
-
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Board Game Editor Student Edition 2017");
-        primaryStage.setResizable(false);
-        StackPane root = new StackPane();
-        Button playB = ButtonMaker("Play");
-        BackgroundImage backgroundImage = new BackgroundImage(new Image("MainMenu/tile.jpg", 200, 200, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        playB.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                primaryStage.setScene(playSceneSelector(primaryStage, primaryStage.getScene()));
-            }
-        });
-        Button editB = ButtonMaker("Edit");
-        Button exitB = ButtonMaker("Exit");
-        exitB.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                primaryStage.close();
-            }
-        });
-        GridPane mainMenu = new GridPane();
-        mainMenu.add(playB, 0, 0);
-        mainMenu.add(editB, 1 ,0);
-        mainMenu.setHgap(20);
-        mainMenu.setAlignment(Pos.CENTER);
-        BorderPane border = new BorderPane();
-        border.setPadding(new Insets(20, 20, 100, 20));
-        border.setBottom(exitB);
-
-        BorderPane.setAlignment(exitB, Pos.CENTER);
-
-        border.setCenter(mainMenu);
-        root.getChildren().add(border);
-        //root.setBackground(new Background(backgroundImage));
-        root.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-        Scene scene = new Scene(root, Screen.getPrimary().getBounds().getWidth()*0.36458333, 700);
-        scene.setFill(new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, new Stop(0, Color.web("#81c483")), new Stop(1, Color.WHITE)));
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        primaryStage.centerOnScreen();
-    }
-    private Button ButtonMaker(String text){
-        Button btn = new Button();
-        btn.setText(text);
-        btn.setPrefWidth(300);
-        //btn.setPrefHeight(100);
-        btn.setFont(Font.font("Arial Regular", FontWeight.BOLD, FontPosture.REGULAR, 30));
-        return(btn);
-    }
-
-    private Scene playSceneSelector(Stage primaryStage, Scene prev){
-        Button newg = ButtonMaker("New Game");
-        newg.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                primaryStage.setScene(levelSelector(primaryStage, primaryStage.getScene()));
-            }
-        });
-        Button saveg = ButtonMaker("Saved Game");
-        BackgroundImage backgroundImage = new BackgroundImage(new Image("MainMenu/tile.jpg", 200, 200, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
-        saveg.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                primaryStage.setScene(savedGame(primaryStage, primaryStage.getScene()));
-            }
-        });
-        Button quitg = ButtonMaker("Back");
-        quitg.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                primaryStage.setScene(prev);
-            }
-        });
-        VBox pVbox = new VBox(20);
-        pVbox.setAlignment(Pos.CENTER);
-        pVbox.getChildren().addAll(newg, saveg, quitg);
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().add(pVbox);
-        //stackPane.setBackground(new Background(backgroundImage));
-        stackPane.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-        Scene scene = new Scene(stackPane, Screen.getPrimary().getBounds().getWidth()*0.36458333, 700);
-        scene.setFill(new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, new Stop(0, Color.web("#81c483")), new Stop(1, Color.WHITE)));
-        return scene;
-    }
-    public class Games {
-        String name;
-        String date;
-
-        Games(String n, String d) {
-            this.name = n;
-            this.date = d;
-        }
-    }
-
-    public Games[] makeGames() {
-
-        Games game1 = new Games("Life", "1:23:45");
-        Games game2 = new Games("Life 2", "1:23:45");
-        Games game3 = new Games("250 With Marius", "1:23:45");
-        Games game4 = new Games("Standing up and saying your name to the rest of the class", "1:23:45");
-        Games game5 = new Games("Track 1: Total War", "1:23:45");
-        Games game6 = new Games("Finally Setting Up Github", "1:23:45");
-        Games game7 = new Games("Forgetting the Microphone", "1:23:45");
-        Games game8 = new Games("Extreme Monopoly", "1:23:45");
-        Games[] games = new Games[]{game1, game2, game3, game4, game5, game6, game7, game8};
-        return games;
-    }
-
-    private Scene savedGame(Stage primaryStage, Scene prev){
-        BorderPane borderPane = new BorderPane();
-        VBox vBox = new VBox(20);
-        HBox hBox = new HBox(20);
-        Text gameT = new Text("   Game                                               ");
-        Text gameD = new Text("Play Time");
-        gameT.setFont(Font.font("Arial Regular", FontWeight.NORMAL, FontPosture.ITALIC, 30));
-        gameD.setFont(Font.font("Arial Regular", FontWeight.NORMAL, FontPosture.ITALIC, 30));
-        hBox.getChildren().addAll(gameT,gameD);
-        borderPane.setTop(hBox);
-
-        ScrollPane scroll = new ScrollPane();
-        Games[] games = makeGames();
-        List<Button> bList = new ArrayList<>();
-        for(Games g : games){
-            bList.add(ButtonMaker(g.name));
-            vBox.getChildren().add(dateHbox(bList.get(bList.size()-1), textMaker(g.date)));
-        }
-        Button eBut = ButtonMaker("Back");
-        eBut.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                primaryStage.setScene(prev);
-            }
-        });
-        borderPane.setBottom(eBut);
-        borderPane.setAlignment(eBut, Pos.CENTER);
-        for(Button b : bList){
-            b.setPrefWidth(500);
-            b.setWrapText(true);
-        }
-        scroll.setContent(vBox);
-        scroll.setFitToWidth(true);
-        scroll.setStyle("-fx-background: transparent; -fx-background-color: transparent; ");
-        borderPane.setCenter(scroll);
-        BackgroundImage backgroundImage = new BackgroundImage(new Image("MainMenu/tile.jpg", 200, 200, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        //vBox.setBackground(new Background(backgroundImage));
-        vBox.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-        //borderPane.setBackground(new Background(backgroundImage));
-        borderPane.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-        Scene scene = new Scene(borderPane, Screen.getPrimary().getBounds().getWidth()*0.36458333, 700);
-        scene.setFill(new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, new Stop(0, Color.web("#81c483")), new Stop(1, Color.WHITE)));
-        return scene;
-    }
-
-    private HBox dateHbox(Button b, Text t){
-        HBox h = new HBox(20);
-        h.getChildren().setAll(b, t);
-        return h;
-    }
-
-    private Text textMaker(String s){
-        Text t = new Text(s);
-        t.setFont(Font.font("Arial Regular", FontWeight.NORMAL, FontPosture.ITALIC, 20));
-        return t;
-    }
-
-    private Scene levelSelector(Stage primaryStage, Scene prev){
+public class NewGameSelector {
+    protected static Scene makeScene(Stage primaryStage, Scene prev){
         BorderPane border = new BorderPane();
         border.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
         ScrollPane scroll = new ScrollPane();
@@ -219,12 +54,12 @@ public class Menu extends Application {
         border.setAlignment(gameT, Pos.CENTER);
 
         vb.setAlignment(Pos.CENTER);
-        Games[] games = makeGames();
+        Helper.Games[] games = Helper.makeGames();
         List<Button> buttonList = new ArrayList<>();
-        for(Games g : games) {
-            buttonList.add(ButtonMaker(g.name));
+        for(Helper.Games g : games) {
+            buttonList.add(Helper.ButtonMaker(g.name));
         }
-        Button eBut = ButtonMaker("Back");
+        Button eBut = Helper.ButtonMaker("Back");
         eBut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -256,7 +91,7 @@ public class Menu extends Application {
         buttonList.get(buttonList.size()-1).setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                primaryStage.setScene(tutorialScene(primaryStage, primaryStage.getScene()));
+                primaryStage.setScene(TutorialScene.tutorialScene(primaryStage, primaryStage.getScene()));
             }
         });
         for(Button b: buttonList) {
@@ -271,64 +106,12 @@ public class Menu extends Application {
         //BackgroundImage backgroundImage = new BackgroundImage(new Image("tile.jpg", 200, 200, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         //border.setBackground(new Background(backgroundImage));
         //vb.setBackground(new Background(backgroundImage));
-        Scene scene = new Scene(border, Screen.getPrimary().getBounds().getWidth()*0.36458333, 700);
+        Scene scene = new Scene(border, Screen.getPrimary().getBounds().getWidth()*0.36458333, Screen.getPrimary().getBounds().getHeight()*0.64814814814);
         scene.setFill(new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, new Stop(0, Color.web("#81c483")), new Stop(1, Color.WHITE)));
         return scene;
     }
 
-    private  Scene tutorialScene(Stage primaryStage, Scene prev){
-        StackPane stackPane = new StackPane();
-        VBox vBox = new VBox(20);
-        Button pva = ButtonMaker("Player vs. AI");
-        Button pvp = ButtonMaker("Player vs. Player");
-        Button back = ButtonMaker("Back");
-        back.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                primaryStage.setScene(prev);
-            }
-        });
-        pva.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Stage newStage = new Stage();
-                newStage.setScene(monopolyScene(newStage));
-                newStage.show();
-                primaryStage.close();
-            }
-        });
-        RadioButton radio = new RadioButton("With Tutorial Mode");
-        radio.setFont(Font.font("Arial Regular", FontWeight.NORMAL, FontPosture.ITALIC, 30));
-        vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(pva, pvp, radio, back);
-        stackPane.getChildren().add(vBox);
-        BackgroundImage backgroundImage = new BackgroundImage(new Image("MainMenu/tile.jpg", 200, 200, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        //stackPane.setBackground(new Background(backgroundImage));
-        stackPane.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-        //vBox.setBackground(new Background(backgroundImage));
-        vBox.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-        Scene scene = new Scene(stackPane, Screen.getPrimary().getBounds().getWidth()*0.36458333, 700);
-        scene.setFill(new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, new Stop(0, Color.web("#81c483")), new Stop(1, Color.WHITE)));;
-        return scene;
-    }
-
-    private Scene monopolyScene(Stage stage){
-        stage.setMaximized(true);
-        stage.setTitle("Extreme Monopoly");
-        Image img = new Image("https://i.pinimg.com/736x/4d/7c/15/4d7c15447aa27222caa7d490c3c7b816.jpg");
-        ImageView imageView = new ImageView(img);
-        imageView.setPreserveRatio(true);
-        //imageView.fitWidthProperty().bind(stage.widthProperty());
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().add(imageView);
-        System.out.println("Here3");
-        Scene scene = new Scene(stackPane);
-        stackPane.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-        scene.setFill(new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, new Stop(0, Color.web("#81c483")), new Stop(1, Color.WHITE)));
-        return scene;
-    }
-
-    private Scene eScene(Stage primaryStage){
+    private static Scene eScene(Stage primaryStage){
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         StackPane rootPane = new StackPane();
@@ -427,7 +210,7 @@ public class Menu extends Application {
     }
 
 
-    private Scene rScene(Stage primaryStage){
+    private static Scene rScene(Stage primaryStage){
         primaryStage.setFullScreen(true);
         primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         AnchorPane anchorPane = new AnchorPane();
