@@ -1,12 +1,10 @@
-package Objects;
 import java.util.*;
-import Objects.*;
 
 /* 
 Class return an array of generated random elements
 */
 public class RNG{
-    int ID, num, seed; int[] range; Random rand;
+    int ID, num, seed; double[] range; Random rand;
     /*
     Attributes:
         ID: every random generator has an unique ID
@@ -24,7 +22,7 @@ public class RNG{
         this.rand = new Random();
     }
 
-    public RNG(int id, int[] range){
+    public RNG(int id, double[] range){
         this.ID = id;
         this.range = range;
         this.num = -1;
@@ -32,15 +30,15 @@ public class RNG{
         this.rand = new Random();
     }
     
-    public RNG(int id, int[] range, int seed){
+    public RNG(int id, double[] range, int num){
         this.ID = id;
         this.range = range;
-        this.seed = seed;
-        this.num = -1;
-        this.rand = new Random(this.seed);
+        this.seed = -1;
+        this.num = num;
+        this.rand = new Random();
     }
     
-    public RNG(int id, int[] range, int seed, int num){
+    public RNG(int id, double[] range, int seed, int num){
         this.ID = id;
         this.range = range;
         this.seed = seed;
@@ -70,7 +68,7 @@ public class RNG{
     public double[] ran_double(){
         double[] result; result = new double[this.num];
         for(int i=0; i < this.num; i++){
-            result[i] = rand.nextDouble()*(this.range[1]-this.range[0]+1) + this.range[0];
+            result[i] = rand.nextDouble()*(this.range[1]-this.range[0]) + this.range[0];
         }
         return result;
     }
@@ -78,7 +76,7 @@ public class RNG{
     public float[] ran_float(){
         float[] result; result = new float[this.num];
         for(int i=0; i < this.num; i++){
-            result[i] = rand.nextFloat()*(this.range[1]-this.range[0]+1) + this.range[0];
+            result[i] = rand.nextFloat()*(float)(this.range[1]-this.range[0]) + (float)this.range[0];
         }
         return result;
     }
@@ -86,18 +84,18 @@ public class RNG{
     public int[] ran_int(){
         int[] result; result = new int[this.num];
         for(int i=0; i < this.num; i++){
-            result[i] = rand.nextInt()*(this.range[1]-this.range[0]+1) + this.range[0];
+            result[i] =  rand.nextInt((int)(this.range[1]-this.range[0])+1) + (int)this.range[0];
         }
         return result;
     }
 
-    public Hashtable<String, Integer> to_json(){
-        Hashtable<String, Integer> result = new Hashtable<String, Integer>();
-        result.put("id", this.ID);
+    public Hashtable<String, Double> to_json(){
+        Hashtable<String, Double> result = new Hashtable<String, Double>();
+        result.put("id", (double)this.ID);
         result.put("min", this.range[0]);
         result.put("max", this.range[1]);
-        result.put("num", this.num);
-        result.put("seed", this.seed);
+        result.put("num", (double)this.num);
+        result.put("seed", (double)this.seed);
         return result;
     }
 
