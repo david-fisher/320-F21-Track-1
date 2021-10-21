@@ -1,0 +1,12 @@
+version: "2.3"
+
+services:
+  app:
+    runtime: nvidia
+    build: .
+    volumes:
+      - ${HOME}/.Xauthority:/root/.Xauthority
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: "host"
+    environment:
+      - DISPLAY=unix${DISPLAY}
