@@ -20,6 +20,8 @@ public class MainMenu {
     public static Scene makeScene(Stage primaryStage){
         StackPane root = new StackPane();
         Button playB = Helper.ButtonMaker("Play");
+        playB.setStyle("-fx-background-color: #00ff00");
+
         BackgroundImage backgroundImage = new BackgroundImage(new Image("MainMenu/tile.jpg", 200, 200, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         playB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
