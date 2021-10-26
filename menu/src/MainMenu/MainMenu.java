@@ -21,8 +21,6 @@ public class MainMenu {
         StackPane root = new StackPane();
         Button playB = Helper.ButtonMaker("Play");
         playB.setId("main-menu-button");
-        playB.getStyleClass().add("main-menu-button");
-        //playB.setStyle("-fx-background-color: #00ff00");
 
         BackgroundImage backgroundImage = new BackgroundImage(new Image("MainMenu/tile.jpg", 200, 200, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         playB.setOnAction(new EventHandler<ActionEvent>() {
@@ -32,7 +30,9 @@ public class MainMenu {
             }
         });
         Button editB = Helper.ButtonMaker("Edit");
+        editB.setId("main-menu-button");
         Button exitB = Helper.ButtonMaker("Exit");
+        exitB.setId("main-menu-button");
         exitB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -55,7 +55,8 @@ public class MainMenu {
         //root.setBackground(new Background(backgroundImage));
         root.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
         Scene scene = new Scene(root, Screen.getPrimary().getBounds().getWidth()*0.36458333, Screen.getPrimary().getBounds().getHeight()*0.64814814814);
-        scene.setFill(new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, new Stop(0, Color.web("#81c483")), new Stop(1, Color.WHITE)));
+        scene.setFill(Color.web("#363D50"));
+        //scene.setFill(new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, new Stop(0, Color.web("#363D50")), new Stop(1, Color.WHITE)));
         return scene;
     }
 }
