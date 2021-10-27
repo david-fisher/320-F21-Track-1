@@ -36,6 +36,15 @@ public class Main extends Application {
         root.getChildren().addAll(boardEditor, ruleEditor, RNG, gameOptions, gameTokens, gameName);
         
         // Side bar *****************************************************************
+        Rectangle sideBar = new Rectangle();
+        sideBar.setY(150);
+        sideBar.setWidth(100);
+        sideBar.setHeight(400);
+        sideBar.setArcWidth(20);
+        sideBar.setArcHeight(20);
+        sideBar.setFill(Color.rgb(255, 255, 255));
+        root.getChildren().add(sideBar);
+        
         
         Scene scene = new Scene(root, 800, 600, Color.rgb(105, 162, 255));
         stage.setTitle("Board Editor");
