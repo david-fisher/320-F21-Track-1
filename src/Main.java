@@ -36,7 +36,6 @@ public class Main extends Application {
         root.getChildren().addAll(boardEditor, ruleEditor, RNG, gameOptions, gameTokens, gameName);
         
         // Side bar *****************************************************************
-        // Will do by Joe Huang
         
         Scene scene = new Scene(root, 800, 600, Color.rgb(105, 162, 255));
         stage.setTitle("Board Editor");
