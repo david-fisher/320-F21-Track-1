@@ -32,6 +32,7 @@ public class Main extends Application {
         TextField gameName = new TextField();
         gameName.setPrefSize(300, 100);
         gameName.setTranslateX(500);
+        gameName.setPromptText("Input the name of the board");
         
         root.getChildren().addAll(boardEditor, ruleEditor, RNG, gameOptions, gameTokens, gameName);
         
