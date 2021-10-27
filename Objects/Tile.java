@@ -1,5 +1,4 @@
-package Objects;
-import Objects.*;
+
 import java.util.*;
 
 public class Tile {

@@ -1,9 +1,9 @@
-package Objects;
+import java.util.*;
 
 public class Score {
     final int ID; int cur_score;
     
-    public Player(int id){
+    public Score(int id){
         this.ID = id;
         this.cur_score = 0;
     }
@@ -13,7 +13,7 @@ public class Score {
         return this.cur_score;
     }
     
-    public void update(ArrayList<Rule> rules){
+    public int update(ArrayList<Rule> rules){
         //The score will be updated based on the rules that will be provided by Team 4
         int new_score = 1;//Calculate based on rules and update
         this.cur_score = new_score;

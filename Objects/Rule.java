@@ -1,6 +1,3 @@
-package Objects;
-import Objects.*;
-
 
 public class Rule {
     final int ID;

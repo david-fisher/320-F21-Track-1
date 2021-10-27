@@ -1,7 +1,5 @@
-package Objects;
 import java.util.*;
 
-import Objects.*;
 
 public class Player {
     final int ID; Score score; Tile current_tile;
@@ -32,8 +30,8 @@ public class Player {
 
     public int get_id(){return this.ID;} 
 
-    public Score check_score(){
-        return this.score.getscore();
+    public int check_score(){
+        return this.score.get_score();
     }
 
     public void update_score(ArrayList<Rule> rules){
