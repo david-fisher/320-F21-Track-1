@@ -6,6 +6,7 @@ import javafx.scene.paint.*;
 import javafx.scene.control.*;
 
 public class Main extends Application {
+	double orgSceneX, orgSceneY;
     public void start(Stage stage){
         Group root = new Group();
         
@@ -79,7 +80,27 @@ public class Main extends Application {
         root.getChildren().addAll(square, circle, triangle, pentagon, hexagon);
         
         // Mouse Interaction *******************************************************
-        
+        circle.setCursor(Cursor.HAND);
+
+        circle.setOnMousePressed((t) -> {
+          orgSceneX = t.getSceneX();
+          orgSceneY = t.getSceneY();
+
+         Circle c = (Circle) (t.getSource());
+         c.toFront();
+        });
+        circle.setOnMouseDragged((t) -> {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+
+            Circle c = (Circle) (t.getSource());
+
+            c.setCenterX(c.getCenterX() + offsetX);
+            c.setCenterY(c.getCenterY() + offsetY);
+
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+          });
         
         Scene scene = new Scene(root, 800, 600, Color.rgb(105, 162, 255));
         stage.setTitle("Board Editor");
