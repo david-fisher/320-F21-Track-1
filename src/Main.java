@@ -40,11 +40,45 @@ public class Main extends Application {
         Rectangle sideBar = new Rectangle();
         sideBar.setY(150);
         sideBar.setWidth(100);
-        sideBar.setHeight(400);
+        sideBar.setHeight(410);
         sideBar.setArcWidth(20);
         sideBar.setArcHeight(20);
         sideBar.setFill(Color.rgb(255, 255, 255));
         root.getChildren().add(sideBar);
+        
+        // Shapes *******************************************************************
+        Rectangle square = new Rectangle(50,50);
+        square.setY(175);
+        square.setX(25);
+        Circle circle = new Circle(25);
+        circle.setCenterY(275);
+        circle.setCenterX(50);
+        Polygon triangle = new Polygon();
+        triangle.getPoints().addAll(new Double[]{
+        		50.0, 325.0,
+        		25.0, 375.0,
+        		75.0, 375.0
+        		});
+        Polygon pentagon = new Polygon();
+        pentagon.getPoints().addAll(new Double[]{
+        		50.0, 400.0,
+        		25.0, 425.0,
+        		35.0, 455.0,
+        		65.0, 455.0,
+        		75.0, 425.0
+        		});
+        Polygon hexagon = new Polygon();
+        hexagon.getPoints().addAll(new Double[]{
+        		62.5, 485.0,
+        		37.5, 485.0,
+        		25.0, 510.0,
+        		37.5, 535.0,
+        		62.5, 535.0,
+        		75.0, 510.0
+        		});
+        root.getChildren().addAll(square, circle, triangle, pentagon, hexagon);
+        
+        // Mouse Interaction *******************************************************
         
         
         Scene scene = new Scene(root, 800, 600, Color.rgb(105, 162, 255));
