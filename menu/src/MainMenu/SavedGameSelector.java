@@ -29,7 +29,7 @@ public class SavedGameSelector {
         BorderPane borderPane = new BorderPane();
         VBox vBox = new VBox(20);
         HBox hBox = new HBox(20);
-        Text gameT = new Text("   Game                                   ");
+        Text gameT = new Text("   Game                                               ");
         Text gameD = new Text("Play Time");
         gameT.setFont(Font.font("Arial Regular", FontWeight.NORMAL, FontPosture.ITALIC, 30));
         gameD.setFont(Font.font("Arial Regular", FontWeight.NORMAL, FontPosture.ITALIC, 30));
@@ -53,7 +53,7 @@ public class SavedGameSelector {
         borderPane.setBottom(eBut);
         borderPane.setAlignment(eBut, Pos.CENTER);
         for(Button b : bList){
-            b.setPrefWidth(Screen.getPrimary().getBounds().getHeight()*0.64814814814*0.71428571428);
+            b.setPrefWidth(500);
             b.setWrapText(true);
         }
         scroll.setContent(vBox);
