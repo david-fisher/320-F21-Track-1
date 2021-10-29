@@ -52,6 +52,7 @@ public class Main extends Application {
         square.setY(175);
         square.setX(25);
         root.getChildren().add(square);
+        dragNDrop(square);
 	}
 	
 	public void createCircle(Group root) {
@@ -59,6 +60,7 @@ public class Main extends Application {
         circle.setCenterY(275);
         circle.setCenterX(50);
         root.getChildren().add(circle);
+        dragNDrop(circle);
 	}
 	
 	public void createTriangle(Group root) {
@@ -69,6 +71,7 @@ public class Main extends Application {
         		75.0, 375.0
         		});
         root.getChildren().add(triangle);
+        dragNDrop(triangle);
 	}
 	
 	public void createPentagon(Group root) {
@@ -81,6 +84,7 @@ public class Main extends Application {
         		75.0, 425.0
         		});
         root.getChildren().add(pentagon);
+        dragNDrop(pentagon);
 	}
 	
 	public void createHexagon(Group root) {
@@ -94,32 +98,33 @@ public class Main extends Application {
         		75.0, 510.0
         		});
         root.getChildren().add(hexagon);
+        dragNDrop(hexagon);
 	}
 
-	public void dragNDrog(Object shape) {
-        // Mouse Interaction *******************************************************
-//      circle.setCursor(Cursor.HAND);
-//
-//      circle.setOnMousePressed((t) -> {
-//			orgSceneX = t.getSceneX();
-//			orgSceneY = t.getSceneY();
-//			
-//			Circle c = (Circle) (t.getSource());
-//			c.toFront();
-//      	});
-//      
-//      circle.setOnMouseDragged((t) -> {
-//          double offsetX = t.getSceneX() - orgSceneX;
-//          double offsetY = t.getSceneY() - orgSceneY;
-//
-//          Circle c = (Circle) (t.getSource());
-//
-//          c.setCenterX(c.getCenterX() + offsetX);
-//          c.setCenterY(c.getCenterY() + offsetY);
-//
-//          orgSceneX = t.getSceneX();
-//          orgSceneY = t.getSceneY();
-//          });
+	public void dragNDrop(Shape shape) {
+      // Drag n' Drop Interaction *******************************************************
+      shape.setCursor(Cursor.HAND);
+
+      shape.setOnMousePressed((t) -> {
+			orgSceneX = t.getSceneX();
+			orgSceneY = t.getSceneY();
+			
+			Shape c = (Shape) (t.getSource());
+			c.toFront();
+      	});
+      
+      shape.setOnMouseDragged((t) -> {
+          double offsetX = t.getSceneX() - orgSceneX;
+          double offsetY = t.getSceneY() - orgSceneY;
+
+          Shape c = (Shape) (t.getSource());
+
+          c.setTranslateX(c.getTranslateX() + offsetX);
+          c.setTranslateY(c.getTranslateY() + offsetY);
+
+          orgSceneX = t.getSceneX();
+          orgSceneY = t.getSceneY();
+          });
 	}
 	
     public void start(Stage stage){
