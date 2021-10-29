@@ -7,10 +7,9 @@ import javafx.scene.control.*;
 
 public class Main extends Application {
 	double orgSceneX, orgSceneY;
-    public void start(Stage stage){
-        Group root = new Group();
-        
-        // Top tabs ***************************************************************
+	
+	public void tabs(Group root) {
+		// Top tabs ***************************************************************
         Button boardEditor = new Button("Board Editor");
         boardEditor.setPrefSize(100,100);
         
@@ -46,21 +45,34 @@ public class Main extends Application {
         sideBar.setArcHeight(20);
         sideBar.setFill(Color.rgb(255, 255, 255));
         root.getChildren().add(sideBar);
-        
-        // Shapes *******************************************************************
-        Rectangle square = new Rectangle(50,50);
+	}
+	
+	public void createRectangle(Group root) {
+		Rectangle square = new Rectangle(50,50);
         square.setY(175);
         square.setX(25);
-        Circle circle = new Circle(25);
+        root.getChildren().add(square);
+	}
+	
+	public void createCircle(Group root) {
+		Circle circle = new Circle(25);
         circle.setCenterY(275);
         circle.setCenterX(50);
-        Polygon triangle = new Polygon();
+        root.getChildren().add(circle);
+	}
+	
+	public void createTriangle(Group root) {
+		Polygon triangle = new Polygon();
         triangle.getPoints().addAll(new Double[]{
         		50.0, 325.0,
         		25.0, 375.0,
         		75.0, 375.0
         		});
-        Polygon pentagon = new Polygon();
+        root.getChildren().add(triangle);
+	}
+	
+	public void createPentagon(Group root) {
+		Polygon pentagon = new Polygon();
         pentagon.getPoints().addAll(new Double[]{
         		50.0, 400.0,
         		25.0, 425.0,
@@ -68,7 +80,11 @@ public class Main extends Application {
         		65.0, 455.0,
         		75.0, 425.0
         		});
-        Polygon hexagon = new Polygon();
+        root.getChildren().add(pentagon);
+	}
+	
+	public void createHexagon(Group root) {
+		Polygon hexagon = new Polygon();
         hexagon.getPoints().addAll(new Double[]{
         		62.5, 485.0,
         		37.5, 485.0,
@@ -77,37 +93,52 @@ public class Main extends Application {
         		62.5, 535.0,
         		75.0, 510.0
         		});
-        root.getChildren().addAll(square, circle, triangle, pentagon, hexagon);
-        
+        root.getChildren().add(hexagon);
+	}
+
+	public void dragNDrog(Object shape) {
         // Mouse Interaction *******************************************************
-        circle.setCursor(Cursor.HAND);
-
-        circle.setOnMousePressed((t) -> {
-			orgSceneX = t.getSceneX();
-			orgSceneY = t.getSceneY();
-			
-			Circle c = (Circle) (t.getSource());
-			c.toFront();
-        	});
+//      circle.setCursor(Cursor.HAND);
+//
+//      circle.setOnMousePressed((t) -> {
+//			orgSceneX = t.getSceneX();
+//			orgSceneY = t.getSceneY();
+//			
+//			Circle c = (Circle) (t.getSource());
+//			c.toFront();
+//      	});
+//      
+//      circle.setOnMouseDragged((t) -> {
+//          double offsetX = t.getSceneX() - orgSceneX;
+//          double offsetY = t.getSceneY() - orgSceneY;
+//
+//          Circle c = (Circle) (t.getSource());
+//
+//          c.setCenterX(c.getCenterX() + offsetX);
+//          c.setCenterY(c.getCenterY() + offsetY);
+//
+//          orgSceneX = t.getSceneX();
+//          orgSceneY = t.getSceneY();
+//          });
+	}
+	
+    public void start(Stage stage){
+        Group root = new Group();
         
-        circle.setOnMouseDragged((t) -> {
-            double offsetX = t.getSceneX() - orgSceneX;
-            double offsetY = t.getSceneY() - orgSceneY;
-
-            Circle c = (Circle) (t.getSource());
-
-            c.setCenterX(c.getCenterX() + offsetX);
-            c.setCenterY(c.getCenterY() + offsetY);
-
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-            });
+        // Initial Setup
+        tabs(root);
+        createRectangle(root);
+        createCircle(root);
+        createTriangle(root);
+        createPentagon(root);
+        createHexagon(root);
         
         Scene scene = new Scene(root, 800, 600, Color.rgb(105, 162, 255));
         stage.setTitle("Board Editor");
         stage.setScene(scene);
         stage.show();
     }
+    
     public static void main(String[] args) {
         launch(args);
     }
