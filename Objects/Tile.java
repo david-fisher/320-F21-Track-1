@@ -3,24 +3,35 @@ import java.util.*;
 
 public class Tile {
 
-    final int ID,x,y; ArrayList<Rule> rules; ArrayList<Tile> next_tiles;
+    final String ID;final int x,y; String color; ArrayList<Rule> rules; ArrayList<Tile> next_tiles;
 
-    public Tile(int id, int x, int y, ArrayList<Rule> rules){
-        this.ID = id;
+    public Tile(int x, int y, String color, ArrayList<Rule> rules){
+        this.ID = UUID.randomUUID().toString();
         this.x = x;
         this.y = y;
+        this.color = color;
         this.rules = rules;
         this.next_tiles = this.next_state();
     }
-    public Tile(int id, int x, int y, ArrayList<Rule> rules, ArrayList<Tile> next_tiles){
+
+    public Tile(String id, int x, int y, String color, ArrayList<Rule> rules){
         this.ID = id;
         this.x = x;
         this.y = y;
+        this.color = color;
+        this.rules = rules;
+        this.next_tiles = this.next_state();
+    }
+    public Tile(String id, int x, int y, String color, ArrayList<Rule> rules, ArrayList<Tile> next_tiles){
+        this.ID = id;
+        this.x = x;
+        this.y = y;
+        this.color = color;
         this.rules = rules;
         this.next_tiles = next_tiles;
     }
 
-    public int get_id(){return this.ID;}
+    public String get_id(){return this.ID;}
 
     public ArrayList<Tile> next_state(){
         ArrayList<Tile> next_possible_tiles = new ArrayList<>();        
@@ -31,31 +42,35 @@ public class Tile {
         return this.next_tiles;
     }
 
+    public void change_color(String new_color) {
+        this.color = new_color;
+    }
+
     public void add_rule(Rule new_rule){
         this.rules.add(new_rule);
     }
 
     public boolean remove_rule(Rule target_rule){
-        return this.rules.remove(findByID(ID));
+        return this.rules.remove(findByID(this.ID));
     }
 
-    public Rule findByID(int ID) {
+    public Rule findByID(String ID) {
 	    return this.rules.stream().filter(rule -> rule.ID == ID).findFirst().orElse(null);
 	}
 
-    public Hashtable<String, int[]> to_json(){
-        Hashtable<String, int[]> result = new Hashtable<String, int[]>();
-        result.put("id", new int[]{this.ID});
-        result.put("x", new int[]{this.x});
-        result.put("y", new int[]{this.y});
-        int[] rule_ids = new int[this.rules.size()];
+    public Hashtable<String, String> to_json(){
+        Hashtable<String, String> result = new Hashtable<String, String>();
+        result.put("id", this.ID);
+        result.put("x", new String(Integer.toString(this.x)));
+        result.put("y", new String(Integer.toString(this.y)));
+        String rule_ids = "";
         for(int i = 0; i < this.rules.size(); i++){
-            rule_ids[i] = this.rules.get(i).ID;
+            rule_ids += " " + this.rules.get(i).ID;
         }
         result.put("rules id", rule_ids);
-        int[] next_tiles_ids = new int[this.next_tiles.size()];
+        String next_tiles_ids = "";
         for(int j = 0; j < this.next_tiles.size(); j++){
-            next_tiles_ids[j] = this.next_tiles.get(j).ID;
+            next_tiles_ids += " " + this.next_tiles.get(j).ID;
         }
         result.put("next tile ids", next_tiles_ids);
         return result;

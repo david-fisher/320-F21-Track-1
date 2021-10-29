@@ -1,8 +1,8 @@
 
 public class Rule {
-    final int ID;
+    final String ID;
 
-    public Rule(int id){
+    public Rule(String id){
         this.ID = id;
     }
 }

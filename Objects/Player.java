@@ -2,33 +2,33 @@ import java.util.*;
 
 
 public class Player {
-    final int ID; Score score; Tile current_tile;
+    final String ID; Score score; Tile current_tile;
 
-    public Player(int id){
-        this.ID = id;
+    public Player(){
+        this.ID = UUID.randomUUID().toString();
         this.score = new Score();
         this.current_tile = null;
     } 
 
-    public Player(int id, Score score){
+    public Player(String id, Score score){
         this.ID = id;
         this.score = score;
         this.current_tile = null;
     } 
 
-    public Player(int id, Tile current_tile){
+    public Player(String id, Tile current_tile){
         this.ID = id;
         this.score = new Score();
         this.current_tile = current_tile;
     } 
 
-    public Player(int id, Score score, Tile current_tile){
+    public Player(String id, Score score, Tile current_tile){
         this.ID = id;
         this.score = score;
         this.current_tile = current_tile;
     }
 
-    public int get_id(){return this.ID;} 
+    public String get_id(){return this.ID;} 
 
     public int check_score(){
         return this.score.get_score();
@@ -42,8 +42,8 @@ public class Player {
         this.current_tile = new_tile;
     }
 
-    public Hashtable<String, Integer> to_json(){
-        Hashtable<String, Integer> result = new Hashtable<String, Integer>();
+    public Hashtable<String, String> to_json(){
+        Hashtable<String, String> result = new Hashtable<String, String>();
         result.put("id", this.ID);
         result.put("score", this.score.get_id());
         result.put("current tile", this.current_tile.get_id());
