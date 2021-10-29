@@ -83,12 +83,13 @@ public class Main extends Application {
         circle.setCursor(Cursor.HAND);
 
         circle.setOnMousePressed((t) -> {
-          orgSceneX = t.getSceneX();
-          orgSceneY = t.getSceneY();
-
-         Circle c = (Circle) (t.getSource());
-         c.toFront();
-        });
+			orgSceneX = t.getSceneX();
+			orgSceneY = t.getSceneY();
+			
+			Circle c = (Circle) (t.getSource());
+			c.toFront();
+        	});
+        
         circle.setOnMouseDragged((t) -> {
             double offsetX = t.getSceneX() - orgSceneX;
             double offsetY = t.getSceneY() - orgSceneY;
@@ -100,7 +101,7 @@ public class Main extends Application {
 
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
-          });
+            });
         
         Scene scene = new Scene(root, 800, 600, Color.rgb(105, 162, 255));
         stage.setTitle("Board Editor");
