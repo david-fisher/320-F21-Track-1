@@ -48,11 +48,11 @@ public class Main extends Application {
 	}
 	
 	public void createRectangle(Group root) {
-		Rectangle square = new Rectangle(50,50);
-        square.setY(175);
-        square.setX(25);
-        root.getChildren().add(square);
-        dragNDrop(square);
+		Rectangle rectangle = new Rectangle(50,50);
+        rectangle.setY(175);
+        rectangle.setX(25);
+        root.getChildren().add(rectangle);
+        dragNDrop(rectangle);
 	}
 	
 	public void createCircle(Group root) {
