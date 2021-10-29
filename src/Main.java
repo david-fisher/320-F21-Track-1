@@ -106,11 +106,11 @@ public void dragNDrop(Shape shape) {
     shape.setCursor(Cursor.HAND);
 
     shape.setOnMousePressed((t) -> {
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-            
-            Shape c = (Shape) (t.getSource());
-            c.toFront();
+        orgSceneX = t.getSceneX();
+        orgSceneY = t.getSceneY();
+        
+        Shape c = (Shape) (t.getSource());
+        c.toFront();
         });
 
     shape.setOnMouseDragged((t) -> {
