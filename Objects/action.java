@@ -2,21 +2,21 @@ import java.text.MessageFormat;
 import java.util.*;
 
 public class action {
-    String ID; int repeat, step_count; ArrayList<Card> cards; RNG rng;
+    String ID; int repeat, step_count; ArrayList<Rule> Rules; RNG rng;
 
-    public action(int repeat, ArrayList<Card> cards, RNG rng){
+    public action(int repeat, ArrayList<Rule> Rules, RNG rng){
         this.ID = UUID.randomUUID().toString();
         this.repeat = repeat;
         this.step_count = 0;
-        this.cards = cards;
+        this.Rules = Rules;
         this.rng = rng;
     }
 
-    public action(String id, int repeat, int step_count, ArrayList<Card> cards, RNG rng){
+    public action(String id, int repeat, int step_count, ArrayList<Rule> Rules, RNG rng){
         this.ID = id;
         this.repeat = repeat;
         this.step_count = step_count;
-        this.cards = cards;
+        this.Rules = Rules;
         this.rng = rng;
     }
 
