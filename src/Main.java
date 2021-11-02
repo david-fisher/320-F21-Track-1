@@ -56,6 +56,7 @@ public void createRectangle(Group root) {
     rectangle.setX(25);
     root.getChildren().add(rectangle);
     dragNDrop(rectangle);
+    colorPicker(rectangle);
 }
 
 public void createCircle(Group root) {
@@ -64,6 +65,7 @@ public void createCircle(Group root) {
     circle.setCenterX(50);
     root.getChildren().add(circle);
     dragNDrop(circle);
+    colorPicker(circle);
 }
 
 public void createTriangle(Group root) {
@@ -75,6 +77,7 @@ public void createTriangle(Group root) {
             });
     root.getChildren().add(triangle);
     dragNDrop(triangle);
+    colorPicker(triangle);
 }
 
 public void createPentagon(Group root) {
@@ -88,6 +91,7 @@ public void createPentagon(Group root) {
             });
     root.getChildren().add(pentagon);
     dragNDrop(pentagon);
+    colorPicker(pentagon);
 }
 
 public void createHexagon(Group root) {
@@ -102,6 +106,7 @@ public void createHexagon(Group root) {
             });
     root.getChildren().add(hexagon);
     dragNDrop(hexagon);
+    colorPicker(hexagon);
 }
 
 public void dragNDrop(Shape shape) {
