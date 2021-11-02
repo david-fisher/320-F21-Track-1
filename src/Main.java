@@ -1,9 +1,11 @@
 import javafx.application.*;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 import javafx.scene.control.*;
+import javafx.scene.input.ContextMenuEvent;
 
 public class Main extends Application {
     double orgSceneX, orgSceneY;
@@ -125,7 +127,26 @@ public void dragNDrop(Shape shape) {
         orgSceneX = t.getSceneX();
         orgSceneY = t.getSceneY();
         });
+
+    ContextMenu contextMenu = new ContextMenu();
+
+    MenuItem menuItem1 = new MenuItem("menu item 1");
+    MenuItem menuItem2 = new MenuItem("menu item 2");
+    MenuItem menuItem3 = new MenuItem("menu item 3");
+
+    contextMenu.getItems().add(menuItem1);
+    contextMenu.getItems().add(menuItem2);
+    contextMenu.getItems().add(menuItem3);    
+    
+    shape.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+
+            @Override
+            public void handle(ContextMenuEvent event) {
+                contextMenu.show(shape, event.getScreenX(), event.getScreenY());
+            }
+    });
 }
+
 
 public void start(Stage stage){
     Group root = new Group();
@@ -142,6 +163,8 @@ public void start(Stage stage){
     stage.setTitle("Board Editor");
     stage.setScene(scene);
     stage.show();
+
+    
 }
 
 public static void main(String[] args) {
