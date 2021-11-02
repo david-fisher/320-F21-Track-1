@@ -3,9 +3,19 @@ import java.util.*;
 public class Score {
     final int ID; int cur_score;
     
+    public Score(){
+        this.ID = UUID.randomUUID().toString();
+        this.cur_score = 0;
+    }
+    
     public Score(int id){
         this.ID = id;
         this.cur_score = 0;
+    }
+    
+    public Score(int id, int score){
+        this.ID = id;
+        this.cur_score = score;
     }
     
     public int get_id(){
