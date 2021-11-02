@@ -1,4 +1,5 @@
 import javafx.application.*;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.*;
@@ -128,25 +129,36 @@ public void dragNDrop(Shape shape) {
         orgSceneY = t.getSceneY();
         });
 
+}
+
+public void colorPicker(Shape shape){
     ContextMenu contextMenu = new ContextMenu();
 
-    MenuItem menuItem1 = new MenuItem("menu item 1");
-    MenuItem menuItem2 = new MenuItem("menu item 2");
-    MenuItem menuItem3 = new MenuItem("menu item 3");
+    ColorPicker colorssPicker = new ColorPicker();
+    colorssPicker.setStyle("-fx-background-color: white;");
+    
+    MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
+    MenuItem colorpicker_item = new MenuItem(null,colorssPicker);
 
-    contextMenu.getItems().add(menuItem1);
-    contextMenu.getItems().add(menuItem2);
-    contextMenu.getItems().add(menuItem3);    
+    colorpicker_item.setOnAction(new EventHandler<ActionEvent>(){
+        @Override
+        public void handle(ActionEvent event)
+        {
+            shape.setFill(colorssPicker.getValue());
+        }
+    });
+
+    contextMenu.getItems().add(colorpicker_item);
+    contextMenu.getItems().add(backgrounduploader_item);
+   
     
     shape.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
-
             @Override
             public void handle(ContextMenuEvent event) {
                 contextMenu.show(shape, event.getScreenX(), event.getScreenY());
             }
     });
 }
-
 
 public void start(Stage stage){
     Group root = new Group();
