@@ -137,15 +137,19 @@ public void dragNDrop(Shape shape) {
 }
 
 public void rightClick(Shape shape, Group root){
+    //*****Color Picker function */
     ContextMenu contextMenu = new ContextMenu();
-
+    //Intial a colorpicker
     ColorPicker colorssPicker = new ColorPicker();
-    colorssPicker.setStyle("-fx-background-color: white;");
-    
+    //Setting the background of the tab white
+    colorssPicker.setStyle("-fx-background-color:White;");
+    //*****Backgraound Uploader function */  
     MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
+    //TODO
     MenuItem colorpicker_item = new MenuItem(null,colorssPicker);
     MenuItem deleter_item = new MenuItem(null, new Label("Delete Shape"));
-
+  
+    //Handle right click
     colorpicker_item.setOnAction(new EventHandler<ActionEvent>(){
         @Override
         public void handle(ActionEvent event)
@@ -166,7 +170,7 @@ public void rightClick(Shape shape, Group root){
     contextMenu.getItems().add(backgrounduploader_item);
     contextMenu.getItems().add(deleter_item);
    
-    
+    //Display menu beside shape
     shape.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
             @Override
             public void handle(ContextMenuEvent event) {
