@@ -56,7 +56,7 @@ public void createRectangle(Group root) {
     rectangle.setX(25);
     root.getChildren().add(rectangle);
     dragNDrop(rectangle);
-    colorPicker(rectangle);
+    LeftClickFunction(rectangle);
 }
 
 public void createCircle(Group root) {
@@ -65,7 +65,7 @@ public void createCircle(Group root) {
     circle.setCenterX(50);
     root.getChildren().add(circle);
     dragNDrop(circle);
-    colorPicker(circle);
+    LeftClickFunction(circle);
 }
 
 public void createTriangle(Group root) {
@@ -77,7 +77,7 @@ public void createTriangle(Group root) {
             });
     root.getChildren().add(triangle);
     dragNDrop(triangle);
-    colorPicker(triangle);
+    LeftClickFunction(triangle);
 }
 
 public void createPentagon(Group root) {
@@ -91,7 +91,7 @@ public void createPentagon(Group root) {
             });
     root.getChildren().add(pentagon);
     dragNDrop(pentagon);
-    colorPicker(pentagon);
+    LeftClickFunction(pentagon);
 }
 
 public void createHexagon(Group root) {
@@ -106,7 +106,7 @@ public void createHexagon(Group root) {
             });
     root.getChildren().add(hexagon);
     dragNDrop(hexagon);
-    colorPicker(hexagon);
+    LeftClickFunction(hexagon);
 }
 
 public void dragNDrop(Shape shape) {
@@ -136,15 +136,18 @@ public void dragNDrop(Shape shape) {
 
 }
 
-public void colorPicker(Shape shape){
+public void LeftClickFunction(Shape shape){
+    //*****Color Picker function */
     ContextMenu contextMenu = new ContextMenu();
-
+    //Intial a colorpicker
     ColorPicker colorssPicker = new ColorPicker();
-    colorssPicker.setStyle("-fx-background-color: white;");
-    
+    //Setting the background of the tab white
+    colorssPicker.setStyle("-fx-background-color:White;");
+    //*****Backgraound Uploader function */  
     MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
+    //TODO
     MenuItem colorpicker_item = new MenuItem(null,colorssPicker);
-
+    //Handle right click
     colorpicker_item.setOnAction(new EventHandler<ActionEvent>(){
         @Override
         public void handle(ActionEvent event)
