@@ -30,6 +30,10 @@ public class Tile extends Saveable{
         this.neighbors = neighbors;
     }
 
+    public int get_x(){return this.x;}
+
+    public int get_y(){return this.y;}
+
     public ArrayList<Integer> get_coordinate(){
         ArrayList<Integer> result = new ArrayList<Integer>();
         result.add(this.x);

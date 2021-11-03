@@ -27,13 +27,17 @@ public class Player extends Saveable {
         this.current_tile = current_tile;
     }
 
-    public int check_score(){
+    public int get_score(){
         return this.score.get_score();
     }
 
     public int update_score(int change){
         this.score.update(change);
-        return check_score();
+        return get_score();
+    }
+
+    public Tile get_Tile(){
+        return this.current_tile;
     }
 
     public void update_tile(Tile new_tile){
