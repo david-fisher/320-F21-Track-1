@@ -139,10 +139,8 @@ public void dragNDrop(Shape shape) {
 public void rightClick(Shape shape, Group root){
     //*****Color Picker function */
     ContextMenu contextMenu = new ContextMenu();
-    //Intial a colorpicker
-    ColorPicker colorssPicker = new ColorPicker();
-    //Setting the background of the tab white
-    colorssPicker.setStyle("-fx-background-color:White;");
+    //Intial a colorpicker, display the current color on shape
+    ColorPicker colorssPicker = new ColorPicker(Color.web(shape.getFill().toString()));
     //*****Backgraound Uploader function */  
     MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
     //TODO
@@ -193,6 +191,8 @@ public void start(Stage stage){
     Scene scene = new Scene(root, 800, 600, Color.rgb(105, 162, 255));
     stage.setTitle("Board Editor");
     stage.setScene(scene);
+    //Using external file to hide the broken 'Custom color' section on ColorPicker
+    scene.getStylesheets().add(getClass().getResource("ColorPickerMod.css").toExternalForm());
     stage.show();
 
     
