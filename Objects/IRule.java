@@ -1,4 +1,3 @@
-import java.util.*;
 
 public interface IRule {
     public RNG get_rng();

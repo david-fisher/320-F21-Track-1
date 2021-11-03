@@ -4,7 +4,7 @@ public class Tile extends Saveable{
 
     final int x,y; Hashtable<String,String> attributes; ArrayList<Rule> rules; Hashtable<String,Tile> neighbors;
 
-    public Tile(int x, int y, Hashtable<String,String> attributes, ArrayList<Rule> rules){
+    public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes){
         this.ID = UUID.randomUUID().toString();
         this.x = x;
         this.y = y;
@@ -13,7 +13,7 @@ public class Tile extends Saveable{
         this.neighbors = new Hashtable<String,Tile>();
     }
 
-    public Tile(int x, int y, Hashtable<String,String> attributes, ArrayList<Rule> rules, Hashtable<String,Tile> neighbors){
+    public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes, Hashtable<String,Tile> neighbors){
         this.ID = UUID.randomUUID().toString();
         this.x = x;
         this.y = y;
@@ -21,13 +21,32 @@ public class Tile extends Saveable{
         this.rules = rules;
         this.neighbors = neighbors;
     }
-    public Tile(String id, int x, int y, Hashtable<String,String> attributes, ArrayList<Rule> rules, Hashtable<String,Tile> neighbors){
+    public Tile(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes, Hashtable<String,Tile> neighbors){
         this.ID = id;
         this.x = x;
         this.y = y;
         this.attributes = attributes;
         this.rules = rules;
         this.neighbors = neighbors;
+    }
+
+    public ArrayList<Integer> get_coordinate(){
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        result.add(this.x);
+        result.add(this.y);
+        return result;
+    }
+
+    public ArrayList<Rule> get_rules(){
+        return this.rules;
+    }
+
+    public Hashtable<String,String> get_attributes(){
+        return this.attributes;
+    }
+
+    public Hashtable<String,Tile> get_neighbors(){
+        return this.neighbors;
     }
 
     public Hashtable<String,Tile> update_neighbor(String direction, Tile new_neighbor){
