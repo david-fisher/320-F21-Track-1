@@ -3,8 +3,8 @@ import java.util.*;
 /* 
 Class return an array of generated random elements
 */
-public class RNG{
-    String ID; int repeat, seed; double[] range; Random rand;
+public class RNG extends Saveable{
+    int repeat, seed; double[] range; Random rand;
     /*
     Attributes:
         ID: every random generator has an unique ID
@@ -62,8 +62,6 @@ public class RNG{
         this.rand = new Random(this.seed);
     }
 
-    public String get_id(){return this.ID;}
-
     public void replace_repeat(int new_repeat){this.repeat = new_repeat;}
 
     public int get_seed(){return this.seed;}
@@ -107,6 +105,7 @@ public class RNG{
         return result;
     }
 
+    @Override
     public Hashtable<String, String> to_json(){
         Hashtable<String, String> result = new Hashtable<String, String>();
         result.put("id", this.ID);

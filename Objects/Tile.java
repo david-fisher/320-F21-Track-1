@@ -1,8 +1,8 @@
 import java.util.*;
 
-public class Tile {
+public class Tile extends Saveable{
 
-    final String ID;final int x,y; Hashtable<String,String> attributes; ArrayList<Rule> rules; Hashtable<String,Tile> neighbors;
+    final int x,y; Hashtable<String,String> attributes; ArrayList<Rule> rules; Hashtable<String,Tile> neighbors;
 
     public Tile(int x, int y, Hashtable<String,String> attributes, ArrayList<Rule> rules){
         this.ID = UUID.randomUUID().toString();
@@ -29,8 +29,6 @@ public class Tile {
         this.rules = rules;
         this.neighbors = neighbors;
     }
-
-    public String get_id(){return this.ID;}
 
     public Hashtable<String,Tile> update_neighbor(String direction, Tile new_neighbor){
         this.neighbors.put(direction, new_neighbor);
@@ -85,6 +83,8 @@ public class Tile {
 	    return this.rules.stream().filter(rule -> rule.ID == ID).findFirst().orElse(null);
 	}
 
+
+    @Override
     public Hashtable<String, String> to_json(){
         Hashtable<String, String> result = new Hashtable<String, String>();
         // result.put("id", this.ID);

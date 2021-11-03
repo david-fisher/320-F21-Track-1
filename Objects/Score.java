@@ -1,8 +1,8 @@
 
 import java.util.*;
 
-public class Score {
-    final String ID; int cur_score;
+public class Score extends Saveable{
+    int cur_score;
     
     public Score(){
         this.ID = UUID.randomUUID().toString();
@@ -17,10 +17,6 @@ public class Score {
     public Score(String id, int score){
         this.ID = id;
         this.cur_score = score;
-    }
-    
-    public String get_id(){
-        return this.ID;
     }
     
     public int get_score(){
