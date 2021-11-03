@@ -1,14 +1,17 @@
-
-import java.util.ArrayList;
+import java.util.*;
 
 public class Board implements IBoard{
-	public Board(int ID,int height,int width) {
+	public Board(){
+		this.ID = UUID.randomUUID().toString();
+	}
+
+	public Board(String ID,int height,int width) {
 		this.ID = ID;
 	//	this.height = height;
 	//	this.width = width;
 		
 	}
-	private final int ID;	
+	private String ID;	
 	//private final int height;     -- Do we need this?
 	//private final int width;      -- And this?
 	// Probably want to have a map from tile to next state

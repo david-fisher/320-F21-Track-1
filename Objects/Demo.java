@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Demos {
+public class Demo {
     public static void print(String str){System.out.println(str);}
     public static void print(int integer){System.out.println(integer);}
 
@@ -95,6 +95,12 @@ public class Demos {
         return one;
     }
 
+    public static void IBoard(){
+        IBoard board = new Board();
+        ArrayList<Tile> tiles= board.get_tiles();
+        Tile temp = tiles.get(0);
+    }
+
     public static boolean RNG_10_INT(){
         int num = 100;
         RNG new_RNG = new RNG(new double[]{1,10},num);
@@ -110,6 +116,7 @@ public class Demos {
         RNG_10_INT();
         tiles();
         player();
+        IBoard();
     }
 
 }
