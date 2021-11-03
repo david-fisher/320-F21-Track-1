@@ -56,7 +56,7 @@ public void createRectangle(Group root) {
     rectangle.setX(25);
     root.getChildren().add(rectangle);
     dragNDrop(rectangle);
-    LeftClickFunction(rectangle);
+    rightClick(rectangle, root);
 }
 
 public void createCircle(Group root) {
@@ -65,7 +65,7 @@ public void createCircle(Group root) {
     circle.setCenterX(50);
     root.getChildren().add(circle);
     dragNDrop(circle);
-    LeftClickFunction(circle);
+    rightClick(circle, root);
 }
 
 public void createTriangle(Group root) {
@@ -77,7 +77,7 @@ public void createTriangle(Group root) {
             });
     root.getChildren().add(triangle);
     dragNDrop(triangle);
-    LeftClickFunction(triangle);
+    rightClick(triangle, root);
 }
 
 public void createPentagon(Group root) {
@@ -91,7 +91,7 @@ public void createPentagon(Group root) {
             });
     root.getChildren().add(pentagon);
     dragNDrop(pentagon);
-    LeftClickFunction(pentagon);
+    rightClick(pentagon, root);
 }
 
 public void createHexagon(Group root) {
@@ -106,7 +106,7 @@ public void createHexagon(Group root) {
             });
     root.getChildren().add(hexagon);
     dragNDrop(hexagon);
-    LeftClickFunction(hexagon);
+    rightClick(hexagon, root);
 }
 
 public void dragNDrop(Shape shape) {
@@ -136,7 +136,7 @@ public void dragNDrop(Shape shape) {
 
 }
 
-public void LeftClickFunction(Shape shape){
+public void rightClick(Shape shape, Group root){
     //*****Color Picker function */
     ContextMenu contextMenu = new ContextMenu();
     //Intial a colorpicker
@@ -147,6 +147,8 @@ public void LeftClickFunction(Shape shape){
     MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
     //TODO
     MenuItem colorpicker_item = new MenuItem(null,colorssPicker);
+    MenuItem deleter_item = new MenuItem(null, new Label("Delete Shape"));
+  
     //Handle right click
     colorpicker_item.setOnAction(new EventHandler<ActionEvent>(){
         @Override
@@ -156,8 +158,18 @@ public void LeftClickFunction(Shape shape){
         }
     });
 
+    deleter_item.setOnAction(new EventHandler<ActionEvent>(){
+        @Override
+        public void handle(ActionEvent event)
+        {
+            root.getChildren().remove(shape);
+        }
+    });
+
     contextMenu.getItems().add(colorpicker_item);
     contextMenu.getItems().add(backgrounduploader_item);
+    contextMenu.getItems().add(deleter_item);
+   
     //Display menu beside shape
     shape.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
             @Override
