@@ -1,4 +1,3 @@
-package Objects;
 import java.util.ArrayList;
 
 public class Token {
@@ -14,7 +13,7 @@ public class Token {
 	//private ArrayList<Player> players;
 	//private ArrayList<RNG> rng;
 	
-	public void setRules(Gamerule rule) {
+	public void setRules(Rule rule) {
 		//ToDo 
 	}
 	public void setGameboard(Gameboard gameboard) {

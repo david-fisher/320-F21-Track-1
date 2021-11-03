@@ -37,6 +37,14 @@ public class RNG{
         this.seed = -1;
         this.rand = new Random();
     }
+
+    public RNG(double[] range, int repeat){
+        this.ID = UUID.randomUUID().toString();
+        this.range = range;
+        this.seed = -1;
+        this.repeat = repeat;
+        this.rand = new Random();
+    }
     
     public RNG(String id, double[] range, int repeat){
         this.ID = id;

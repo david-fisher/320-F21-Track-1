@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class Player {
     final String ID; Score score; Tile current_tile;
 
@@ -10,14 +9,14 @@ public class Player {
         this.current_tile = null;
     } 
 
-    public Player(String id, Score score){
-        this.ID = id;
+    public Player(Score score){
+        this.ID = UUID.randomUUID().toString();
         this.score = score;
         this.current_tile = null;
     } 
 
-    public Player(String id, Tile current_tile){
-        this.ID = id;
+    public Player(Tile current_tile){
+        this.ID = UUID.randomUUID().toString();
         this.score = new Score();
         this.current_tile = current_tile;
     } 
@@ -34,8 +33,9 @@ public class Player {
         return this.score.get_score();
     }
 
-    public void update_score(ArrayList<Rule> rules){
-        this.score.update(rules);
+    public int update_score(int change){
+        this.score.update(change);
+        return check_score();
     }
 
     public void update_tile(Tile new_tile){

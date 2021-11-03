@@ -22,7 +22,7 @@ public class Gameboard {
 		this.tiles.add(tile);
 		// Called from Tile object
 	}
-	public void removeTile(int ID) {
+	public void removeTile(String ID) {
 		tiles.remove(findByID(ID));
 	}
 	public int getID() {
@@ -47,7 +47,7 @@ public class Gameboard {
 		//persistence method
 	}
 	
-	public Tile findByID(int ID) {
+	public Tile findByID(String ID) {
 	    return this.tiles.stream().filter(tile -> tile.ID == ID).findFirst().orElse(null);
 	}
 	
