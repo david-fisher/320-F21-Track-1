@@ -158,8 +158,7 @@ public void LeftClickFunction(Shape shape){
 
     contextMenu.getItems().add(colorpicker_item);
     contextMenu.getItems().add(backgrounduploader_item);
-   
-    
+    //Display menu beside shape
     shape.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
             @Override
             public void handle(ContextMenuEvent event) {
