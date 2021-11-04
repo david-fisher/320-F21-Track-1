@@ -2,9 +2,11 @@ package Objects;
 import java.util.ArrayList;
 
 public class Token {
+	final public int id;
+	private Gameboard board; private ArrayList<Player> players;
 	
-	public Token(int ID, int numPlayers) {
-		this.ID = ID;
+	public Token(int id, int numPlayers) {
+		this.id = id;
 		this.numPlayers = numPlayers;
 	}
 	private final int ID;
