@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Rule {
+public class Rule implements IRule{
     final String ID;
     final String rule; int score; String type; RNG rng;
 
