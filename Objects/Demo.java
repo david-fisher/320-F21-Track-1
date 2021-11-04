@@ -4,7 +4,7 @@ public class Demo {
     public static void print(String str){System.out.println(str);}
     public static void print(int integer){System.out.println(integer);}
 
-    public static Tile tiles(){
+    public static ArrayList<Tile> tiles(){
         /* tiles:
             | a | b |
             | c | d |
@@ -12,7 +12,7 @@ public class Demo {
         Tile a = new Tile(0, 0, new ArrayList<Rule>(), new Hashtable<String,String>(){{put("color", "blue");}});
         Tile b = new Tile(0, 1, new ArrayList<Rule>(), new Hashtable<String,String>());
         Tile c = new Tile(1, 0, new ArrayList<Rule>(), new Hashtable<String,String>());
-        // Tile d = new Tile(1, 1, new ArrayList<Rule>(), new Hashtable<String,String>());
+        Tile d = new Tile(1, 1, new ArrayList<Rule>(), new Hashtable<String,String>());
         print(String.format("Current tile: id: %30s; x: %2d; y: %2d;", a.get_id(), a.get_x(), a.get_y()));
 
         a.update_attribute("brightness", "3");
@@ -64,15 +64,15 @@ public class Demo {
             print(String.format("\t\tdirection: %6s; x: %2d; y: %2d", key, temp.get_x(), temp.get_y()));
         }
 
-        return a;
+        return new ArrayList<Tile>(){{add(a);add(b);add(c);add(d);}};
     }
 
-    public static Player player(){
+    public static Player Player(){
         /* tiles:
             | a (Player) | b |
             | c          | d |
         */
-        Tile a = tiles();
+        Tile a = tiles().get(0);
         Player one = new Player(a);
         print(String.format("Player: %s, Score: %d", one.get_id(), one.get_score()));
         one.update_score(3);
@@ -95,28 +95,51 @@ public class Demo {
         return one;
     }
 
-    public static void IBoard(){
-        IBoard board = new Board();
-        ArrayList<Tile> tiles= board.get_tiles();
-        Tile temp = tiles.get(0);
+    public static Board Board(){
+        Board board = new Board();
+
+        ArrayList<Tile> tiles= tiles();
+        board.update_tiles(tiles);
+        Rule rule = new Rule("rng greater than 50% fall into a trap", -1, "Trap", new RNG(new double[]{0,1}, 1));
+        tiles.get(3).add_rule(rule); // update a new rule to tile d
+
+        // board.update_tiles(tiles);
+        Tile d = board.get_tiles().get(3); // get tile d
+        print("");
+        print(d.get_rules().get(0).to_string()); // print the rule content
+        
+        // removing tile d from board
+        print(String.format("\nCurrent number of Tiles: %2d", board.get_tiles().size()));
+        board.remove_tile(d);
+        print(String.format("Current number of Tiles: %2d", board.get_tiles().size()));
+
+        return board;
     }
 
-    public static boolean RNG_10_INT(){
+    public static void Token(){
+        Token token = new Token();
+        token.update_gameboard(Board());
+        token.update_player(Player());
+    }
+
+    public static int[] RNG_10_INT(){
         int num = 100;
         RNG new_RNG = new RNG(new double[]{1,10},num);
         int[] result = new int[num];
         result = new_RNG.ran_int();
         for(int i = 0; i < num; ++i){
             System.out.println(result[i]);
-            if (result[i] > 10 || result[i] < 1) return false;
+            // if (result[i] > 10 || result[i] < 1) return false;
         }
-        return true;
+        return result;
     }
     public static void main(String[] args){
-        RNG_10_INT();
-        tiles();
-        player();
-        IBoard();
+        // Board();
+        Token();
+        // RNG_10_INT();
+        // tiles();
+        // Player();
+        
     }
 
 }

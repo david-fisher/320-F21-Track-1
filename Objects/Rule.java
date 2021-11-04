@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Rule implements IRule{
     final String ID;
-    final String rule; int score; String type; RNG rng;
+    String rule; int score; String type; RNG rng;
 
     public Rule(){
         this.ID = UUID.randomUUID().toString();
@@ -52,7 +52,7 @@ public class Rule implements IRule{
         this.rng = rng;
     }
 
-    public String get_id() { return this.id; }
+    public String get_id() { return this.ID; }
 
     public RNG get_rng() { return this.rng; }
 

@@ -46,10 +46,7 @@ public class Board implements IBoard{
 	public ArrayList<Tile> update_tile(Tile new_tile) {
 		int index = tiles.indexOf(tile_findByID(new_tile.ID));
 		tiles.set(index, new_tile);
-		return tiles;
-		
-		
-		
+		return tiles;	
 	}
 
 	@Override
@@ -57,8 +54,6 @@ public class Board implements IBoard{
 		int index = tiles.indexOf(tile_findByID(tile.ID));
 		tiles.remove(index);
 		return tiles;
-		
-		
 	}
 
 	@Override
