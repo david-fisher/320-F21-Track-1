@@ -10,20 +10,17 @@ public class Board implements IBoard{
 	
 	
 	public Board(){
-		this.ID = UUID.randomUUID().toString();
+		this(UUID.randomUUID().toString());
 	}
-
+	
 	public Board(String ID) {
-		this.ID = ID;
-		
+		this(ID, new ArrayList<Tile>());
 	}
-	public Board(ArrayList<Tile> tiles) {
-		this.tiles = tiles;
+	
+	public Board(String ID, ArrayList<Tile> tiles) {
+		this(ID, tiles, new ArrayList<Rule>());
 	}
-	public Board(ArrayList<Tile> tiles, ArrayList<Rule> rules) {
-		this.tiles = tiles;
-		this.rules = rules;
-	}
+	
 	public Board(String ID, ArrayList<Tile> tiles, ArrayList<Rule> rules) {
 		this.ID = ID;
 		this.tiles = tiles;

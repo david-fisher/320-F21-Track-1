@@ -8,24 +8,17 @@ public class Token implements IToken{
 	private ArrayList<Player> players;
 	
 	public Token() {
-		this.ID = UUID.randomUUID().toString();
-		this.players = new ArrayList<Player>();
-		this.board = new Board();
-
+		this(UUID.randomUUID().toString());
+	}
+	public Token(String ID) {
+		this(ID, new ArrayList<Player>());
 	}
 	public Token(String ID, ArrayList<Player> players) {
-		this.ID = ID;
-		this.players = players;
-		this.board = new Board();
+		this(ID, players, new Board());
 	}
 	public Token(String ID, ArrayList<Player> players, Board board) {
 		this.ID = ID;
 		this.players = players;
-		this.board = board;
-	}
-	public Token(String ID, Board board) {
-		this.ID = ID;
-		this.players = new ArrayList<Player>();
 		this.board = board;
 	}
 	public String get_ID() {
