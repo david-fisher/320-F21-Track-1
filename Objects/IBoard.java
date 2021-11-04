@@ -8,7 +8,7 @@ public interface IBoard{
     public ArrayList<Tile> remove_tiles();
     public ArrayList<Rule> get_rules();
     public ArrayList<Rule> add_rule(Rule new_rule);
-    public boolean remove_rule(Rule target_rule);
+    public Rule remove_rule(Rule target_rule);
     public Rule rule_findByID(String ID);
     public Tile tile_findByID(String ID);
 }

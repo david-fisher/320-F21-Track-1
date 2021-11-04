@@ -1,34 +1,56 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
-public class Token {
-	final public int id;
-	private Gameboard board; private ArrayList<Player> players;
+public class Token implements IToken{
 	
-	public Token(int id, int numPlayers) {
-		this.id = id;
-		this.numPlayers = numPlayers;
-	}
-	private final int ID;
-	private Gameboard gameboard;
-	private int numPlayers;
-	//private ArrayList<Gamerule> rules;
-	//private ArrayList<Player> players;
-	//private ArrayList<RNG> rng;
+	private String ID;
+	private Board board;
+	private ArrayList<Player> players;
 	
-	public void setRules(Rule rule) {
-		//ToDo 
+	public Token() {
+		this.ID = UUID.randomUUID().toString();
 	}
-	public void setGameboard(Gameboard gameboard) {
-		this.gameboard = gameboard;
+	public Token(String ID, ArrayList<Player> players) {
+		this.ID = ID;
+		this.players = players;
 	}
-	public void addPlayers(Player player) {
-		//this.players.add(player)
+	public Token(String ID, ArrayList<Player> players, Board board) {
+		this.ID = ID;
+		this.players = players;
+		this.board = board;
 	}
-	public void addRNG(RNG rng) {
-		//this.rng.add(rng);
-	} 
-	private void to_json(Token token) {
-		//persistence 
+	public Token(String ID, Board board) {
+		this.ID = ID;
+		this.board = board;
+	}
+	public String get_ID() {
+		return this.ID;
+	}
+	
+
+	@Override
+	public ArrayList<Player> get_players() {		
+		return players;
+	}
+	@Override
+	// new player ID must match ID of player to be replaced
+	public ArrayList<Player> update_player(Player new_player) {
+		int index = players.indexOf(player_findByID(new_player.ID));
+		players.set(index, new_player);
+		return players;
+	}
+	@Override
+	public Player player_findByID(String ID) {
+		 return this.players.stream().filter(player -> player.ID == ID).findFirst().orElse(null);
+	}
+	@Override
+	public Board get_gameboard() {
+		return board;
+	}
+	@Override
+	public Board update_gameboard(Board new_board) {
+		this.board = new_board;
+		return board;
 	}
 
 }

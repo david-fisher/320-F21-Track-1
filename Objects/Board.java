@@ -1,56 +1,104 @@
 import java.util.*;
 
 public class Board implements IBoard{
+	
+	
+	private String ID;	
+
+	private ArrayList<Tile> tiles;
+	private ArrayList<Rule> rules;
+	
+	
 	public Board(){
 		this.ID = UUID.randomUUID().toString();
 	}
 
-	public Board(String ID,int height,int width) {
+	public Board(String ID) {
 		this.ID = ID;
-	//	this.height = height;
-	//	this.width = width;
 		
 	}
-	private String ID;	
-	//private final int height;     -- Do we need this?
-	//private final int width;      -- And this?
-	// Probably want to have a map from tile to next state
-	private ArrayList<Tile> tiles;
-	
-	
-	public ArrayList<Tile> getTiles() {
-		return tiles;
+	public Board(ArrayList<Tile> tiles) {
+		this.tiles = tiles;
 	}
-	public void addTile(Tile tile) {
-		this.tiles.add(tile);
-		// Called from Tile object
+	public Board(ArrayList<Tile> tiles, ArrayList<Rule> rules) {
+		this.tiles = tiles;
+		this.rules = rules;
 	}
-	public void removeTile(String ID) {
-		tiles.remove(findByID(ID));
+	public Board(String ID, ArrayList<Tile> tiles, ArrayList<Rule> rules) {
+		this.ID = ID;
+		this.tiles = tiles;
+		this.rules = rules;
+		
 	}
-	public int getID() {
+
+	public String getID() {
 		return ID;
 	}
-	/*
-	public int getHeight() {
-		return height;
+
+	
+	@Override
+	public ArrayList<Tile> get_tiles() {
+		return tiles;
 	}
-	public int getWidth() {
-		return width;
+
+	@Override
+	// new tile ID must match ID of tile to be replaced
+	public ArrayList<Tile> update_tile(Tile new_tile) {
+		int index = tiles.indexOf(tile_findByID(new_tile.ID));
+		tiles.set(index, new_tile);
+		return tiles;
+		
+		
+		
 	}
-	
-	public Tile getNext(Tile tile) {
-		//
+
+	@Override
+	public ArrayList<Tile> remove_tile(Tile tile) {
+		int index = tiles.indexOf(tile_findByID(tile.ID));
+		tiles.remove(index);
+		return tiles;
+		
+		
 	}
-	
-	
-	*/
-	
-	private void to_json(Gameboard current) {
-		//persistence method
+
+	@Override
+	public ArrayList<Tile> update_tiles(ArrayList<Tile> tiles) {
+		this.tiles = tiles;
+		return tiles;
 	}
-	
-	public Tile findByID(String ID) {
+
+	@Override
+	public ArrayList<Tile> remove_tiles() {
+		this.tiles.clear();
+		return tiles;
+	}
+
+	@Override
+	public ArrayList<Rule> get_rules() {
+		return rules;
+	}
+
+	@Override
+	public ArrayList<Rule> add_rule(Rule new_rule) {
+		rules.add(new_rule);
+		return rules;
+	}
+
+	@Override
+	public Rule remove_rule(Rule target_rule) {
+		int index = rules.indexOf(rule_findByID(target_rule.ID));
+		return rules.remove(index);
+
+		
+	}
+
+	@Override
+	public Rule rule_findByID(String ID) {
+	    return this.rules.stream().filter(rule -> rule.ID == ID).findFirst().orElse(null);
+	}
+
+	@Override
+	public Tile tile_findByID(String ID) {
 	    return this.tiles.stream().filter(tile -> tile.ID == ID).findFirst().orElse(null);
 	}
 	
