@@ -62,18 +62,20 @@ public class Rule implements IRule{
 
     public RNG update_rng(RNG new_rng) {
         this.rng = new_rng;
+        return this.rng;
     }
 
     public int replace_rule_score(int new_score) {
         this.score = new_score;
+        return this.score;
     }
 
-    public update_rule(String new_rule, String new_type) {
+    public void update_rule(String new_rule, String new_type) {
         this.rule = new_rule;
         this.type = new_type;
     }
 
-    public to_string() {
+    public String to_string() {
         // to-do
         String str = "This rule is about " + this.rule;
         return str;
