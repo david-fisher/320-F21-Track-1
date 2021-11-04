@@ -120,6 +120,9 @@ public class Demo {
         Token token = new Token();
         token.update_gameboard(Board());
         token.update_player(Player());
+        print(String.format("Successfully update gameboard: '%s' and player object: '%s' into token",
+                             token.get_gameboard().getID(), token.get_players().get(0).get_id()));
+
     }
 
     public static int[] RNG_10_INT(){

@@ -9,10 +9,14 @@ public class Token implements IToken{
 	
 	public Token() {
 		this.ID = UUID.randomUUID().toString();
+		this.players = new ArrayList<Player>();
+		this.board = new Board();
+
 	}
 	public Token(String ID, ArrayList<Player> players) {
 		this.ID = ID;
 		this.players = players;
+		this.board = new Board();
 	}
 	public Token(String ID, ArrayList<Player> players, Board board) {
 		this.ID = ID;
@@ -21,6 +25,7 @@ public class Token implements IToken{
 	}
 	public Token(String ID, Board board) {
 		this.ID = ID;
+		this.players = new ArrayList<Player>();
 		this.board = board;
 	}
 	public String get_ID() {
@@ -35,8 +40,13 @@ public class Token implements IToken{
 	@Override
 	// new player ID must match ID of player to be replaced
 	public ArrayList<Player> update_player(Player new_player) {
-		int index = players.indexOf(player_findByID(new_player.ID));
-		players.set(index, new_player);
+		try {
+			int index = players.indexOf(player_findByID(new_player.ID));
+			players.set(index, new_player);
+		} catch (Exception e) {
+			players.add(new_player);
+		}
+		
 		return players;
 	}
 	@Override
