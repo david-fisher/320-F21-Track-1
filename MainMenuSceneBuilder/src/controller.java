@@ -57,4 +57,10 @@ public class controller {
         Scene scene = new Scene(root);
         stage.setScene(scene);
     }
+    @FXML
+    public void toSavedGame(javafx.event.ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new saveGameViewController().makeScene(stage);
+        stage.setScene(scene);
     }
+}

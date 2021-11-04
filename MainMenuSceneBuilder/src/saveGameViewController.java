@@ -1,5 +1,3 @@
-package saveGame;
-
 import Helpers.Helper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
