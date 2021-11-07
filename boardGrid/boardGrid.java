@@ -1,6 +1,7 @@
 package boardGrid;
 import boardGrid.Helpers.Helper;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -34,8 +35,9 @@ public class boardGrid {
             for (int j = 0; j < height; j++){
                 char a = 'A';
                 int aChar = a;
-                char c = (char) (aChar + i + j * height);
-                board.add(Helper.ButtonMaker(Character.toString(c), null), i, j);
+                char c = (char) (aChar + i + j);
+                Button b = Helper.ButtonMaker(Character.toString(c), null);
+                board.add(Helper.adjustButtonSize(b, 70, 70), i, j);
             }
         }
 
@@ -44,13 +46,6 @@ public class boardGrid {
 //        board.add(Helper.ButtonMaker("b", null), 0, 2);
 //        board.add(Helper.ButtonMaker("c", null), 1, 0);
 //        board.add(Helper.ButtonMaker("d", null), 2, 2);
-
-
-        ColumnConstraints column1 = new ColumnConstraints();
-        column1.setPercentWidth(10);
-        ColumnConstraints column2 = new ColumnConstraints();
-        column2.setPercentWidth(10);
-        board.getColumnConstraints().addAll(column1, column2);
 
         Scene scene = new Scene(board);
         return scene;
