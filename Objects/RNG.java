@@ -15,8 +15,7 @@ public class RNG extends Saveable{
 
     public RNG(){
         this.ID = UUID.randomUUID().toString();
-        this.range[0] = 0;
-        this.range[1] = 1;
+        this.range = new double[]{0,1};
         this.repeat = 1;
         this.seed = -1;
         this.rand = new Random();
