@@ -13,7 +13,7 @@ public class boardLauncher extends Application {
         int[] size = {6, 6};
 
         Scene scene = boardGrid.makeScene(stage, size[0], size[1]);
-        stage.setTitle("save game");
+        stage.setTitle("Game Board");
         stage.setScene(scene);
         stage.show();
     }

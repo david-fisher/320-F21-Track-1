@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9768ba15-d440-4789-bff9-f7502a59bc1f" name="Changes" comment="create Game play board with GridPane" />
+    <list default="true" id="9768ba15-d440-4789-bff9-f7502a59bc1f" name="Changes" comment="update Game play board with GridPane">
+      <change afterPath="$PROJECT_DIR$/boardGrid/Helpers/cell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/fish.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/hex_font.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boardGrid/boardGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/boardGrid/boardGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boardGrid/boardLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/boardGrid/boardLauncher.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +78,8 @@
       <workItem from="1636134451405" duration="2929000" />
       <workItem from="1636314685014" duration="99000" />
       <workItem from="1636314832140" duration="228000" />
-      <workItem from="1636324190655" duration="324000" />
+      <workItem from="1636324190655" duration="514000" />
+      <workItem from="1636346707336" duration="284000" />
     </task>
     <task id="LOCAL-00001" summary="Create sceneBuilder README.md">
       <created>1636046475263</created>
@@ -101,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636324265561</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update Game play board with GridPane">
+      <created>1636324589467</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1636324589467</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,6 +138,7 @@
     <MESSAGE value="Create sceneBuilder README.md" />
     <MESSAGE value="push save game view controller" />
     <MESSAGE value="create Game play board with GridPane" />
-    <option name="LAST_COMMIT_MESSAGE" value="create Game play board with GridPane" />
+    <MESSAGE value="update Game play board with GridPane" />
+    <option name="LAST_COMMIT_MESSAGE" value="update Game play board with GridPane" />
   </component>
 </project>
