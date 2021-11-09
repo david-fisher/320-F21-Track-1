@@ -1,4 +1,5 @@
-package boardGrid.Helpers;
+package Helpers;
+
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
@@ -7,6 +8,8 @@ public class cell {
     private String name;
     private Integer cellHeight;
     private Integer cellWidth;
+    private Integer x;
+    private Integer y;
 
     public cell(String name, ImageView imageView){
         this.name = name;
@@ -23,14 +26,31 @@ public class cell {
     public String getName() { return this.name; }
     public ImageView getImageView() { return this.imageView; }
 
-    public Button getCellButton(){
-        Button button = Helper.ButtonMaker(this.name, null);
-        Helper.adjustButtonSize(button,
-                (this.cellHeight == null)? 70: this.cellHeight, // default size 70
-                (this.cellWidth == null)? 70: this.cellWidth
+    // return an array size of two
+    public Integer[] getPosition(){ return new Integer[]{this.x, this.y}; }
+    public void setPosition(int x, int y) { this.x = x; this.y = y; }
+
+    public ImageView getCellObject(String imageFile){
+        String fileName = (imageFile == null)? "images/fish.jpeg" : imageFile;
+        ImageView icon = Helper.imageMaker(fileName, 70, 70);
+
+//        icon.fitWidthProperty().bind();
+
+        assert icon != null;
+        icon.setOnMouseClicked(
+                e -> {  // TODO: set mouse click actions
+                    System.out.println(e.toString() + " is clicked");
+                }
         );
-        if (this.imageView != null) { button.setGraphic(this.imageView); }
-        return button;
+
+        icon.setOnDragDetected( // drag starts
+                e -> {  // TODO: set drag motion
+                    icon.setVisible(false);
+                }
+        );
+
+        return icon;
     }
+
 
 }

@@ -1,6 +1,4 @@
-package boardGrid;
-
-import boardGrid.Helpers.cell;
+import Helpers.cell;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,9 +13,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class boardGrid {
+    // grid pane
+    private static GridPane board = new GridPane();
 
     // load an arraylist to the grid
-    private static void loadGrid(GridPane board, ArrayList<ArrayList<cell>> table){
+    private static void loadGrid(ArrayList<ArrayList<cell>> table){
         /*
         table:
             [i] is width
@@ -25,8 +25,10 @@ public class boardGrid {
          */
         for (int i = 0; i < table.size(); i++){
             for (int j = 0; j < table.get(i).size(); j++){
+                cell currentCell = table.get(i).get(j);
+                if (currentCell == null) { continue; }  // empty cell element
                 board.add(table.get(i).get(j).
-                        getCellButton(),    // button or board element
+                                getCellObject(null),    // button or board element
                         i,  // x coordinate
                         j); // y coordinate
             }
@@ -64,7 +66,7 @@ public class boardGrid {
                 char c = (char) (aChar + i + j);
                 cell currentCell = new cell(
                         Character.toString(c),
-                        imageFromFile("images/fish.jpeg")   // the working dir is the project root directory
+                        imageFromFile("src/images/fish.jpeg")   // the working dir is the project root directory
                 );
                 currentRow.add(currentCell);
             }
@@ -73,14 +75,27 @@ public class boardGrid {
         return cellTable;
     }
 
+    public static void updateCell(cell c, int x, int y){
+        // TODO: replace cell method
+        try{
+            board.getChildren().remove(x, y);
+        }
+        catch (Exception ignored) {
+            board.add(
+                    c.getCellObject(null),
+                    x,
+                    y
+            );
+        }
+    }
+
 
     public static Scene makeScene(Stage primaryStage, int height, int width){
 
         int widthPercentage = 100 / width;
         int heightPercentage = 100 / height;
 
-        // grid pane
-        GridPane board = new GridPane();
+
 
         // column constraints
         for (int i = 0; i < width; i++){
@@ -98,7 +113,7 @@ public class boardGrid {
                     add(row);
         }
 
-        loadGrid(board, generateCell(width, height));   // load from an arraylist
+        loadGrid(generateCell(width, height));   // load from an arraylist
 
     /*  test:
         board.add(Helper.ButtonMaker("a", null), 0, 0);

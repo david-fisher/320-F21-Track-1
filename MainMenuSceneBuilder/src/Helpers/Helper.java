@@ -2,20 +2,62 @@ package Helpers;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 public class Helper {
-    public static Button ButtonMaker(String text){
-        Button btn = new Button();
-        btn.setText(text);
-        btn.setPrefWidth(300);
-        //btn.setPrefHeight(100);
-        btn.setFont(Font.font("Arial Regular", FontWeight.BOLD, FontPosture.REGULAR, 30));
-        return(btn);
+    public static Button ButtonMaker(String text, Font f){
+        Button button = new Button();
+        button.setText(text);
+        button.setPrefWidth(300);
+        //button.setPrefHeight(100);
+        button.setFont(f == null? Font.font("Arial Regular", FontWeight.BOLD, FontPosture.REGULAR, 30) : f);
+
+        return button;
+    }
+
+    public static Button adjustButtonSize(Button button, int height, int width){
+        button.setPrefWidth(width);
+        button.setPrefHeight(height);
+        return button;
+    }
+
+    // get an imageView from an image file
+    private static ImageView imageFromFile(String fileName){
+        ImageView imageView = new ImageView();
+
+        try {   // try open the image file
+            InputStream imageFile = new FileInputStream(fileName);  // load from file
+            Image image = new Image(imageFile);
+            imageView.setImage(image);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot open file: " + fileName);
+            e.printStackTrace();
+        }
+
+        return imageView;
+    }
+
+    // create an imageview from a file and preset its size
+    public static ImageView imageMaker(String fileName, int height, int width){
+
+        ImageView currentImage = imageFromFile(fileName);
+        if (currentImage == null) { return null; }
+
+        currentImage.setFitHeight(height);
+        currentImage.setFitWidth(width);
+
+        return currentImage;
     }
 
     public static Games[] makeGames() {
@@ -57,5 +99,6 @@ public class Helper {
         t.setFont(Font.font("Arial Regular", FontWeight.NORMAL, FontPosture.ITALIC, 20));
         return t;
     }
+
 
 }

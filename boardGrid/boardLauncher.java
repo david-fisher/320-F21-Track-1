@@ -1,5 +1,3 @@
-package boardGrid;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,7 +8,7 @@ public class boardLauncher extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        int[] size = {6, 6};
+        int[] size = {10, 7};
 
         Scene scene = boardGrid.makeScene(stage, size[0], size[1]);
         stage.setTitle("Game Board");

@@ -1,5 +1,3 @@
-package saveGame;
-
 import Helpers.Helper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -141,7 +139,7 @@ public class saveGameViewController {
         stackPane.getChildren().add(vbox);
         return new Scene(stackPane,
                 Screen.getPrimary().getBounds().getWidth()
-                        *0.3    // factors
+                        *0.5    // factors
                 ,
                 Screen.getPrimary().getBounds().getHeight()
                         *0.5
