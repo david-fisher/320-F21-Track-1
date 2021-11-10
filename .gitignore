@@ -25,3 +25,7 @@ hs_err_pid*
 .project
 .classpath
 .DS_Store
+
+# Files related to Docker, that are not required for running the app
+docker-compose.yml
+Dockerfile
