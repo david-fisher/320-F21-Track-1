@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
@@ -16,92 +18,131 @@ import javafx.util.Callback;
 
 import java.util.Collections;
 
+
 public class saveGameViewController {
     private static TableView<Helper.Games> saveTable = new TableView<Helper.Games>();
-    protected static Scene makeScene(Stage primaryStage){
+    private static Label title = new Label("Saved Games");
+    private static Button cancelButton = Helper.ButtonMaker("Cancel", Font.font("Helvetica",
+            FontWeight.NORMAL,
+            FontPosture.REGULAR,
+            20)
+    );
 
+    private static void setTitle(){
+        title.setFont(new Font("Helvetica", 20));
+    }
+
+    private static void createTable(){
         // TODO update game structure
         Helper.Games[] data = Helper.makeGames();
-        final ObservableList<Helper.Games> existingGame = FXCollections.observableArrayList();
+        final ObservableList<Helper.Games> existingGame =
+                FXCollections.observableArrayList();
         Collections.addAll(existingGame, data); // add games
 
-        // title
-        final Label title = new Label("Saved Games");
-        title.setFont(new Font("Arial", 20));
-
         // saving-game pop-out interface
-//        TableView<Helper.Games> saveTable = new TableView<Helper.Games>();
         saveTable.setId("saveTable");
-//        saveTable.setEditable(true);
+
         // game name column
         TableColumn<Helper.Games, String> gameColumn = new TableColumn<>("game");
         gameColumn.setMinWidth(200);
         gameColumn.setCellValueFactory(
                 cellData -> (cellData.getValue().getNameString()));
+
         gameColumn.setStyle("-fx-alignment: CENTER;");
-        // game time column
+
+        // time column
         TableColumn<Helper.Games, String> timeColumn = new TableColumn<>("time");
         timeColumn.setMinWidth(300);
         timeColumn.setCellValueFactory(
                 cellData -> (cellData.getValue().getDateString()));
+
         timeColumn.setStyle("-fx-alignment: CENTER;");
 //        timeColumn.setStyle("-fx-background-color: transparent;");
 
         saveTable.setItems(existingGame);
-        saveTable.getColumns().addAll(gameColumn, timeColumn);
-        addButton();
+        saveTable.getColumns().addAll(
+                gameColumn,
+                timeColumn
+        );
+        addTableButton();
         saveTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-
         saveTable.setMaxSize(700, 300);
+    }
+
+
+    private static void setCancel(){
+        cancelButton.setOnAction((ActionEvent event) -> {
+            System.out.println("cancel from saved game interface.");
+        });
+        Helper.adjustButtonSize(cancelButton, 20, 100);
+    }
+
+
+    // create tableview buttons for each column
+    private static void addTableButton() {
+        TableColumn<Helper.Games, Void> buttonColumn = new TableColumn<>("");
+
+        Callback<TableColumn<Helper.Games, Void>, TableCell<Helper.Games, Void>> cellFactory =
+                new Callback<>() {  // callback function
+                    @Override
+                    public TableCell<Helper.Games, Void> call(final TableColumn<Helper.Games, Void> param) {
+                        return new TableCell<>() {
+
+                            private final Button button = new Button("Load");   // TODO: load button style
+                            {
+                                button.setOnAction((ActionEvent event) -> {
+                                    Helper.Games data = getTableView().
+                                            getItems().
+                                            get(getIndex());
+                                    // TODO: load game function
+                                    System.out.println("Load " + data.getName());
+                                });
+                            }
+
+                            @Override
+                            public void updateItem(Void item, boolean empty) {
+                                super.updateItem(item, empty);
+                                setGraphic(empty? null : button);
+                            }
+                        };
+                    }
+                };
+        buttonColumn.setCellFactory(cellFactory);
+        saveTable.getColumns().add(buttonColumn);
+
+    }
+
+    protected static Scene makeScene(Stage primaryStage){
+
+        setTitle();
+        createTable();
+        setCancel();
 
         VBox vbox = new VBox();
         vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 50, 50, 60));
-        vbox.getChildren().addAll(title, saveTable);
+        vbox.setPadding(new Insets(
+                35,
+                100,
+                50,
+                50
+        ));
+
+        // fill out the vbox
+        vbox.getChildren().addAll(title,
+                saveTable,
+                cancelButton
+        );
 
         // generate scene
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(vbox);
         return new Scene(stackPane,
                 Screen.getPrimary().getBounds().getWidth()
-                        *0.5
+                        *0.5    // factors
                 ,
                 Screen.getPrimary().getBounds().getHeight()
-                        *0.64814814814
+                        *0.5
         );
-    }
-
-    private static void addButton() {
-        TableColumn<Helper.Games, Void> buttonColumn = new TableColumn<>("");
-
-        Callback<TableColumn<Helper.Games, Void>, TableCell<Helper.Games, Void>> cellFactory = new Callback<>() {
-            @Override
-            public TableCell<Helper.Games, Void> call(final TableColumn<Helper.Games, Void> param) {
-                return new TableCell<>() {
-
-                    private final Button button = new Button("Load");
-                    {
-                        button.setOnAction((ActionEvent event) -> {
-                            Helper.Games data = getTableView().getItems().get(getIndex());
-                            System.out.println("Load " + data.getName());
-                        });
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(button);
-                        }
-                    }
-                };
-            }
-        };
-        buttonColumn.setCellFactory(cellFactory);
-        saveTable.getColumns().add(buttonColumn);
-
     }
 }
