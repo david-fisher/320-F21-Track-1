@@ -9,11 +9,20 @@ public class Demo {
             | a | b |
             | c | d |
         */
+
+        Piece pa = new Piece(0, 0, new ArrayList<Rule>(), new Hashtable<String, String>());
+
         Tile a = new Tile(0, 0, new ArrayList<Rule>(), new Hashtable<String,String>(){{put("color", "blue");}});
         Tile b = new Tile(0, 1, new ArrayList<Rule>(), new Hashtable<String,String>());
         Tile c = new Tile(1, 0, new ArrayList<Rule>(), new Hashtable<String,String>());
         Tile d = new Tile(1, 1, new ArrayList<Rule>(), new Hashtable<String,String>());
         print(String.format("Current tile: id: %30s; x: %2d; y: %2d;", a.get_id(), a.get_x(), a.get_y()));
+
+        a.update_peice(pa);
+        ArrayList<Piece> AP = a.get_peices();
+        for (int m=0; m < AP.size(); m++){
+            print(AP.get(m).get_id());
+        }
 
         a.update_attribute("brightness", "3");
         Hashtable<String,String> attributes = a.get_attributes();
@@ -142,7 +151,6 @@ public class Demo {
         // RNG_10_INT();
         // tiles();
         // Player();
-        
     }
 
 }

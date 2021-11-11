@@ -99,7 +99,25 @@ public class RNG extends Saveable{
     public int[] ran_int(){
         int[] result; result = new int[this.repeat];
         for(int i=0; i < this.repeat; i++){
-            result[i] =  rand.nextInt((int)(this.range[1]-this.range[0])+1) + (int)this.range[0];
+            result[i] = rand.nextInt((int)(this.range[1]-this.range[0])+1) + (int)this.range[0];
+        }
+        return result;
+    }
+
+    public ArrayList<Rule> ran_rule(ArrayList<Rule> input){
+        ArrayList<Rule> result = new ArrayList<Rule>();
+        for(int i=0; i < this.repeat; i++){
+            int index = rand.nextInt((int)(this.range[1]-this.range[0])+1) + (int)this.range[0];
+            result.add(input.get(index));
+        }
+        return result;
+    }
+ 
+    public ArrayList<Piece> ran_piece(ArrayList<Piece> input){
+        ArrayList<Piece> result = new ArrayList<Piece>();
+        for(int i=0; i < this.repeat; i++){
+            int index = rand.nextInt((int)(this.range[1]-this.range[0])+1) + (int)this.range[0];
+            result.add(input.get(index));
         }
         return result;
     }
