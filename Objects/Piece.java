@@ -1,7 +1,6 @@
 import java.util.*;
 import javafx.scene.image.ImageView;
 
-
 public class Piece extends PTile{
     private ImageView image;
     Piece(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes){
