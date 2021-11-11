@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<TabPane prefHeight="355.0" prefWidth="640.0" rotateGraphic="true" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="130.0" tabMaxWidth="70.0" tabMinHeight="130.0" tabMinWidth="70.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane prefHeight="355.0" prefWidth="640.0" rotateGraphic="true" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="130.0" tabMaxWidth="70.0" tabMinHeight="130.0" tabMinWidth="70.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
   <tabs>
     <Tab closable="false">
       <content>
@@ -81,11 +81,12 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="363.0" prefWidth="522.0">
             <children>
-               <Pane layoutX="37.0" layoutY="26.0" prefHeight="316.0" prefWidth="441.0">
+               <Pane layoutX="38.0" layoutY="57.0" prefHeight="316.0" prefWidth="441.0">
                   <children>
-                     <TilePane layoutX="68.0" layoutY="49.0" orientation="VERTICAL" prefHeight="177.0" prefWidth="292.0" vgap="10.0">
+                     <Label alignment="CENTER" layoutX="5.0" layoutY="6.0" text="Choose an order for the rules a player will follow on their turn" />
+                     <TilePane layoutX="5.0" layoutY="18.0" orientation="VERTICAL" prefHeight="268.0" prefWidth="292.0" vgap="10.0">
                         <children>
-                           <ComboBox prefWidth="150.0" value="Choose Rule">
+                           <ComboBox fx:id="dropdown0" prefWidth="150.0" value="Choose Rule">
                          <items>
                              <FXCollections fx:factory="observableArrayList">
                                  <String fx:value="Draw Card" />
@@ -96,7 +97,7 @@
                          </items>
                        </ComboBox>
                            
-                           <ComboBox prefWidth="150.0" value="Choose Rule">
+                             <ComboBox fx:id="dropdown1" prefWidth="150.0" value="Choose Rule">
                          <items>
                              <FXCollections fx:factory="observableArrayList">
                                  <String fx:value="Draw Card" />
@@ -106,7 +107,7 @@
                              </FXCollections>
                          </items>
                        </ComboBox>
-                           <ComboBox prefWidth="150.0" value="Choose Rule">
+                           <ComboBox fx:id="dropdown2" prefWidth="150.0" value="Choose Rule">
                          <items>
                              <FXCollections fx:factory="observableArrayList">
                                  <String fx:value="Draw Card" />
@@ -116,7 +117,7 @@
                              </FXCollections>
                          </items>
                        </ComboBox>
-                       <ComboBox prefWidth="150.0" value="Choose Rule">
+                       <ComboBox fx:id="dropdown3" prefWidth="150.0" value="Choose Rule">
                          <items>
                              <FXCollections fx:factory="observableArrayList">
                                  <String fx:value="Draw Card" />
@@ -125,11 +126,23 @@
                                  <String fx:value="Play Card" />
                              </FXCollections>
                          </items>
-                       </ComboBox>                  
-                       <Button mnemonicParsing="false" text="X" textFill="#ff4e4e" />
-                           <Button mnemonicParsing="false" text="X" textFill="#ff4e4e" />
-                           <Button mnemonicParsing="false" text="X" textFill="#ff4e4e" />
-                           <Button mnemonicParsing="false" text="X" textFill="#ff4e4e" />
+                       </ComboBox>
+                              <ComboBox fx:id="dropdown4" prefWidth="150.0" value="Choose Rule" visible="false">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="Draw Card" />
+                                       <String fx:value="Roll Dice" />
+                                       <String fx:value="Move" />
+                                       <String fx:value="Play Card" />
+                                    </FXCollections>
+                                 </items>
+                              </ComboBox>
+                           <Button mnemonicParsing="false" onMouseClicked="#addDropDown" text="+" />
+                           <Button fx:id="delete0" mnemonicParsing="false" onMouseClicked="#deleteDropDown" text="X" textFill="#ff4e4e" visible="false" />
+                           <Button fx:id="delete1" mnemonicParsing="false" onMouseClicked="#deleteDropDown" text="X" textFill="#ff4e4e" visible="false" />
+                           <Button fx:id="delete2" mnemonicParsing="false" onMouseClicked="#deleteDropDown" text="X" textFill="#ff4e4e" visible="false" />
+                              <Button fx:id="delete3" mnemonicParsing="false" onMouseClicked="#deleteDropDown" text="X" textFill="#ff4e4e" />                  
+                       <Button fx:id="delete4" mnemonicParsing="false" onMouseClicked="#deleteDropDown" text="X" textFill="#ff4e4e" visible="false" />
                         </children>
                         <padding>
                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -138,21 +151,19 @@
                            <Insets />
                         </opaqueInsets>
                      </TilePane>
-                     <Button layoutX="153.0" layoutY="219.0" mnemonicParsing="false" text="+" />
-                     <Label alignment="CENTER" layoutX="58.0" layoutY="32.0" text="Choose an order for the rules a player will follow on their turn" />
-                        <HBox alignment="TOP_RIGHT" layoutX="-6.0" layoutY="-7.0" prefHeight="52.0" prefWidth="454.0" spacing="5.0">
-                           <children>
-                              <Button mnemonicParsing="false" text="Save Rule" />
-                              <Button mnemonicParsing="false" prefWidth="56.0" text="Cancel" />
-                           </children>
-                        </HBox>
                   </children>
                </Pane>
+                  <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Save Rule" />
+                        <Button mnemonicParsing="false" prefWidth="56.0" text="Cancel" />
+                     </children>
+                  </HBox>
             </children>
          </AnchorPane>
          </content>
          <graphic>
-            <StackPane prefHeight="150.0" prefWidth="200.0" rotate="90.0">
+            <StackPane onMouseClicked="#initializeTurnRule" prefHeight="150.0" prefWidth="200.0" rotate="90.0">
                <children>
                   <Label maxWidth="-Infinity" minWidth="-Infinity" rotate="90.0" text="Turn Rule" />
                </children>
