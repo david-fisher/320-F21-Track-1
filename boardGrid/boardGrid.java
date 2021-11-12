@@ -1,11 +1,9 @@
-import Helpers.cell;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,10 +12,12 @@ import java.util.ArrayList;
 
 public class boardGrid {
     // grid pane
-    private static GridPane board = new GridPane();
+    protected static GridPane board = new GridPane();
+    private static int height = 10, width = 10;
+    private static boardScore currentScore;
 
     // load an arraylist to the grid
-    private static void loadGrid(ArrayList<ArrayList<cell>> table){
+    private static void loadGrid(ArrayList<ArrayList<boardCell>> table){
         /*
         table:
             [i] is width
@@ -25,10 +25,10 @@ public class boardGrid {
          */
         for (int i = 0; i < table.size(); i++){
             for (int j = 0; j < table.get(i).size(); j++){
-                cell currentCell = table.get(i).get(j);
+                boardCell currentCell = table.get(i).get(j);
                 if (currentCell == null) { continue; }  // empty cell element
                 board.add(table.get(i).get(j).
-                                getCellObject(null),    // button or board element
+                                getCellObject(null, board, currentScore, height, width),    // button or board element
                         i,  // x coordinate
                         j); // y coordinate
             }
@@ -55,16 +55,16 @@ public class boardGrid {
     }
 
     // generate cell is a function for testing only
-    private static ArrayList<ArrayList<cell>> generateCell(int width, int height){
-        ArrayList<ArrayList<cell>> cellTable = new ArrayList<>();
+    private static ArrayList<ArrayList<boardCell>> generateCell(int width, int height){
+        ArrayList<ArrayList<boardCell>> cellTable = new ArrayList<>();
 
         for (int i = 0; i < width; i++) {
-            ArrayList<cell> currentRow = new ArrayList<>();
+            ArrayList<boardCell> currentRow = new ArrayList<>();
             for (int j = 0; j < height; j++) {
                 char a = 'A';
                 int aChar = a;
                 char c = (char) (aChar + i + j);
-                cell currentCell = new cell(
+                boardCell currentCell = new boardCell(
                         Character.toString(c),
                         imageFromFile("src/images/fish.jpeg")   // the working dir is the project root directory
                 );
@@ -75,27 +75,46 @@ public class boardGrid {
         return cellTable;
     }
 
-    public static void updateCell(cell c, int x, int y){
+    protected static void updateScore(){
+
+        // TODO: checking winning or scoring condition
+        boolean condition = true;
+        if (condition){
+            currentScore.addOne();
+        }
+
+
+    }
+
+    public void updateCell(boardCell c, int x, int y){
         // TODO: replace cell method
         try{
             board.getChildren().remove(x, y);
         }
         catch (Exception ignored) {
             board.add(
-                    c.getCellObject(null),
+                    c.getCellObject(null, board, currentScore, height, width),
                     x,
                     y
             );
         }
     }
 
+    public static VBox createScore(){
+        return currentScore.scoreBox();
+    }
 
-    public static Scene makeScene(Stage primaryStage, int height, int width){
+
+    public static GridPane createBoard(String userName, int h, int w){
+
+
+        height = h;
+        width = w;
 
         int widthPercentage = 100 / width;
         int heightPercentage = 100 / height;
 
-
+        currentScore = new boardScore(userName);
 
         // column constraints
         for (int i = 0; i < width; i++){
@@ -115,6 +134,9 @@ public class boardGrid {
 
         loadGrid(generateCell(width, height));   // load from an arraylist
 
+        // TODO: preset board size
+
+        return board;
     /*  test:
         board.add(Helper.ButtonMaker("a", null), 0, 0);
         board.add(Helper.ButtonMaker("b", null), 0, 2);
@@ -122,11 +144,7 @@ public class boardGrid {
         board.add(Helper.ButtonMaker("d", null), 2, 2);
     */
 
-        Scene scene = new Scene(board);
-        return scene;
+//        Scene scene = new Scene(board);
+//        return scene;
     }
-
-
-
-
 }

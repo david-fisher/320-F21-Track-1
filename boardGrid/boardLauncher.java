@@ -8,10 +8,16 @@ public class boardLauncher extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        int[] size = {10, 7};
+        int[] size = {8, 7};
 
-        Scene scene = boardGrid.makeScene(stage, size[0], size[1]);
+        Scene scene = gamePlayUI.makeScene(stage, null,  size[0], size[1]);
         stage.setTitle("Game Board");
+
+//        cell c = new cell(
+//                "Hey fisher", null);
+//        boardGrid.updateCell(c, 1, 1);
+
+
         stage.setScene(scene);
         stage.show();
     }

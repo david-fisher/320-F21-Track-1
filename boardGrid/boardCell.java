@@ -1,22 +1,22 @@
-package Helpers;
-
-import javafx.scene.control.Button;
+import Helpers.Helper;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
-public class cell {
-    private ImageView imageView;
-    private String name;
+public class boardCell {
+    private final ImageView imageView;
+    private final String name;
     private Integer cellHeight;
     private Integer cellWidth;
     private Integer x;
     private Integer y;
+    private ImageView icon;
 
-    public cell(String name, ImageView imageView){
+    public boardCell(String name, ImageView imageView){
         this.name = name;
         this.imageView = imageView;
     }
 
-    public cell(String name, ImageView imageView, int height, int width){
+    public boardCell(String name, ImageView imageView, int height, int width){
         this.name = name;
         this.imageView = imageView;
         this.cellHeight = height;
@@ -30,15 +30,20 @@ public class cell {
     public Integer[] getPosition(){ return new Integer[]{this.x, this.y}; }
     public void setPosition(int x, int y) { this.x = x; this.y = y; }
 
-    public ImageView getCellObject(String imageFile){
+    public ImageView getCellObject(String imageFile, GridPane board, boardScore score, int height, int width){
         String fileName = (imageFile == null)? "images/fish.jpeg" : imageFile;
-        ImageView icon = Helper.imageMaker(fileName, 70, 70);
+        icon = Helper.imageMaker(fileName, 70, 70);
+//        ImageView icon = Helper.imageFromFile(fileName);
+//        icon.setPreserveRatio(true);
 
-//        icon.fitWidthProperty().bind();
+        // TODO: figure out if the resizable issue is here
+//        icon.fitWidthProperty().bind(board.widthProperty().divide(width));
+//        icon.fitHeightProperty().bind(board.heightProperty().divide(height));
 
         assert icon != null;
         icon.setOnMouseClicked(
                 e -> {  // TODO: set mouse click actions
+                    score.addOne();
                     System.out.println(e.toString() + " is clicked");
                 }
         );
