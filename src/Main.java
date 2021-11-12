@@ -1,12 +1,15 @@
 import javafx.application.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.shape.*;
+import javafx.scene.text.Text;
 import javafx.scene.paint.*;
 import javafx.scene.control.*;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.layout.StackPane;
 
 public class Main extends Application {
     double orgSceneX, orgSceneY;
@@ -104,9 +107,22 @@ public void createHexagon(Group root) {
             62.5, 535.0,
             75.0, 510.0
             });
-    root.getChildren().add(hexagon);
-    dragNDrop(hexagon);
-    rightClick(hexagon, root);
+    //root.getChildren().add(hexagon);
+    // dragNDrop(hexagon);
+    //rightClick(hexagon, root);
+    TextField text = new TextField ("AAA");
+    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;");
+    text.setAlignment(Pos.CENTER);
+    StackPane layout = new StackPane();
+    layout.getChildren().addAll(
+            hexagon,
+            text
+    );
+    root.getChildren().add(layout);
+    // layout.setLayoutX(5);
+    layout.setLayoutX(-30);
+    layout.setLayoutY(490);
+    dragNDrop_stack(layout);      
 }
 
 public void dragNDrop(Shape shape) {
@@ -135,6 +151,35 @@ public void dragNDrop(Shape shape) {
         });
 
 }
+
+public void dragNDrop_stack(StackPane sp) {
+    // Drag n' Drop Interaction *******************************************************
+        sp.setCursor(Cursor.HAND);
+    
+        sp.setOnMousePressed((t) -> {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            
+            StackPane c = (StackPane) (t.getSource());
+            c.toFront();
+            });
+    
+        sp.setOnMouseDragged((t) -> {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+    
+            StackPane c = (StackPane) (t.getSource());
+    
+            c.setTranslateX(c.getTranslateX() + offsetX);
+            c.setTranslateY(c.getTranslateY() + offsetY);
+    
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            // System.out.println(orgSceneX);
+            // System.out.println(orgSceneY);
+            });
+    
+    }
 
 public void rightClick(Shape shape, Group root){
     //*****Color Picker function */
@@ -187,6 +232,8 @@ public void start(Stage stage){
     createTriangle(root);
     createPentagon(root);
     createHexagon(root);
+    
+    // System.out.print(root.);
     
     Scene scene = new Scene(root, 800, 600, Color.rgb(105, 162, 255));
     stage.setTitle("Board Editor");
