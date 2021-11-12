@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.* ?>
+<?import javafx.scene.layout.* ?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testcontroller.ModeMenuController">
+<children>
+    <Spinner fx:id="playerSpinner" layoutX="230.0" layoutY="100.0" style="-fx-scale-x: 1; -fx-scale-y: 1;" stylesheets="@style.css" />
+    <Label layoutX="230.0" layoutY="63.0" text="Number of Players:">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </Label>
+    <Label layoutX="242.0" layoutY="187.0" text="Number of AI:">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </Label>
+
+    <Spinner fx:id="aiSpinner" layoutX="230.0" layoutY="230.0" style="-fx-scale-x: 1; -fx-scale-y: 1;" stylesheets="@style.css"/>
+    <CheckBox id="main-menu-button" layoutX="146.0" layoutY="308.0" mnemonicParsing="false" style="-fx-scale-x: 0.5; -fx-scale-y: 0.5;" stylesheets="@style.css" text="Tutorial Mode">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </CheckBox>
+</children>
+</Pane>
