@@ -41,8 +41,8 @@ public class Controller {
 
     @FXML
     private ComboBox<String>[] dropdowns = new ComboBox[5];
-    private int numVisible = 5;
-    private int[] visible = { 1, 1, 1, 1, 1 };
+    private int numVisible = 1;
+    private int[] visible = { 1, 0,0,0,0};
     private String[] deleteButtons = { "d0", "d1", "d2", "d3", "d4" };
     private double orgSceneX, orgSceneY;
 
@@ -56,6 +56,10 @@ public class Controller {
         dropdowns[2] = dropdown2;
         dropdowns[3] = dropdown3;
         dropdowns[4] = dropdown4;
+        dropdowns[1].getParent().setManaged(false);;
+        dropdowns[2].getParent().setManaged(false);;
+        dropdowns[3].getParent().setManaged(false);;
+        dropdowns[4].getParent().setManaged(false);;
     }
 
     @FXML
@@ -110,6 +114,7 @@ public class Controller {
 
     @FXML
     void mouseReleased(MouseEvent event) {
+
         ((Node) event.getSource()).setOnMousePressed((t) -> {
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();

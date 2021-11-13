@@ -168,7 +168,7 @@
                                        <Button fx:id="d0" mnemonicParsing="false" onMouseClicked="#deleteDropDown" text="X" textFill="#ff4e4e" />
                                  </children>
                               </HBox>
-                              <HBox spacing="20.0">
+                              <HBox spacing="20.0" visible="false">
                                  <children>
                                        
                                                <ComboBox fx:id="dropdown1" prefWidth="150.0">
@@ -184,7 +184,7 @@
                                        <Button fx:id="d1" mnemonicParsing="false" onMouseClicked="#deleteDropDown" text="X" textFill="#ff4e4e" />
                                  </children>
                               </HBox>
-                              <HBox spacing="20.0">
+                              <HBox spacing="20.0" visible="false">
                                  <children>
                                        <ComboBox fx:id="dropdown2" prefWidth="150.0">
                                      <items>
@@ -199,7 +199,7 @@
                                        <Button fx:id="d2" mnemonicParsing="false" onMouseClicked="#deleteDropDown" text="X" textFill="#ff4e4e" />
                                  </children>
                               </HBox>
-                              <HBox spacing="20.0">
+                              <HBox spacing="20.0" visible="false">
                                  <children>
                                    <ComboBox fx:id="dropdown3" prefWidth="150.0">
                                      <items>
@@ -214,7 +214,7 @@
                                     <Button fx:id="d3" mnemonicParsing="false" onMouseClicked="#deleteDropDown" text="X" textFill="#ff4e4e" />
                                  </children>
                               </HBox>
-                              <HBox spacing="20.0">
+                              <HBox spacing="20.0" visible="false">
                                  <children>
                                     <ComboBox fx:id="dropdown4" prefWidth="150.0">
                                        <items>
