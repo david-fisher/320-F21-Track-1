@@ -1,5 +1,3 @@
-package com.example.testcontroller;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
