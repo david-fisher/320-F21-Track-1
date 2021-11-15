@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.CardPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="615.0" prefWidth="900.0">
+         <children>
+            <CardPane layoutX="253.0" layoutY="162.0" prefHeight="255.0" prefWidth="427.0">
+                <Label contentDisplay="RIGHT" prefHeight="51.0" prefWidth="296.0" style="-fx-padding:10;" text="Type                   ">
+                  <graphic>
+                     <ComboBox prefWidth="150.0" />
+                  </graphic>
+               </Label>
+               <Label contentDisplay="RIGHT" prefHeight="44.0" prefWidth="399.0" style="-fx-padding:10;" text="Quantity             ">
+                  <graphic>
+                     <TextField minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="170.0" text="Enter Quantity" />
+                  </graphic>
+               </Label>
+               <Label contentDisplay="RIGHT" prefHeight="51.0" prefWidth="296.0" style="-fx-padding:10;" text="Select Deck        ">
+                  <graphic>
+                     <ComboBox prefWidth="150.0" />
+                  </graphic>
+               </Label>
+               <Label contentDisplay="RIGHT" prefHeight="44.0" prefWidth="442.0" style="-fx-padding:10;" text="Range                 ">
+                  <graphic>
+                     <Pane>
+                        <children>
+                           <TextField layoutX="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="45.0" text="Max" />
+                           <TextField minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="39.0" text="Min" />
+                           <Line endX="-60.0" endY="34.99998474121094" layoutX="109.0" layoutY="-23.0" startX="-43.33331298828125" startY="34.99998474121094" strokeWidth="3.0" />
+                        </children>
+                     </Pane>
+                  </graphic>
+               </Label>
+            </CardPane>
+            <Button layoutX="631.0" layoutY="124.0" mnemonicParsing="false" text="Save" />
+            <Button layoutX="681.0" layoutY="124.0" mnemonicParsing="false" text="Cancel" />
+            <Button layoutX="405.0" layoutY="433.0" mnemonicParsing="false" text="Card Creation" />
+            <Button layoutX="271.0" layoutY="431.0" mnemonicParsing="false" text="Add New RNG" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
