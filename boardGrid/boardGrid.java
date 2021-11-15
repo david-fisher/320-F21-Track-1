@@ -1,9 +1,6 @@
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -80,7 +77,7 @@ public class boardGrid {
         // TODO: checking winning or scoring condition
         boolean condition = true;
         if (condition){
-            currentScore.addOne();
+            currentScore.addOnePlayer1();
         }
 
 
@@ -100,7 +97,7 @@ public class boardGrid {
         }
     }
 
-    public static VBox createScore(){
+    public static HBox createScore(){
         return currentScore.scoreBox();
     }
 
@@ -114,7 +111,7 @@ public class boardGrid {
         int widthPercentage = 100 / width;
         int heightPercentage = 100 / height;
 
-        currentScore = new boardScore(userName);
+        currentScore = new boardScore(userName, "Marius");
 
         // column constraints
         for (int i = 0; i < width; i++){

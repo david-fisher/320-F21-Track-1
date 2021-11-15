@@ -43,7 +43,7 @@ public class boardCell {
         assert icon != null;
         icon.setOnMouseClicked(
                 e -> {  // TODO: set mouse click actions
-                    score.addOne();
+                    score.addOnePlayer1();
                     System.out.println(e.toString() + " is clicked");
                 }
         );
