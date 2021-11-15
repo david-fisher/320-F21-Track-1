@@ -18,8 +18,9 @@ public class GameEditorMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent menu = FXMLLoader.load(getClass().getResource("GameEditorMain.fxml"));
-        Scene mainMenu = new Scene(menu, 600,300);
+        //Parent menu = FXMLLoader.load(getClass().getResource("GameEditorMain.fxml"));
+        Parent menu = FXMLLoader.load(getClass().getResource("RuleEditorUI/Editor.fxml"));
+        Scene mainMenu = new Scene(menu);
         primaryStage.setScene(mainMenu);
         primaryStage.show();
 

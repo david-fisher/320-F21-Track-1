@@ -1,4 +1,4 @@
-package com.example.newrngui;
+package GameEditor.NewRNGUI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

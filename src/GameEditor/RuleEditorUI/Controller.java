@@ -1,4 +1,4 @@
-package application;
+package GameEditor.RuleEditorUI;
 
 import java.net.URL;
 import java.util.Arrays;

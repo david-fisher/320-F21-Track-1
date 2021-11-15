@@ -1,4 +1,4 @@
-package com.example.newrngui;
+package GameEditor.NewRNGUI;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

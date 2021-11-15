@@ -1,4 +1,4 @@
-package com.example.newrngui;
+package GameEditor.NewRNGUI;
 
 public class RNG {
     private String Type;
