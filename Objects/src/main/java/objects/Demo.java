@@ -1,4 +1,7 @@
+package objects;
+
 import java.util.*;
+import java.io.*;
 
 public class Demo {
     public static void print(String str){System.out.println(str);}
@@ -51,7 +54,7 @@ public class Demo {
             print(String.format("\t\tattribute: %12s; value: %6s;", key, temp));
         }
 
-        a.remove_attributes();
+        //a.remove_attributes();
         attributes = a.get_attributes();
         setofAttributes = attributes.keySet();
         print("\tattributes after erase entire attributes:");
@@ -119,20 +122,28 @@ public class Demo {
         
         // removing tile d from board
         print(String.format("\nCurrent number of Tiles: %2d", board.get_tiles().size()));
-        board.remove_tile(d);
+        //board.remove_tile(d);
         print(String.format("Current number of Tiles: %2d", board.get_tiles().size()));
 
         return board;
     }
 
-    public static void Token(){
+    public static Token Token(){
         Token token = new Token();
         token.update_gameboard(Board());
         token.update_player(Player());
+        token.get_players().get(0).update_tile(token.get_gameboard().get_tiles().get(2));
         print(String.format("Successfully update gameboard: '%s' and player object: '%s' into token",
                              token.get_gameboard().getID(), token.get_players().get(0).get_id()));
 
+        return token;
     }
+    
+    public static Token JSON() throws IOException{
+		JSONConverter json = new JSONConverter(Token(), "Token.json");
+		json.To_JSON();
+		return json.From_JSON();
+	}
 
     public static int[] RNG_10_INT(){
         int num = 100;
@@ -145,12 +156,14 @@ public class Demo {
         }
         return result;
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         // Board();
-        Token();
+        //Token();
+        JSON();
+        //JSONConverter jsonConverter = new JSONConverter(JSON(), "After.json");
+        //jsonConverter.To_JSON();
         // RNG_10_INT();
         // tiles();
         // Player();
     }
-
 }

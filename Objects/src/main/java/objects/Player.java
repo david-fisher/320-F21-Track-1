@@ -1,3 +1,5 @@
+package objects;
+
 import java.util.*;
 
 public class Player extends Saveable {
@@ -51,7 +53,5 @@ public class Player extends Saveable {
         result.put("score", this.score.get_id());
         result.put("current tile", this.current_tile.get_id());
         return result;
-    } 
-
-    
+    }
 }

@@ -1,6 +1,8 @@
+package objects;
+
 import java.util.*;
 
-public class Tile extends PTile{
+public class Tile extends PTile {
 
     Hashtable<String,Tile> neighbors; ArrayList<Piece> pieces;
 
@@ -74,6 +76,7 @@ public class Tile extends PTile{
         }
         return this.pieces;
     }
+    
     public ArrayList<Piece> remove_piece(Piece piece){
         try {
             int index = this.pieces.indexOf(findPieceByID(piece.ID));
@@ -86,6 +89,7 @@ public class Tile extends PTile{
         this.pieces = new_pieces;
         return this.pieces;
     }
+    
     public ArrayList<Piece> remove_peices(){
         this.pieces.clear();
         return this.pieces;
@@ -112,7 +116,5 @@ public class Tile extends PTile{
         // }
         // result.put("next tile ids", next_tiles_ids);
         return result;
-    } 
-
-
+    }
 }

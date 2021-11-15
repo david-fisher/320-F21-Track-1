@@ -1,10 +1,14 @@
+package objects;
+
 import java.util.*;
 
 /* 
 Class return an array of generated random elements
 */
-public class RNG extends Saveable{
-    int repeat, seed; double[] range; Random rand;
+public class RNG extends Saveable {
+    int repeat, seed; double[] range;
+    //private transient Random rand;
+    private Random rand;
     /*
     Attributes:
         ID: every random generator has an unique ID
@@ -79,7 +83,6 @@ public class RNG extends Saveable{
         return current_seed;
     }
 
-
     public double[] ran_double(){
         double[] result; result = new double[this.repeat];
         for(int i=0; i < this.repeat; i++){
@@ -135,5 +138,4 @@ public class RNG extends Saveable{
         result.put("seed", new String(Integer.toString(this.seed)));
         return result;
     }
-
 }

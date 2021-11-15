@@ -1,6 +1,8 @@
+package objects;
+
 import java.util.*;
 
-public class Rule implements IRule{
+public class Rule implements IRule {
     final String ID;
     String rule; int score; String type; RNG rng;
 
