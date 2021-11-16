@@ -3,6 +3,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class boardLauncher extends Application {
     @Override
@@ -10,12 +11,13 @@ public class boardLauncher extends Application {
 
         int[] size = {8, 7};
 
-        Scene scene = gamePlayUI.makeScene(stage, null,  size[0], size[1]);
-        stage.setTitle("Game Board");
+        ArrayList<String> playerList = new ArrayList<>();
+        playerList.add(null);
+        playerList.add("Fisher");
+        playerList.add("Marius");
 
-//        cell c = new cell(
-//                "Hey fisher", null);
-//        boardGrid.updateCell(c, 1, 1);
+        Scene scene = gamePlayUI.makeScene(stage, playerList, size[0], size[1]);
+        stage.setTitle("Game Board");
 
 
         stage.setScene(scene);

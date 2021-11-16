@@ -1,7 +1,10 @@
+
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -37,19 +40,27 @@ public class boardScore {
     }
 
     protected ArrayList<String> getPlayerList() { return this.playerList; }
+    public int getPlayerScoreByName(String name) { return this.playerScore.get(name); }
 
     // showUpdates on UI
     private boolean showUpdates(String key){
         try {
             int playerIndex = this.playerList.indexOf(key);
 
-            Node nodeOut = this.scoreBoard.getChildren().get(playerIndex);
-            if (nodeOut instanceof VBox){
-                Node nodeIn = ((VBox) nodeOut).getChildren().get(1);
-                if (nodeIn instanceof Text){
-                    ((Text) nodeIn).setText(
-                            this.playerScore.get(key).toString()
-                    );
+            // get a stack of one of the score board
+            Node nodeStack = this.scoreBoard.getChildren().get(playerIndex);
+            if (nodeStack instanceof StackPane){
+                // get VBox inside the stack pane
+                Node nodeVBox = ((StackPane) nodeStack).getChildren().get(1);
+                if (nodeVBox instanceof VBox){
+                    // get Text view inside the VBox
+                    Node nodeText = ((VBox) nodeVBox).getChildren().get(1);
+                    if (nodeText instanceof Text){
+                        // update Text with the current score
+                        ((Text) nodeText).setText(
+                                this.playerScore.get(key).toString()
+                        );
+                    }
                 }
             }
 
@@ -81,19 +92,38 @@ public class boardScore {
 
     public HBox scoreBox(){
 
+        ArrayList<Color> colorList = new ArrayList<>();
+        colorList.add(Color.LIME);
+        colorList.add(Color.YELLOW);
+        colorList.add(Color.GREEN);
+        int colorIndex = 0;
+
         for(String player : this.playerList) {
-            VBox currentBoard = new VBox();
+            StackPane localBoard = new StackPane();
+
+            VBox currentVBox = new VBox();
 
             Text number = new Text(String.valueOf(this.playerScore.get(player)));
             Text user = new Text(player);
+            number.setFill(Color.MIDNIGHTBLUE);
 
-            number.setFont(Font.font("Arial Regular", FontWeight.BOLD, FontPosture.REGULAR, 30));
-            user.setFont(Font.font("Arial Regular", FontWeight.BOLD, FontPosture.REGULAR, 40));
+            number.setFont(Font.font("Arial Regular", FontWeight.BOLD, FontPosture.REGULAR, 40));
+            user.setFont(Font.font("Arial Regular", FontWeight.BOLD, FontPosture.REGULAR, 30));
 
-            currentBoard.getChildren().addAll(user, number);
-            currentBoard.setAlignment(Pos.CENTER);
+            currentVBox.getChildren().addAll(user, number);
+            currentVBox.setAlignment(Pos.CENTER);
 
-            this.scoreBoard.getChildren().add(currentBoard);
+            Rectangle currentBackground = new Rectangle();
+            currentBackground.setHeight(100);
+            currentBackground.setWidth(90);
+            currentBackground.setFill(colorList.get(colorIndex));
+            colorIndex = (colorIndex + 1) % colorList.size();
+
+            localBoard.getChildren().add(currentBackground);
+            localBoard.getChildren().add(currentVBox);
+            localBoard.setAlignment(Pos.CENTER);
+
+            this.scoreBoard.getChildren().add(localBoard);
         }
 
         // TODO: fill color for score board bounds

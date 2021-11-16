@@ -8,12 +8,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class gamePlayUI {
 
-    public static Scene makeScene(Stage primaryStage, String userName, int height, int width){
+    public static Scene makeScene(Stage primaryStage, ArrayList<String> players, int height, int width){
 
         BorderPane mainScene = new BorderPane();
-        VBox leftStack = new VBox(50);
+        VBox leftStack = new VBox(150);
         VBox rightStack = new VBox();
         VBox topStack = new VBox();
 
@@ -25,7 +27,7 @@ public class gamePlayUI {
         rightStack.getChildren().addAll(saveButton, editButton);
 
         // board
-        GridPane board = boardGrid.createBoard(userName, height, width);
+        GridPane board = boardGrid.createBoard(players, height, width);
         moveInfo infoBoard = new moveInfo("Move forward 4 spaces and lose next turn or stay in current space");
 
         // top

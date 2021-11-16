@@ -70,11 +70,15 @@ public class boardCell {
         stack.getChildren().add(index);
 
         stack.setOnMouseClicked(
-                e -> {  // TODO: set mouse click actions
+                e -> {  // set mouse click actions
+
+                    /*
+                    score.addOne(String playerName)
+                    score.updateScore(String playerName, int amount)
+                     */
 
                     score.addOne(currentTurn.getCurrentPlayer());
-//                    score.updateScore("player1", 10);
-//                    score.updateScore("Fisher", -1);
+                    if (currentTurn.getCurrentPlayer().equals("Fisher")) { score.updateScore("Fisher", -1); }
                     currentTurn.next();
                 }
         );

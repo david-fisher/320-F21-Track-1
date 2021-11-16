@@ -13,6 +13,7 @@ public class boardGrid {
     private static int height = 10, width = 10;
     private static boardScore currentScore;
     private static turns currentTurn;
+    private static ArrayList<String> playerList;
 
     // load an arraylist to the grid
     private static void loadGrid(ArrayList<ArrayList<boardCell>> table){
@@ -103,12 +104,12 @@ public class boardGrid {
         return currentScore.scoreBox();
     }
 
-    public static HBox createTurns(){
+    public static StackPane createTurns(){
         return currentTurn.displayTurns();
     }
 
 
-    public static GridPane createBoard(String userName, int h, int w){
+    public static GridPane createBoard(ArrayList<String> players, int h, int w){
 
 
         height = h;
@@ -117,11 +118,16 @@ public class boardGrid {
         int widthPercentage = 100 / width;
         int heightPercentage = 100 / height;
 
-        ArrayList<String> tempUserList = new ArrayList<>();
-        tempUserList.add(userName);
-        tempUserList.add("Fisher");
-        tempUserList.add("Marius");
-        currentScore = new boardScore(tempUserList);
+        playerList = new ArrayList<>();
+
+        if (players == null){
+            players  = new ArrayList<>();
+            players.add(null);
+        }
+
+        playerList.addAll(players);
+
+        currentScore = new boardScore(playerList);
         currentTurn = new turns(currentScore);
 
         // column constraints
