@@ -26,6 +26,9 @@ hs_err_pid*
 .classpath
 .DS_Store
 
-# Files related to Docker, that are not required for running the app
+# Files that are not required for running the app
 docker-compose.yml
 Dockerfile
+.idea
+out
+320-F21-Track-1.iml
