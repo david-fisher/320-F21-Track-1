@@ -76,10 +76,4 @@ public class Rule implements IRule {
         this.rule = new_rule;
         this.type = new_type;
     }
-
-    public String to_string() {
-        // to-do
-        String str = "This rule is about " + this.rule;
-        return str;
-    }
 }
