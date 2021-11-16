@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -156,13 +157,14 @@ public class GameEditorMainController {
     	transition.setVisible(false);
     }
 
-    public void changeTokenMenu(ActionEvent event) throws IOException {
+    @FXML
+    public void changeAnchorScene(Event event) throws IOException {
         Node node = (Node) event.getSource();
         String tokenType = (String) node.getUserData();
         Stage app_stage = (Stage) node.getScene().getWindow();
 
-        if (tokenType.equals("movementPiece")) {
-            Parent addMovementPiece = FXMLLoader.load(getClass().getResource("GameEditor.Views/MovementPiece.fxml"));
+        if (tokenType.equals("gameToken")) {
+            Parent addMovementPiece = FXMLLoader.load(getClass().getResource("Views/customToken.fxml"));
             app_stage.setScene(new Scene(addMovementPiece));
         }
         else if (tokenType == ""){}

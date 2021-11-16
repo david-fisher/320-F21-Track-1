@@ -30,4 +30,19 @@ public class TokenController {
         app_stage.setScene(new Scene (addMovementPiece));
 
     }
+
+    public void onClick(ActionEvent event) throws IOException {
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        Parent addMovementPiece = FXMLLoader.load(getClass().getResource("Views/AddMovementPiece.fxml"));
+        app_stage.setScene(new Scene (addMovementPiece));
+    }
+
+    public void changeScene(Scene in, Scene out){};
+
+    public  void displayNewDeck(){}
+
+    public  void displayNewToken(){}
+
+    public void enableValue(){}
 }
