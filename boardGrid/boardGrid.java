@@ -65,6 +65,7 @@ public class boardGrid {
                         Character.toString(c),
                         imageFromFile("images/fish.jpeg")   // the working dir is the project root directory
                 );
+                currentCell.setIndex(i + j * width + 1);
                 currentRow.add(currentCell);
             }
             cellTable.add(currentRow);
