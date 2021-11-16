@@ -63,7 +63,7 @@ public class boardGrid {
                 char c = (char) (aChar + i + j);
                 boardCell currentCell = new boardCell(
                         Character.toString(c),
-                        imageFromFile("src/images/fish.jpeg")   // the working dir is the project root directory
+                        imageFromFile("images/fish.jpeg")   // the working dir is the project root directory
                 );
                 currentRow.add(currentCell);
             }
@@ -72,12 +72,12 @@ public class boardGrid {
         return cellTable;
     }
 
-    protected static void updateScore(){
+    protected static void updatePlayerScore(String name, int amount){
 
         // TODO: checking winning or scoring condition
         boolean condition = true;
         if (condition){
-            currentScore.addOnePlayer1();
+            currentScore.updateScore(name, amount);
         }
 
 
@@ -111,7 +111,10 @@ public class boardGrid {
         int widthPercentage = 100 / width;
         int heightPercentage = 100 / height;
 
-        currentScore = new boardScore(userName, "Marius");
+        ArrayList<String> tempUserList = new ArrayList<>();
+        tempUserList.add(userName);
+        tempUserList.add("Marius");
+        currentScore = new boardScore(tempUserList);
 
         // column constraints
         for (int i = 0; i < width; i++){

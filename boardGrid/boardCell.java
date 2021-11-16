@@ -43,8 +43,10 @@ public class boardCell {
         assert icon != null;
         icon.setOnMouseClicked(
                 e -> {  // TODO: set mouse click actions
-                    score.addOnePlayer1();
-                    System.out.println(e.toString() + " is clicked");
+
+                    score.addOne("Marius");
+                    score.updateScore("player1", 10);
+//                    System.out.println(e.toString() + " is clicked");
                 }
         );
 
@@ -53,6 +55,8 @@ public class boardCell {
                     icon.setVisible(false);
                 }
         );
+
+
 
         return icon;
     }
