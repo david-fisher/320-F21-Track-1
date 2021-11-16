@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="130.0" tabMaxWidth="70.0" tabMinHeight="130.0" tabMinWidth="70.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tokenController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="130.0" tabMaxWidth="70.0" tabMinHeight="130.0" tabMinWidth="70.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <tabs>
         <Tab>
             <graphic>
@@ -57,8 +57,8 @@
                            <children>
                               <Pane fx:id="deck1" layoutX="7.0" layoutY="7.0" prefHeight="281.0" prefWidth="412.0" style="-fx-border-color: #000000;">
                                  <children>
-                                    <TextField fx:id="name22" alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="26.0" prefWidth="119.0" promptText="Enter Name" text="Deck 1" />
-                                    <ImageView fx:id="visuals22" fitHeight="100.0" fitWidth="100.0" layoutX="17.0" layoutY="39.0" opacity="0.5" pickOnBounds="true" smooth="false" />
+                                    <TextField fx:id="deck_name1" alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="26.0" prefWidth="119.0" promptText="Enter Name" text="Deck 1" />
+                                    <ImageView fx:id="deck_visuals1" fitHeight="100.0" fitWidth="100.0" layoutX="17.0" layoutY="39.0" opacity="0.5" pickOnBounds="true" smooth="false" />
                                     <Button layoutX="126.0" layoutY="46.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" text="+ Choose Image">
                                        <font>
                                           <Font size="10.0" />
@@ -393,11 +393,11 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1760.0" prefWidth="425.0">
                            <children>
-                              <Pane fx:id="custok1" layoutX="7.0" layoutY="7.0" prefHeight="176.0" prefWidth="412.0" style="-fx-border-color: #000000;">
+                              <Pane fx:id="custok0" layoutX="7.0" layoutY="7.0" prefHeight="176.0" prefWidth="412.0" style="-fx-border-color: #000000;">
                                  <children>
-                                    <TextField alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="26.0" prefWidth="119.0" promptText="Enter Name" text="Custom Token 1" />
-                                    <ImageView fx:id="visuals" fitHeight="120.0" fitWidth="120.0" layoutX="6.0" layoutY="40.0" opacity="0.5" pickOnBounds="true" smooth="false" />
-                                    <Button layoutX="126.0" layoutY="46.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" text="+ Choose Image">
+                                    <TextField fx:id="custTok_name0" alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="26.0" prefWidth="119.0" promptText="Enter Name" text="Custom Token 1" />
+                                    <ImageView fx:id="custToke_visuals0" fitHeight="120.0" fitWidth="120.0" layoutX="6.0" layoutY="40.0" opacity="0.5" pickOnBounds="true" smooth="false" />
+                                    <Button fx:id="custTok_chooseImage0" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" text="+ Choose Image">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -407,38 +407,38 @@
                                           <Font size="11.0" />
                                        </font>
                                     </Label>
-                                    <ChoiceBox layoutX="125.0" layoutY="110.0" prefHeight="19.0" prefWidth="94.0" />
-                                    <Button layoutX="327.0" layoutY="7.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="X Delete" textFill="RED" />
+                                    <ChoiceBox fx:id="custTok_presets0" layoutX="125.0" layoutY="110.0" prefHeight="19.0" prefWidth="94.0" />
+                                    <Button fx:id="custTok_delete0" layoutX="327.0" layoutY="7.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="X Delete" textFill="RED" />
                                     <Label layoutX="238.0" layoutY="49.0" text="Quantity given to player:">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="quantity" layoutX="374.0" layoutY="43.0" prefHeight="26.0" prefWidth="32.0" />
+                                    <TextField fx:id="custTok_qty0" layoutX="374.0" layoutY="43.0" prefHeight="26.0" prefWidth="32.0" />
                                     <Label layoutX="238.0" layoutY="81.0" text="Token Type:" underline="true">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
                                     </Label>
-                                    <CheckBox fx:id="playMoney" layoutX="238.0" layoutY="101.0" mnemonicParsing="false" onAction="#enableValue" text="Play Money" />
-                                    <CheckBox fx:id="miscToken" layoutX="238.0" layoutY="144.0" mnemonicParsing="false" text="Miscellaneous Token" />
-                                    <Label fx:id="valLabel" disable="true" layoutX="298.0" layoutY="122.0" text="Value:">
+                                    <CheckBox fx:id="isPlayMoney0" layoutX="238.0" layoutY="101.0" mnemonicParsing="false" onAction="#enableValue" text="Play Money" />
+                                    <CheckBox fx:id="isMiscToken0" layoutX="238.0" layoutY="144.0" mnemonicParsing="false" text="Miscellaneous Token" />
+                                    <Label fx:id="valLabel0" disable="true" layoutX="298.0" layoutY="122.0" text="Value:">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="tokenValue" disable="true" layoutX="333.0" layoutY="119.0" prefHeight="15.0" prefWidth="32.0">
+                                    <TextField fx:id="custTok_value0" disable="true" layoutX="333.0" layoutY="119.0" prefHeight="15.0" prefWidth="32.0">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
                                     </TextField>
                                  </children>
                               </Pane>
-                              <Pane fx:id="custok2" layoutX="7.0" layoutY="183.0" prefHeight="176.0" prefWidth="412.0" style="-fx-border-color: #000000;">
+                              <Pane fx:id="custok1" layoutX="7.0" layoutY="183.0" prefHeight="176.0" prefWidth="412.0" style="-fx-border-color: #000000;">
                                  <children>
-                                    <TextField fx:id="name2" alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="26.0" prefWidth="119.0" promptText="Enter Name" text="Custom Token 2" />
-                                    <ImageView fx:id="visuals2" fitHeight="120.0" fitWidth="120.0" layoutX="6.0" layoutY="40.0" opacity="0.5" pickOnBounds="true" smooth="false" />
-                                    <Button layoutX="126.0" layoutY="46.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" text="+ Choose Image">
+                                    <TextField fx:id="custTok_name1" alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="26.0" prefWidth="119.0" promptText="Enter Name" text="Custom Token 1" />
+                                    <ImageView fx:id="custToke_visuals1" fitHeight="120.0" fitWidth="120.0" layoutX="6.0" layoutY="40.0" opacity="0.5" pickOnBounds="true" smooth="false" />
+                                    <Button fx:id="custTok_chooseImage1" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" text="+ Choose Image">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -448,68 +448,68 @@
                                           <Font size="11.0" />
                                        </font>
                                     </Label>
-                                    <ChoiceBox layoutX="125.0" layoutY="110.0" prefHeight="19.0" prefWidth="94.0" />
-                                    <Button layoutX="327.0" layoutY="7.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="X Delete" textFill="RED" />
+                                    <ChoiceBox fx:id="custTok_presets1" layoutX="125.0" layoutY="110.0" prefHeight="19.0" prefWidth="94.0" />
+                                    <Button fx:id="custTok_delete1" layoutX="327.0" layoutY="7.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="X Delete" textFill="RED" />
                                     <Label layoutX="238.0" layoutY="49.0" text="Quantity given to player:">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="quantity2" layoutX="374.0" layoutY="43.0" prefHeight="26.0" prefWidth="32.0" />
+                                    <TextField fx:id="custTok_qty1" layoutX="374.0" layoutY="43.0" prefHeight="26.0" prefWidth="32.0" />
                                     <Label layoutX="238.0" layoutY="81.0" text="Token Type:" underline="true">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
                                     </Label>
-                                    <CheckBox fx:id="playMoney2" layoutX="238.0" layoutY="101.0" mnemonicParsing="false" onAction="#enableValue" text="Play Money" />
-                                    <CheckBox fx:id="miscToken2" layoutX="238.0" layoutY="144.0" mnemonicParsing="false" text="Miscellaneous Token" />
+                                    <CheckBox fx:id="isPlayMoney1" layoutX="238.0" layoutY="101.0" mnemonicParsing="false" onAction="#enableValue" text="Play Money" />
+                                    <CheckBox fx:id="isMiscToken1" layoutX="238.0" layoutY="144.0" mnemonicParsing="false" text="Miscellaneous Token" />
+                                    <Label fx:id="valLabel1" disable="true" layoutX="298.0" layoutY="122.0" text="Value:">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="custTok_value1" disable="true" layoutX="333.0" layoutY="119.0" prefHeight="15.0" prefWidth="32.0">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="custok2" layoutX="7.0" layoutY="359.0" prefHeight="176.0" prefWidth="412.0" style="-fx-border-color: #000000;">
+                                 <children>
+                                    <TextField fx:id="custTok_name2" alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="26.0" prefWidth="119.0" promptText="Enter Name" text="Custom Token 1" />
+                                    <ImageView fx:id="custToke_visuals2" fitHeight="120.0" fitWidth="120.0" layoutX="6.0" layoutY="40.0" opacity="0.5" pickOnBounds="true" smooth="false" />
+                                    <Button fx:id="custTok_chooseImage2" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" text="+ Choose Image">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Button>
+                                    <Label layoutX="129.0" layoutY="67.0" prefHeight="43.0" prefWidth="85.0" text="or select from list of presets:" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                    <ChoiceBox fx:id="custTok_presets2" layoutX="125.0" layoutY="110.0" prefHeight="19.0" prefWidth="94.0" />
+                                    <Button fx:id="custTok_delete2" layoutX="327.0" layoutY="7.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="X Delete" textFill="RED" />
+                                    <Label layoutX="238.0" layoutY="49.0" text="Quantity given to player:">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="custTok_qty2" layoutX="374.0" layoutY="43.0" prefHeight="26.0" prefWidth="32.0" />
+                                    <Label layoutX="238.0" layoutY="81.0" text="Token Type:" underline="true">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                    <CheckBox fx:id="isPlayMoney2" layoutX="238.0" layoutY="101.0" mnemonicParsing="false" onAction="#enableValue" text="Play Money" />
+                                    <CheckBox fx:id="isMiscToken2" layoutX="238.0" layoutY="144.0" mnemonicParsing="false" text="Miscellaneous Token" />
                                     <Label fx:id="valLabel2" disable="true" layoutX="298.0" layoutY="122.0" text="Value:">
                                        <font>
                                           <Font size="11.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="tokenValue2" disable="true" layoutX="333.0" layoutY="119.0" prefHeight="15.0" prefWidth="32.0">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="custok3" layoutX="7.0" layoutY="359.0" prefHeight="176.0" prefWidth="412.0" style="-fx-border-color: #000000;">
-                                 <children>
-                                    <TextField fx:id="name21" alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="26.0" prefWidth="119.0" promptText="Enter Name" text="Custom Token 3" />
-                                    <ImageView fx:id="visuals21" fitHeight="120.0" fitWidth="120.0" layoutX="6.0" layoutY="40.0" opacity="0.5" pickOnBounds="true" smooth="false" />
-                                    <Button layoutX="126.0" layoutY="46.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" text="+ Choose Image">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Button>
-                                    <Label layoutX="129.0" layoutY="67.0" prefHeight="43.0" prefWidth="85.0" text="or select from list of presets:" textAlignment="CENTER" wrapText="true">
-                                       <font>
-                                          <Font size="11.0" />
-                                       </font>
-                                    </Label>
-                                    <ChoiceBox layoutX="125.0" layoutY="110.0" prefHeight="19.0" prefWidth="94.0" />
-                                    <Button layoutX="327.0" layoutY="7.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="76.0" text="X Delete" textFill="RED" />
-                                    <Label layoutX="238.0" layoutY="49.0" text="Quantity given to player:">
-                                       <font>
-                                          <Font size="11.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="quantity21" layoutX="374.0" layoutY="43.0" prefHeight="26.0" prefWidth="32.0" />
-                                    <Label layoutX="238.0" layoutY="81.0" text="Token Type:" underline="true">
-                                       <font>
-                                          <Font size="11.0" />
-                                       </font>
-                                    </Label>
-                                    <CheckBox fx:id="playMoney21" layoutX="238.0" layoutY="101.0" mnemonicParsing="false" onAction="#enableValue" text="Play Money" />
-                                    <CheckBox fx:id="miscToken21" layoutX="238.0" layoutY="144.0" mnemonicParsing="false" text="Miscellaneous Token" />
-                                    <Label fx:id="valLabel21" disable="true" layoutX="298.0" layoutY="122.0" text="Value:">
-                                       <font>
-                                          <Font size="11.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="tokenValue21" disable="true" layoutX="333.0" layoutY="119.0" prefHeight="15.0" prefWidth="32.0">
+                                    <TextField fx:id="custTok_value2" disable="true" layoutX="333.0" layoutY="119.0" prefHeight="15.0" prefWidth="32.0">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
