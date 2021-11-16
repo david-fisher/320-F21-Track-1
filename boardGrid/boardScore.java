@@ -36,6 +36,8 @@ public class boardScore {
         this.playerList.addAll(playersSet);
     }
 
+    protected ArrayList<String> getPlayerList() { return this.playerList; }
+
     // showUpdates on UI
     private boolean showUpdates(String key){
         try {

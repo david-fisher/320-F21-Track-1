@@ -12,6 +12,7 @@ public class boardGrid {
     protected static GridPane board = new GridPane();
     private static int height = 10, width = 10;
     private static boardScore currentScore;
+    private static turns currentTurn;
 
     // load an arraylist to the grid
     private static void loadGrid(ArrayList<ArrayList<boardCell>> table){
@@ -25,7 +26,7 @@ public class boardGrid {
                 boardCell currentCell = table.get(i).get(j);
                 if (currentCell == null) { continue; }  // empty cell element
                 board.add(table.get(i).get(j).
-                                getCellObject(null, board, currentScore, height, width),    // button or board element
+                                getCellObject(null, board, currentScore, currentTurn, height, width),    // button or board element
                         i,  // x coordinate
                         j); // y coordinate
             }
@@ -91,7 +92,7 @@ public class boardGrid {
         }
         catch (Exception ignored) {
             board.add(
-                    c.getCellObject(null, board, currentScore, height, width),
+                    c.getCellObject(null, board, currentScore, currentTurn, height, width),
                     x,
                     y
             );
@@ -100,6 +101,10 @@ public class boardGrid {
 
     public static HBox createScore(){
         return currentScore.scoreBox();
+    }
+
+    public static HBox createTurns(){
+        return currentTurn.displayTurns();
     }
 
 
@@ -114,8 +119,10 @@ public class boardGrid {
 
         ArrayList<String> tempUserList = new ArrayList<>();
         tempUserList.add(userName);
+        tempUserList.add("Fisher");
         tempUserList.add("Marius");
         currentScore = new boardScore(tempUserList);
+        currentTurn = new turns(currentScore);
 
         // column constraints
         for (int i = 0; i < width; i++){

@@ -43,7 +43,7 @@ public class boardCell {
     public Integer[] getPosition(){ return new Integer[]{this.x, this.y}; }
     public void setPosition(int x, int y) { this.x = x; this.y = y; }
 
-    public StackPane getCellObject(String imageFile, GridPane board, boardScore score, int height, int width){
+    public StackPane getCellObject(String imageFile, GridPane board, boardScore score, turns currentTurn, int height, int width){
         stack = new StackPane();
 
         Rectangle square = new Rectangle(80, 80);
@@ -72,9 +72,10 @@ public class boardCell {
         stack.setOnMouseClicked(
                 e -> {  // TODO: set mouse click actions
 
-                    score.addOne("Marius");
-                    score.updateScore("player1", 10);
-//                    System.out.println(e.toString() + " is clicked");
+                    score.addOne(currentTurn.getCurrentPlayer());
+//                    score.updateScore("player1", 10);
+//                    score.updateScore("Fisher", -1);
+                    currentTurn.next();
                 }
         );
 
