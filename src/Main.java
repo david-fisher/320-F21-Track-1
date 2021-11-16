@@ -94,9 +94,23 @@ public void createPentagon(Group root) {
             65.0, 455.0,
             75.0, 425.0
             });
-    root.getChildren().add(pentagon);
-    dragNDrop(pentagon);
-    rightClick(pentagon, root);
+    // root.getChildren().add(pentagon);
+    // dragNDrop(pentagon);
+    // rightClick(pentagon, root);
+    TextField text = new TextField ("Pentagon");
+    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
+    text.setPrefWidth(68);
+    text.setAlignment(Pos.CENTER);
+    StackPane layout = new StackPane();
+    layout.getChildren().addAll(
+            pentagon,
+            text
+    );
+    root.getChildren().add(layout);
+    // layout.setLayoutX(10);
+    // layout.setLayoutY(490);
+    dragNDrop_stack(layout);
+    rightClick_stack(layout,root);
 }
 
 public void createHexagon(Group root) {
@@ -112,8 +126,9 @@ public void createHexagon(Group root) {
     //root.getChildren().add(hexagon);
     // dragNDrop(hexagon);
     //rightClick(hexagon, root);
-    TextField text = new TextField ("AAA");
-    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;");
+    TextField text = new TextField ("Hexagon");
+    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
+    text.setPrefWidth(68);
     text.setAlignment(Pos.CENTER);
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
@@ -121,12 +136,11 @@ public void createHexagon(Group root) {
             text
     );
     root.getChildren().add(layout);
-    // layout.setLayoutX(5);
-    layout.setLayoutX(-30);
+    layout.setLayoutX(10);
     layout.setLayoutY(490);
     dragNDrop_stack(layout);
     rightClick_stack(layout,root);
-    System.out.print(layout.getChildren().get(0));
+    
 }
 
 public void dragNDrop(Shape shape) {
