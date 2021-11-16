@@ -1,10 +1,12 @@
-package GameEditor.RuleEditorUI;
+package GameEditor;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
@@ -38,13 +41,41 @@ public class Controller {
     private ComboBox<String> dropdown3;
     @FXML
     private ComboBox<String> dropdown4;
-
+    @FXML
+    private Button transition;
+    @FXML
+    private Button addTransition;
+    @FXML
+    private HBox modifyTransitionButtons;
+    @FXML
+    private Button changeTransition;
+    @FXML
+    private Button deleteTransition;
+    
+    @FXML
+    private TextFlow takeFromPlayer;
+    @FXML
+    private TextFlow givePlayer;
+    @FXML
+    private TextFlow movePlayer;
+    @FXML
+    private TextFlow tileNum;
+    @FXML
+    private TextFlow numCards;
+    @FXML
+    private TextFlow numPoints;
+    
+    private String[] transitions = {"\u2192", "\u2190", "\u2194"};
+    private int currentTransition = 0;
+    
     @FXML
     private ComboBox<String>[] dropdowns = new ComboBox[5];
     private int numVisible = 1;
     private int[] visible = { 1, 0,0,0,0};
     private String[] deleteButtons = { "d0", "d1", "d2", "d3", "d4" };
     private double orgSceneX, orgSceneY;
+    private boolean turnRuleClicked = false;
+
 
     @FXML
     private URL location;
@@ -56,10 +87,46 @@ public class Controller {
         dropdowns[2] = dropdown2;
         dropdowns[3] = dropdown3;
         dropdowns[4] = dropdown4;
-        dropdowns[1].getParent().setManaged(false);;
-        dropdowns[2].getParent().setManaged(false);;
-        dropdowns[3].getParent().setManaged(false);;
-        dropdowns[4].getParent().setManaged(false);;
+        if(!turnRuleClicked)
+        {
+            dropdowns[1].getParent().setManaged(false);
+            dropdowns[2].getParent().setManaged(false);
+            dropdowns[3].getParent().setManaged(false);
+            dropdowns[4].getParent().setManaged(false);
+        }
+        turnRuleClicked = true;
+    }
+    
+    @FXML
+    void initializeTileRule()
+    {
+        dragAndDrop(takeFromPlayer);
+        dragAndDrop(givePlayer);
+        dragAndDrop(movePlayer);
+        dragAndDrop(numCards);
+        dragAndDrop(tileNum);
+        dragAndDrop(numPoints);
+    }
+
+    @FXML
+    void dragAndDrop(TextFlow action)
+    {
+        action.setCursor(Cursor.HAND);
+        action.setOnMousePressed((t) -> {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            Node c = (Node) (t.getSource());
+            c.toFront();
+        });
+        action.setOnMouseDragged((t) -> {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+            Node c = (Node) (t.getSource());
+            c.setTranslateX(c.getTranslateX() + offsetX);
+            c.setTranslateY(c.getTranslateY() + offsetY);
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+        });
     }
 
     @FXML
@@ -124,9 +191,41 @@ public class Controller {
 
         });
     }
+    
+    @FXML
+    void intializeMovementRule(MouseEvent event) {
+        modifyTransitionButtons.setVisible(false);
+        addTransition.setVisible(true);
+    }
+    
+    @FXML
+    void selectTransition(MouseEvent event) {
+        addTransition.setVisible(false);
+        modifyTransitionButtons.setVisible(true);
+    }
+    
+    @FXML
+    void changeTransition(MouseEvent event) {
+        currentTransition = (currentTransition+1) % 3;
+        transition.setText(transitions[currentTransition]);
+    }
 
-    public static void main(String[] args) {
+    @FXML
+    void deleteTransition(MouseEvent event) {
+        transition.setVisible(false);
+    }
 
+    public void changeTokenMenu(ActionEvent event) throws IOException {
+        Node node = (Node) event.getSource();
+        String tokenType = (String) node.getUserData();
+        Stage app_stage = (Stage) node.getScene().getWindow();
+
+        if (tokenType.equals("movementPiece")) {
+            Parent addMovementPiece = FXMLLoader.load(getClass().getResource("TokenUI/MovementPiece.fxml"));
+            app_stage.setScene(new Scene(addMovementPiece));
+        }
+        else if (tokenType == ""){}
+        else {}
     }
 
 }
