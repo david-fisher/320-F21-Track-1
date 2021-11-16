@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 import javafx.application.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -122,7 +124,9 @@ public void createHexagon(Group root) {
     // layout.setLayoutX(5);
     layout.setLayoutX(-30);
     layout.setLayoutY(490);
-    dragNDrop_stack(layout);      
+    dragNDrop_stack(layout);
+    rightClick_stack(layout,root);
+    System.out.print(layout.getChildren().get(0));
 }
 
 public void dragNDrop(Shape shape) {
@@ -175,8 +179,6 @@ public void dragNDrop_stack(StackPane sp) {
     
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
-            // System.out.println(orgSceneX);
-            // System.out.println(orgSceneY);
             });
     
     }
@@ -218,6 +220,47 @@ public void rightClick(Shape shape, Group root){
             @Override
             public void handle(ContextMenuEvent event) {
                 contextMenu.show(shape, event.getScreenX(), event.getScreenY());
+            }
+    });
+}
+
+public void rightClick_stack(StackPane sp, Group root){
+    //*****Color Picker function */
+    ContextMenu contextMenu = new ContextMenu();
+    //Intial a colorpicker, display the current color on shape
+    ColorPicker colorssPicker = new ColorPicker(Color.web(((Shape) sp.getChildren().get(0)).getFill().toString()));
+    //*****Backgraound Uploader function */  
+    MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
+    //TODO
+    MenuItem colorpicker_item = new MenuItem(null,colorssPicker);
+    MenuItem deleter_item = new MenuItem(null, new Label("Delete Shape"));
+  
+    //Handle right click
+    colorpicker_item.setOnAction(new EventHandler<ActionEvent>(){
+        @Override
+        public void handle(ActionEvent event)
+        {
+            ((Shape) sp.getChildren().get(0)).setFill(colorssPicker.getValue());
+        }
+    });
+
+    deleter_item.setOnAction(new EventHandler<ActionEvent>(){
+        @Override
+        public void handle(ActionEvent event)
+        {
+            root.getChildren().remove(sp);
+        }
+    });
+
+    contextMenu.getItems().add(colorpicker_item);
+    contextMenu.getItems().add(backgrounduploader_item);
+    contextMenu.getItems().add(deleter_item);
+   
+    //Display menu beside shape
+    sp.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+            @Override
+            public void handle(ContextMenuEvent event) {
+                contextMenu.show(sp, event.getScreenX(), event.getScreenY());
             }
     });
 }
