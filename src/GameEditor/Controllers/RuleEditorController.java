@@ -1,4 +1,4 @@
-package GameEditor;
+package GameEditor.Controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +26,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-public class Controller {
+public class RuleEditorController {
 
     @FXML
     private ResourceBundle resources;
@@ -213,19 +213,6 @@ public class Controller {
     @FXML
     void deleteTransition(MouseEvent event) {
         transition.setVisible(false);
-    }
-
-    public void changeTokenMenu(ActionEvent event) throws IOException {
-        Node node = (Node) event.getSource();
-        String tokenType = (String) node.getUserData();
-        Stage app_stage = (Stage) node.getScene().getWindow();
-
-        if (tokenType.equals("movementPiece")) {
-            Parent addMovementPiece = FXMLLoader.load(getClass().getResource("TokenUI/MovementPiece.fxml"));
-            app_stage.setScene(new Scene(addMovementPiece));
-        }
-        else if (tokenType == ""){}
-        else {}
     }
 
 }

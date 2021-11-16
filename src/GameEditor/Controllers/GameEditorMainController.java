@@ -1,13 +1,10 @@
-package GameEditor;
+package GameEditor.Controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -16,17 +13,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-public class Controller {
+public class GameEditorMainController {
 
     @FXML
     private ResourceBundle resources;
@@ -170,7 +162,7 @@ public class Controller {
         Stage app_stage = (Stage) node.getScene().getWindow();
 
         if (tokenType.equals("movementPiece")) {
-            Parent addMovementPiece = FXMLLoader.load(getClass().getResource("TokenUI/MovementPiece.fxml"));
+            Parent addMovementPiece = FXMLLoader.load(getClass().getResource("GameEditor.Views/MovementPiece.fxml"));
             app_stage.setScene(new Scene(addMovementPiece));
         }
         else if (tokenType == ""){}

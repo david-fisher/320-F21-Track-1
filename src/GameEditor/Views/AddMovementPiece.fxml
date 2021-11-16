@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<VBox  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controller">
+<VBox  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.TokenController">
     <children>
         <Button fx:id="newPiece" mnemonicParsing="false" onAction="#changeTokenMenu" text="New Movement Piece" />
         <AnchorPane>

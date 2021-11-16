@@ -19,7 +19,7 @@ public class GameEditorMain extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         //Parent menu = FXMLLoader.load(getClass().getResource("GameEditorMain.fxml"));
-        Parent menu = FXMLLoader.load(getClass().getResource("RuleEditorUI/Editor.fxml"));
+        Parent menu = FXMLLoader.load(getClass().getResource("Views/RuleEditor.fxml"));
         Scene mainMenu = new Scene(menu);
         primaryStage.setScene(mainMenu);
         primaryStage.show();
@@ -30,7 +30,7 @@ public class GameEditorMain extends Application {
     public void onClick(ActionEvent event) throws IOException {
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        Parent addMovementPiece = FXMLLoader.load(getClass().getResource("TokenUI/AddMovementPiece.fxml"));
+        Parent addMovementPiece = FXMLLoader.load(getClass().getResource("Views/AddMovementPiece.fxml"));
         app_stage.setScene(new Scene (addMovementPiece, 600, 300));
     }
 
