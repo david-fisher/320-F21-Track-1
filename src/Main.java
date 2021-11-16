@@ -7,6 +7,9 @@ import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 import javafx.scene.control.*;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 public class Main extends Application {
     double orgSceneX, orgSceneY;
@@ -50,15 +53,15 @@ public void tabs(Group root) {
     root.getChildren().add(sideBar);
 }
 
-public void createRectangle(Group root) {
+// Testing createRectangle ******************************************************
+public Rectangle createRectangle() {
     Rectangle rectangle = new Rectangle(50,50);
-    rectangle.setY(175);
-    rectangle.setX(25);
-    root.getChildren().add(rectangle);
     dragNDrop(rectangle);
-    rightClick(rectangle, root);
+    
+//    rightClick(rectangle, root);
+    return rectangle;
 }
-
+// ******************************************************************************************
 public void createCircle(Group root) {
     Circle circle = new Circle(25);
     circle.setCenterY(275);
@@ -124,16 +127,35 @@ public void dragNDrop(Shape shape) {
     shape.setOnMouseDragged((t) -> {
         double offsetX = t.getSceneX() - orgSceneX;
         double offsetY = t.getSceneY() - orgSceneY;
-
+        
         Shape c = (Shape) (t.getSource());
-
+        
         c.setTranslateX(c.getTranslateX() + offsetX);
         c.setTranslateY(c.getTranslateY() + offsetY);
 
         orgSceneX = t.getSceneX();
         orgSceneY = t.getSceneY();
         });
+    
+    shape.setOnMouseReleased((t) -> {       
+    	double offsetX = t.getSceneX() - orgSceneX;
+        double offsetY = t.getSceneY() - orgSceneY;
+        
+        Shape c = (Shape) (t.getSource());
+        double snapX = (c.getTranslateX() + offsetX) % 50;
+        if (snapX > 25.0){
+        	snapX = (c.getTranslateX() + offsetX) - snapX + 50;
+        }
+        else {
+        	snapX = (c.getTranslateX() + offsetX) - snapX;
+        }
+        
+        c.setTranslateX(snapX);
+        c.setTranslateY(c.getTranslateY() + offsetY);
 
+        orgSceneX = t.getSceneX();
+        orgSceneY = t.getSceneY();
+        });
 }
 
 public void rightClick(Shape shape, Group root){
@@ -179,23 +201,64 @@ public void rightClick(Shape shape, Group root){
     });
 }
 
+// Testing Grid ******************************************************
+public static class boardGrid {
+    // grid pane
+    private GridPane board = new GridPane();
+    private int height = 10, width = 10;
+    
+    public void createBoard(){
+    	board.setGridLinesVisible(true);
+
+        // Scale of client
+        int widthPercentage = 100 / width;
+        int heightPercentage = 100 / height;
+
+        // column constraints
+        for (int i = 0; i <= width; i++){
+            ColumnConstraints column = new ColumnConstraints();
+            column.setPercentWidth(widthPercentage);
+            board.getColumnConstraints().add(column);
+        }
+
+        // row constraints
+        for (int j  = 0; j <= height; j++){
+            RowConstraints row = new RowConstraints();
+            row.setPercentHeight(heightPercentage);
+            board.getRowConstraints().add(row);
+        }
+    }
+    
+    public GridPane getBoard() {
+    	return board;
+    }
+}
+// Testing ******************************************************
 public void start(Stage stage){
     Group root = new Group();
-    
+    boardGrid board = new boardGrid();
+    board.createBoard();
+    board.getBoard().setTranslateX(100);
+    board.getBoard().setTranslateY(100);
+    board.getBoard().add(createRectangle(), 0, 0);
+    board.getBoard().add(createRectangle(), 1, 1);
+    board.getBoard().add(createRectangle(), 9, 9);
+    board.getBoard().add(createRectangle(), 10, 10);
+    board.getBoard().add(createRectangle(), 10, 0);
+    board.getBoard().add(createRectangle(), 0, 10);
+    root.getChildren().add(board.getBoard());
     // Initial Setup
     tabs(root);
-    createRectangle(root);
-    createCircle(root);
-    createTriangle(root);
-    createPentagon(root);
-    createHexagon(root);
-    
-    Scene scene = new Scene(root, 800, 600, Color.rgb(105, 162, 255));
+//    createRectangle(root);
+//    createCircle(root);
+//    createTriangle(root);
+//    createPentagon(root);
+//    createHexagon(root);
+   
+    Scene scene = new Scene(root, 700, 700, Color.rgb(105, 162, 255));
     stage.setTitle("Board Editor");
     stage.setScene(scene);
     stage.show();
-
-    
 }
 
 public static void main(String[] args) {
