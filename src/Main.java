@@ -12,7 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public class Main extends Application {
-    double orgSceneX, orgSceneY;
+	double orgSceneX, orgSceneY;
 
 public void tabs(Group root) {
     // Top tabs ***************************************************************
@@ -112,6 +112,7 @@ public void createHexagon(Group root) {
     rightClick(hexagon, root);
 }
 
+// Testing  *********************************************************************************
 public void dragNDrop(Shape shape) {
 // Drag n' Drop Interaction *******************************************************
     shape.setCursor(Cursor.HAND);
@@ -138,25 +139,39 @@ public void dragNDrop(Shape shape) {
         });
     
     shape.setOnMouseReleased((t) -> {       
-    	double offsetX = t.getSceneX() - orgSceneX;
-        double offsetY = t.getSceneY() - orgSceneY;
-        
         Shape c = (Shape) (t.getSource());
-        double snapX = (c.getTranslateX() + offsetX) % 50;
+       
+
+        double snapX = (c.getTranslateX()) % 50;
         if (snapX > 25.0){
-        	snapX = (c.getTranslateX() + offsetX) - snapX + 50;
+        	snapX = (c.getTranslateX()) - snapX + 50;
         }
         else {
-        	snapX = (c.getTranslateX() + offsetX) - snapX;
+        	snapX = (c.getTranslateX()) - snapX;
+        }
+        if (t.getSceneX() >= 100 && t.getSceneX() < 650) {
+            c.setTranslateX(snapX);
+        }
+        else {
+        	System.out.println(t.getSceneX());
+        	System.out.println(c.getTranslateX());
+        	
+//        	c.setTranslateX(c.getTranslateX() - t.getSceneX());
+//        	c.setTranslateX(100);
         }
         
-        c.setTranslateX(snapX);
-        c.setTranslateY(c.getTranslateY() + offsetY);
-
-        orgSceneX = t.getSceneX();
-        orgSceneY = t.getSceneY();
+        double snapY = (c.getTranslateY()) % 50;
+        if (snapY > 25.0){
+        	snapY = (c.getTranslateY()) - snapY + 50;
+        }
+        else {
+        	snapY = (c.getTranslateY()) - snapY;
+        }
+//        System.out.println();
+        c.setTranslateY(snapY);
         });
 }
+// **************************************************************************************************************
 
 public void rightClick(Shape shape, Group root){
     //*****Color Picker function */
@@ -201,7 +216,7 @@ public void rightClick(Shape shape, Group root){
     });
 }
 
-// Testing Grid ******************************************************
+// Testing Grid *************************************************************************************************
 public static class boardGrid {
     // grid pane
     private GridPane board = new GridPane();
@@ -233,7 +248,7 @@ public static class boardGrid {
     	return board;
     }
 }
-// Testing ******************************************************
+// *************************************************************************************************************
 public void start(Stage stage){
     Group root = new Group();
     boardGrid board = new boardGrid();
