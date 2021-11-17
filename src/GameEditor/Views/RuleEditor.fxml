@@ -32,7 +32,7 @@
         <tabs>
           <Tab closable="false">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" onMouseEntered="#initializeTileRule" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
                            <children>
@@ -80,22 +80,22 @@
                                                       <TextFlow fx:id="tileNum" layoutX="154.0" layoutY="193.0">
                                                          <children>
                                                             <Label text="Tile  " />
-                                                            <TextField prefHeight="26.0" prefWidth="27.0" promptText="_" />
+                                                            <TextField prefHeight="26.0" prefWidth="33.0" promptText="_" />
                                                          </children>
                                                       </TextFlow>
                                                       <TextFlow fx:id="numCards" layoutX="98.0" layoutY="237.0">
                                                          <children>
-                                                            <TextField prefHeight="26.0" prefWidth="27.0" promptText="_" />
+                                                            <TextField prefHeight="26.0" prefWidth="33.0" promptText="_" />
                                                             <Label text="  Cards" />
                                                          </children>
                                                       </TextFlow>
                                                       <TextFlow fx:id="numPoints" layoutX="15.0" layoutY="238.0">
                                                          <children>
-                                                            <TextField prefHeight="26.0" prefWidth="27.0" promptText="_" />
+                                                            <TextField prefHeight="26.0" prefWidth="35.0" promptText="_" />
                                                             <Label text="  Points" />
                                                          </children>
                                                       </TextFlow>
-                                                      <TextFlow fx:id="takeFromPlayer" layoutX="15.0" layoutY="163.0" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" prefHeight="21.0" prefWidth="110.0">
+                                                      <TextFlow fx:id="takeFromPlayer" layoutX="15.0" layoutY="163.0" prefHeight="21.0" prefWidth="110.0">
                                                          <children>
                                                             <Label text="Take from player..." />
                                                          </children>
@@ -114,7 +114,7 @@
                   </AnchorPane>
             </content>
                <graphic>
-                  <StackPane onMouseClicked="#initializeTileRule" prefHeight="150.0" prefWidth="200.0" rotate="90.0">
+                  <StackPane prefHeight="150.0" prefWidth="200.0" rotate="90.0">
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" rotate="90.0" text="Tile Rule" />
                      </children>

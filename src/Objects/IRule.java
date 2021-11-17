@@ -1,3 +1,4 @@
+package Objects;
 
 public interface IRule {
     public RNG get_rng();

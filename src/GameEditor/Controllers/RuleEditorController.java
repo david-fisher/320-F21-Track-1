@@ -32,15 +32,7 @@ public class RuleEditorController {
     private ResourceBundle resources;
 
     @FXML
-    private ComboBox<String> dropdown0;
-    @FXML
-    private ComboBox<String> dropdown1;
-    @FXML
-    private ComboBox<String> dropdown2;
-    @FXML
-    private ComboBox<String> dropdown3;
-    @FXML
-    private ComboBox<String> dropdown4;
+    private ComboBox<String> dropdown0, dropdown1, dropdown2, dropdown3, dropdown4;
     @FXML
     private Button transition;
     @FXML
@@ -53,17 +45,7 @@ public class RuleEditorController {
     private Button deleteTransition;
     
     @FXML
-    private TextFlow takeFromPlayer;
-    @FXML
-    private TextFlow givePlayer;
-    @FXML
-    private TextFlow movePlayer;
-    @FXML
-    private TextFlow tileNum;
-    @FXML
-    private TextFlow numCards;
-    @FXML
-    private TextFlow numPoints;
+    private TextFlow takeFromPlayer, givePlayer, movePlayer, tileNum, numCards, numPoints;
     
     private String[] transitions = {"\u2192", "\u2190", "\u2194"};
     private int currentTransition = 0;
@@ -80,6 +62,7 @@ public class RuleEditorController {
     @FXML
     private URL location;
 
+    //initializes the turn rule menu
     @FXML
     void initializeTurnRule() {
         dropdowns[0] = dropdown0;
@@ -97,6 +80,7 @@ public class RuleEditorController {
         turnRuleClicked = true;
     }
     
+    //initializes the drag and drop for each of the actions in the tile rule editor
     @FXML
     void initializeTileRule()
     {
@@ -108,6 +92,7 @@ public class RuleEditorController {
         dragAndDrop(numPoints);
     }
 
+    //drag and drop for the actions in the tile rule editor
     @FXML
     void dragAndDrop(TextFlow action)
     {
@@ -129,6 +114,7 @@ public class RuleEditorController {
         });
     }
 
+    //adding a drop down box for the turn rule editor
     @FXML
     void addDropDown(MouseEvent event) {
         if (numVisible < 5) {
@@ -146,9 +132,9 @@ public class RuleEditorController {
         }
     }
 
+    //deleting a drop down box for the turn rule editor
     @FXML
     void deleteDropDown(MouseEvent event) {
-        // make the appropriate nodes not visible and clear and selection for that dropdown
         ((Node) event.getSource()).getParent().setVisible(false);
         ((Node) event.getSource()).getParent().setManaged(false);
         ((ComboBox<String>) ((Node) event.getSource()).getParent().getChildrenUnmodifiable().get(0)).getSelectionModel()
@@ -160,36 +146,6 @@ public class RuleEditorController {
                 return;
             }
         }
-    }
-
-    @FXML
-    void mousePressed(MouseEvent event) {
-        ((Node) event.getSource()).setCursor(Cursor.HAND);
-        ((Node) event.getSource()).setOnMouseDragged((t) -> {
-            double offsetX = t.getSceneX() - orgSceneX;
-            double offsetY = t.getSceneY() - orgSceneY;
-
-            TextFlow c = (TextFlow) (t.getSource());
-
-            c.setTranslateX(c.getTranslateX() + offsetX);
-            c.setTranslateY(c.getTranslateY() + offsetY);
-
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-        });
-    }
-
-    @FXML
-    void mouseReleased(MouseEvent event) {
-
-        ((Node) event.getSource()).setOnMousePressed((t) -> {
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-
-            TextFlow c = (TextFlow) (t.getSource());
-            c.toFront();
-
-        });
     }
     
     @FXML
