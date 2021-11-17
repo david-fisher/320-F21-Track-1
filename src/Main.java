@@ -91,22 +91,20 @@ public StackPane createRectangle(boardGrid root) {
     return layout;
 }
 
-public void createCircle(boardGrid root) {
+public StackPane createCircle(boardGrid root) {
     Circle circle = new Circle(25);
-    // circle.setCenterY(275);
-    // circle.setCenterX(50);
-    // root.getChildren().add(circle);
-    // dragNDrop(circle);
-    // rightClick(circle, root);
     TextField text = new TextField ("Circle");
     //Making the TextField transparent, so we dont see the whole input box
     text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
-    text.setPrefWidth(69);
+    text.setMaxWidth(30);
     text.setAlignment(Pos.CENTER);
     //Adding shadow for text, for better readability
     DropShadow shadow = new DropShadow();
     shadow.setSpread(0.6);
+    shadow.setHeight(5);
+    shadow.setWidth(5);
     text.setEffect(shadow);
+    
     //Create a stackPane for TextField and Shape
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
@@ -117,27 +115,30 @@ public void createCircle(boardGrid root) {
     layout.setLayoutY(250);
     dragNDrop_StackPane(layout);
     rightClick_StackPane(layout,root);
+    return layout;
 }
 
-public void createTriangle(boardGrid root) {
+public StackPane createTriangle(boardGrid root) {
     Polygon triangle = new Polygon();
     triangle.getPoints().addAll(new Double[]{
             50.0, 325.0,
             25.0, 375.0,
             75.0, 375.0
             });
-    // root.getChildren().add(triangle);
-    // dragNDrop(triangle);
-    // rightClick(triangle, root);
+    
     TextField text = new TextField ("Triangle");
     //Making the TextField transparent, so we dont see the whole input box
     text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
-    text.setPrefWidth(69);
+    text.setMaxWidth(30);
     text.setAlignment(Pos.CENTER);
+    
     //Adding shadow for text, for better readability
     DropShadow shadow = new DropShadow();
     shadow.setSpread(0.6);
+    shadow.setHeight(5);
+    shadow.setWidth(5);
     text.setEffect(shadow);
+    
     //Create a stackPane for TextField and Shape
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
@@ -148,9 +149,10 @@ public void createTriangle(boardGrid root) {
     layout.setLayoutY(320);
     dragNDrop_StackPane(layout);
     rightClick_StackPane(layout,root);
+    return layout;
 }
 
-public void createPentagon(boardGrid root) {
+public StackPane createPentagon(boardGrid root) {
     Polygon pentagon = new Polygon();
     pentagon.getPoints().addAll(new Double[]{
             50.0, 400.0,
@@ -159,18 +161,19 @@ public void createPentagon(boardGrid root) {
             65.0, 455.0,
             75.0, 425.0
             });
-    // root.getChildren().add(pentagon);
-    // dragNDrop(pentagon);
-    // rightClick(pentagon, root);
     TextField text = new TextField ("Pentagon");
     //Making the TextField transparent, so we dont see the whole input box
     text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
-    text.setPrefWidth(69);
+    text.setMaxWidth(30);
     text.setAlignment(Pos.CENTER);
+    
     //Adding shadow for text, for better readability
     DropShadow shadow = new DropShadow();
     shadow.setSpread(0.6);
+    shadow.setHeight(5);
+    shadow.setWidth(5);
     text.setEffect(shadow);
+    
     //Create a stackPane for TextField and Shape
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
@@ -181,9 +184,10 @@ public void createPentagon(boardGrid root) {
     layout.setLayoutY(400);
     dragNDrop_StackPane(layout);
     rightClick_StackPane(layout,root);
+    return layout;
 }
 
-public void createHexagon(boardGrid root) {
+public StackPane createHexagon(boardGrid root) {
     Polygon hexagon = new Polygon();
     hexagon.getPoints().addAll(new Double[]{
             62.5, 485.0,
@@ -193,18 +197,19 @@ public void createHexagon(boardGrid root) {
             62.5, 535.0,
             75.0, 510.0
             });
-    //root.getChildren().add(hexagon);
-    // dragNDrop(hexagon);
-    //rightClick(hexagon, root);
     TextField text = new TextField ("Hexagon");
     //Making the TextField transparent, so we dont see the whole input box
     text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;");
-    text.setPrefWidth(69);
+    text.setMaxWidth(30);
     text.setAlignment(Pos.CENTER);
+    
     //Adding shadow for text, for better readability
     DropShadow shadow = new DropShadow();
     shadow.setSpread(0.6);
+    shadow.setHeight(5);
+    shadow.setWidth(5);
     text.setEffect(shadow);
+    
     //Create a stackPane for TextField and Shape
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
@@ -215,7 +220,7 @@ public void createHexagon(boardGrid root) {
     layout.setLayoutY(490);
     dragNDrop_StackPane(layout);
     rightClick_StackPane(layout,root);
-    
+    return layout;
 }
 
 public void dragNDrop_StackPane(StackPane sp) {
@@ -258,13 +263,9 @@ public void dragNDrop_StackPane(StackPane sp) {
 	            c.setTranslateX(snapX);
 	        }
 	        else {
-	        	System.out.println(t.getSceneX());
-	        	System.out.println(c.getTranslateX());
-	        	
-	//        	c.setTranslateX(c.getTranslateX() - t.getSceneX());
-	//        	c.setTranslateX(100);
+	        	c.setTranslateX(0);
 	        }
-	        
+	             
 	        double snapY = (c.getTranslateY()) % 50;
 	        if (snapY > 25.0){
 	        	snapY = (c.getTranslateY()) - snapY + 50;
@@ -272,9 +273,14 @@ public void dragNDrop_StackPane(StackPane sp) {
 	        else {
 	        	snapY = (c.getTranslateY()) - snapY;
 	        }
-	//        System.out.println();
-	        c.setTranslateY(snapY);
-	        });
+	        
+	        if (t.getSceneY() >= 100 && t.getSceneY() < 600) {
+	            c.setTranslateY(snapY);
+	        }
+	        else {
+	        	c.setTranslateY(0);
+	        }
+	    });
 }
 
 public void rightClick_StackPane(StackPane sp, boardGrid root){
@@ -355,14 +361,11 @@ public static class boardGrid {
     public void createBoard(){
     	board.setGridLinesVisible(true);
 
-        // Scale of client
-//        int widthPercentage = 100 / width;
-//        int heightPercentage = 100 / height;
-
         // column constraints
         for (int i = 0; i <= width; i++){
             ColumnConstraints column = new ColumnConstraints();
             column.setMinWidth(50);
+            column.setMaxWidth(50);
             board.getColumnConstraints().add(column);
         }
 
@@ -370,6 +373,7 @@ public static class boardGrid {
         for (int j  = 0; j <= height; j++){
             RowConstraints row = new RowConstraints();
             row.setMinHeight(50);
+            row.setMaxHeight(50);
             board.getRowConstraints().add(row);
         }
     }
@@ -389,10 +393,9 @@ public void start(Stage stage){
     // Testing 
     board.getBoard().add(createRectangle(board), 0, 0);
     board.getBoard().add(createRectangle(board), 1, 1);
-//    board.getBoard().add(createRectangle(root), 9, 9);
-//    board.getBoard().add(createRectangle(root), 10, 10);
-//    board.getBoard().add(createRectangle(root), 10, 0);
-//    board.getBoard().add(createRectangle(root), 0, 10);
+    board.getBoard().add(createTriangle(board), 10, 10);
+    board.getBoard().add(createPentagon(board), 0, 10);
+    board.getBoard().add(createHexagon(board), 10, 0);
     root.getChildren().add(board.getBoard());
     
     // Initial Setup
