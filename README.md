@@ -1,6 +1,6 @@
 # 320-F21-Track-1
 ## What is a Game Editor?
-Game editor provides a platform for game editing
+A game editor provides a platform for game editing
 ## Structure 
 * [boardGrid](boardGrid/README.md)
 * [MainMenuSceneBuilder](MainMenuSceneBuilder/README.md)
