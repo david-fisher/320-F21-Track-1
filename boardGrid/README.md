@@ -10,9 +10,9 @@
 * The maximum number of players is two
 
 ### Functions
-* If you click the cell, the score will be added for current player.
+* If you click the cell, the score will be added for the current player.
 * Only one player can make changes on the board in any given round.
-* If you drag the cell, the image will be gone, but other part of the cell will remain at the position where it was.
+* If you drag a cell, the image will be gone, but other part of the cell will remain at the position where it was.
 * The current player will "gain" negative score if they drag the cell
 
 ### Structure
