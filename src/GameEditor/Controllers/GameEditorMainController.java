@@ -26,15 +26,7 @@ public class GameEditorMainController {
     private ResourceBundle resources;
 
     @FXML
-    private ComboBox<String> dropdown0;
-    @FXML
-    private ComboBox<String> dropdown1;
-    @FXML
-    private ComboBox<String> dropdown2;
-    @FXML
-    private ComboBox<String> dropdown3;
-    @FXML
-    private ComboBox<String> dropdown4;
+    private ComboBox<String> dropdown0, dropdown1, dropdown2, dropdown3, dropdown4;
     @FXML
     private Button transition;
     @FXML
@@ -103,36 +95,6 @@ public class GameEditorMainController {
                 return;
             }
         }
-    }
-
-    @FXML
-    void mousePressed(MouseEvent event) {
-        ((Node) event.getSource()).setCursor(Cursor.HAND);
-        ((Node) event.getSource()).setOnMouseDragged((t) -> {
-            double offsetX = t.getSceneX() - orgSceneX;
-            double offsetY = t.getSceneY() - orgSceneY;
-
-            TextFlow c = (TextFlow) (t.getSource());
-
-            c.setTranslateX(c.getTranslateX() + offsetX);
-            c.setTranslateY(c.getTranslateY() + offsetY);
-
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-        });
-    }
-
-    @FXML
-    void mouseReleased(MouseEvent event) {
-
-        ((Node) event.getSource()).setOnMousePressed((t) -> {
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-
-            TextFlow c = (TextFlow) (t.getSource());
-            c.toFront();
-
-        });
     }
     
     @FXML
