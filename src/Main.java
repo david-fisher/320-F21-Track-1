@@ -1,7 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 import javafx.application.*;
@@ -18,7 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 
 public class Main extends Application {
     double orgSceneX, orgSceneY;
@@ -62,17 +61,21 @@ public void tabs(Group root) {
     root.getChildren().add(sideBar);
 }
 
-public StackPane createRectangle(Group root) {
+public StackPane createRectangle(boardGrid root) {
     Rectangle rectangle = new Rectangle(50,50);
-    TextField text = new TextField ("Rectangle");
+    TextField text = new TextField ("+1");
     //Making the TextField transparent, so we dont see the whole input box
     text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
-    text.setPrefWidth(69);
+    text.setMaxWidth(30);
     text.setAlignment(Pos.CENTER);
+    
     //Adding shadow for text, for better readability
     DropShadow shadow = new DropShadow();
     shadow.setSpread(0.6);
+    shadow.setHeight(5);
+    shadow.setWidth(5);
     text.setEffect(shadow);
+    
     //Create a stackPane for TextField and Shape
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
@@ -88,7 +91,7 @@ public StackPane createRectangle(Group root) {
     return layout;
 }
 
-public void createCircle(Group root) {
+public void createCircle(boardGrid root) {
     Circle circle = new Circle(25);
     // circle.setCenterY(275);
     // circle.setCenterX(50);
@@ -109,15 +112,14 @@ public void createCircle(Group root) {
     layout.getChildren().addAll(
             circle,
             text
-    );
-    root.getChildren().add(layout);
+    		);
     layout.setLayoutX(10);
     layout.setLayoutY(250);
     dragNDrop_StackPane(layout);
     rightClick_StackPane(layout,root);
 }
 
-public void createTriangle(Group root) {
+public void createTriangle(boardGrid root) {
     Polygon triangle = new Polygon();
     triangle.getPoints().addAll(new Double[]{
             50.0, 325.0,
@@ -141,15 +143,14 @@ public void createTriangle(Group root) {
     layout.getChildren().addAll(
             triangle,
             text
-    );
-    root.getChildren().add(layout);
+    		);
     layout.setLayoutX(10);
     layout.setLayoutY(320);
     dragNDrop_StackPane(layout);
     rightClick_StackPane(layout,root);
 }
 
-public void createPentagon(Group root) {
+public void createPentagon(boardGrid root) {
     Polygon pentagon = new Polygon();
     pentagon.getPoints().addAll(new Double[]{
             50.0, 400.0,
@@ -175,15 +176,14 @@ public void createPentagon(Group root) {
     layout.getChildren().addAll(
             pentagon,
             text
-    );
-    root.getChildren().add(layout);
+    		);
     layout.setLayoutX(10);
     layout.setLayoutY(400);
     dragNDrop_StackPane(layout);
     rightClick_StackPane(layout,root);
 }
 
-public void createHexagon(Group root) {
+public void createHexagon(boardGrid root) {
     Polygon hexagon = new Polygon();
     hexagon.getPoints().addAll(new Double[]{
             62.5, 485.0,
@@ -210,8 +210,7 @@ public void createHexagon(Group root) {
     layout.getChildren().addAll(
             hexagon,
             text
-    );
-    root.getChildren().add(layout);
+    		);
     layout.setLayoutX(10);
     layout.setLayoutY(490);
     dragNDrop_StackPane(layout);
@@ -278,7 +277,7 @@ public void dragNDrop_StackPane(StackPane sp) {
 	        });
 }
 
-public void rightClick_StackPane(StackPane sp, Group root){
+public void rightClick_StackPane(StackPane sp, boardGrid root){
     //*****Color Picker function */
     ContextMenu contextMenu = new ContextMenu();
     //Intial a colorpicker, display the current color on shape
@@ -331,7 +330,7 @@ backgrounduploader_item.setOnAction(UploadEventHandler);
         @Override
         public void handle(ActionEvent event)
         {
-            root.getChildren().remove(sp);
+            root.getBoard().getChildren().remove(sp);
         }
     });
 
@@ -357,20 +356,20 @@ public static class boardGrid {
     	board.setGridLinesVisible(true);
 
         // Scale of client
-        int widthPercentage = 100 / width;
-        int heightPercentage = 100 / height;
+//        int widthPercentage = 100 / width;
+//        int heightPercentage = 100 / height;
 
         // column constraints
         for (int i = 0; i <= width; i++){
             ColumnConstraints column = new ColumnConstraints();
-            column.setPercentWidth(widthPercentage);
+            column.setMinWidth(50);
             board.getColumnConstraints().add(column);
         }
 
         // row constraints
         for (int j  = 0; j <= height; j++){
             RowConstraints row = new RowConstraints();
-            row.setPercentHeight(heightPercentage);
+            row.setMinHeight(50);
             board.getRowConstraints().add(row);
         }
     }
@@ -388,12 +387,12 @@ public void start(Stage stage){
     board.getBoard().setTranslateY(100);
     
     // Testing 
-    board.getBoard().add(createRectangle(root), 0, 0);
-    board.getBoard().add(createRectangle(root), 1, 1);
-    board.getBoard().add(createRectangle(root), 9, 9);
-    board.getBoard().add(createRectangle(root), 10, 10);
-    board.getBoard().add(createRectangle(root), 10, 0);
-    board.getBoard().add(createRectangle(root), 0, 10);
+    board.getBoard().add(createRectangle(board), 0, 0);
+    board.getBoard().add(createRectangle(board), 1, 1);
+//    board.getBoard().add(createRectangle(root), 9, 9);
+//    board.getBoard().add(createRectangle(root), 10, 10);
+//    board.getBoard().add(createRectangle(root), 10, 0);
+//    board.getBoard().add(createRectangle(root), 0, 10);
     root.getChildren().add(board.getBoard());
     
     // Initial Setup
