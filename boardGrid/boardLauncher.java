@@ -10,7 +10,7 @@ public class boardLauncher extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        int[] size = {7, 8};
+        int[] size = {8, 7};
         ArrayList<ArrayList<StackPane>> stackTable = new ArrayList<>();
         for (int i = 0; i < size[0]; i++){
             ArrayList<StackPane> row = new ArrayList<>();

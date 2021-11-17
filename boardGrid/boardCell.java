@@ -71,14 +71,15 @@ public class boardCell {
             stack = new StackPane();
 
             Rectangle square = new Rectangle(80, 80);
-            if (this.cellIndex == null){
+            if (this.x == null){
                 square.setFill(Color.GREEN);
             }
-            else if (this.cellIndex % 2 == 0){
-                square.setFill(Color.gray(0.3));
-            }
             else{
-                square.setFill(Color.gray(0.8));
+                square.setFill(this.x % 2 == 0?
+                        (this.y % 2 == 0)?
+                                Color.gray(0.3) : Color.gray(0.8)
+                        : (this.y % 2 == 0) ?
+                        Color.gray(0.8) : Color.gray(0.3));
             }
 
             stack.getChildren().add(square);    // background

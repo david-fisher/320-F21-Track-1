@@ -1,66 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3df4a894-922e-46ea-8362-c6a2e82a85ed" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+    <list default="true" id="e937a4c6-f540-415c-b527-b7cc179830e0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/320-F21-Track-1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/320-F21-Track-1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/style guide.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/ModeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/ModeMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/editormenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/editormenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/mode-menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/mode-menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/MainMenuFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/PlayGameFXML.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/editormenu.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/gameplay.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/mode-menu.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/pause.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/style.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectId" id="2112wBh7tnNaFpPp1yE6Ahr7MjP" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/OneDrive - University of Massachusetts/Documents/javafx-sdk-17.0.1/lib" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.09940356" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="RunManager">
+    <configuration name="boardLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="boardLauncher" />
+      <module name="320-F21-Track-1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.boardLauncher" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="3df4a894-922e-46ea-8362-c6a2e82a85ed" name="Changes" comment="" />
-      <created>1637094512618</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1637094512618</updated>
-    </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
