@@ -1,4 +1,3 @@
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -58,14 +57,5 @@ public class controller {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new saveGameViewController().makeScene(stage);
         stage.setScene(scene);
-    }
-
-    @FXML
-    public void closeWindow(javafx.event.ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
-    }
-    public void exitApp(javafx.event.ActionEvent event) throws IOException {
-        Platform.exit();
     }
 }
