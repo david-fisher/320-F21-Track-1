@@ -3,7 +3,7 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/MainMenuSceneBuilder/src/Helpers" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MainMenuSceneBuilder/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/boardGrid" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
