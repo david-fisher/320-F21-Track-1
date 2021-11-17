@@ -1,12 +1,13 @@
 {
     "java.project.referencedLibraries": [
-        "/Users/vincentlyu/Documents/javafx-sdk-17.0.1-x64/lib/javafx-swt.jar",
-        "/Users/vincentlyu/Documents/javafx-sdk-17.0.1-x64/lib/javafx.base.jar",
-        "/Users/vincentlyu/Documents/javafx-sdk-17.0.1-x64/lib/javafx.controls.jar",
-        "/Users/vincentlyu/Documents/javafx-sdk-17.0.1-x64/lib/javafx.fxml.jar",
-        "/Users/vincentlyu/Documents/javafx-sdk-17.0.1-x64/lib/javafx.graphics.jar",
-        "/Users/vincentlyu/Documents/javafx-sdk-17.0.1-x64/lib/javafx.media.jar",
-        "/Users/vincentlyu/Documents/javafx-sdk-17.0.1-x64/lib/javafx.swing.jar",
-        "/Users/vincentlyu/Documents/javafx-sdk-17.0.1-x64/lib/javafx.web.jar"
+        "lib/**/*.jar",
+        "d:\\javafx-sdk-17.0.1\\lib\\javafx.base.jar",
+        "d:\\javafx-sdk-17.0.1\\lib\\javafx.controls.jar",
+        "d:\\javafx-sdk-17.0.1\\lib\\javafx.fxml.jar",
+        "d:\\javafx-sdk-17.0.1\\lib\\javafx.graphics.jar",
+        "d:\\javafx-sdk-17.0.1\\lib\\javafx.media.jar",
+        "d:\\javafx-sdk-17.0.1\\lib\\javafx.swing.jar",
+        "d:\\javafx-sdk-17.0.1\\lib\\javafx.web.jar",
+        "d:\\javafx-sdk-17.0.1\\lib\\javafx-swt.jar"
     ]
 }
