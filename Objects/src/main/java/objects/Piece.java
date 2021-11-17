@@ -20,6 +20,7 @@ public class Piece extends PTile {
         this.image = image;
     }
 
+    // card constructor
     Piece(ArrayList<Rule> rules, Hashtable<String,String> attributes, ImageView image){
         super(rules, attributes);
         this.image = image;
