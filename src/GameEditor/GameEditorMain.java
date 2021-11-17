@@ -16,6 +16,11 @@ public class GameEditorMain extends Application {
         launch(args);
     }
 
+    
+    /*
+      main Stage for the GameEditor.
+      Integrates the boardEditor into the GameEditor menu.
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent menu = FXMLLoader.load(getClass().getResource("Views/GameEditorMain.fxml"));
