@@ -4,14 +4,13 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class boardLauncher extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        int[] size = {8, 7};
+        int[] size = {7, 8};
         ArrayList<ArrayList<StackPane>> stackTable = new ArrayList<>();
         for (int i = 0; i < size[0]; i++){
             ArrayList<StackPane> row = new ArrayList<>();
