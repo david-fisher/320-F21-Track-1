@@ -22,4 +22,12 @@ public class ModeMenuController {
     public void initialize() {
         initSpinner(10, 4);
     }
+
+    @FXML
+    public void toPlay(javafx.event.ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("PLayGameFXML.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+    }
 }

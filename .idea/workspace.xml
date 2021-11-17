@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9768ba15-d440-4789-bff9-f7502a59bc1f" name="Changes" comment="add button to the saved game UI" />
+    <list default="true" id="3df4a894-922e-46ea-8362-c6a2e82a85ed" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/320-F21-Track-1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/320-F21-Track-1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/ModeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/ModeMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/editormenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/editormenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/mode-menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/mode-menu.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="PUSH_TAGS">
-      <GitPushTagMode>
-        <option name="argument" value="--follow-tags" />
-        <option name="title" value="Current Branch" />
-      </GitPushTagMode>
-    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="main" />
@@ -29,207 +25,42 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1zeR4URRgP7OpGs6SxYAicqr8Yk" />
+  <component name="ProjectId" id="2112wBh7tnNaFpPp1yE6Ahr7MjP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$USER_HOME$/OneDrive - University of Massachusetts/Documents/javafx-sdk-17.0.1/lib" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.09940356" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/MainMenuSceneBuilder/src" />
-      <recent name="$PROJECT_DIR$/MainMenuSceneBuilder" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\maxm2\Documents\GitHub\320-F21-Track-1\boardGrid" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.boardLauncher">
-    <configuration name="Application" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8 (2)" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="Menu" />
-      <module name="320-F21-Track-1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="320-F21-Track-1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ModeMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ModeMenu" />
-      <module name="320-F21-Track-1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="boardLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="azul-17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="boardLauncher" />
-      <module name="320-F21-Track-1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.Application" />
-      <item itemvalue="Application.boardLauncher" />
-      <item itemvalue="Application.Main" />
-      <item itemvalue="Application.ModeMenu" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.boardLauncher" />
-        <item itemvalue="Application.ModeMenu" />
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9768ba15-d440-4789-bff9-f7502a59bc1f" name="Changes" comment="" />
-      <created>1634506376494</created>
+      <changelist id="3df4a894-922e-46ea-8362-c6a2e82a85ed" name="Changes" comment="" />
+      <created>1637094512618</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1634506376494</updated>
-      <workItem from="1634506379432" duration="393000" />
-      <workItem from="1634747690882" duration="2462000" />
-      <workItem from="1635090010914" duration="2754000" />
-      <workItem from="1636068382380" duration="555000" />
-      <workItem from="1636071565774" duration="26000" />
-      <workItem from="1636134451405" duration="2929000" />
-      <workItem from="1636314685014" duration="99000" />
-      <workItem from="1636314832140" duration="228000" />
-      <workItem from="1636324190655" duration="514000" />
-      <workItem from="1636346707336" duration="1903000" />
-      <workItem from="1636405043812" duration="95000" />
-      <workItem from="1636475409544" duration="3245000" />
-      <workItem from="1637112442114" duration="186000" />
-      <workItem from="1637112767362" duration="104000" />
-      <workItem from="1637170426036" duration="601000" />
-      <workItem from="1637171068276" duration="56000" />
-      <workItem from="1637184318838" duration="736000" />
+      <updated>1637094512618</updated>
     </task>
-    <task id="LOCAL-00001" summary="Create sceneBuilder README.md">
-      <created>1636046475263</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1636046475263</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Create sceneBuilder README.md">
-      <created>1636046916750</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1636046916750</updated>
-    </task>
-    <task id="LOCAL-00003" summary="push save game view controller">
-      <created>1636068704091</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1636068704091</updated>
-    </task>
-    <task id="LOCAL-00004" summary="create Game play board with GridPane">
-      <created>1636324265561</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1636324265561</updated>
-    </task>
-    <task id="LOCAL-00005" summary="update Game play board with GridPane">
-      <created>1636324589467</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1636324589467</updated>
-    </task>
-    <task id="LOCAL-00006" summary="update board and create cells">
-      <created>1636347064088</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1636347064088</updated>
-    </task>
-    <task id="LOCAL-00007" summary="add button to the saved game UI">
-      <created>1636348739266</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1636348739266</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/team-omnicron" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="origin/team-omnicron" />
-                </option>
-              </RecentGroup>
-            </list>
+            <State />
           </value>
         </entry>
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create sceneBuilder README.md" />
-    <MESSAGE value="push save game view controller" />
-    <MESSAGE value="create Game play board with GridPane" />
-    <MESSAGE value="update Game play board with GridPane" />
-    <MESSAGE value="update board and create cells" />
-    <MESSAGE value="add button to the saved game UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="add button to the saved game UI" />
   </component>
 </project>

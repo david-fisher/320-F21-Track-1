@@ -10,6 +10,7 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MainMenuFXML.fxml"));
             //loader.setController(new SampleController());
             Scene scene = new Scene(root);
+            primaryStage.setTitle("Game Board Editor");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch(Exception e) {

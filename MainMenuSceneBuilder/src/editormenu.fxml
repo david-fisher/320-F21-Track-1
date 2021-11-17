@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller">
    <children>
       <VBox alignment="CENTER">
          <children>
@@ -32,7 +32,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button id="main-menu-button" fx:id="fromTemplateButton" mnemonicParsing="false" prefHeight="68.0" prefWidth="304.0" stylesheets="@style.css" text="From Template">
+            <Button id="main-menu-button" fx:id="fromTemplateButton" mnemonicParsing="false" onAction="#toMainMenu" prefHeight="68.0" prefWidth="304.0" stylesheets="@style.css" text="Back">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
