@@ -55,7 +55,7 @@ public void createRectangle(Group root) {
     rectangle.setY(175);
     rectangle.setX(25);
     root.getChildren().add(rectangle);
-    dragNDrop(rectangle);
+    dragNDrop(rectangle, root);
     rightClick(rectangle, root);
 }
 
@@ -64,7 +64,7 @@ public void createCircle(Group root) {
     circle.setCenterY(275);
     circle.setCenterX(50);
     root.getChildren().add(circle);
-    dragNDrop(circle);
+    dragNDrop(circle, root);
     rightClick(circle, root);
 }
 
@@ -76,7 +76,7 @@ public void createTriangle(Group root) {
             75.0, 375.0
             });
     root.getChildren().add(triangle);
-    dragNDrop(triangle);
+    dragNDrop(triangle, root);
     rightClick(triangle, root);
 }
 
@@ -90,7 +90,7 @@ public void createPentagon(Group root) {
             75.0, 425.0
             });
     root.getChildren().add(pentagon);
-    dragNDrop(pentagon);
+    dragNDrop(pentagon, root);
     rightClick(pentagon, root);
 }
 
@@ -105,11 +105,11 @@ public void createHexagon(Group root) {
             75.0, 510.0
             });
     root.getChildren().add(hexagon);
-    dragNDrop(hexagon);
+    dragNDrop(hexagon, root);
     rightClick(hexagon, root);
 }
 
-public void dragNDrop(Shape shape) {
+public void dragNDrop(Shape shape, Group root) {
 // Drag n' Drop Interaction *******************************************************
     shape.setCursor(Cursor.HAND);
 
@@ -133,7 +133,26 @@ public void dragNDrop(Shape shape) {
         orgSceneX = t.getSceneX();
         orgSceneY = t.getSceneY();
         });
-
+    
+    shape.setOnMouseReleased((t) -> {
+    	if (shape instanceof Rectangle) {
+    		createRectangle(root);
+    		}
+    	else if (shape instanceof Circle) {
+    		createCircle(root);
+    		}
+    	else {
+    		if (((Polygon)shape).getPoints().size() == 6) {
+    			createTriangle(root);
+    			}
+    		else if (((Polygon)shape).getPoints().size() == 10) {
+    			createPentagon(root);
+    			}
+    		else {
+    			createHexagon(root);
+    			}
+    		}
+    	});
 }
 
 public void rightClick(Shape shape, Group root){
