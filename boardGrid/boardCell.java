@@ -13,61 +13,71 @@ public class boardCell {
     private final ImageView imageView;
     private final String name;
     private Integer cellIndex;
-    private Integer cellHeight;
-    private Integer cellWidth;
     private Integer x;
     private Integer y;
     private ImageView icon;
     private StackPane stack;
 
+    public boardCell(){
+        this.name = null;
+        this.imageView = null;
+        this.cellIndex = null;
+        this.stack = null;
+    }
+
+    public boardCell(String name){
+        this.name = name;
+        this.imageView = null;
+        this.cellIndex = null;
+        this.stack = null;
+    }
+
     public boardCell(String name, ImageView imageView){
         this.name = name;
         this.imageView = imageView;
         this.cellIndex = null;
-    }
-
-    public boardCell(String name, ImageView imageView, int height, int width){
-        this.name = name;
-        this.imageView = imageView;
-        this.cellHeight = height;
-        this.cellWidth = width;
-        this.cellIndex = null;
+        this.stack = null;
     }
 
     public void setIndex(int index) { this.cellIndex = index; }
+    public Text setText(){
+        // update index in the front
+        Text index = new Text(this.cellIndex == null? "empty" : this.cellIndex.toString());
+        index.setFont(Font.font("Arial Regular", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        return index;
+    }
 
-    public String getName() { return this.name; }
-    public ImageView getImageView() { return this.imageView; }
+    public void loadCellImage(String fileName){
+        if (fileName == null) { return; }   // check null
+
+        icon = Helper.imageMaker(fileName, 70, 70);
+    }
+
+
+    public String getCellName() { return this.name; }
+    public ImageView getCellImageView() { return this.imageView; }
 
     // return an array size of two
     public Integer[] getPosition(){ return new Integer[]{this.x, this.y}; }
     public void setPosition(int x, int y) { this.x = x; this.y = y; }
 
-    public StackPane getCellObject(String imageFile, GridPane board, boardScore score, turns currentTurn, int height, int width){
-        stack = new StackPane();
+    // load a stack pane to the cell
+    public void loadStack(StackPane s){
+        this.stack = s;
+    }
 
-        Rectangle square = new Rectangle(80, 80);
-        square.setFill(Color.BLUE);
+    public StackPane getCellObject(boardScore score, turns currentTurn){
+        if (stack == null){ // if binary-brother can provide the cell stack pane for us, we don't have to recreate it
+            stack = new StackPane();
 
+            Rectangle square = new Rectangle(80, 80);
+            square.setFill(Color.BLUE);
 
-        String fileName = (imageFile == null)? "images/fish.jpeg" : imageFile;
-        icon = Helper.imageMaker(fileName, 70, 70);
-//        ImageView icon = Helper.imageFromFile(fileName);
-//        icon.setPreserveRatio(true);
+            stack.getChildren().add(square);    // background
+            stack.getChildren().add(icon);  // image
+            stack.getChildren().add(setText());
+        }
 
-        // TODO: figure out if the resizable issue is here
-//        icon.fitWidthProperty().bind(board.widthProperty().divide(width));
-//        icon.fitHeightProperty().bind(board.heightProperty().divide(height));
-
-
-
-        // update index in the front
-        Text index = new Text(this.cellIndex == null? "empty" : this.cellIndex.toString());
-        index.setFont(Font.font("Arial Regular", FontWeight.BOLD, FontPosture.REGULAR, 20));
-
-        stack.getChildren().add(square);    // background
-        stack.getChildren().add(icon);  // image
-        stack.getChildren().add(index);
 
         stack.setOnMouseClicked(
                 e -> {  // set mouse click actions
@@ -76,9 +86,7 @@ public class boardCell {
                     score.addOne(String playerName)
                     score.updateScore(String playerName, int amount)
                      */
-
                     score.addOne(currentTurn.getCurrentPlayer());
-                    if (currentTurn.getCurrentPlayer().equals("Fisher")) { score.updateScore("Fisher", -1); }
                     currentTurn.next();
                 }
         );
@@ -86,10 +94,12 @@ public class boardCell {
         stack.setOnDragDetected( // drag starts
                 e -> {  // TODO: set drag motion
                     icon.setVisible(false);
+                    score.updateScore(currentTurn.getCurrentPlayer(), -1);
+                    currentTurn.next();
                 }
         );
 
-
+        // TODO: Drag motion implementation
 
         return stack;
     }

@@ -1,11 +1,7 @@
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
+
 
 public class boardGrid {
     // grid pane
@@ -27,46 +23,32 @@ public class boardGrid {
                 boardCell currentCell = table.get(i).get(j);
                 if (currentCell == null) { continue; }  // empty cell element
                 board.add(table.get(i).get(j).
-                                getCellObject(null, board, currentScore, currentTurn, height, width),    // button or board element
+                                getCellObject(currentScore, currentTurn),    // button or board element
                         i,  // x coordinate
                         j); // y coordinate
             }
         }
     }
 
-    // get an imageView from an image file
-    private static ImageView imageFromFile(String fileName){
-        ImageView imageView = new ImageView();
-
-        try {   // try open the image file
-            InputStream imageFile = new FileInputStream(fileName);  // load from file
-            Image image = new Image(imageFile);
-            imageView.setImage(image);
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Cannot open file: " + fileName);
-            e.printStackTrace();
-        }
-
-        imageView.setFitHeight(70);
-        imageView.setFitWidth(70);
-        return imageView;
-    }
-
-    // generate cell is a function for testing only
-    private static ArrayList<ArrayList<boardCell>> generateCell(int width, int height){
+    // convert possible stackPane table to boardCell table
+    // TODO: work with Binary-Brothers
+    private static ArrayList<ArrayList<boardCell>> stackToCell(ArrayList<ArrayList<StackPane>> stackTable){
         ArrayList<ArrayList<boardCell>> cellTable = new ArrayList<>();
 
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < stackTable.size(); i++){
+
             ArrayList<boardCell> currentRow = new ArrayList<>();
-            for (int j = 0; j < height; j++) {
-                char a = 'A';
-                int aChar = a;
-                char c = (char) (aChar + i + j);
-                boardCell currentCell = new boardCell(
-                        Character.toString(c),
-                        imageFromFile("images/fish.jpeg")   // the working dir is the project root directory
-                );
+            for (int j = 0; j < stackTable.get(i).size(); j++){
+                boardCell currentCell = new boardCell();
+                currentCell.setPosition(i, j);
+                if (stackTable.get(i).get(j) != null){  // load stack
+                    currentCell.loadStack(stackTable.get(i).get(j));
+                    currentRow.add(currentCell);
+                    continue;
+                }
+
+                // if it's an empty stack pane, then create some default features
+                currentCell.loadCellImage("images/fish.jpeg");
                 currentCell.setIndex(i + j * width + 1);
                 currentRow.add(currentCell);
             }
@@ -86,14 +68,19 @@ public class boardGrid {
 
     }
 
-    public void updateCell(boardCell c, int x, int y){
+    public void updateCell(boardCell cell, int x, int y, StackPane object){
         // TODO: replace cell method
         try{
             board.getChildren().remove(x, y);
+            board.add(
+                    cell.getCellObject(currentScore, currentTurn),
+                    x,
+                    y
+            );
         }
         catch (Exception ignored) {
             board.add(
-                    c.getCellObject(null, board, currentScore, currentTurn, height, width),
+                    cell.getCellObject(currentScore, currentTurn),
                     x,
                     y
             );
@@ -109,11 +96,11 @@ public class boardGrid {
     }
 
 
-    public static GridPane createBoard(ArrayList<String> players, int h, int w){
+    public static GridPane createBoard(ArrayList<String> players, ArrayList<ArrayList<StackPane>> cellTable){
 
 
-        height = h;
-        width = w;
+        width = cellTable.size();
+        height = cellTable.get(0).size();
 
         int widthPercentage = 100 / width;
         int heightPercentage = 100 / height;
@@ -127,6 +114,7 @@ public class boardGrid {
 
         playerList.addAll(players);
 
+        // create local score and turns objects
         currentScore = new boardScore(playerList);
         currentTurn = new turns(currentScore);
 
@@ -146,19 +134,8 @@ public class boardGrid {
                     add(row);
         }
 
-        loadGrid(generateCell(width, height));   // load from an arraylist
-
-        // TODO: preset board size
+        loadGrid(stackToCell(cellTable));   // load from a 2d array
 
         return board;
-    /*  test:
-        board.add(Helper.ButtonMaker("a", null), 0, 0);
-        board.add(Helper.ButtonMaker("b", null), 0, 2);
-        board.add(Helper.ButtonMaker("c", null), 1, 0);
-        board.add(Helper.ButtonMaker("d", null), 2, 2);
-    */
-
-//        Scene scene = new Scene(board);
-//        return scene;
     }
 }

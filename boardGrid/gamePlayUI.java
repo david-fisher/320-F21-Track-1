@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -12,13 +13,12 @@ import java.util.ArrayList;
 
 public class gamePlayUI {
 
-    public static Scene makeScene(Stage primaryStage, ArrayList<String> players, int height, int width){
+    public static Scene makeScene(Stage primaryStage, ArrayList<String> players, ArrayList<ArrayList<StackPane>> stackTable) {
 
         BorderPane mainScene = new BorderPane();
         VBox leftStack = new VBox(150);
         VBox rightStack = new VBox();
         VBox topStack = new VBox();
-
 
 
         // right
@@ -27,7 +27,7 @@ public class gamePlayUI {
         rightStack.getChildren().addAll(saveButton, editButton);
 
         // board
-        GridPane board = boardGrid.createBoard(players, height, width);
+        GridPane board = boardGrid.createBoard(players, stackTable);
         moveInfo infoBoard = new moveInfo("Move forward 4 spaces and lose next turn or stay in current space");
 
         // top
