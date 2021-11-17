@@ -274,7 +274,7 @@ public void dragNDrop_StackPane(StackPane sp) {
 	        	snapY = (c.getTranslateY()) - snapY;
 	        }
 	        
-	        if (t.getSceneY() >= 100 && t.getSceneY() < 600) {
+	        if (t.getSceneY() >= 100 && t.getSceneY() < 650) {
 	            c.setTranslateY(snapY);
 	        }
 	        else {
@@ -353,7 +353,7 @@ backgrounduploader_item.setOnAction(UploadEventHandler);
     });
 }
 
-public static class boardGrid {
+public class boardGrid {
     // grid pane
     private GridPane board = new GridPane();
     private int height = 10, width = 10;
@@ -378,6 +378,33 @@ public static class boardGrid {
         }
     }
     
+    public void addInitialPieces() {
+    	StackPane tmp1 = createRectangle(this);
+    	board.add(tmp1, 0, 0);
+    	tmp1.setTranslateX(-75);
+    	tmp1.setTranslateY(75);
+    	
+    	StackPane tmp2 = createCircle(this);
+    	board.add(tmp2, 0, 0);
+    	tmp2.setTranslateX(-75);
+    	tmp2.setTranslateY(150);
+    	
+    	StackPane tmp3 = createTriangle(this);
+    	board.add(tmp3, 0, 0);
+    	tmp3.setTranslateX(-75);
+    	tmp3.setTranslateY(225);
+    	
+    	StackPane tmp4 = createPentagon(this);
+    	board.add(tmp4, 0, 0);
+    	tmp4.setTranslateX(-75);
+    	tmp4.setTranslateY(300);
+    	
+    	StackPane tmp5 = createHexagon(this);
+    	board.add(tmp5, 0, 0);
+    	tmp5.setTranslateX(-75);
+    	tmp5.setTranslateY(375);
+    }
+    
     public GridPane getBoard() {
     	return board;
     }
@@ -391,15 +418,17 @@ public void start(Stage stage){
     board.getBoard().setTranslateY(100);
     
     // Testing 
-    board.getBoard().add(createRectangle(board), 0, 0);
-    board.getBoard().add(createRectangle(board), 1, 1);
-    board.getBoard().add(createTriangle(board), 10, 10);
-    board.getBoard().add(createPentagon(board), 0, 10);
-    board.getBoard().add(createHexagon(board), 10, 0);
+    tabs(root);
+    board.addInitialPieces();
+//    board.getBoard().add(createRectangle(board), 0, 0);
+//    board.getBoard().add(createRectangle(board), 1, 1);
+//    board.getBoard().add(createTriangle(board), 10, 10);
+//    board.getBoard().add(createPentagon(board), 0, 10);
+//    board.getBoard().add(createHexagon(board), 10, 0);
     root.getChildren().add(board.getBoard());
     
     // Initial Setup
-    tabs(root);
+//    tabs(root);
 
 //    createRectangle(root);
 //    createCircle(root);
