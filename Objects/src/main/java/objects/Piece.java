@@ -19,6 +19,11 @@ public class Piece extends PTile {
         super(id, x, y, rules, attributes);
         this.image = image;
     }
+
+    Piece(ArrayList<Rule> rules, Hashtable<String,String> attributes, ImageView image){
+        super(rules, attributes);
+        this.image = image;
+    }
     
     public ImageView update_image(ImageView image){
         this.image = image;
