@@ -2,28 +2,56 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9768ba15-d440-4789-bff9-f7502a59bc1f" name="Changes" comment="add button to the saved game UI">
-      <change beforePath="$PROJECT_DIR$/.idea/320-F21-Track-1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/320-F21-Track-1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/Helpers/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/Helpers/Helper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/saveGameViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/saveGameViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boardGrid/Helpers/Helper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/boardGrid/Helpers/cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/boardGrid/Helpers/cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boardGrid/boardGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/boardGrid/boardGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boardGrid/boardLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/boardGrid/boardLauncher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/.idea/320-F21-Track-1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/menu/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_controlsfx_controlsfx_11_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_7_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_7_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_7_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_7_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_openjfx_javafx_base_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_openjfx_javafx_base_mac_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_openjfx_javafx_controls_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_openjfx_javafx_controls_mac_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_openjfx_javafx_fxml_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_openjfx_javafx_fxml_mac_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_openjfx_javafx_graphics_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_openjfx_javafx_graphics_mac_17_ea_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/ModeMenuSceneBuilder.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/src/main/java/com/example/testcontroller/HelloApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/src/main/java/com/example/testcontroller/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/src/main/java/com/example/testcontroller/ModeMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/src/main/java/com/example/testcontroller/ModeMenuController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/src/main/resources/com/example/testcontroller/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/src/main/resources/com/example/testcontroller/mode-menu.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/src/main/resources/com/example/testcontroller/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/target/classes/com/example/testcontroller/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/target/classes/com/example/testcontroller/mode-menu.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModeMenuSceneBuilder/target/classes/com/example/testcontroller/style.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
@@ -63,7 +91,7 @@
       <recent name="$PROJECT_DIR$/MainMenuSceneBuilder" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.boardLauncher">
+  <component name="RunManager" selected="Application.ModeMenu">
     <configuration name="Application" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="1.8 (2)" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -75,6 +103,13 @@
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="320-F21-Track-1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModeMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ModeMenu" />
       <module name="320-F21-Track-1" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -93,9 +128,11 @@
       <item itemvalue="Application.Application" />
       <item itemvalue="Application.boardLauncher" />
       <item itemvalue="Application.Main" />
+      <item itemvalue="Application.ModeMenu" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ModeMenu" />
         <item itemvalue="Application.boardLauncher" />
         <item itemvalue="Application.Main" />
       </list>
