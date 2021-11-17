@@ -4,7 +4,7 @@
 
 ### Before Running
 * launch from `boardLauncher` class
-* require functions from `MainMenuSceneBuilder/src/Helper`
+* require functions from `MainMenuSceneBuilder/src`
 * board is in GridPane with adjustable size
 * Maximum players are two
 
