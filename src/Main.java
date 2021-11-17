@@ -18,10 +18,10 @@ import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 
 public class Main extends Application {
-    double orgSceneX, orgSceneY;
+	double orgSceneX, orgSceneY;
 
 public void tabs(Group root) {
     // Top tabs ***************************************************************
@@ -62,7 +62,8 @@ public void tabs(Group root) {
     root.getChildren().add(sideBar);
 }
 
-public void createRectangle(Group root) {
+// Testing createRectangle ******************************************************
+public Rectangle createRectangle() {
     Rectangle rectangle = new Rectangle(50,50);
     // rectangle.setY(175);
     // rectangle.setX(25);
@@ -89,8 +90,13 @@ public void createRectangle(Group root) {
     layout.setLayoutY(180);
     dragNDrop_StackPane(layout);
     rightClick_StackPane(layout,root);
-}
+//     dragNDrop(rectangle);
+    
+// //    rightClick(rectangle, root);
+//     return rectangle;
 
+}
+// ******************************************************************************************
 public void createCircle(Group root) {
     Circle circle = new Circle(25);
     // circle.setCenterY(275);
@@ -229,6 +235,19 @@ public void createHexagon(Group root) {
 //     shape.setOnMousePressed((t) -> {
 //         orgSceneX = t.getSceneX();
 //         orgSceneY = t.getSceneY();
+
+//     shape.setOnMousePressed((t) -> {
+//         orgSceneX = t.getSceneX();
+//         orgSceneY = t.getSceneY();
+
+// Testing  *********************************************************************************
+//public void dragNDrop(Shape shape) {
+// Drag n' Drop Interaction *******************************************************
+    //shape.setCursor(Cursor.HAND);
+
+   // shape.setOnMousePressed((t) -> {
+    //    orgSceneX = t.getSceneX();
+     //   orgSceneY = t.getSceneY();
         
 //         Shape c = (Shape) (t.getSource());
 //         c.toFront();
@@ -295,6 +314,116 @@ public void dragNDrop_StackPane(StackPane sp) {
 //             shape.setFill(colorssPicker.getValue());
 //         }
 //     });
+
+//     shape.setOnMouseDragged((t) -> {
+//         double offsetX = t.getSceneX() - orgSceneX;
+//         double offsetY = t.getSceneY() - orgSceneY;
+
+//         Shape c = (Shape) (t.getSource());
+
+//         c.setTranslateX(c.getTranslateX() + offsetX);
+//         c.setTranslateY(c.getTranslateY() + offsetY);
+
+//         orgSceneX = t.getSceneX();
+//         orgSceneY = t.getSceneY();
+//         });
+
+// }
+
+public void dragNDrop_StackPane(StackPane sp) {
+    // Drag n' Drop Interaction *******************************************************
+        sp.setCursor(Cursor.HAND);
+    
+        sp.setOnMousePressed((t) -> {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            
+            StackPane c = (StackPane) (t.getSource());
+            c.toFront();
+            });
+    
+        sp.setOnMouseDragged((t) -> {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+    
+            StackPane c = (StackPane) (t.getSource());
+    
+            c.setTranslateX(c.getTranslateX() + offsetX);
+            c.setTranslateY(c.getTranslateY() + offsetY);
+    
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            });
+    
+    }
+//                  *****Deprecated *****
+// public void rightClick(Shape shape, Group root){
+//     //*****Color Picker function */
+//     ContextMenu contextMenu = new ContextMenu();
+//     //Intial a colorpicker, display the current color on shape
+//     ColorPicker colorssPicker = new ColorPicker(Color.web(shape.getFill().toString()));
+//     //*****Backgraound Uploader function */  
+//     MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
+//     //TODO
+//     MenuItem colorpicker_item = new MenuItem(null,colorssPicker);
+//     MenuItem deleter_item = new MenuItem(null, new Label("Delete Shape"));
+  
+//     //Handle right click
+//     colorpicker_item.setOnAction(new EventHandler<ActionEvent>(){
+//         @Override
+//         public void handle(ActionEvent event)
+//         {
+//             shape.setFill(colorssPicker.getValue());
+//         }
+//     });
+    shape.setOnMouseDragged((t) -> {
+        double offsetX = t.getSceneX() - orgSceneX;
+        double offsetY = t.getSceneY() - orgSceneY;
+        
+        Shape c = (Shape) (t.getSource());
+        
+        c.setTranslateX(c.getTranslateX() + offsetX);
+        c.setTranslateY(c.getTranslateY() + offsetY);
+
+        orgSceneX = t.getSceneX();
+        orgSceneY = t.getSceneY();
+        });
+    
+    shape.setOnMouseReleased((t) -> {       
+        Shape c = (Shape) (t.getSource());
+       
+
+        double snapX = (c.getTranslateX()) % 50;
+        if (snapX > 25.0){
+        	snapX = (c.getTranslateX()) - snapX + 50;
+        }
+        else {
+        	snapX = (c.getTranslateX()) - snapX;
+        }
+        if (t.getSceneX() >= 100 && t.getSceneX() < 650) {
+            c.setTranslateX(snapX);
+        }
+        else {
+        	System.out.println(t.getSceneX());
+        	System.out.println(c.getTranslateX());
+        	
+//        	c.setTranslateX(c.getTranslateX() - t.getSceneX());
+//        	c.setTranslateX(100);
+        }
+        
+        double snapY = (c.getTranslateY()) % 50;
+        if (snapY > 25.0){
+        	snapY = (c.getTranslateY()) - snapY + 50;
+        }
+        else {
+        	snapY = (c.getTranslateY()) - snapY;
+        }
+//        System.out.println();
+        c.setTranslateY(snapY);
+        });
+}
+// **************************************************************************************************************
+
 
 //     deleter_item.setOnAction(new EventHandler<ActionEvent>(){
 //         @Override
@@ -387,11 +516,55 @@ backgrounduploader_item.setOnAction(UploadEventHandler);
     });
 }
 
+// Testing Grid *************************************************************************************************
+public static class boardGrid {
+    // grid pane
+    private GridPane board = new GridPane();
+    private int height = 10, width = 10;
+    
+    public void createBoard(){
+    	board.setGridLinesVisible(true);
+
+        // Scale of client
+        int widthPercentage = 100 / width;
+        int heightPercentage = 100 / height;
+
+        // column constraints
+        for (int i = 0; i <= width; i++){
+            ColumnConstraints column = new ColumnConstraints();
+            column.setPercentWidth(widthPercentage);
+            board.getColumnConstraints().add(column);
+        }
+
+        // row constraints
+        for (int j  = 0; j <= height; j++){
+            RowConstraints row = new RowConstraints();
+            row.setPercentHeight(heightPercentage);
+            board.getRowConstraints().add(row);
+        }
+    }
+    
+    public GridPane getBoard() {
+    	return board;
+    }
+}
+// *************************************************************************************************************
 public void start(Stage stage){
     Group root = new Group();
-    
+    boardGrid board = new boardGrid();
+    board.createBoard();
+    board.getBoard().setTranslateX(100);
+    board.getBoard().setTranslateY(100);
+    board.getBoard().add(createRectangle(), 0, 0);
+    board.getBoard().add(createRectangle(), 1, 1);
+    board.getBoard().add(createRectangle(), 9, 9);
+    board.getBoard().add(createRectangle(), 10, 10);
+    board.getBoard().add(createRectangle(), 10, 0);
+    board.getBoard().add(createRectangle(), 0, 10);
+    root.getChildren().add(board.getBoard());
     // Initial Setup
     tabs(root);
+
     createRectangle(root);
     createCircle(root);
     createTriangle(root);
@@ -401,13 +574,20 @@ public void start(Stage stage){
     // System.out.print(root.);
     
     Scene scene = new Scene(root, 800, 600, Color.rgb(105, 162, 255));
+
+//    createRectangle(root);
+//    createCircle(root);
+//    createTriangle(root);
+//    createPentagon(root);
+//    createHexagon(root);
+   
+//    Scene scene = new Scene(root, 700, 700, Color.rgb(105, 162, 255));
+
     stage.setTitle("Board Editor");
     stage.setScene(scene);
     //Using external file to hide the broken 'Custom color' section on ColorPicker
     scene.getStylesheets().add(getClass().getResource("ColorPickerMod.css").toExternalForm());
     stage.show();
-
-    
 }
 
 public static void main(String[] args) {
