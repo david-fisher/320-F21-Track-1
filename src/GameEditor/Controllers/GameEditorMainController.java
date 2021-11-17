@@ -1,11 +1,11 @@
-package GameEditor.RuleEditorUI;
+package GameEditor.Controllers;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import javafx.application.Application;
-import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -14,16 +14,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
+import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-public class Controller {
+public class GameEditorMainController {
 
     @FXML
     private ResourceBundle resources;
@@ -38,7 +35,20 @@ public class Controller {
     private ComboBox<String> dropdown3;
     @FXML
     private ComboBox<String> dropdown4;
-
+    @FXML
+    private Button transition;
+    @FXML
+    private Button addTransition;
+    @FXML
+    private HBox modifyTransitionButtons;
+    @FXML
+    private Button changeTransition;
+    @FXML
+    private Button deleteTransition;
+    
+    private String[] transitions = {"\u2192", "\u2190", "\u2194"};
+    private int currentTransition = 0;
+    
     @FXML
     private ComboBox<String>[] dropdowns = new ComboBox[5];
     private int numVisible = 1;
@@ -124,9 +134,51 @@ public class Controller {
 
         });
     }
-
-    public static void main(String[] args) {
-
+    
+    @FXML
+    void intializeMovementRule(MouseEvent event) {
+    	modifyTransitionButtons.setVisible(false);
+    	addTransition.setVisible(true);
     }
+    
+    @FXML
+    void selectTransition(MouseEvent event) {
+    	addTransition.setVisible(false);
+    	modifyTransitionButtons.setVisible(true);
+    }
+    
+    @FXML
+    void changeTransition(MouseEvent event) {
+    	currentTransition = (currentTransition+1) % 3;
+    	transition.setText(transitions[currentTransition]);
+    }
+
+    @FXML
+    void deleteTransition(MouseEvent event) {
+    	transition.setVisible(false);
+    }
+
+    @FXML
+    public void changeAnchorScene(Event event) throws IOException {
+        Node node = (Node) event.getSource();
+        String tokenType = (String) node.getUserData();
+        Stage app_stage = (Stage) node.getScene().getWindow();
+
+        if (tokenType.equals("gameToken")) {
+            Parent addMovementPiece = FXMLLoader.load(getClass().getResource("Views/customToken.fxml"));
+            app_stage.setScene(new Scene(addMovementPiece));
+        }
+        else if (tokenType == ""){}
+        else {}
+    }
+
+    @FXML
+    //controller method to add BoardEditor node to corresponding tab in GameEditorMain
+    private Tab boardEditor;
+
+
+
+
+
 
 }

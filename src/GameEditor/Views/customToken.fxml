@@ -15,7 +15,22 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="130.0" tabMaxWidth="70.0" tabMinHeight="130.0" tabMinWidth="70.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity"
+         maxWidth="-Infinity"
+         minHeight="-Infinity"
+         minWidth="-Infinity"
+         prefHeight="400.0"
+         prefWidth="600.0"
+         side="LEFT"
+         tabClosingPolicy="UNAVAILABLE"
+         tabMaxHeight="130.0"
+         tabMaxWidth="70.0"
+         tabMinHeight="130.0"
+         tabMinWidth="70.0"
+         xmlns="http://javafx.com/javafx/17"
+         xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="GameEditor.Controllers.TokenController"
+>
     <tabs>
         <Tab>
             <graphic>

@@ -1,5 +1,6 @@
-package GameEditor.NewRNGUI;
+package GameEditor.Controllers;
 
+//import GameEditor.NewRNGUI.RNG;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -8,9 +9,9 @@ import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
-public class HelloController {
+public class RNGController {
 
-    private ArrayList<RNG> values = new ArrayList<RNG>();
+//    private ArrayList<RNG> values = new ArrayList<RNG>();
 
     @FXML
     private ComboBox<String> TypeSelection;
