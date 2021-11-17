@@ -1,5 +1,9 @@
 import Helpers.Helper;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -7,8 +11,10 @@ import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class gamePlayUI {
@@ -23,6 +29,24 @@ public class gamePlayUI {
 
         // right
         Button saveButton = Helper.ButtonMaker("Save", null);
+        saveButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage saveStage = new Stage();
+                System.out.println("Here");
+                Parent root = null;
+                try {
+                    Parent r = FXMLLoader.load(getClass().getClassLoader().getResource("pause.fxml"));
+                    Scene scene = new Scene(r);
+                    saveStage.setScene(scene);
+                    saveStage.initModality(Modality.APPLICATION_MODAL);
+                    saveStage.show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         Button editButton = Helper.ButtonMaker("Edit", null);
         rightStack.getChildren().addAll(saveButton, editButton);
 
