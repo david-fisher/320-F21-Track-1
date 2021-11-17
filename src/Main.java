@@ -1,12 +1,14 @@
 import javafx.application.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 import javafx.scene.control.*;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.layout.StackPane;
 
 public class Main extends Application {
     double orgSceneX, orgSceneY;
@@ -52,20 +54,52 @@ public void tabs(Group root) {
 
 public void createRectangle(Group root) {
     Rectangle rectangle = new Rectangle(50,50);
-    rectangle.setY(175);
-    rectangle.setX(25);
-    root.getChildren().add(rectangle);
-    dragNDrop(rectangle);
-    rightClick(rectangle, root);
+    // rectangle.setY(175);
+    // rectangle.setX(25);
+    // root.getChildren().add(rectangle);
+    // dragNDrop(rectangle);
+    // rightClick(rectangle, root);
+    TextField text = new TextField ("Rectangle");
+    //Making the TextField transparent, so we dont see the whole input box
+    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
+    text.setPrefWidth(69);
+    text.setAlignment(Pos.CENTER);
+    //Create a stackPane for TextField and Shape
+    StackPane layout = new StackPane();
+    layout.getChildren().addAll(
+            rectangle,
+            text
+    );
+    root.getChildren().add(layout);
+    layout.setLayoutX(10);
+    layout.setLayoutY(180);
+    dragNDrop_StackPane(layout);
+    rightClick_StackPane(layout,root);
 }
 
 public void createCircle(Group root) {
     Circle circle = new Circle(25);
-    circle.setCenterY(275);
-    circle.setCenterX(50);
-    root.getChildren().add(circle);
-    dragNDrop(circle);
-    rightClick(circle, root);
+    // circle.setCenterY(275);
+    // circle.setCenterX(50);
+    // root.getChildren().add(circle);
+    // dragNDrop(circle);
+    // rightClick(circle, root);
+    TextField text = new TextField ("Circle");
+    //Making the TextField transparent, so we dont see the whole input box
+    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
+    text.setPrefWidth(69);
+    text.setAlignment(Pos.CENTER);
+    //Create a stackPane for TextField and Shape
+    StackPane layout = new StackPane();
+    layout.getChildren().addAll(
+            circle,
+            text
+    );
+    root.getChildren().add(layout);
+    layout.setLayoutX(10);
+    layout.setLayoutY(250);
+    dragNDrop_StackPane(layout);
+    rightClick_StackPane(layout,root);
 }
 
 public void createTriangle(Group root) {
@@ -75,9 +109,25 @@ public void createTriangle(Group root) {
             25.0, 375.0,
             75.0, 375.0
             });
-    root.getChildren().add(triangle);
-    dragNDrop(triangle);
-    rightClick(triangle, root);
+    // root.getChildren().add(triangle);
+    // dragNDrop(triangle);
+    // rightClick(triangle, root);
+    TextField text = new TextField ("Triangle");
+    //Making the TextField transparent, so we dont see the whole input box
+    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
+    text.setPrefWidth(69);
+    text.setAlignment(Pos.CENTER);
+    //Create a stackPane for TextField and Shape
+    StackPane layout = new StackPane();
+    layout.getChildren().addAll(
+            triangle,
+            text
+    );
+    root.getChildren().add(layout);
+    layout.setLayoutX(10);
+    layout.setLayoutY(320);
+    dragNDrop_StackPane(layout);
+    rightClick_StackPane(layout,root);
 }
 
 public void createPentagon(Group root) {
@@ -89,9 +139,25 @@ public void createPentagon(Group root) {
             65.0, 455.0,
             75.0, 425.0
             });
-    root.getChildren().add(pentagon);
-    dragNDrop(pentagon);
-    rightClick(pentagon, root);
+    // root.getChildren().add(pentagon);
+    // dragNDrop(pentagon);
+    // rightClick(pentagon, root);
+    TextField text = new TextField ("Pentagon");
+    //Making the TextField transparent, so we dont see the whole input box
+    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
+    text.setPrefWidth(69);
+    text.setAlignment(Pos.CENTER);
+    //Create a stackPane for TextField and Shape
+    StackPane layout = new StackPane();
+    layout.getChildren().addAll(
+            pentagon,
+            text
+    );
+    root.getChildren().add(layout);
+    layout.setLayoutX(10);
+    layout.setLayoutY(400);
+    dragNDrop_StackPane(layout);
+    rightClick_StackPane(layout,root);
 }
 
 public void createHexagon(Group root) {
@@ -104,43 +170,129 @@ public void createHexagon(Group root) {
             62.5, 535.0,
             75.0, 510.0
             });
-    root.getChildren().add(hexagon);
-    dragNDrop(hexagon);
-    rightClick(hexagon, root);
+    //root.getChildren().add(hexagon);
+    // dragNDrop(hexagon);
+    //rightClick(hexagon, root);
+    TextField text = new TextField ("Hexagon");
+    //Making the TextField transparent, so we dont see the whole input box
+    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;");
+    text.setPrefWidth(69);
+    text.setAlignment(Pos.CENTER);
+    text.selectAll();
+    //Create a stackPane for TextField and Shape
+    StackPane layout = new StackPane();
+    layout.getChildren().addAll(
+            hexagon,
+            text
+    );
+    root.getChildren().add(layout);
+    layout.setLayoutX(10);
+    layout.setLayoutY(490);
+    dragNDrop_StackPane(layout);
+    rightClick_StackPane(layout,root);
+    
 }
+//                 *****Deprecated *****
+// public void dragNDrop(Shape shape) {
+// // Drag n' Drop Interaction *******************************************************
+//     shape.setCursor(Cursor.HAND);
 
-public void dragNDrop(Shape shape) {
-// Drag n' Drop Interaction *******************************************************
-    shape.setCursor(Cursor.HAND);
-
-    shape.setOnMousePressed((t) -> {
-        orgSceneX = t.getSceneX();
-        orgSceneY = t.getSceneY();
+//     shape.setOnMousePressed((t) -> {
+//         orgSceneX = t.getSceneX();
+//         orgSceneY = t.getSceneY();
         
-        Shape c = (Shape) (t.getSource());
-        c.toFront();
-        });
+//         Shape c = (Shape) (t.getSource());
+//         c.toFront();
+//         });
 
-    shape.setOnMouseDragged((t) -> {
-        double offsetX = t.getSceneX() - orgSceneX;
-        double offsetY = t.getSceneY() - orgSceneY;
+//     shape.setOnMouseDragged((t) -> {
+//         double offsetX = t.getSceneX() - orgSceneX;
+//         double offsetY = t.getSceneY() - orgSceneY;
 
-        Shape c = (Shape) (t.getSource());
+//         Shape c = (Shape) (t.getSource());
 
-        c.setTranslateX(c.getTranslateX() + offsetX);
-        c.setTranslateY(c.getTranslateY() + offsetY);
+//         c.setTranslateX(c.getTranslateX() + offsetX);
+//         c.setTranslateY(c.getTranslateY() + offsetY);
 
-        orgSceneX = t.getSceneX();
-        orgSceneY = t.getSceneY();
-        });
+//         orgSceneX = t.getSceneX();
+//         orgSceneY = t.getSceneY();
+//         });
 
-}
+// }
 
-public void rightClick(Shape shape, Group root){
+public void dragNDrop_StackPane(StackPane sp) {
+    // Drag n' Drop Interaction *******************************************************
+        sp.setCursor(Cursor.HAND);
+    
+        sp.setOnMousePressed((t) -> {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            
+            StackPane c = (StackPane) (t.getSource());
+            c.toFront();
+            });
+    
+        sp.setOnMouseDragged((t) -> {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+    
+            StackPane c = (StackPane) (t.getSource());
+    
+            c.setTranslateX(c.getTranslateX() + offsetX);
+            c.setTranslateY(c.getTranslateY() + offsetY);
+    
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            });
+    
+    }
+//                  *****Deprecated *****
+// public void rightClick(Shape shape, Group root){
+//     //*****Color Picker function */
+//     ContextMenu contextMenu = new ContextMenu();
+//     //Intial a colorpicker, display the current color on shape
+//     ColorPicker colorssPicker = new ColorPicker(Color.web(shape.getFill().toString()));
+//     //*****Backgraound Uploader function */  
+//     MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
+//     //TODO
+//     MenuItem colorpicker_item = new MenuItem(null,colorssPicker);
+//     MenuItem deleter_item = new MenuItem(null, new Label("Delete Shape"));
+  
+//     //Handle right click
+//     colorpicker_item.setOnAction(new EventHandler<ActionEvent>(){
+//         @Override
+//         public void handle(ActionEvent event)
+//         {
+//             shape.setFill(colorssPicker.getValue());
+//         }
+//     });
+
+//     deleter_item.setOnAction(new EventHandler<ActionEvent>(){
+//         @Override
+//         public void handle(ActionEvent event)
+//         {
+//             root.getChildren().remove(shape);
+//         }
+//     });
+
+//     contextMenu.getItems().add(colorpicker_item);
+//     contextMenu.getItems().add(backgrounduploader_item);
+//     contextMenu.getItems().add(deleter_item);
+   
+//     //Display menu beside shape
+//     shape.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+//             @Override
+//             public void handle(ContextMenuEvent event) {
+//                 contextMenu.show(shape, event.getScreenX(), event.getScreenY());
+//             }
+//     });
+// }
+
+public void rightClick_StackPane(StackPane sp, Group root){
     //*****Color Picker function */
     ContextMenu contextMenu = new ContextMenu();
     //Intial a colorpicker, display the current color on shape
-    ColorPicker colorssPicker = new ColorPicker(Color.web(shape.getFill().toString()));
+    ColorPicker colorssPicker = new ColorPicker(Color.web(((Shape) sp.getChildren().get(0)).getFill().toString()));
     //*****Backgraound Uploader function */  
     MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
     //TODO
@@ -152,7 +304,7 @@ public void rightClick(Shape shape, Group root){
         @Override
         public void handle(ActionEvent event)
         {
-            shape.setFill(colorssPicker.getValue());
+            ((Shape) sp.getChildren().get(0)).setFill(colorssPicker.getValue());
         }
     });
 
@@ -160,7 +312,7 @@ public void rightClick(Shape shape, Group root){
         @Override
         public void handle(ActionEvent event)
         {
-            root.getChildren().remove(shape);
+            root.getChildren().remove(sp);
         }
     });
 
@@ -169,10 +321,10 @@ public void rightClick(Shape shape, Group root){
     contextMenu.getItems().add(deleter_item);
    
     //Display menu beside shape
-    shape.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+    sp.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
             @Override
             public void handle(ContextMenuEvent event) {
-                contextMenu.show(shape, event.getScreenX(), event.getScreenY());
+                contextMenu.show(sp, event.getScreenX(), event.getScreenY());
             }
     });
 }
@@ -187,6 +339,8 @@ public void start(Stage stage){
     createTriangle(root);
     createPentagon(root);
     createHexagon(root);
+    
+    // System.out.print(root.);
     
     Scene scene = new Scene(root, 800, 600, Color.rgb(105, 162, 255));
     stage.setTitle("Board Editor");
