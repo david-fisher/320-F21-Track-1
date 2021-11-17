@@ -1,18 +1,27 @@
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import javafx.application.*;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.layout.*;
-
+import javafx.scene.layout.StackPane;
 
 public class Main extends Application {
-	double orgSceneX, orgSceneY;
+    double orgSceneX, orgSceneY;
 
 public void tabs(Group root) {
     // Top tabs ***************************************************************
@@ -60,6 +69,10 @@ public StackPane createRectangle(Group root) {
     text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
     text.setPrefWidth(69);
     text.setAlignment(Pos.CENTER);
+    //Adding shadow for text, for better readability
+    DropShadow shadow = new DropShadow();
+    shadow.setSpread(0.6);
+    text.setEffect(shadow);
     //Create a stackPane for TextField and Shape
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
@@ -87,6 +100,10 @@ public void createCircle(Group root) {
     text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
     text.setPrefWidth(69);
     text.setAlignment(Pos.CENTER);
+    //Adding shadow for text, for better readability
+    DropShadow shadow = new DropShadow();
+    shadow.setSpread(0.6);
+    text.setEffect(shadow);
     //Create a stackPane for TextField and Shape
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
@@ -115,6 +132,10 @@ public void createTriangle(Group root) {
     text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
     text.setPrefWidth(69);
     text.setAlignment(Pos.CENTER);
+    //Adding shadow for text, for better readability
+    DropShadow shadow = new DropShadow();
+    shadow.setSpread(0.6);
+    text.setEffect(shadow);
     //Create a stackPane for TextField and Shape
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
@@ -145,6 +166,10 @@ public void createPentagon(Group root) {
     text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
     text.setPrefWidth(69);
     text.setAlignment(Pos.CENTER);
+    //Adding shadow for text, for better readability
+    DropShadow shadow = new DropShadow();
+    shadow.setSpread(0.6);
+    text.setEffect(shadow);
     //Create a stackPane for TextField and Shape
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
@@ -176,7 +201,10 @@ public void createHexagon(Group root) {
     text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;");
     text.setPrefWidth(69);
     text.setAlignment(Pos.CENTER);
-    text.selectAll();
+    //Adding shadow for text, for better readability
+    DropShadow shadow = new DropShadow();
+    shadow.setSpread(0.6);
+    text.setEffect(shadow);
     //Create a stackPane for TextField and Shape
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
@@ -257,7 +285,36 @@ public void rightClick_StackPane(StackPane sp, Group root){
     ColorPicker colorssPicker = new ColorPicker(Color.web(((Shape) sp.getChildren().get(0)).getFill().toString()));
     //*****Backgraound Uploader function */  
     MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
-    //TODO
+    
+    //Intialize UploadHandler
+    EventHandler<ActionEvent> UploadEventHandler
+    = new EventHandler<ActionEvent>(){
+
+    @Override
+    public void handle(ActionEvent t) {
+        FileChooser fileChooser = new FileChooser();
+        
+        //Set extension filter
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png","*.jpeg");
+        fileChooser.getExtensionFilters().addAll(imageFilter);
+         
+        //Show open file dialog
+        File file = fileChooser.showOpenDialog(null);
+                  
+        try {
+            BufferedImage bufferedImage = ImageIO.read(file);
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            ((Shape)sp.getChildren().get(0)).setFill(new ImagePattern(image));
+        } catch (IOException ex) {
+            System.out.print("ERROR IN IMAGE UPLOADER");
+        }
+
+    }
+};
+//Add the Upload function to the menuitem
+
+backgrounduploader_item.setOnAction(UploadEventHandler);
+
     MenuItem colorpicker_item = new MenuItem(null,colorssPicker);
     MenuItem deleter_item = new MenuItem(null, new Label("Delete Shape"));
   
@@ -349,12 +406,15 @@ public void start(Stage stage){
 //    createHexagon(root);
     
     Scene scene = new Scene(root, 700, 700, Color.rgb(105, 162, 255));
+
     stage.setTitle("Board Editor");
     stage.setScene(scene);
     
     // Using external file to hide the broken 'Custom color' section on ColorPicker
     scene.getStylesheets().add(getClass().getResource("ColorPickerMod.css").toExternalForm());
     stage.show();
+
+    
 }
 
 public static void main(String[] args) {
