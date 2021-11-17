@@ -40,10 +40,10 @@
                   <ComboBox prefWidth="150.0" />
                </graphic>
             </Label>
-            <Button layoutX="361.0" layoutY="2.0" mnemonicParsing="false" text="Save" />
-            <Button layoutX="410.0" layoutY="2.0" mnemonicParsing="false" text="Cancel" />
-            <Button layoutX="429.0" layoutY="341.0" mnemonicParsing="false" text="Card Creation" visible="false" />
-            <Button layoutX="177.0" layoutY="214.0" mnemonicParsing="false" text="Add New RNG" />
+            <Button fx:id="Save" layoutX="361.0" layoutY="2.0" mnemonicParsing="false" text="Save" />
+            <Button fx:id="Cancel" layoutX="410.0" layoutY="2.0" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="CardCreation" layoutX="429.0" layoutY="341.0" mnemonicParsing="false" text="Card Creation" visible="false" />
+            <Button fx:id="AddNewRNG" layoutX="177.0" layoutY="214.0" mnemonicParsing="false" text="Add New RNG" onAction="#addNewRNG"/>
          </children>
       </AnchorPane>
    </children>

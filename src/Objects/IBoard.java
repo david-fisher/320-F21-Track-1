@@ -1,3 +1,5 @@
+package Objects;
+
 import java.util.*;
 
 public interface IBoard{
