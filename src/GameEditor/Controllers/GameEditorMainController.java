@@ -172,13 +172,4 @@ public class GameEditorMainController {
         else {}
     }
 
-    @FXML
-    //controller method to add BoardEditor node to corresponding tab in GameEditorMain
-    private Tab boardEditor;
-
-
-
-
-
-
 }

@@ -15,7 +15,6 @@ public class GameEditorMain extends Application {
         launch(args);
     }
 
-
     /*
       main Stage for the GameEditor.
       Integrates the boardEditor into the GameEditor menu.
