@@ -1,10 +1,11 @@
 package GameEditor;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class GameEditorMain extends Application {
         launch(args);
     }
 
-
+    
     /*
       main Stage for the GameEditor.
       Integrates the boardEditor into the GameEditor menu.
@@ -24,8 +25,6 @@ public class GameEditorMain extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent menu = FXMLLoader.load(getClass().getResource("Views/GameEditorMain.fxml"));
         Scene mainMenu = new Scene(menu);
-        TabPane tabpane = (TabPane) menu.getChildrenUnmodifiable().get(0);
-        tabpane.getTabs().get(0).setContent(new BoardEditor().startBoardEditor());
         primaryStage.setScene(mainMenu);
         primaryStage.show();
     }
