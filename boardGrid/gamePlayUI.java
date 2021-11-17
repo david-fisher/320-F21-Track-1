@@ -33,7 +33,6 @@ public class gamePlayUI {
             @Override
             public void handle(ActionEvent event) {
                 Stage saveStage = new Stage();
-                System.out.println("Here");
                 Parent root = null;
                 try {
                     Parent r = FXMLLoader.load(getClass().getClassLoader().getResource("pause.fxml"));

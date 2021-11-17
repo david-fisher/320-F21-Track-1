@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9768ba15-d440-4789-bff9-f7502a59bc1f" name="Changes" comment="add button to the saved game UI">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenuSceneBuilder/src/controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainMenuSceneBuilder/src/pause.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/boardGrid/pause.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boardGrid/gamePlayUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/boardGrid/gamePlayUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/320-F21-Track-1/pause.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/320-F21-Track-1/pause.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="9768ba15-d440-4789-bff9-f7502a59bc1f" name="Changes" comment="add button to the saved game UI" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -133,6 +127,7 @@
       <workItem from="1637112767362" duration="104000" />
       <workItem from="1637170426036" duration="601000" />
       <workItem from="1637171068276" duration="56000" />
+      <workItem from="1637184318838" duration="736000" />
     </task>
     <task id="LOCAL-00001" summary="Create sceneBuilder README.md">
       <created>1636046475263</created>
