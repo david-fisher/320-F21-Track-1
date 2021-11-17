@@ -2,21 +2,21 @@ package objects;
 
 import java.util.*;
 
-public class Score extends Saveable {
+public class Score extends Savable {
     int cur_score;
     
     public Score(){
-        this.ID = UUID.randomUUID().toString();
+        super();
         this.cur_score = 0;
     }
     
     public Score(int score){
-        this.ID = UUID.randomUUID().toString();
+    	super();
         this.cur_score = score;
     }
     
     public Score(String id, int score){
-        this.ID = id;
+    	super(id);
         this.cur_score = score;
     }
     

@@ -2,19 +2,35 @@ package objects;
 
 import java.util.*;
 
-public class PTile extends Saveable {
-    final int x,y; Hashtable<String,String> attributes; ArrayList<Rule> rules;
+public class PTile extends Savable {
+	private final int x,y; private Hashtable<String,String> attributes; private ArrayList<Rule> rules;
+
+    public PTile(ArrayList<Rule> rules, Hashtable<String,String> attributes){
+        super();
+        this.x = -1;
+        this.y = -1;
+        this.attributes = attributes;
+        this.rules = rules;
+    }
 
     public PTile(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes){
-        this.ID = UUID.randomUUID().toString();
+        super();
         this.x = x;
         this.y = y;
         this.attributes = attributes;
         this.rules = rules;
     }
 
+    public PTile(String id, ArrayList<Rule> rules, Hashtable<String,String> attributes){
+        super(id);
+        this.x = -1;
+        this.y = -1;
+        this.attributes = attributes;
+        this.rules = rules;
+    }
+
     public PTile(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes){
-        this.ID = id;
+        super(id);
         this.x = x;
         this.y = y;
         this.attributes = attributes;
@@ -66,10 +82,10 @@ public class PTile extends Saveable {
     }
 
     public boolean remove_rule(Rule target_rule){
-        return this.rules.remove(findByID(target_rule.ID));
+        return this.rules.remove(findByID(target_rule.get_id()));
     }
 
     public Rule findByID(String ID) {
-	    return this.rules.stream().filter(rule -> rule.ID == ID).findFirst().orElse(null);
+	    return this.rules.stream().filter(rule -> rule.get_id() == ID).findFirst().orElse(null);
 	}
 }

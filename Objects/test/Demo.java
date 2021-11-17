@@ -1,6 +1,8 @@
-package objects;
-
+package test;
 import java.util.*;
+
+import objects.*;
+
 import java.io.*;
 
 public class Demo {
@@ -21,8 +23,8 @@ public class Demo {
         Tile d = new Tile(1, 1, new ArrayList<Rule>(), new Hashtable<String,String>());
         print(String.format("Current tile: id: %30s; x: %2d; y: %2d;", a.get_id(), a.get_x(), a.get_y()));
 
-        a.update_peice(pa);
-        ArrayList<Piece> AP = a.get_peices();
+        a.get_deck().update_piece(pa);
+        ArrayList<Piece> AP = a.get_deck().get_pieces();
         for (int m=0; m < AP.size(); m++){
             print(AP.get(m).get_id());
         }
@@ -64,16 +66,14 @@ public class Demo {
         }
 
 
-        a.update_neighbor("right", b);
-        b.update_neighbor("left", a);
-        a.update_neighbor("down", c);
-        c.update_neighbor("up", a);
-        Hashtable<String,Tile> neighbors = a.get_neighbors();
-        Set<String> setofDirection = neighbors.keySet();
+        a.update_neighbor(b);
+        b.update_neighbor(a);
+        a.update_neighbor(c);
+        c.update_neighbor(a);
+        ArrayList<Tile> neighbors = a.get_neighbors();
         print("\tneighbors:");
-        for(String key: setofDirection){
-            Tile temp = neighbors.get(key);
-            print(String.format("\t\tdirection: %6s; x: %2d; y: %2d", key, temp.get_x(), temp.get_y()));
+        for(Tile neighbor: neighbors){
+            print(String.format("\t\tx: %2d; y: %2d", neighbor.get_x(), neighbor.get_y()));
         }
 
         return new ArrayList<Tile>(){{add(a);add(b);add(c);add(d);}};
@@ -84,7 +84,8 @@ public class Demo {
             | a (Player) | b |
             | c          | d |
         */
-        Tile a = tiles().get(0);
+        ArrayList<Tile> tile = tiles();
+        Tile a = tile.get(0);
         Player one = new Player(a);
         print(String.format("Player: %s, Score: %d", one.get_id(), one.get_score()));
         one.update_score(3);
@@ -101,8 +102,8 @@ public class Demo {
             | c | d          |
         */
         print(String.format("Current location: (%d,%d)", one.get_Tile().get_x(), one.get_Tile().get_y()));
-        Hashtable<String,Tile> neighbors = one.get_Tile().get_neighbors();
-        one.update_tile(neighbors.get("right"));
+        ArrayList<Tile> neighbors = one.get_Tile().get_neighbors();
+        one.update_tile(neighbors.get(0));
         print(String.format("Current location: (%d,%d)", one.get_Tile().get_x(), one.get_Tile().get_y()));
         return one;
     }
@@ -134,7 +135,7 @@ public class Demo {
         token.update_player(Player());
         token.get_players().get(0).update_tile(token.get_gameboard().get_tiles().get(2));
         print(String.format("Successfully update gameboard: '%s' and player object: '%s' into token",
-                             token.get_gameboard().getID(), token.get_players().get(0).get_id()));
+                             token.get_gameboard().get_id(), token.get_players().get(0).get_id()));
 
         return token;
     }
@@ -158,8 +159,8 @@ public class Demo {
     }
     public static void main(String[] args) throws IOException {
         // Board();
-        //Token();
-        JSON();
+        Token();
+//        JSON();
         //JSONConverter jsonConverter = new JSONConverter(JSON(), "After.json");
         //jsonConverter.To_JSON();
         // RNG_10_INT();

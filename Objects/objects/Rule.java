@@ -2,12 +2,11 @@ package objects;
 
 import java.util.*;
 
-public class Rule implements IRule {
-    final String ID;
-    String rule; int score; String type; RNG rng;
+public class Rule extends Savable implements IRule {
+    private String rule; private int score; private String type; private RNG rng;
 
     public Rule(){
-        this.ID = UUID.randomUUID().toString();
+        super();
         this.score = 0;
         this.type = "";
         this.rule = "";
@@ -15,7 +14,7 @@ public class Rule implements IRule {
     }
 
     public Rule(String rule){
-        this.ID = UUID.randomUUID().toString();
+    	super();
         this.score = 0;
         this.type = "";
         this.rule = rule;
@@ -23,7 +22,7 @@ public class Rule implements IRule {
     }
 
     public Rule(String rule, int score){
-        this.ID = UUID.randomUUID().toString();
+    	super();
         this.score = score;
         this.type = "";
         this.rule = rule;
@@ -31,7 +30,7 @@ public class Rule implements IRule {
     }
 
     public Rule(String rule, int score, String type){
-        this.ID = UUID.randomUUID().toString();
+    	super();
         this.score = score;
         this.type = type;
         this.rule = rule;
@@ -39,7 +38,7 @@ public class Rule implements IRule {
     }
 
     public Rule(String rule, int score, String type, RNG rng){
-        this.ID = UUID.randomUUID().toString();
+    	super();
         this.score = score;
         this.type = type;
         this.rule = rule;
@@ -47,14 +46,12 @@ public class Rule implements IRule {
     }
 
     public Rule(String id, String rule, int score, String type, RNG rng){
-        this.ID = id;
+    	super(id);
         this.score = score;
         this.type = type;
         this.rule = rule;
         this.rng = rng;
     }
-
-    public String get_id() { return this.ID; }
 
     public RNG get_rng() { return this.rng; }
 
