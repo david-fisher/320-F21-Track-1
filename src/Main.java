@@ -1,15 +1,23 @@
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Stack;
 
+import javax.imageio.ImageIO;
+
 import javafx.application.*;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.Text;
 import javafx.scene.paint.*;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.StackPane;
 
@@ -80,9 +88,23 @@ public void createTriangle(Group root) {
             25.0, 375.0,
             75.0, 375.0
             });
-    root.getChildren().add(triangle);
-    dragNDrop(triangle);
-    rightClick(triangle, root);
+    // root.getChildren().add(triangle);
+    // dragNDrop(triangle);
+    // rightClick(triangle, root);
+    TextField text = new TextField ("Triangle");
+    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
+    text.setPrefWidth(68);
+    text.setAlignment(Pos.CENTER);
+    StackPane layout = new StackPane();
+    layout.getChildren().addAll(
+            triangle,
+            text
+    );
+    root.getChildren().add(layout);
+    layout.setLayoutX(10);
+    layout.setLayoutY(330);
+    dragNDrop_stack(layout);
+    rightClick_stack(layout,root);
 }
 
 public void createPentagon(Group root) {
@@ -107,8 +129,8 @@ public void createPentagon(Group root) {
             text
     );
     root.getChildren().add(layout);
-    // layout.setLayoutX(10);
-    // layout.setLayoutY(490);
+    layout.setLayoutX(10);
+    layout.setLayoutY(400);
     dragNDrop_stack(layout);
     rightClick_stack(layout,root);
 }
@@ -127,9 +149,10 @@ public void createHexagon(Group root) {
     // dragNDrop(hexagon);
     //rightClick(hexagon, root);
     TextField text = new TextField ("Hexagon");
-    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
+    text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;");
     text.setPrefWidth(68);
     text.setAlignment(Pos.CENTER);
+    text.selectAll();
     StackPane layout = new StackPane();
     layout.getChildren().addAll(
             hexagon,

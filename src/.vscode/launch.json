@@ -8,16 +8,15 @@
             "type": "java",
             "name": "Launch Current File",
             "request": "launch",
-            "vmArgs": "--module-path D:\\javafx-sdk-17.0.1\\lib --add-modules javafx.controls,javafx.fxml",
             "mainClass": "${file}"
         },
         {
             "type": "java",
             "name": "Launch Main",
             "request": "launch",
+            "vmArgs": "--module-path /Users/vincentlyu/Documents/javafx-sdk-17.0.1-x64/lib --add-modules javafx.controls,javafx.fxml",
             "mainClass": "Main",
-            "vmArgs": "--module-path D:\\javafx-sdk-17.0.1\\lib --add-modules javafx.controls,javafx.fxml",
-            "projectName": "src_dddf71cd"
+            "projectName": "src_6be1c15"
         }
     ]
 }
