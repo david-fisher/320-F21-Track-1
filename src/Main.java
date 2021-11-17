@@ -20,7 +20,7 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.*;
 
 public class Main extends Application {
-    double orgSceneX, orgSceneY;
+    double orgSceneX, orgSceneY, xTemp;
 
 public void tabs(Group root) {
     // Top tabs ***************************************************************
@@ -86,7 +86,7 @@ public StackPane createRectangle(boardGrid root) {
     layout.setMaxWidth(50);
     layout.setLayoutX(10);
     layout.setLayoutY(180);
-    dragNDrop_StackPane(layout);
+    dragNDrop_StackPane(layout,root);
     rightClick_StackPane(layout,root);
     return layout;
 }
@@ -113,7 +113,7 @@ public StackPane createCircle(boardGrid root) {
     		);
     layout.setLayoutX(10);
     layout.setLayoutY(250);
-    dragNDrop_StackPane(layout);
+    dragNDrop_StackPane(layout,root);
     rightClick_StackPane(layout,root);
     return layout;
 }
@@ -147,7 +147,7 @@ public StackPane createTriangle(boardGrid root) {
     		);
     layout.setLayoutX(10);
     layout.setLayoutY(320);
-    dragNDrop_StackPane(layout);
+    dragNDrop_StackPane(layout,root);
     rightClick_StackPane(layout,root);
     return layout;
 }
@@ -182,7 +182,7 @@ public StackPane createPentagon(boardGrid root) {
     		);
     layout.setLayoutX(10);
     layout.setLayoutY(400);
-    dragNDrop_StackPane(layout);
+    dragNDrop_StackPane(layout,root);
     rightClick_StackPane(layout,root);
     return layout;
 }
@@ -218,18 +218,19 @@ public StackPane createHexagon(boardGrid root) {
     		);
     layout.setLayoutX(10);
     layout.setLayoutY(490);
-    dragNDrop_StackPane(layout);
+    dragNDrop_StackPane(layout,root);
     rightClick_StackPane(layout,root);
     return layout;
 }
 
-public void dragNDrop_StackPane(StackPane sp) {
+public void dragNDrop_StackPane(StackPane sp, boardGrid root) {
     // Drag n' Drop Interaction *******************************************************
         sp.setCursor(Cursor.HAND);
     
         sp.setOnMousePressed((t) -> {
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
+            xTemp = orgSceneX;
             
             StackPane c = (StackPane) (t.getSource());
             c.toFront();
@@ -280,6 +281,47 @@ public void dragNDrop_StackPane(StackPane sp) {
 	        else {
 	        	c.setTranslateY(0);
 	        }
+	        
+	        //checking if we are moving a piece from spawn
+	        //don't ask why value is 100, it just works
+	        if (xTemp < 100) {
+	        	for (int i = 0; i < c.getChildren().size(); i++) {
+	        		if (c.getChildren().toArray()[i] instanceof Rectangle) {
+	        			StackPane temp = createRectangle(root);
+	        			root.getBoard().add(temp, 0, 0);
+	        			temp.setTranslateX(-75);
+	        	    	temp.setTranslateY(75);
+	        			break;
+	        		}
+	        		else if (c.getChildren().toArray()[i] instanceof Circle) {
+	        			StackPane temp = createCircle(root);
+	        			root.getBoard().add(temp, 0, 0);
+	        			temp.setTranslateX(-75);
+	        	    	temp.setTranslateY(150);
+	        			break;
+	        		}
+	        		else if (c.getChildren().toArray()[i] instanceof Polygon) {
+	        			if (((Polygon)(c.getChildren().toArray()[i])).getPoints().size() == 6) {
+	        				StackPane temp = createTriangle(root);
+		        			root.getBoard().add(temp, 0, 0);
+		        			temp.setTranslateX(-75);
+		        	    	temp.setTranslateY(225);
+	            			}
+	            		else if (((Polygon)(c.getChildren().toArray()[i])).getPoints().size() == 10) {
+	        				StackPane temp = createPentagon(root);
+		        			root.getBoard().add(temp, 0, 0);
+		        			temp.setTranslateX(-75);
+		        	    	temp.setTranslateY(300);
+	            			}
+	            		else {
+	            			StackPane temp = createHexagon(root);
+		        			root.getBoard().add(temp, 0, 0);
+		        			temp.setTranslateX(-75);
+		        	    	temp.setTranslateY(375);
+	            			}
+	            		}
+	        		}
+	        	}
 	    });
 }
 
