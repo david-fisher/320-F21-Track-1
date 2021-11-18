@@ -5,17 +5,23 @@ import javafx.scene.image.ImageView;
 
 public class Piece extends PTile {
     private transient ImageView image;
-    
-    Piece(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes){
-        super(x, y, rules, attributes);
+
+    public Piece(ArrayList<Rule> rules, Hashtable<String,String> attributes){
+        super(rules, attributes);
+        this.image = new ImageView();
     }
     
-    Piece(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes, ImageView image){
+    public Piece(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes){
+        super(x, y, rules, attributes);
+        this.image = new ImageView();
+    }
+    
+    public Piece(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes, ImageView image){
         super(x, y, rules, attributes);
         this.image = image;
     }
     
-    Piece(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes, ImageView image){
+    public Piece(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes, ImageView image){
         super(id, x, y, rules, attributes);
         this.image = image;
     }

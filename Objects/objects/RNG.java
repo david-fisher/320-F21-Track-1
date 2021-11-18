@@ -5,8 +5,8 @@ import java.util.*;
 /* 
 Class return an array of generated random elements
 */
-public class RNG extends Saveable {
-    int repeat, seed; double[] range;
+public class RNG extends Savable {
+	private int repeat, seed; private double[] range;
     //private transient Random rand;
     private Random rand;
     /*
@@ -18,7 +18,7 @@ public class RNG extends Saveable {
     */
 
     public RNG(){
-        this.ID = UUID.randomUUID().toString();
+        super();
         this.range = new double[]{0,1};
         this.repeat = 1;
         this.seed = -1;
@@ -26,7 +26,7 @@ public class RNG extends Saveable {
     }
 
     public RNG(double[] range){
-        this.ID = UUID.randomUUID().toString();
+    	super();
         this.range = range;
         this.repeat = 1;
         this.seed = -1;
@@ -34,7 +34,7 @@ public class RNG extends Saveable {
     }
 
     public RNG(String id, double[] range){
-        this.ID = id;
+    	super();
         this.range = range;
         this.repeat = 1;
         this.seed = -1;
@@ -42,7 +42,7 @@ public class RNG extends Saveable {
     }
 
     public RNG(double[] range, int repeat){
-        this.ID = UUID.randomUUID().toString();
+    	super();
         this.range = range;
         this.seed = -1;
         this.repeat = repeat;
@@ -50,7 +50,7 @@ public class RNG extends Saveable {
     }
     
     public RNG(String id, double[] range, int repeat){
-        this.ID = id;
+    	super(id);
         this.range = range;
         this.seed = -1;
         this.repeat = repeat;
@@ -58,7 +58,7 @@ public class RNG extends Saveable {
     }
     
     public RNG(String id, double[] range, int seed, int repeat){
-        this.ID = id;
+    	super(id);
         this.range = range;
         this.seed = seed;
         this.repeat = repeat;
@@ -125,17 +125,4 @@ public class RNG extends Saveable {
         return result;
     }
 
-    @Override
-    public Hashtable<String, String> to_json(){
-        Hashtable<String, String> result = new Hashtable<String, String>();
-        result.put("id", this.ID);
-        String ranges = "";
-        for(int i = 0; i < 2; i++){
-            ranges += " " + this.range[i];
-        }
-        result.put("ranges", ranges);
-        result.put("repeat", new String(Integer.toString(this.repeat)));
-        result.put("seed", new String(Integer.toString(this.seed)));
-        return result;
-    }
 }

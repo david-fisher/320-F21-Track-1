@@ -2,34 +2,36 @@ package objects;
 
 import java.util.*;
 
-public class Token implements IToken {
+public class Token extends Savable implements IToken {
 	
-	private String ID;
 	private Board board;
 	private ArrayList<Player> players;
 	
 	public Token() {
-		this(UUID.randomUUID().toString());
+		super();
+		this.board = new Board();
+		this.players = new ArrayList<Player>();
 	}
 	
 	public Token(String ID) {
-		this(ID, new ArrayList<Player>());
+		super(ID);
+		this.board = new Board();
+		this.players = new ArrayList<Player>();
 	}
 	
 	public Token(String ID, ArrayList<Player> players) {
-		this(ID, players, new Board());
+		super(ID);
+		this.board = new Board();
+		this.players = players;
 	}
 	
 	public Token(String ID, ArrayList<Player> players, Board board) {
-		this.ID = ID;
-		this.players = players;
+		super(ID);
 		this.board = board;
+		this.players = players;
 	}
 	
-	public String get_ID() {
-		return this.ID;
-	}
-	
+
 	@Override
 	public ArrayList<Player> get_players() {		
 		return players;
@@ -39,7 +41,7 @@ public class Token implements IToken {
 	// new player ID must match ID of player to be replaced
 	public ArrayList<Player> update_player(Player new_player) {
 		try {
-			int index = players.indexOf(player_findByID(new_player.ID));
+			int index = players.indexOf(player_findByID(new_player.get_id()));
 			players.set(index, new_player);
 		} catch (Exception e) {
 			players.add(new_player);
@@ -50,7 +52,7 @@ public class Token implements IToken {
 	
 	@Override
 	public Player player_findByID(String ID) {
-		 return this.players.stream().filter(player -> player.ID == ID).findFirst().orElse(null);
+		 return this.players.stream().filter(player -> player.get_id() == ID).findFirst().orElse(null);
 	}
 	
 	@Override
