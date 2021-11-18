@@ -36,9 +36,9 @@ public class Deck extends Saveable{
 
     public ArrayList<Piece> remove_piece(Piece input){
         try {
-            int index = this.pieces.indexOf(piece_findByID(input.get_id()));
-		    this.pieces.remove(index);
+		    this.pieces.remove(this.pieces.indexOf(piece_findByID(input.get_id())));
         } catch (Exception e) {
+        	System.out.println("Error: Unable to remove target piece:");
             System.out.println(e);
         }		
         return this.pieces;
