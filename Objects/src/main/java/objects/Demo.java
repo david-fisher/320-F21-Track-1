@@ -139,8 +139,11 @@ public class Demo {
     }
     
     public static Token JSON() throws IOException{
-		JSONConverter json = new JSONConverter(Token(), "Token.json");
+    	Token token = Token();
+		JSONConverter json = new JSONConverter(token, "Token.json");
 		json.To_JSON();
+		print(String.format("Successfully convert the token object with ID: %s into JSON file",
+                token.get_id()));
 		return json.From_JSON();
 	}
 
