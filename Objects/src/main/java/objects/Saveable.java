@@ -2,12 +2,14 @@ package objects;
 
 import java.util.*;
 
-public class Savable {
+public class Saveable {
     private final String ID;
-    public Savable(){
+    
+    public Saveable(){
         this.ID = UUID.randomUUID().toString();
     }
-    public Savable(String id){
+    
+    public Saveable(String id){
         this.ID = id;
     }
     

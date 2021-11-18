@@ -59,6 +59,7 @@ public class Tile extends PTile {
     }
 
     public ArrayList<Tile> update_neighbors(ArrayList<Tile> new_neighbors){
+    	remove_neighbors();
         for (Tile new_neighbor: new_neighbors){
             update_neighbor(new_neighbor);
         }
@@ -73,5 +74,4 @@ public class Tile extends PTile {
     public Tile tile_findByID(String ID) {
 	    return this.neighbors.stream().filter(tile -> tile.get_id().equals(ID)).findFirst().orElse(null);
 	}
-
 }

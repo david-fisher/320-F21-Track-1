@@ -14,17 +14,15 @@ public class BoardDeserializer implements JsonDeserializer<Board> {
 		String id = context.deserialize(j.get("ID"), String.class);
 		ArrayList<Tile> tiles = context.deserialize(j.get("tiles"), new TypeToken<List<Tile>>(){}.getType());
 		ArrayList<Rule> rules = context.deserialize(j.get("rules"), new TypeToken<List<Rule>>(){}.getType());
+		Deck deck = context.deserialize(j.get("deck"), Deck.class);
 		
-		Board board = new Board(id, tiles, rules);
+		Board board = new Board(id, tiles, rules, deck);
 		for (Tile tile : board.get_tiles()) {
-			for (Map.Entry<String, Tile> entry : tile.get_neighbors().entrySet()) {
-				String key = entry.getKey();
-				String val = String.valueOf(entry.getValue());
-				
-				Hashtable<String, Tile> neighbors = new Hashtable<>();
-				neighbors.put(key, board.tile_findByID(val));
-				tile.update_neighbors(neighbors);
+			ArrayList<Tile> neighbors = new ArrayList<>();
+			for (int i = 0; i < tile.get_neighbors().size(); i++) {
+				neighbors.add(board.tile_findByID(String.valueOf(tile.get_neighbors().get(i))));
 			}
+			tile.update_neighbors(neighbors);
 		}
 		
 		return board;

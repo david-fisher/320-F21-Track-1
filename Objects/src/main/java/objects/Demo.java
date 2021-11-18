@@ -1,8 +1,6 @@
-package test;
+package objects;
+
 import java.util.*;
-
-import objects.*;
-
 import java.io.*;
 
 public class Demo {
@@ -67,9 +65,9 @@ public class Demo {
 
 
         a.update_neighbor(b);
-        b.update_neighbor(a);
+        //b.update_neighbor(a);
         a.update_neighbor(c);
-        c.update_neighbor(a);
+        //c.update_neighbor(a);
         ArrayList<Tile> neighbors = a.get_neighbors();
         print("\tneighbors:");
         for(Tile neighbor: neighbors){
@@ -159,8 +157,8 @@ public class Demo {
     }
     public static void main(String[] args) throws IOException {
         // Board();
-        Token();
-//        JSON();
+        //Token();
+    	JSON();
         //JSONConverter jsonConverter = new JSONConverter(JSON(), "After.json");
         //jsonConverter.To_JSON();
         // RNG_10_INT();

@@ -1,8 +1,6 @@
 package objects;
 
-import java.util.*;
-
-public class Rule extends Savable implements IRule {
+public class Rule extends Saveable implements IRule {
     private String rule; private int score; private String type; private RNG rng;
 
     public Rule(){

@@ -2,7 +2,7 @@ package objects;
 
 import java.util.*;
 
-public class Token extends Savable implements IToken {
+public class Token extends Saveable implements IToken {
 	
 	private Board board;
 	private ArrayList<Player> players;

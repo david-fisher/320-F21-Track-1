@@ -2,7 +2,7 @@ package objects;
 
 import java.util.*;
 
-public class Deck extends Savable{
+public class Deck extends Saveable{
     ArrayList<Piece> pieces;
 
     public Deck(){
@@ -14,12 +14,12 @@ public class Deck extends Savable{
     	super();
         this.pieces = pieces;
     }
+    
     public Deck(String id, ArrayList<Piece> pieces){
     	super(id);
         this.pieces = pieces;
     }
 
-    
     public ArrayList<Piece> get_pieces(){
         return this.pieces;
     }

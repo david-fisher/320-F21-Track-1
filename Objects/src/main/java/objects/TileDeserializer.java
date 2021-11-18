@@ -16,9 +16,9 @@ public class TileDeserializer implements JsonDeserializer<Tile> {
 		int y = context.deserialize(j.get("y"), int.class);
 		ArrayList<Rule> rules = context.deserialize(j.get("rules"), new TypeToken<List<Rule>>(){}.getType());
 		Hashtable<String, String> attributes = context.deserialize(j.get("attributes"), new TypeToken<Hashtable<String, String>>(){}.getType());
-		Hashtable<String, Tile> neighbors = context.deserialize(j.get("neighbors"), new TypeToken<Hashtable<String, String>>(){}.getType());
-		ArrayList<Piece> pieces = context.deserialize(j.get("pieces"), new TypeToken<List<Piece>>(){}.getType());
+		ArrayList<Tile> neighbors = context.deserialize(j.get("neighbors"), new TypeToken<List<String>>(){}.getType());
+		Deck deck = context.deserialize(j.get("deck"), Deck.class);
 		
-		return new Tile(id, x, y, rules, attributes, neighbors, pieces);
+		return new Tile(id, x, y, rules, attributes, neighbors, deck);
 	}
 }
