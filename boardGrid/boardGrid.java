@@ -48,7 +48,7 @@ public class boardGrid {
                 }
 
                 // if it's an empty stack pane, then create some default features
-                currentCell.loadCellImage("images/fish.jpeg");
+                currentCell.loadCellImage(i % 2 == 0? "images/fish.jpeg": "images/marius.jpeg");
                 currentCell.setIndex(i + j * width + 1);
                 currentRow.add(currentCell);
             }
