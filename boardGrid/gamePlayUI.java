@@ -48,12 +48,7 @@ public class gamePlayUI {
             }
         });
         Button editButton = Helper.ButtonMaker("Edit", null);
-        rightStack.getChildren().addAll(saveButton, editButton);
-
-        // board
-        GridPane board = boardGrid.createBoard(players, stackTable);
-        moveInfo infoBoard = new moveInfo("Move forward 4 spaces and lose next turn or stay in current space");
-
+        
         Button exitButton = Helper.ButtonMaker("Exit", null);
         exitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -61,6 +56,16 @@ public class gamePlayUI {
                 Platform.exit();
             }
         });
+
+
+        rightStack.getChildren().addAll(saveButton, editButton, exitButton);
+
+
+        // board
+        GridPane board = boardGrid.createBoard(players, stackTable);
+        moveInfo infoBoard = new moveInfo("Move forward 4 spaces and lose next turn or stay in current space");
+
+
         // top
         topStack.getChildren().addAll(boardGrid.createTurns());
 
