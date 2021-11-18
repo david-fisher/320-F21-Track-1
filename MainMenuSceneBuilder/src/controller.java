@@ -49,10 +49,12 @@ public class controller {
 
     @FXML
     public void toGameplay(javafx.event.ActionEvent event) throws IOException {
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("gameplay.fxml"));
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("gameplay.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        stage.setScene(boardScene.makeScene(stage));
     }
 
     @FXML
@@ -76,7 +78,15 @@ public class controller {
         stage.close();
     }
 
+    @FXML
     public void exitApp(javafx.event.ActionEvent event) throws IOException {
         Platform.exit();
     }
+
+    @FXML
+    public void toBoard(javafx.event.ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(boardScene.makeScene(stage));
+    }
+
 }

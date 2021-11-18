@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class boardScene {
 
-    public Scene makeScene(Stage stage){
+    public static Scene makeScene(Stage stage){
         int[] size = {8, 7};
         ArrayList<ArrayList<StackPane>> stackTable = new ArrayList<>();
         for (int i = 0; i < size[0]; i++){
