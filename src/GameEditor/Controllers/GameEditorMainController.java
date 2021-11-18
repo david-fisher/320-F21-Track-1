@@ -1,23 +1,24 @@
 package GameEditor.Controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
+import Objects.JSONConverter;
+import Objects.Token;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import java.util.Random;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class GameEditorMainController {
 
@@ -136,7 +137,15 @@ public class GameEditorMainController {
 
     @FXML
     public void saveGame(Event event) throws IOException {
-
+        Node node = (Node) event.getSource();
+        TextField text = (TextField) node.getParent().getChildrenUnmodifiable().get(0);
+        String gameName = text.getText();
+        if (gameName.equals("")) {
+            gameName = "Game" + new Random().nextInt(10000);
+        }
+        Token newgame = new Token(gameName);
+        JSONConverter savedGames = new JSONConverter(newgame, "demo.json");
+        savedGames.To_JSON();
     }
 
 }
