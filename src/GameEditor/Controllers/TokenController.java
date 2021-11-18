@@ -38,7 +38,6 @@ public class TokenController {
         app_stage.setScene(new Scene (addMovementPiece));
     }
 
-    public void changeScene(Scene in, Scene out){};
 
     public  void displayNewDeck(){}
 
