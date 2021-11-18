@@ -1,4 +1,5 @@
 import Helpers.Helper;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +54,13 @@ public class gamePlayUI {
         GridPane board = boardGrid.createBoard(players, stackTable);
         moveInfo infoBoard = new moveInfo("Move forward 4 spaces and lose next turn or stay in current space");
 
+        Button exitButton = Helper.ButtonMaker("Exit", null);
+        exitButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Platform.exit();
+            }
+        });
         // top
         topStack.getChildren().addAll(boardGrid.createTurns());
 

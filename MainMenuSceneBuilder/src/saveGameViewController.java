@@ -2,7 +2,11 @@ import Helpers.Helper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
@@ -16,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.util.Collections;
 
 
@@ -27,6 +32,7 @@ public class saveGameViewController {
             FontPosture.REGULAR,
             20)
     );
+
 
     private static void setTitle(){
         title.setFont(new Font("Helvetica", 20));
@@ -133,7 +139,20 @@ public class saveGameViewController {
                 saveTable,
                 cancelButton
         );
-
+        cancelButton.setOnAction(new EventHandler<ActionEvent>()  {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("PLayGameFXML.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+            }
+        });
         // generate scene
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(vbox);
