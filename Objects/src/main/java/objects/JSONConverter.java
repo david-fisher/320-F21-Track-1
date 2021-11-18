@@ -1,4 +1,4 @@
-package objects;
+package src.main.java.objects;
 
 import java.io.*;
 import com.google.gson.*;

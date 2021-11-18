@@ -1,4 +1,4 @@
-package objects;
+package src.main.java.objects;
 
 public class Score extends Saveable {
     int cur_score;
