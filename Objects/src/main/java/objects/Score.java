@@ -1,8 +1,6 @@
-package objects;
+package src.main.java.objects;
 
-import java.util.*;
-
-public class Score extends Savable {
+public class Score extends Saveable {
     int cur_score;
     
     public Score(){

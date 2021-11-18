@@ -1,11 +1,11 @@
-package objects;
+package src.main.java.objects;
 
 import java.util.*;
 
 /* 
 Class return an array of generated random elements
 */
-public class RNG extends Savable {
+public class RNG extends Saveable {
 	private int repeat, seed; private double[] range;
     //private transient Random rand;
     private Random rand;
@@ -124,5 +124,4 @@ public class RNG extends Savable {
         }
         return result;
     }
-
 }

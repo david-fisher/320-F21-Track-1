@@ -1,8 +1,6 @@
-package objects;
+package src.main.java.objects;
 
-import java.util.*;
-
-public class Player extends Savable {
+public class Player extends Saveable {
     private Score score; private Tile current_tile; private Deck deck;
 
     public Player(){
@@ -52,6 +50,5 @@ public class Player extends Savable {
 
     public void update_tile(Tile new_tile){
         this.current_tile = new_tile;
-    }
-    
+    }   
 }

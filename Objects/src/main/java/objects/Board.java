@@ -1,8 +1,8 @@
-package objects;
+package src.main.java.objects;
 
 import java.util.*;
 
-public class Board extends Savable implements IBoard {
+public class Board extends Saveable implements IBoard {
 	
 	private ArrayList<Tile> tiles;
 	private ArrayList<Rule> rules;

@@ -30,3 +30,8 @@ action.java
 .classpath
 lib/
 *.json
+target/
+test/
+.project
+*.xml
+.settings

@@ -1,8 +1,8 @@
-package objects;
+package src.main.java.objects;
 
 import java.util.*;
 
-public class PTile extends Savable {
+public class PTile extends Saveable {
 	private final int x,y; private Hashtable<String,String> attributes; private ArrayList<Rule> rules;
 
     public PTile(ArrayList<Rule> rules, Hashtable<String,String> attributes){
