@@ -4,7 +4,7 @@
 
 ### Before Running
 * launch from [boardLauncher](boardLauncher.java) class
-* requires functions from [MainMenuSceneBuilder/src](../MainMenuSceneBuilder/src), especially from the [Helper](../MainMenuSceneBuilder/src/Helpers/Helper.java) class
+* requires functions from [MainMenuSceneBuilder/src](src), especially from the [Helper](..) class
 * any modification on the loading data can only be edited from [boardLauncher](boardLauncher.java)
 * board is in GridPane with adjustable size
 * The maximum number of players is two
@@ -24,6 +24,6 @@
 
 ### TODO
 * add mouse drag and drop motion in [cell](boardCell.java)
-* use [Tile](../Objects/Tile.java) rather than `StackPane` for the cell objects
+* use [Tile](../../Objects/Tile.java) rather than `StackPane` for the cell objects
 * create another scene for a user to input players' names
 

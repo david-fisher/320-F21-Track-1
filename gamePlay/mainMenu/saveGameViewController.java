@@ -145,7 +145,7 @@ public class saveGameViewController {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Parent root = null;
                 try {
-                    root = FXMLLoader.load(getClass().getClassLoader().getResource("PLayGameFXML.fxml"));
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("PlayGameFXML.fxml"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -1,3 +1,5 @@
+package src;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -33,7 +35,7 @@ public class ModeMenuController {
     @FXML
     public void toPlay(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("PLayGameFXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("PlayGameFXML.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
     }
