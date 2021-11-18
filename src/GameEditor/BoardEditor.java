@@ -28,7 +28,7 @@ public void tabs(Group root) {
     // Top tabs ***************************************************************
     Button boardEditor = new Button("Board Editor");
     boardEditor.setPrefSize(100,100);
-    
+    /*
     Button ruleEditor = new Button("Rule Editor");
     ruleEditor.setPrefSize(100, 100);
     ruleEditor.setTranslateX(100);
@@ -51,7 +51,7 @@ public void tabs(Group root) {
     gameName.setPromptText("Input the name of the board");
     
     root.getChildren().addAll(boardEditor, ruleEditor, RNG, gameOptions, gameTokens, gameName);
-    
+    */
     // Side bar *****************************************************************
     Rectangle sideBar = new Rectangle();
     sideBar.setY(150);
@@ -59,7 +59,7 @@ public void tabs(Group root) {
     sideBar.setHeight(410);
     sideBar.setArcWidth(20);
     sideBar.setArcHeight(20);
-    sideBar.setFill(Color.rgb(255, 255, 255));
+    sideBar.setFill(Color.rgb(220, 220, 220));
     root.getChildren().add(sideBar);
 }
 
