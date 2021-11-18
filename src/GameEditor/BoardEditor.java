@@ -1,3 +1,5 @@
+package GameEditor;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.*;
 
-public class Main extends Application {
+public class BoardEditor {
     double orgSceneX, orgSceneY, xTemp;
 
 public void tabs(Group root) {
@@ -452,7 +454,7 @@ public class boardGrid {
     }
 }
 
-public void start(Stage stage){
+public Group startBoardEditor(Stage stage){
     Group root = new Group();
     boardGrid board = new boardGrid();
     board.createBoard();
@@ -468,7 +470,7 @@ public void start(Stage stage){
 //    board.getBoard().add(createPentagon(board), 0, 10);
 //    board.getBoard().add(createHexagon(board), 10, 0);
     root.getChildren().add(board.getBoard());
-    
+    return root;
     // Initial Setup
 //    tabs(root);
 
@@ -478,19 +480,16 @@ public void start(Stage stage){
 //    createPentagon(root);
 //    createHexagon(root);
     
-    Scene scene = new Scene(root, 700, 700, Color.rgb(105, 162, 255));
+    //Scene scene = new Scene(root, 700, 700, Color.rgb(105, 162, 255));
 
-    stage.setTitle("Board Editor");
-    stage.setScene(scene);
+    //stage.setTitle("Board Editor");
+    //stage.setScene(scene);
     
     // Using external file to hide the broken 'Custom color' section on ColorPicker
-    scene.getStylesheets().add(getClass().getResource("ColorPickerMod.css").toExternalForm());
-    stage.show();
+    //scene.getStylesheets().add(getClass().getResource("ColorPickerMod.css").toExternalForm());
+    //stage.show();
 
     
 }
 
-public static void main(String[] args) {
-    launch(args);
-    }
 }
