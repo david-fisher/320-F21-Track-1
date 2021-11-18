@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.RNGController">
+   <children>
+      <AnchorPane prefHeight="615.0">
+         <children>
+            <Label fx:id="QuantitySelection" contentDisplay="RIGHT" layoutX="302.0" layoutY="247.0" prefHeight="44.0" prefWidth="399.0" style="-fx-padding:10;" text="Quantity             " visible="false">
+               <graphic>
+                  <TextField fx:id="QuantityField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="170.0" text="Enter Quantity" />
+               </graphic>
+            </Label>
+            <Label fx:id="RangeSelection" contentDisplay="RIGHT" layoutX="302.0" layoutY="291.0" prefHeight="44.0" prefWidth="442.0" style="-fx-padding:10;" text="Range                 " visible="false">
+               <graphic>
+                  <Pane>
+                     <children>
+                        <TextField fx:id="MaxField" layoutX="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="45.0" text="Max" />
+                        <TextField fx:id="MinField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="39.0" text="Min" />
+                        <Line endX="-60.0" endY="34.99998474121094" layoutX="109.0" layoutY="-23.0" startX="-43.33331298828125" startY="34.99998474121094" strokeWidth="3.0" />
+                     </children>
+                  </Pane>
+               </graphic>
+            </Label>
+             <Label contentDisplay="RIGHT" layoutX="302.0" layoutY="195.0" prefHeight="51.0" prefWidth="296.0" style="-fx-padding:10;" text="Type                   ">
+               <graphic>
+                  <ComboBox fx:id="TypeSelection" prefWidth="150.0" />
+               </graphic>
+            </Label>
+            <Label fx:id="DeckSelection" contentDisplay="RIGHT" layoutX="302.0" layoutY="243.0" prefHeight="51.0" prefWidth="296.0" style="-fx-padding:10;" text="Select Deck        " visible="false">
+               <graphic>
+                  <ComboBox prefWidth="150.0" />
+               </graphic>
+            </Label>
+            <Button layoutX="631.0" layoutY="124.0" mnemonicParsing="false" text="Save" />
+            <Button layoutX="681.0" layoutY="124.0" mnemonicParsing="false" text="Cancel" />
+            <Button layoutX="429.0" layoutY="341.0" mnemonicParsing="false" text="Card Creation" visible="false" />
+            <Button layoutX="302.0" layoutY="341.0" mnemonicParsing="false" text="Add New RNG" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
