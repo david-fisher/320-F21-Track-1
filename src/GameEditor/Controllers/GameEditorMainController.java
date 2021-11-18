@@ -133,4 +133,10 @@ public class GameEditorMainController {
         else {}
     }
 
+
+    @FXML
+    public void saveGame(Event event) throws IOException {
+
+    }
+
 }
