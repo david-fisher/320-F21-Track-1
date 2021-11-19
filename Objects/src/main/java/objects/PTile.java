@@ -62,7 +62,12 @@ public class PTile extends Saveable {
     }
 
     public Hashtable<String,String> remove_attribute(String key){
-        this.attributes.remove(key);
+    	try {
+    		this.attributes.remove(key);
+        } catch (Exception e) {
+        	System.out.println(String.format("Error: Unable to remove target attribute with key: %12s", key));
+            System.out.println(e);
+        }
         return this.attributes;
     }
 
@@ -81,8 +86,14 @@ public class PTile extends Saveable {
         return this.rules;
     }
 
-    public boolean remove_rule(Rule target_rule){
-        return this.rules.remove(findByID(target_rule.get_id()));
+    public ArrayList<Rule> remove_rule(Rule target_rule){
+    	try {
+    		this.rules.remove(findByID(target_rule.get_id()));
+        } catch (Exception e) {
+        	System.out.println(String.format("Error: Unable to remove target rule: %s", target_rule.get_id()));
+            System.out.println(e);
+        }
+        return this.rules;
     }
 
     public Rule findByID(String ID) {

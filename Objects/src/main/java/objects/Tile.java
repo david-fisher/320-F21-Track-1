@@ -50,16 +50,15 @@ public class Tile extends PTile {
 
     public ArrayList<Tile> remove_neighbor(Tile input){
         try {
-            int index = this.neighbors.indexOf(tile_findByID(input.get_id()));
-		    this.neighbors.remove(index);
+		    this.neighbors.remove(this.neighbors.indexOf(tile_findByID(input.get_id())));
         } catch (Exception e) {
+        	System.out.println(String.format("Error: Unable to remove target neighbor tile: %s", input.get_id()));
             System.out.println(e);
         }	
         return this.neighbors;
     }
 
     public ArrayList<Tile> update_neighbors(ArrayList<Tile> new_neighbors){
-    	remove_neighbors();
         for (Tile new_neighbor: new_neighbors){
             update_neighbor(new_neighbor);
         }
