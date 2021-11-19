@@ -126,7 +126,10 @@ public class Tile extends Saveable{
         // }
         // result.put("next tile ids", next_tiles_ids);
         return result;
-    } 
+    }
 
 
+    public Object get_peices() {
+        return null;
+    }
 }

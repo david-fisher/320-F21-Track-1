@@ -1,23 +1,25 @@
 package GameEditor.Controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
+import Objects.JSONConverter;
+import Objects.Token;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 public class GameEditorMainController {
 
@@ -131,6 +133,42 @@ public class GameEditorMainController {
         }
         else if (tokenType == ""){}
         else {}
+    }
+
+    //TODO
+    /*
+        Confirmation prompt of game being saved.
+        Don't exit the scene until pressing the actual exit button.
+        After save, can continue to edit. If saved, and editing, just re-edit in
+        the database, rather than a new savedGame.
+     */
+    @FXML
+    public void saveGame(Event event) throws IOException {
+        Node node = (Node) event.getSource();
+        //saveGame
+        TextField text = (TextField) node.getParent().getChildrenUnmodifiable().get(0);
+        String gameName = text.getText();
+        if (gameName.equals("")) {
+            gameName = "Game" + new Random().nextInt(10000);
+        }
+        Token newgame = new Token(gameName);
+        JSONConverter savedGames = new JSONConverter(newgame, "test.json");
+        savedGames.To_JSON();
+
+        popup(event, "Game has been saved");
+
+
+    }
+
+    //creates a popup window
+    @FXML
+    public void popup(Event event, String argument) {
+        BorderPane borderPane = new BorderPane();
+        Scene scene = new Scene(borderPane, 300, 200);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle(argument);
+        stage.show();
     }
 
 }
