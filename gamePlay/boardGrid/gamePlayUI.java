@@ -16,9 +16,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import mainMenu.Main;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class gamePlayUI {
 
@@ -38,7 +40,7 @@ public class gamePlayUI {
                 Stage saveStage = new Stage();
                 Parent root = null;
                 try {
-                    Parent r = FXMLLoader.load(getClass().getClassLoader().getResource("pause.fxml"));
+                    Parent r = FXMLLoader.load(Objects.requireNonNull(boardGrid.class.getResource("pause.fxml")));
                     Scene scene = new Scene(r);
                     saveStage.setScene(scene);
                     saveStage.initModality(Modality.APPLICATION_MODAL);
