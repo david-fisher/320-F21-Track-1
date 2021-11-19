@@ -1,3 +1,5 @@
+package mainMenu;
+
 import Helpers.Helper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +24,7 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Objects;
 
 
 public class saveGameViewController {
@@ -145,7 +148,7 @@ public class saveGameViewController {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Parent root = null;
                 try {
-                    root = FXMLLoader.load(getClass().getClassLoader().getResource("PlayGameFXML.fxml"));
+                    root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PlayGameFXML.fxml")));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

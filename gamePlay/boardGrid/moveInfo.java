@@ -1,3 +1,5 @@
+package boardGrid;
+
 import Helpers.Helper;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
@@ -36,7 +38,7 @@ public class moveInfo {
         infoVBox.getChildren().addAll(title,info);
         infoVBox.setAlignment(Pos.TOP_CENTER);
 
-        String backgroundFile = "images/infoBackground.png";
+        String backgroundFile = "gamePlay/images/infoBackground.png";
         backgroundImage = Helper.imageMaker(backgroundFile, 200, 250);
 
 

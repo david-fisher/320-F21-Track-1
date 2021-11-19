@@ -1,3 +1,5 @@
+package boardGrid;
+
 import Helpers.Helper;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;

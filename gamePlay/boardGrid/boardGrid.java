@@ -1,3 +1,5 @@
+package boardGrid;
+
 import javafx.scene.layout.*;
 
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ public class boardGrid {
                 }
 
                 // if it's an empty stack pane, then create some default features
-                currentCell.loadCellImage(i % 2 == 0? "images/fish.jpeg": "images/marius.jpeg");
+                currentCell.loadCellImage(i % 2 == 0? "gamePlay/images/fish.jpeg": "gamePlay/images/marius.jpeg");
                 currentCell.setIndex(i + j * width + 1);
                 currentRow.add(currentCell);
             }

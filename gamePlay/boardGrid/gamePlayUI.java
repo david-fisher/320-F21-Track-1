@@ -1,3 +1,5 @@
+package boardGrid;
+
 import Helpers.Helper;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

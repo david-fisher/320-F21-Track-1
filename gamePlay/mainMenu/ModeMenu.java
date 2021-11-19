@@ -1,4 +1,4 @@
-package src;
+package mainMenu;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
