@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class preGame{
 
     public static Scene makeScene(Stage primaryStage){
+        playerSelect.setMaxPlayer(6);
         Scene scene = new Scene(playerSelect.makeScene(primaryStage, generateTestCell()));
         return scene;
     }

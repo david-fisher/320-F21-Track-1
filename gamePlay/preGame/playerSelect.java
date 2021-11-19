@@ -15,13 +15,21 @@ import java.util.ArrayList;
 public class playerSelect {
     private static Integer number;
     private static ArrayList<String> nameList;
+    private static int maxSize = 5;
 
     public playerSelect(){
         number = 0;
         nameList = new ArrayList<>();
     }
 
+    public static void setMaxPlayer(int num){
+        maxSize = num;
+    }
+
     public static HBox dropDown(){
+        Label warning = new Label("Maximum player size is " + maxSize);
+        warning.setVisible(false);
+
         ComboBox<Integer> cBox = new ComboBox<>();
         cBox.setEditable(true);
         cBox.getItems().addAll(1, 2, 3, 4, 5);
@@ -30,7 +38,7 @@ public class playerSelect {
             Object n = cBox.getSelectionModel().getSelectedItem();
 
             if (n != null){
-                Integer num = 0;
+                int num = 0;
                 try{
                     String nString = n.toString();
                     num = Integer.parseInt(nString);
@@ -38,6 +46,11 @@ public class playerSelect {
                 catch (Exception e){
                     System.out.println(e.toString());
                 }
+                if (num > maxSize){
+                    warning.setVisible(true);
+                    return;
+                }
+
                 number = num;
                 System.out.println("Player number: " + number.toString());
             }
@@ -45,7 +58,7 @@ public class playerSelect {
                 System.out.println("Loading Error: Cannot read from ComboBox");
             }
         }));
-        return new HBox(cBox);
+        return new HBox(cBox, warning);
     }
 
     public static HBox makeScene(Stage primaryStage, ArrayList<ArrayList<StackPane>> boardTable){
