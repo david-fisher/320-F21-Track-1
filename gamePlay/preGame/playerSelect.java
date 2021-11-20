@@ -1,5 +1,6 @@
 package preGame;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -58,7 +59,9 @@ public class playerSelect {
                 System.out.println("Loading Error: Cannot read from ComboBox");
             }
         }));
-        return new HBox(cBox, warning);
+        HBox dropDownMenu = new HBox(cBox, warning);
+        dropDownMenu.setAlignment(Pos.CENTER);
+        return dropDownMenu;
     }
 
     public static HBox makeScene(Stage primaryStage, ArrayList<ArrayList<StackPane>> boardTable){
@@ -71,6 +74,7 @@ public class playerSelect {
         }));
 
         HBox numSelect = new HBox(50, dropDownMenu, nextButton);
+        numSelect.setAlignment(Pos.CENTER);
         numSelect.setMinHeight(300);
         return numSelect;
     }
@@ -90,15 +94,16 @@ public class playerSelect {
         }
 
         for (int i = 0; i < number; i++){
-            Label empty = new Label();
-            root.addRow(2 + i,empty, inputList.get(i));
+            Label label = new Label("Player" + String.valueOf(i + 1) + ":");
+            root.addRow(2 + i,label, inputList.get(i));
         }
 
         Button submitButton = new Button("Submit");
 
         submitButton.setOnAction((event -> {
             for (TextField textField : inputList) {
-                nameList.add(textField.getText());
+                String currentName = textField.getText();
+                nameList.add(currentName.isEmpty()? null : textField.getText());
             }
             for (String s : nameList) {
                 System.out.println(s);
@@ -107,6 +112,7 @@ public class playerSelect {
         }));
 
         root.addRow(root.getRowCount(), submitButton);
+        root.setAlignment(Pos.CENTER);
 
         return root;
     }

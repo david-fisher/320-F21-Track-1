@@ -45,10 +45,12 @@ public class controller {
 
     @FXML
     public void toModeMenu(javafx.event.ActionEvent event) throws IOException {
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("mode-menu.fxml")));
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("mode-menu.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+        stage.setScene(preGame.preGame.makeScene(stage));
     }
 
     @FXML
