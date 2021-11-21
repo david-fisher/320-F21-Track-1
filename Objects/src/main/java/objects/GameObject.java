@@ -2,10 +2,10 @@ package src.main.java.objects;
 
 import java.util.*;
 
-public class PTile extends Saveable {
+public class GameObject extends Saveable {
 	private final int x,y; private Hashtable<String,String> attributes; private ArrayList<Rule> rules;
 
-    public PTile(ArrayList<Rule> rules, Hashtable<String,String> attributes){
+    public GameObject(ArrayList<Rule> rules, Hashtable<String,String> attributes){
         super();
         this.x = -1;
         this.y = -1;
@@ -13,7 +13,7 @@ public class PTile extends Saveable {
         this.rules = rules;
     }
 
-    public PTile(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes){
+    public GameObject(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes){
         super();
         this.x = x;
         this.y = y;
@@ -21,7 +21,7 @@ public class PTile extends Saveable {
         this.rules = rules;
     }
 
-    public PTile(String id, ArrayList<Rule> rules, Hashtable<String,String> attributes){
+    public GameObject(String id, ArrayList<Rule> rules, Hashtable<String,String> attributes){
         super(id);
         this.x = -1;
         this.y = -1;
@@ -29,7 +29,7 @@ public class PTile extends Saveable {
         this.rules = rules;
     }
 
-    public PTile(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes){
+    public GameObject(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes){
         super(id);
         this.x = x;
         this.y = y;

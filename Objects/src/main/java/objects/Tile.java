@@ -2,7 +2,7 @@ package src.main.java.objects;
 
 import java.util.*;
 
-public class Tile extends PTile {
+public class Tile extends GameObject {
 
     private ArrayList<Tile> neighbors; private Deck deck;
 
@@ -73,4 +73,5 @@ public class Tile extends PTile {
     public Tile tile_findByID(String ID) {
 	    return this.neighbors.stream().filter(tile -> tile.get_id().equals(ID)).findFirst().orElse(null);
 	}
+
 }
