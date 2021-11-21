@@ -7,6 +7,10 @@ public class GameState {
   private Stack<Card> deck;
   private RNG rng;
 
+  public GameState(ArrayList<Player> players, Token gameToLoad){
+    // TODO: Write this function for Omnicron to init game with
+  }
+
   public GameState(List<Player> players, Board board, List<Card> cards, double[] rngRange) {
     this.players = new ArrayList<Player>(players);
     this.curPlayer = this.players.get(0);
