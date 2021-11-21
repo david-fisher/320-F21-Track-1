@@ -41,7 +41,7 @@ public class saveGameViewController {
         title.setFont(new Font("Helvetica", 20));
     }
 
-    private static void createTable(){
+    private static void createTable(Stage primaryStage){
         // TODO update game structure
         Helper.Games[] data = Helper.makeGames();
         final ObservableList<Helper.Games> existingGame =
@@ -73,7 +73,7 @@ public class saveGameViewController {
                 gameColumn,
                 timeColumn
         );
-        addTableButton();
+        addTableButton(primaryStage);
         saveTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         saveTable.setMaxSize(700, 300);
@@ -89,7 +89,7 @@ public class saveGameViewController {
 
 
     // create tableview buttons for each column
-    private static void addTableButton() {
+    private static void addTableButton(Stage primaryStage) {
         TableColumn<Helper.Games, Void> buttonColumn = new TableColumn<>("");
 
         Callback<TableColumn<Helper.Games, Void>, TableCell<Helper.Games, Void>> cellFactory =
@@ -106,6 +106,8 @@ public class saveGameViewController {
                                             get(getIndex());
                                     // TODO: load game function
                                     System.out.println("Load " + data.getName());
+
+                                    primaryStage.setScene(boardGrid.boardScene.makeScene(primaryStage));
                                 });
                             }
 
@@ -125,7 +127,7 @@ public class saveGameViewController {
     protected static Scene makeScene(Stage primaryStage){
 
         setTitle();
-        createTable();
+        createTable(primaryStage);
         setCancel();
 
         VBox vbox = new VBox();
