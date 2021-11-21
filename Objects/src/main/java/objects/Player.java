@@ -1,5 +1,7 @@
 package src.main.java.objects;
 
+import java.util.ArrayList;
+
 public class Player extends Saveable {
     private Score score; private Tile current_tile; private Deck deck;
     private String name; private Boolean isAI;
@@ -9,7 +11,12 @@ public class Player extends Saveable {
         this.score = new Score();
         this.current_tile = null;
         this.deck = new Deck();
-    } 
+    }
+
+    public Player(String name, Boolean isAI) {
+        super();
+        // TODO: Implement this function for Omnicron to use for Player init
+    }
 
     public Player(Score score){
         super();
