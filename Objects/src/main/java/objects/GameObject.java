@@ -5,6 +5,10 @@ import java.util.*;
 public class GameObject extends Saveable {
 	private final int x,y; private Hashtable<String,String> attributes; private ArrayList<Rule> rules;
 
+    public GameObject(ArrayList<Player> players, Token gameToLoad){
+        // TODO: Write this function for Omnicron to init game with
+    }
+
     public GameObject(ArrayList<Rule> rules, Hashtable<String,String> attributes){
         super();
         this.x = -1;
