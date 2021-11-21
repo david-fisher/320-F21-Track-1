@@ -2,6 +2,7 @@ package src.main.java.objects;
 
 public class Player extends Saveable {
     private Score score; private Tile current_tile; private Deck deck;
+    private String name; private Boolean isAI;
 
     public Player(){
         super();
