@@ -2,10 +2,7 @@ package preGame;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -16,11 +13,13 @@ import java.util.ArrayList;
 public class playerSelect {
     private static Integer number;  // total number of players
     private static ArrayList<String> nameList;    // save a list of play names
+    private static ArrayList<Boolean> AIList;
     private static int maxSize = 5;     // a preset bound index
 
     public playerSelect(){
         number = 0;
         nameList = new ArrayList<>();
+        AIList = new ArrayList<Boolean>();
     }
 
     // update max player number
@@ -71,20 +70,28 @@ public class playerSelect {
     private static GridPane inputName(Stage primaryStage, ArrayList<ArrayList<StackPane>> boardTable){
         GridPane root = new GridPane();
         nameList = new ArrayList<>();
+        AIList = new ArrayList<>();
 
         Label numLabel = new Label("Player number: " + number);
         Label playerLabel = new Label("Please Type Players name here ");
         root.addRow(0, numLabel);
         root.addRow(1, playerLabel);
 
+        // a list of input text field
         ArrayList<TextField> inputList = new ArrayList<>();
         for (int i = 0; i < number; i++){
             inputList.add(new TextField());
         }
 
+        // a list of check boxes
+        ArrayList<CheckBox> checkBoxes = new ArrayList<>();
+        for (int i = 0; i < number; i++){
+            checkBoxes.add(new CheckBox("AI"));
+        }
+
         for (int i = 0; i < number; i++){
             Label label = new Label("Player" + String.valueOf(i + 1) + ":");
-            root.addRow(2 + i,label, inputList.get(i));
+            root.addRow(2 + i,label, checkBoxes.get(i), inputList.get(i));
         }
 
         Button backButton = new Button("Back");
@@ -98,12 +105,16 @@ public class playerSelect {
 
         // when user click <play>
         submitButton.setOnAction((event -> {
-            for (TextField textField : inputList) {
-                String currentName = textField.getText();
-                nameList.add(currentName.isEmpty()? null : textField.getText());
+            for (int i = 0; i < inputList.size(); i++){
+                String currentName = inputList.get(i).getText();
+                nameList.add(currentName.isEmpty()? null : currentName);
+                boolean a = checkBoxes.get(i).isSelected();
+                AIList.add(checkBoxes.get(i).isSelected());
             }
-            for (String s : nameList) {     // test printing call
-                System.out.println(s);
+
+            for (int i = 0; i < inputList.size(); i++) {     // test printing call
+                System.out.println(inputList.get(i).getText());
+                System.out.print(AIList.get(i)? " I want AI" : " No AI");
             }
             primaryStage.setScene(boardGrid.gamePlayUI.makeScene(primaryStage, nameList, boardTable));
         }));
