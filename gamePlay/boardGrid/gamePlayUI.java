@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -16,6 +17,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import loadSave.exitGame;
+import loadSave.saveGame;
 import mainMenu.Main;
 
 import java.io.IOException;
@@ -26,6 +29,7 @@ public class gamePlayUI {
 
     public static Scene makeScene(Stage primaryStage, ArrayList<String> players, ArrayList<ArrayList<StackPane>> stackTable) {
 
+        ScrollPane scrollView = new ScrollPane();
         BorderPane mainScene = new BorderPane();
         VBox leftStack = new VBox(150);
         VBox rightStack = new VBox();
@@ -34,32 +38,32 @@ public class gamePlayUI {
 
         // right
         Button saveButton = Helper.ButtonMaker("Save", null);
-        saveButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Stage saveStage = new Stage();
-                Parent root = null;
-                try {
-                    Parent r = FXMLLoader.load(Objects.requireNonNull(boardGrid.class.getResource("pause.fxml")));
-                    Scene scene = new Scene(r);
-                    saveStage.setScene(scene);
-                    saveStage.initModality(Modality.APPLICATION_MODAL);
-                    saveStage.show();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        saveButton.setOnAction(event -> {
+            saveGame.popSave(primaryStage);
         });
+//        saveButton.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                Stage saveStage = new Stage();
+//                Parent root = null;
+//                try {
+//                    Parent r = FXMLLoader.load(Objects.requireNonNull(boardGrid.class.getResource("pause.fxml")));
+//                    Scene scene = new Scene(r);
+//                    saveStage.setScene(scene);
+//                    saveStage.initModality(Modality.APPLICATION_MODAL);
+//                    saveStage.show();
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
         Button editButton = Helper.ButtonMaker("Edit", null);
         
         Button exitButton = Helper.ButtonMaker("Exit", null);
-        exitButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Platform.exit();
-            }
-        });
+        exitButton.setOnAction((event -> {
+            exitGame.popExit(primaryStage);
+        }));
 
 
         rightStack.getChildren().addAll(saveButton, editButton, exitButton);
@@ -82,6 +86,9 @@ public class gamePlayUI {
         mainScene.setRight(rightStack);
         mainScene.setTop(topStack);
 
-        return new Scene(mainScene);
+        scrollView.setPrefSize(1200, 600);
+        scrollView.setContent(mainScene);
+
+        return new Scene(scrollView);
     }
 }
