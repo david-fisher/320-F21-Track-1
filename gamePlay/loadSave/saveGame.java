@@ -18,7 +18,8 @@ public class saveGame {
 
         Button resumeButton = new Button("Resume");
         Button saveButton = new Button("Save");
-
+        resumeButton.setId("main-menu-button");
+        saveButton.setId("main-menu-button");
         // after click resume button
         resumeButton.setOnAction((event -> {
             popStage.close();
@@ -39,9 +40,12 @@ public class saveGame {
         view.getChildren().add(allButton);
         view.setPrefSize(500, 300);
 
-        popStage.setScene(new Scene(view));
+        Scene scene = new Scene(view);
+        scene.getStylesheets().add("boardGrid/style.css");
+        popStage.setScene(scene);
         popStage.initModality(Modality.APPLICATION_MODAL);
         popStage.setResizable(false);
+
         popStage.show();
     }
 
