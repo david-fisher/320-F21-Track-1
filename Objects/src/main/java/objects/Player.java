@@ -8,6 +8,7 @@ public class Player extends Saveable {
 
     public Player(){
         super();
+        this.isAI = false;
         this.score = new Score();
         this.current_tile = null;
         this.deck = new Deck();
@@ -15,11 +16,16 @@ public class Player extends Saveable {
 
     public Player(String name, Boolean isAI) {
         super();
-        // TODO: Implement this function for Omnicron to use for Player init
+        this.name = name;
+        this.isAI = true;
+        this.score = new Score();
+        this.current_tile = null;
+        this.deck = new Deck();
     }
 
     public Player(Score score){
         super();
+        this.isAI = false;
         this.score = score;
         this.current_tile = null;
         this.deck = new Deck();
@@ -27,6 +33,7 @@ public class Player extends Saveable {
 
     public Player(Tile current_tile){
         super();
+        this.isAI = false;
         this.score = new Score();
         this.current_tile = current_tile;
         this.deck = new Deck();
@@ -34,6 +41,7 @@ public class Player extends Saveable {
 
     public Player(String id, Score score, Tile current_tile, Deck deck){
         super(id);
+        this.isAI = false;
         this.score = score;
         this.current_tile = current_tile;
         this.deck = deck;
