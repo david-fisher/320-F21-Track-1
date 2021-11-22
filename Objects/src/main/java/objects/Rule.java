@@ -1,53 +1,44 @@
 package src.main.java.objects;
 
 public class Rule extends Saveable implements IRule {
-    private String rule; private int score; private String type; private RNG rng;
+	private String type; 
+    private int score;     
+    private RNG rng;
+    private Card card;
+    private Tile tile;
 
     public Rule(){
         super();
         this.score = 0;
         this.type = "";
-        this.rule = "";
         this.rng = new RNG();
     }
 
-    public Rule(String rule){
-    	super();
-        this.score = 0;
-        this.type = "";
-        this.rule = rule;
-        this.rng = new RNG();
-    }
-
-    public Rule(String rule, int score){
+    public Rule(int score){
     	super();
         this.score = score;
         this.type = "";
-        this.rule = rule;
         this.rng = new RNG();
     }
 
-    public Rule(String rule, int score, String type){
+    public Rule(int score, String type){
     	super();
         this.score = score;
         this.type = type;
-        this.rule = rule;
         this.rng = new RNG();
     }
 
-    public Rule(String rule, int score, String type, RNG rng){
+    public Rule(int score, String type, RNG rng){
     	super();
         this.score = score;
         this.type = type;
-        this.rule = rule;
         this.rng = rng;
     }
 
-    public Rule(String id, String rule, int score, String type, RNG rng){
+    public Rule(String id, int score, String type, RNG rng){
     	super(id);
         this.score = score;
         this.type = type;
-        this.rule = rule;
         this.rng = rng;
     }
 
@@ -67,14 +58,8 @@ public class Rule extends Saveable implements IRule {
         return this.score;
     }
 
-    public void update_rule(String new_rule, String new_type) {
-        this.rule = new_rule;
+    public void update_rule_type(String new_type) {
         this.type = new_type;
     }
 
-    public String to_string() {
-        // to-do
-        String str = "This rule is about " + this.rule;
-        return str;
-    }
 }
