@@ -74,8 +74,9 @@ public class playerSelect {
 
         Label numLabel = new Label("Player number: " + number);
         Label playerLabel = new Label("Please Type Players name here ");
+        Label AILabel = new Label("If player is AI");
         root.addRow(0, numLabel);
-        root.addRow(1, playerLabel);
+        root.addRow(1, playerLabel, new Label(), AILabel);
 
         // a list of input text field
         ArrayList<TextField> inputList = new ArrayList<>();
@@ -91,7 +92,7 @@ public class playerSelect {
 
         for (int i = 0; i < number; i++){
             Label label = new Label("Player" + String.valueOf(i + 1) + ":");
-            root.addRow(2 + i,label, checkBoxes.get(i), inputList.get(i));
+            root.addRow(2 + i,label, inputList.get(i), checkBoxes.get(i));
         }
 
         Button backButton = new Button("Back");
@@ -119,8 +120,10 @@ public class playerSelect {
             primaryStage.setScene(boardGrid.gamePlayUI.makeScene(primaryStage, nameList, boardTable));
         }));
 
-        root.addRow(root.getRowCount(), backButton, submitButton);
+        root.addRow(root.getRowCount(), backButton, new Label(), submitButton);
         root.setAlignment(Pos.CENTER);
+        root.setVgap(5);
+        root.setHgap(10);
         root.setPrefSize(500, 300);
 
         return root;
