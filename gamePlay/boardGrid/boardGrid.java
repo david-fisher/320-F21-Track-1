@@ -1,5 +1,8 @@
 package boardGrid;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
 import java.util.ArrayList;
@@ -89,6 +92,21 @@ public class boardGrid {
         }
     }
 
+    // get cell based on the coordinate
+    public static StackPane getBoardCell(int x, int y){
+        Node node = null;
+        ObservableList<Node> childerns = board.getChildren();
+
+        for (Node n : childerns){
+            if (board.getRowIndex(n) == x && board.getColumnIndex(n) == y){
+                node = n;
+                break;
+            }
+        }
+
+        return (node instanceof StackPane)? (StackPane) node : null;
+    }
+
     public static HBox createScore(){
         return currentScore.scoreBox();
     }
@@ -137,6 +155,10 @@ public class boardGrid {
         }
 
         loadGrid(stackToCell(cellTable));   // load from a 2d array
+
+        // testing update board cell
+        StackPane a = getBoardCell(3, 3);
+        a.getChildren().remove(2);
 
         return board;
     }
