@@ -10,11 +10,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import loadSave.exitGame;
@@ -85,10 +83,19 @@ public class gamePlayUI {
         mainScene.setLeft(leftStack);
         mainScene.setRight(rightStack);
         mainScene.setTop(topStack);
+        mainScene.setBackground(
+                new Background(
+                        new BackgroundFill(Helper.backgroundStyle(), null, null)
+                )
+        );
 
-        scrollView.setPrefSize(1200, 600);
+        scrollView.setFitToHeight(true);
+        scrollView.setFitToWidth(true);
         scrollView.setContent(mainScene);
 
-        return new Scene(scrollView);
+        Scene scene = new Scene(scrollView);
+        scene.getStylesheets().add("boardGrid/style.css");
+
+        return scene;
     }
 }

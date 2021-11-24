@@ -5,6 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -98,6 +102,15 @@ public class Helper {
         Text t = new Text(s);
         t.setFont(Font.font("Arial Regular", FontWeight.NORMAL, FontPosture.ITALIC, 20));
         return t;
+    }
+
+    public static LinearGradient backgroundStyle() {
+        return new LinearGradient(
+                0, 1, 1, 1, true,
+                CycleMethod.NO_CYCLE,
+                new Stop(0, Color.web("#282C34FF")),
+                new Stop(1, Color.web("#21252BFF", 0.5))
+        );
     }
 
 

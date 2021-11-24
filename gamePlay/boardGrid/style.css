@@ -6,3 +6,7 @@
     -fx-background-radius: 20;
     -fx-padding: 5;
 }
+
+#transparentBackground {
+    -fx-background-color: transparent;
+}
