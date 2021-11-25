@@ -45,11 +45,7 @@ public class saveGame {
         view.setAlignment(Pos.CENTER);
         view.setPrefSize(500, 150);
         view.setBackground(
-                new Background(
-                        new BackgroundFill(
-                                Color.rgb(33, 37, 43), null, null
-                        )
-                )
+                Helpers.Helper.backgroundColor()
         );
 
         Scene scene = new Scene(view);

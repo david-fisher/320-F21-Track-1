@@ -58,6 +58,36 @@
     -fx-min-width: 50;
 }
 
+#input_back_button{
+    -fx-font: normal 15pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255);
+    -fx-background-color: #0d192c;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+    -fx-min-width: 30;
+}
+
+#input_play_button{
+    -fx-font: normal 15pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255);
+    -fx-background-color: #5670f0;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+    -fx-min-width: 30;
+}
+
+#pre_game_label{
+    -fx-font: normal 15pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255);
+}
+
+#pre_game_text{
+    -fx-font: normal 10pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255);
+}
+
 
 .combo-box .combo-box, .list-cell, .list-view{
     -fx-background-color: #282c34;

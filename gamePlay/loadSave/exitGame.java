@@ -56,11 +56,7 @@ public class exitGame {
         popOut.setPrefSize(500, 300);
 
         popOut.setBackground(
-                new Background(
-                        new BackgroundFill(
-                                Color.rgb(33, 37, 43), null, null
-                        )
-                )
+                Helpers.Helper.backgroundColor()
         );
 
         Scene scene = new Scene(popOut);

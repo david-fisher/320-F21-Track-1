@@ -82,6 +82,10 @@ public class playerSelect {
         Label numLabel = new Label("Player number: " + number);
         Label playerLabel = new Label("Please Type Players name here ");
         Label AILabel = new Label("If player is AI");
+        numLabel.setId("pre_game_label");
+        playerLabel.setId("pre_game_label");
+        AILabel.setId("pre_game_label");
+
         root.addRow(0, numLabel);
         root.addRow(1, playerLabel, new Label(), AILabel);
 
@@ -94,22 +98,30 @@ public class playerSelect {
         // a list of check boxes
         ArrayList<CheckBox> checkBoxes = new ArrayList<>();
         for (int i = 0; i < number; i++){
-            checkBoxes.add(new CheckBox("AI"));
+            CheckBox currentBox = new CheckBox("AI");
+            currentBox.setId("pre_game_text");
+            checkBoxes.add(currentBox);
         }
 
         for (int i = 0; i < number; i++){
             Label label = new Label("Player" + String.valueOf(i + 1) + ":");
+            label.setId("pre_game_text");
             root.addRow(2 + i,label, inputList.get(i), checkBoxes.get(i));
         }
 
         Button backButton = new Button("Back");
+        backButton.setId("input_back_button");
 
         // when user click <back>
         backButton.setOnAction((event -> {
-            primaryStage.setScene(new Scene(makeScene(primaryStage, boardTable)));
+            playerSelect.setMaxPlayer(6);
+            Scene s = new Scene(makeScene(primaryStage, boardTable));
+            s.getStylesheets().add("boardGrid/style.css");
+            primaryStage.setScene(s);
         }));
 
         Button submitButton = new Button("Play");
+        submitButton.setId("input_play_button");
 
         // when user click <play>
         submitButton.setOnAction((event -> {
@@ -131,7 +143,8 @@ public class playerSelect {
         root.setAlignment(Pos.CENTER);
         root.setVgap(5);
         root.setHgap(10);
-        root.setPrefSize(500, 300);
+        root.setPrefSize(600, 300);
+        root.setBackground(Helpers.Helper.backgroundColor());
 
         return root;
     }
@@ -150,7 +163,10 @@ public class playerSelect {
         // forwarding: after number was selected
         nextButton.setOnAction((event -> {
 
-            primaryStage.setScene(new Scene(inputName(primaryStage, boardTable)));
+            Scene newScene = new Scene(inputName(primaryStage, boardTable));
+            newScene.getStylesheets().add("boardGrid/style.css");
+
+            primaryStage.setScene(newScene);
             tutorial = needTutorial.isSelected();   // update if tutorial mode is selected
         }));
 
@@ -162,11 +178,7 @@ public class playerSelect {
         numSelect.setAlignment(Pos.CENTER);
         numSelect.setMinHeight(300);
         numSelect.setBackground(
-                new Background(
-                        new BackgroundFill(
-                                Color.rgb(33, 37, 43), null, null
-                        )
-                )
+                Helpers.Helper.backgroundColor()
         );
         return numSelect;
     }

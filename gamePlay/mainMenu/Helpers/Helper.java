@@ -4,6 +4,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -110,6 +112,14 @@ public class Helper {
                 CycleMethod.NO_CYCLE,
                 new Stop(0, Color.web("#282C34FF")),
                 new Stop(1, Color.web("#21252BFF", 0.5))
+        );
+    }
+
+    public static Background backgroundColor(){
+        return new Background(
+                new BackgroundFill(
+                        Color.rgb(33, 37, 43), null, null
+                )
         );
     }
 
