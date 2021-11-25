@@ -53,7 +53,8 @@ public class exitGame {
         popOut.getChildren().addAll(confirmBox, allButton);
         popOut.setAlignment(Pos.CENTER);
 
-        popOut.setPrefSize(500, 300);
+        double popOutWidth = 500; double popOutHeight = 300;
+        popOut.setPrefSize(popOutWidth, popOutHeight);
 
         popOut.setBackground(
                 Helpers.Helper.backgroundColor()
@@ -66,6 +67,9 @@ public class exitGame {
         popStage.initStyle(StageStyle.TRANSPARENT);
         popStage.initModality(Modality.APPLICATION_MODAL);
         popStage.setResizable(false);
+        double a = popOut.getWidth();
+        popStage.setX( primaryStage.getX() + (primaryStage.getWidth() / 2) - (popOutWidth / 2));
+        popStage.setY( primaryStage.getY() + (primaryStage.getHeight() / 2) - (popOutHeight / 2));
         popStage.show();
     }
 }

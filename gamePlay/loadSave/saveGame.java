@@ -43,7 +43,9 @@ public class saveGame {
         StackPane view = new StackPane();
         view.getChildren().add(alignmentSettler);
         view.setAlignment(Pos.CENTER);
-        view.setPrefSize(500, 150);
+
+        double viewWidth = 500; double viewHeight = 150;
+        view.setPrefSize(viewWidth, viewHeight);
         view.setBackground(
                 Helpers.Helper.backgroundColor()
         );
@@ -54,6 +56,8 @@ public class saveGame {
         popStage.initStyle(StageStyle.TRANSPARENT);
         popStage.initModality(Modality.APPLICATION_MODAL);
         popStage.setResizable(false);
+        popStage.setX( primaryStage.getX() + (primaryStage.getWidth() / 2) - (viewWidth / 2));
+        popStage.setY( primaryStage.getY() + (primaryStage.getHeight() / 2) - (viewHeight / 2));
 
         popStage.show();
     }

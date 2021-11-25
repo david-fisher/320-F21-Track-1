@@ -15,6 +15,7 @@ public class playerSelect {
     private static ArrayList<Boolean> AIList;
     private static Boolean tutorial;
     private static int maxSize = 5;     // a preset bound index
+    private static final double inputRootWidth = 900; private static final double inputRootHeight = 450;
 
     public playerSelect(){
         number = 0;
@@ -74,7 +75,7 @@ public class playerSelect {
     }
 
     // return the player number input box
-    private static GridPane inputName(Stage primaryStage, ArrayList<ArrayList<StackPane>> boardTable){
+    private static ScrollPane inputName(Stage primaryStage, ArrayList<ArrayList<StackPane>> boardTable){
         GridPane root = new GridPane();
         nameList = new ArrayList<>();
         AIList = new ArrayList<>();
@@ -117,6 +118,9 @@ public class playerSelect {
             playerSelect.setMaxPlayer(6);
             Scene s = new Scene(makeScene(primaryStage, boardTable));
             s.getStylesheets().add("boardGrid/style.css");
+
+            primaryStage.setX( primaryStage.getX());
+            primaryStage.setY( primaryStage.getY());
             primaryStage.setScene(s);
         }));
 
@@ -136,6 +140,8 @@ public class playerSelect {
                 System.out.println(inputList.get(i).getText());
                 System.out.print(AIList.get(i)? " I want AI" : " No AI");
             }
+
+            primaryStage.centerOnScreen();
             primaryStage.setScene(boardGrid.gamePlayUI.makeScene(primaryStage, nameList, boardTable));
         }));
 
@@ -143,14 +149,17 @@ public class playerSelect {
         root.setAlignment(Pos.CENTER);
         root.setVgap(5);
         root.setHgap(10);
-        root.setPrefSize(600, 300);
+        root.setPrefSize(inputRootWidth, inputRootHeight);
         root.setBackground(Helpers.Helper.backgroundColor());
 
-        return root;
+        ScrollPane scrollShow = new ScrollPane(root);
+        scrollShow.setFitToHeight(true); scrollShow.setFitToWidth(true);
+
+        return scrollShow;
     }
 
     // scene: init the player number dropdown menu -> input player names
-    public static HBox makeScene(Stage primaryStage, ArrayList<ArrayList<StackPane>> boardTable){
+    public static ScrollPane makeScene(Stage primaryStage, ArrayList<ArrayList<StackPane>> boardTable){
         tutorial = false;
         RadioButton needTutorial = new RadioButton("New to the game? Try tutorial");
         needTutorial.setId("tutorial_text");
@@ -162,12 +171,15 @@ public class playerSelect {
 
         // forwarding: after number was selected
         nextButton.setOnAction((event -> {
+            tutorial = needTutorial.isSelected();   // update if tutorial mode is selected
 
             Scene newScene = new Scene(inputName(primaryStage, boardTable));
             newScene.getStylesheets().add("boardGrid/style.css");
 
+            primaryStage.setX( primaryStage.getX());
+            primaryStage.setY( primaryStage.getY());
             primaryStage.setScene(newScene);
-            tutorial = needTutorial.isSelected();   // update if tutorial mode is selected
+
         }));
 
         VBox tutorialWithButton = new VBox(10);
@@ -176,11 +188,14 @@ public class playerSelect {
 
         HBox numSelect = new HBox(dropDownMenu, tutorialWithButton);
         numSelect.setAlignment(Pos.CENTER);
-        numSelect.setMinHeight(300);
+        numSelect.setPrefSize(inputRootWidth, inputRootHeight);
         numSelect.setBackground(
                 Helpers.Helper.backgroundColor()
         );
-        return numSelect;
+
+        ScrollPane scrollShow = new ScrollPane(numSelect);
+        scrollShow.setFitToHeight(true); scrollShow.setFitToWidth(true);
+        return scrollShow;
     }
 
 }

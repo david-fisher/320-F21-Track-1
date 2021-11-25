@@ -59,9 +59,9 @@
 }
 
 #input_back_button{
-    -fx-font: normal 15pt "Helvetica";
+    -fx-font: normal 20pt "Helvetica";
     -fx-text-fill: rgba(255, 255, 255);
-    -fx-background-color: #0d192c;
+    -fx-background-color: #545963;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
     -fx-padding: 5;
@@ -69,7 +69,7 @@
 }
 
 #input_play_button{
-    -fx-font: normal 15pt "Helvetica";
+    -fx-font: normal 20pt "Helvetica";
     -fx-text-fill: rgba(255, 255, 255);
     -fx-background-color: #5670f0;
     -fx-border-radius: 20;
@@ -79,12 +79,12 @@
 }
 
 #pre_game_label{
-    -fx-font: normal 15pt "Helvetica";
+    -fx-font: bold 17pt "Helvetica";
     -fx-text-fill: rgba(255, 255, 255);
 }
 
 #pre_game_text{
-    -fx-font: normal 10pt "Helvetica";
+    -fx-font: normal 15pt "Helvetica";
     -fx-text-fill: rgba(255, 255, 255);
 }
 
@@ -97,6 +97,18 @@
 .combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover{
     -fx-background-color: #454545;
     -fx-text-fill: #7fcbfb;
+}
+
+.text-field{
+    -fx-font: normal 15pt "Helvetica";
+    -fx-text-fill: white;
+    -fx-background-color: #463c3c;
+}
+
+.text-field:focused{
+    -fx-background-color: #454545;
+    -fx-font: normal 15pt "Helvetica";
+    -fx-text-fill: white;
 }
 
 #transparentBackground {
