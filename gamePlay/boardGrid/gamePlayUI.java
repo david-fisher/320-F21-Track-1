@@ -1,27 +1,16 @@
 package boardGrid;
 
 import Helpers.Helper;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-
-import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import loadSave.exitGame;
 import loadSave.saveGame;
-import mainMenu.Main;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class gamePlayUI {
 
@@ -30,12 +19,12 @@ public class gamePlayUI {
         ScrollPane scrollView = new ScrollPane();
         BorderPane mainScene = new BorderPane();
         VBox leftStack = new VBox(150);
-        VBox rightStack = new VBox();
+        VBox rightStack = new VBox(10);
         VBox topStack = new VBox();
 
 
         // right
-        Button saveButton = Helper.ButtonMaker("Save", null);
+        Button saveButton = new Button("Save");
         saveButton.setOnAction(event -> {
             saveGame.popSave(primaryStage);
         });
@@ -56,12 +45,16 @@ public class gamePlayUI {
 //                }
 //            }
 //        });
-        Button editButton = Helper.ButtonMaker("Edit", null);
+        Button editButton = new Button("Edit");
         
-        Button exitButton = Helper.ButtonMaker("Exit", null);
+        Button exitButton = new Button("Exit");
         exitButton.setOnAction((event -> {
             exitGame.popExit(primaryStage);
         }));
+
+        saveButton.setId("board_side_button");
+        editButton.setId("board_side_button");
+        exitButton.setId("board_side_button");
 
 
         rightStack.getChildren().addAll(saveButton, editButton, exitButton);

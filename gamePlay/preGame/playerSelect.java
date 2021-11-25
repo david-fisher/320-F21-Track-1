@@ -3,9 +3,8 @@ package preGame;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -14,13 +13,17 @@ public class playerSelect {
     private static Integer number;  // total number of players
     private static ArrayList<String> nameList;    // save a list of play names
     private static ArrayList<Boolean> AIList;
+    private static Boolean tutorial;
     private static int maxSize = 5;     // a preset bound index
 
     public playerSelect(){
         number = 0;
         nameList = new ArrayList<>();
         AIList = new ArrayList<Boolean>();
+        tutorial = false;
     }
+
+    public boolean isTutorial() { return tutorial; }
 
     // update max player number
     public static void setMaxPlayer(int num){
@@ -36,15 +39,19 @@ public class playerSelect {
         cBox.setEditable(true);
         cBox.getItems().addAll(1, 2, 3, 4, 5);
 
+
         // when drop down menu is clicked do:
         cBox.setOnAction((event -> {
             Object n = cBox.getSelectionModel().getSelectedItem();  // might be user input
 
             if (n != null){
-                int num = 0;
+                int num = 1;
                 try{
                     String nString = n.toString();
-                    num = Integer.parseInt(nString);    // string input into integer
+                    int currentNum = Integer.parseInt(nString);   // string input into integer
+                    if (currentNum > 0){
+                        num = currentNum;
+                    }
                 }
                 catch (Exception e){
                     System.out.println(e.toString());
@@ -131,18 +138,36 @@ public class playerSelect {
 
     // scene: init the player number dropdown menu -> input player names
     public static HBox makeScene(Stage primaryStage, ArrayList<ArrayList<StackPane>> boardTable){
+        tutorial = false;
+        RadioButton needTutorial = new RadioButton("New to the game? Try tutorial");
+        needTutorial.setId("tutorial_text");
+
         HBox dropDownMenu = dropDown();
-        Button nextButton = Helpers.Helper.ButtonMaker("Next", null);
+
+        Button nextButton = new Button("Next");
+        nextButton.setId("next_button");
 
         // forwarding: after number was selected
         nextButton.setOnAction((event -> {
 
             primaryStage.setScene(new Scene(inputName(primaryStage, boardTable)));
+            tutorial = needTutorial.isSelected();   // update if tutorial mode is selected
         }));
 
-        HBox numSelect = new HBox(50, dropDownMenu, nextButton);
+        VBox tutorialWithButton = new VBox(10);
+        tutorialWithButton.getChildren().addAll(needTutorial, nextButton);
+        tutorialWithButton.setAlignment(Pos.CENTER);
+
+        HBox numSelect = new HBox(dropDownMenu, tutorialWithButton);
         numSelect.setAlignment(Pos.CENTER);
         numSelect.setMinHeight(300);
+        numSelect.setBackground(
+                new Background(
+                        new BackgroundFill(
+                                Color.rgb(33, 37, 43), null, null
+                        )
+                )
+        );
         return numSelect;
     }
 

@@ -11,6 +11,7 @@ public class preGame{
     public static Scene makeScene(Stage primaryStage){
         playerSelect.setMaxPlayer(6);
         Scene scene = new Scene(playerSelect.makeScene(primaryStage, generateTestCell()));
+        scene.getStylesheets().add("boardGrid/style.css");
         return scene;
     }
 

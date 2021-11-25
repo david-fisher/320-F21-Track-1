@@ -5,10 +5,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class exitGame {
 
@@ -17,6 +21,8 @@ public class exitGame {
         Stage popStage = new Stage();
         Label confirm = new Label("Confirm Exit");
         Label conFirmMessage = new Label("Are you sure you want to exit?");
+        confirm.setId("exit_text");
+        conFirmMessage.setId("exit_text");
 
         Button exitButton = new Button("Exit");
         Button cancelButton = new Button("Cancel");
@@ -30,6 +36,9 @@ public class exitGame {
         cancelButton.setOnAction((event -> {
             popStage.close();
         }));
+
+        exitButton.setId("resume_button");
+        cancelButton.setId("save_button");
 
         HBox allButton = new HBox(30);
         allButton.getChildren().addAll(exitButton, cancelButton);
@@ -46,7 +55,19 @@ public class exitGame {
 
         popOut.setPrefSize(500, 300);
 
-        popStage.setScene(new Scene(popOut));
+        popOut.setBackground(
+                new Background(
+                        new BackgroundFill(
+                                Color.rgb(33, 37, 43), null, null
+                        )
+                )
+        );
+
+        Scene scene = new Scene(popOut);
+        scene.getStylesheets().add("boardGrid/style.css");
+
+        popStage.setScene(scene);
+        popStage.initStyle(StageStyle.TRANSPARENT);
         popStage.initModality(Modality.APPLICATION_MODAL);
         popStage.setResizable(false);
         popStage.show();
