@@ -93,6 +93,7 @@ public class boardGrid {
     }
 
     // get cell based on the coordinate
+    //TODO: This is the function that I need to call in order to do the stackpane animation for dragging
     public static StackPane getBoardCell(int x, int y){
         Node node = null;
         ObservableList<Node> childerns = board.getChildren();
