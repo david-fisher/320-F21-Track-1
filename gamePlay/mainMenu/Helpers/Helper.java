@@ -123,5 +123,13 @@ public class Helper {
         );
     }
 
+    public static Background saveBackground(){
+        return new Background(
+                new BackgroundFill(
+                        Color.rgb(55, 55, 60), null, null
+                )
+        );
+    }
+
 
 }
