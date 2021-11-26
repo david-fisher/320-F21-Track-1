@@ -122,6 +122,7 @@ public class saveGameViewController {
 
     protected static Scene makeScene(Stage primaryStage){
 
+        // don't need to reload again if user is coming back from the cancel button
         if (tableLoaded) { return savedScene; }
 
         setTitle();
