@@ -132,7 +132,7 @@
 
 .text-field:focused{
     -fx-background-color: #454545;
-    -fx-font: normal 15pt "Helvetica";
+    -fx-font: normal 20pt "Helvetica";
     -fx-text-fill: white;
 }
 

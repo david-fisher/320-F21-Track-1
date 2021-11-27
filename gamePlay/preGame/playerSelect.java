@@ -97,17 +97,17 @@ public class playerSelect {
         }
 
         // a list of check boxes
-        ArrayList<CheckBox> checkBoxes = new ArrayList<>();
+        ArrayList<selectSwitch> switches = new ArrayList<>();
         for (int i = 0; i < number; i++){
-            CheckBox currentBox = new CheckBox("AI");
-            currentBox.setId("pre_game_text");
-            checkBoxes.add(currentBox);
+            selectSwitch currentBox = new selectSwitch();
+            currentBox.setText("AI");
+            switches.add(currentBox);
         }
 
         for (int i = 0; i < number; i++){
             Label label = new Label("Player" + String.valueOf(i + 1) + ":");
             label.setId("pre_game_text");
-            root.addRow(2 + i,label, inputList.get(i), checkBoxes.get(i));
+            root.addRow(2 + i,label, inputList.get(i), switches.get(i));
         }
 
         Button backButton = new Button("Back");
@@ -132,8 +132,8 @@ public class playerSelect {
             for (int i = 0; i < inputList.size(); i++){
                 String currentName = inputList.get(i).getText();
                 nameList.add(currentName.isEmpty()? null : currentName);
-                boolean a = checkBoxes.get(i).isSelected();
-                AIList.add(checkBoxes.get(i).isSelected());
+                boolean a = switches.get(i).switchState();
+                AIList.add(switches.get(i).switchState());
             }
 
             for (int i = 0; i < inputList.size(); i++) {     // test printing call
@@ -161,8 +161,10 @@ public class playerSelect {
     // scene: init the player number dropdown menu -> input player names
     public static ScrollPane makeScene(Stage primaryStage, ArrayList<ArrayList<StackPane>> boardTable){
         tutorial = false;
-        RadioButton needTutorial = new RadioButton("New to the game? Try tutorial");
-        needTutorial.setId("tutorial_text");
+
+        selectSwitch needTutorial = new selectSwitch();
+        needTutorial.setText("Tutorial");
+
 
         HBox dropDownMenu = dropDown();
 
@@ -171,7 +173,7 @@ public class playerSelect {
 
         // forwarding: after number was selected
         nextButton.setOnAction((event -> {
-            tutorial = needTutorial.isSelected();   // update if tutorial mode is selected
+            tutorial = needTutorial.switchState();   // update if tutorial mode is selected
 
             Scene newScene = new Scene(inputName(primaryStage, boardTable));
             newScene.getStylesheets().add("boardGrid/style.css");
