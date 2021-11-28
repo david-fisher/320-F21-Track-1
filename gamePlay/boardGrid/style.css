@@ -58,6 +58,16 @@
     -fx-min-width: 50;
 }
 
+#back_button{
+    -fx-font: normal 24pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255);
+    -fx-background-color: #545963;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+    -fx-min-width: 40;
+}
+
 #input_back_button{
     -fx-font: normal 20pt "Helvetica";
     -fx-text-fill: rgba(255, 255, 255);

@@ -3,7 +3,6 @@ package preGame;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -12,20 +11,21 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-import java.util.Stack;
-
 
 public class selectSwitch extends HBox{
-    private final Rectangle rectangle = new Rectangle(50, 28, Color.BLUE);
+    private final Rectangle rectangle = new Rectangle(50, 28);
     private final Button button = new Button();
     private StackPane theSwitch = new StackPane();
     private Label name = new Label("");
 
-    private String buttonStyleOff = "-fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.2), 0.1, 0.0, 0.0, 0.1); -fx-background-color: WHITE;";
-    private String buttonStyleOn = "-fx-effect: dropshadow(three-pass-box, rgba(86,112,240,0.2), 0.1, 0.0, 0.0, 0.1); -fx-background-color: #5670f0;";
+    private final String buttonStyleOff = "-fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.2), 0.1, 0.0, 0.0, 0.1); -fx-background-color: WHITE;";
+    private final String buttonStyleOn = "-fx-effect: dropshadow(three-pass-box, rgba(86,112,240,0.2), 0.1, 0.0, 0.0, 0.1); -fx-background-color: #e8edf0;";
 
-    private String nameStyleOn = "-fx-text-fill: rgba(255, 255, 255); -fx-font: normal 20pt \"Helvetica\"";
-    private String nameStyleOff = "-fx-text-fill: #545963; -fx-font: normal 20pt \"Helvetica\"";
+    private final String rectColorOff = "#37393d";
+    private final String rectColorOn = "#32ca56";
+
+    private final String nameStyleOn = "-fx-text-fill: rgba(255, 255, 255); -fx-font: normal 20pt \"Helvetica\"";
+    private final String nameStyleOff = "-fx-text-fill: #545963; -fx-font: normal 20pt \"Helvetica\"";
 
     private boolean state;
 
@@ -39,15 +39,9 @@ public class selectSwitch extends HBox{
         setSpacing(20);
         setMinSize(100, 15);
 
-        rectangle.maxWidth(30);
-        rectangle.minWidth(30);
-
-        rectangle.maxHeight(10);
-        rectangle.minHeight(10);
-
         rectangle.setArcHeight(rectangle.getHeight());
         rectangle.setArcWidth(rectangle.getHeight());
-        rectangle.setFill(Color.valueOf("#A1B0BA"));
+        rectangle.setFill(Color.web(rectColorOff));
         Double r = 1.0;
         button.setShape(new Circle(r));
 
@@ -66,7 +60,8 @@ public class selectSwitch extends HBox{
 
     public boolean switchState(){ return state;}
 
-    public selectSwitch() {
+    public selectSwitch(String labelName) {
+        setText(labelName);
         createLayout();
         EventHandler<Event> click = new EventHandler<Event>() {
 
@@ -74,13 +69,13 @@ public class selectSwitch extends HBox{
             public void handle(Event e) {
                 if (state) {
                     button.setStyle(buttonStyleOff);
-                    rectangle.setFill(Color.valueOf("#A1B0BA"));
+                    rectangle.setFill(Color.web(rectColorOff));
                     name.setStyle(nameStyleOff);
                     StackPane.setAlignment(button, Pos.CENTER_LEFT);
                     state = false;
                 } else {
                     button.setStyle(buttonStyleOn);
-                    rectangle.setFill(Color.valueOf("#7fcbfb"));
+                    rectangle.setFill(Color.web(rectColorOn));
                     name.setStyle(nameStyleOn);
                     StackPane.setAlignment(button, Pos.CENTER_RIGHT);
                     state = true;

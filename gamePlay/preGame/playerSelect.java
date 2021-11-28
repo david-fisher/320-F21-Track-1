@@ -1,13 +1,19 @@
 package preGame;
 
+import com.sun.tools.javac.Main;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class playerSelect {
     private static Integer number;  // total number of players
@@ -16,6 +22,8 @@ public class playerSelect {
     private static Boolean tutorial;
     private static int maxSize = 5;     // a preset bound index
     private static final double inputRootWidth = 900; private static final double inputRootHeight = 450;
+    private static Label warning;
+    private static boolean forward = false;
 
     public playerSelect(){
         number = 0;
@@ -32,13 +40,15 @@ public class playerSelect {
     }
 
     // return the dropDown menu
-    private static HBox dropDown(){
-        Label warning = new Label("Maximum player size is " + maxSize);
+    private static VBox dropDown(){
+        warning = new Label("Maximum player size is " + maxSize);
+        warning.setId("pre_game_label");
         warning.setVisible(false);
 
         ComboBox<Integer> cBox = new ComboBox<>();
         cBox.setEditable(true);
         cBox.getItems().addAll(1, 2, 3, 4, 5);
+        cBox.setMaxSize(150, 50);
 
 
         // when drop down menu is clicked do:
@@ -55,21 +65,29 @@ public class playerSelect {
                     }
                 }
                 catch (Exception e){
+                    forward = false;
+                    warning.setText("Please enter an integer");
+                    warning.setVisible(true);
                     System.out.println(e.toString());
+                    return;
                 }
                 if (num > maxSize){
+                    forward = false;
+                    warning.setText("Maximum player size is " + maxSize);
                     warning.setVisible(true);   // show warningL: over the maximum number
                     return;
                 }
 
                 number = num;
+                warning.setVisible(false);
+                forward = true;
                 System.out.println("Player number: " + number.toString());
             }
             else{
                 System.out.println("Loading Error: Cannot read from ComboBox");
             }
         }));
-        HBox dropDownMenu = new HBox(cBox, warning);
+        VBox dropDownMenu = new VBox(cBox, warning);
         dropDownMenu.setAlignment(Pos.CENTER);
         return dropDownMenu;
     }
@@ -99,8 +117,7 @@ public class playerSelect {
         // a list of check boxes
         ArrayList<selectSwitch> switches = new ArrayList<>();
         for (int i = 0; i < number; i++){
-            selectSwitch currentBox = new selectSwitch();
-            currentBox.setText("AI");
+            selectSwitch currentBox = new selectSwitch("AI");
             switches.add(currentBox);
         }
 
@@ -129,6 +146,9 @@ public class playerSelect {
 
         // when user click <play>
         submitButton.setOnAction((event -> {
+
+            warning.setVisible(false);
+
             for (int i = 0; i < inputList.size(); i++){
                 String currentName = inputList.get(i).getText();
                 nameList.add(currentName.isEmpty()? null : currentName);
@@ -162,17 +182,23 @@ public class playerSelect {
     public static ScrollPane makeScene(Stage primaryStage, ArrayList<ArrayList<StackPane>> boardTable){
         tutorial = false;
 
-        selectSwitch needTutorial = new selectSwitch();
-        needTutorial.setText("Tutorial");
+        selectSwitch needTutorial = new selectSwitch("Tutorial");
 
-
-        HBox dropDownMenu = dropDown();
+        VBox dropDownMenu = dropDown();
 
         Button nextButton = new Button("Next");
+        Button backButton = new Button("Back");
         nextButton.setId("next_button");
+        backButton.setId("back_button");
 
         // forwarding: after number was selected
         nextButton.setOnAction((event -> {
+
+            if (!forward) {     // over the maximum limit
+                warning.setVisible(true);
+                return;
+            }
+
             tutorial = needTutorial.switchState();   // update if tutorial mode is selected
 
             Scene newScene = new Scene(inputName(primaryStage, boardTable));
@@ -184,11 +210,25 @@ public class playerSelect {
 
         }));
 
-        VBox tutorialWithButton = new VBox(10);
-        tutorialWithButton.getChildren().addAll(needTutorial, nextButton);
+        // back to previous page
+        backButton.setOnAction((event -> {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PlayGameFXML.fxml")));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+        }));
+
+        HBox buttonBox = new HBox(30, backButton, nextButton);
+        VBox tutorialWithButton = new VBox(30);
+        tutorialWithButton.getChildren().addAll(needTutorial, buttonBox);
         tutorialWithButton.setAlignment(Pos.CENTER);
 
-        HBox numSelect = new HBox(dropDownMenu, tutorialWithButton);
+        HBox numSelect = new HBox(80, dropDownMenu, tutorialWithButton);
         numSelect.setAlignment(Pos.CENTER);
         numSelect.setPrefSize(inputRootWidth, inputRootHeight);
         numSelect.setBackground(
