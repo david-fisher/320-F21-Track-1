@@ -215,7 +215,7 @@ public class playerSelect {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Parent root = null;
             try {
-                root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PlayGameFXML.fxml")));
+                root = FXMLLoader.load(Objects.requireNonNull(mainMenu.Main.class.getResource("PlayGameFXML.fxml")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
