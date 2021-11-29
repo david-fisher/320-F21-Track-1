@@ -349,7 +349,10 @@ public void rightClick_StackPane(StackPane sp, boardGrid root){
          
         //Show open file dialog
         File file = fileChooser.showOpenDialog(null);
-                  
+        //Store image path into sp
+        //Can be retrieve using sp.getUserData()
+        String imgPath = file.getAbsolutePath();
+        if(imgPath!=null){sp.setUserData(imgPath);}
         try {
             BufferedImage bufferedImage = ImageIO.read(file);
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
