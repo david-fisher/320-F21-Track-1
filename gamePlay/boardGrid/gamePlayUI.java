@@ -45,7 +45,7 @@ public class gamePlayUI {
 //                }
 //            }
 //        });
-        Button editButton = new Button("Edit");
+
         
         Button exitButton = new Button("Exit");
         exitButton.setOnAction((event -> {
@@ -53,11 +53,11 @@ public class gamePlayUI {
         }));
 
         saveButton.setId("board_side_button");
-        editButton.setId("board_side_button");
+
         exitButton.setId("board_side_button");
 
 
-        rightStack.getChildren().addAll(saveButton, editButton, exitButton);
+        rightStack.getChildren().addAll(saveButton, exitButton);
 
 
         // board
