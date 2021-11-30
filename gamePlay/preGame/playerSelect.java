@@ -21,6 +21,7 @@ public class playerSelect {
     private static ArrayList<Boolean> AIList;
     private static Boolean tutorial;
     private static int maxSize = 5;     // a preset bound index
+    private static int maxAI = maxSize - 1;
     private static final double inputRootWidth = 900; private static final double inputRootHeight = 450;
     private static Label warning;
     private static boolean forward = false;
@@ -37,6 +38,7 @@ public class playerSelect {
     // update max player number
     public static void setMaxPlayer(int num){
         maxSize = num;
+        maxAI = maxSize - 1;
     }
 
     // return the dropDown menu
