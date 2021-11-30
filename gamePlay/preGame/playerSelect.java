@@ -1,14 +1,15 @@
 package preGame;
 
-import com.sun.tools.javac.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class playerSelect {
     private static final double inputRootWidth = 900; private static final double inputRootHeight = 450;
     private static Label warning;
     private static boolean forward = false;
+    private static ArrayList<selectSwitch> aiSwitches = new ArrayList<>();
 
     public playerSelect(){
         number = 0;
@@ -64,6 +66,7 @@ public class playerSelect {
                     int currentNum = Integer.parseInt(nString);   // string input into integer
                     if (currentNum > 0){
                         num = currentNum;
+                        maxAI = num - 1;
                     }
                 }
                 catch (Exception e){
@@ -94,6 +97,19 @@ public class playerSelect {
         return dropDownMenu;
     }
 
+    // get total number of selected ai
+    protected static int totalSelectedAI(){
+        int sum = 0;
+        for (selectSwitch aiSwitch : aiSwitches) {
+            if (aiSwitch.switchState()) {
+                sum++;
+            }
+        }
+        return sum;
+    }
+
+    protected static int getMaxAI() { return maxAI; }
+
     // return the player number input box
     private static ScrollPane inputName(Stage primaryStage, ArrayList<ArrayList<StackPane>> boardTable){
         GridPane root = new GridPane();
@@ -117,16 +133,16 @@ public class playerSelect {
         }
 
         // a list of check boxes
-        ArrayList<selectSwitch> switches = new ArrayList<>();
         for (int i = 0; i < number; i++){
             selectSwitch currentBox = new selectSwitch("AI");
-            switches.add(currentBox);
+            currentBox.setAsAI();
+            aiSwitches.add(currentBox);
         }
 
         for (int i = 0; i < number; i++){
             Label label = new Label("Player" + String.valueOf(i + 1) + ":");
             label.setId("pre_game_text");
-            root.addRow(2 + i,label, inputList.get(i), switches.get(i));
+            root.addRow(2 + i,label, inputList.get(i), aiSwitches.get(i));
         }
 
         Button backButton = new Button("Back");
@@ -154,8 +170,8 @@ public class playerSelect {
             for (int i = 0; i < inputList.size(); i++){
                 String currentName = inputList.get(i).getText();
                 nameList.add(currentName.isEmpty()? null : currentName);
-                boolean a = switches.get(i).switchState();
-                AIList.add(switches.get(i).switchState());
+                boolean a = aiSwitches.get(i).switchState();
+                AIList.add(aiSwitches.get(i).switchState());
             }
 
             for (int i = 0; i < inputList.size(); i++) {     // test printing call

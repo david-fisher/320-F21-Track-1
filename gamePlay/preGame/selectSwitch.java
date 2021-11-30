@@ -11,7 +11,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-
+/*
+    the maximum number of player for right now is 6
+    and maximum of AI the user can take is (selected number) - 1
+ */
 public class selectSwitch extends HBox{
     private final Rectangle rectangle = new Rectangle(50, 28);
     private final Button button = new Button();
@@ -28,6 +31,10 @@ public class selectSwitch extends HBox{
     private final String nameStyleOff = "-fx-text-fill: #545963; -fx-font: normal 20pt \"Helvetica\"";
 
     private boolean state;
+
+    private boolean isAISwitch = false;
+
+    public void setAsAI(){ isAISwitch = true; }
 
     private void createLayout() {
 
@@ -67,6 +74,14 @@ public class selectSwitch extends HBox{
 
             @Override
             public void handle(Event e) {
+                if (isAISwitch){
+                    int totalSofar = playerSelect.totalSelectedAI();
+                    int maxAI = playerSelect.getMaxAI();
+                    if (totalSofar >= maxAI && !state){
+                        return;
+                    }
+                }
+
                 if (state) {
                     button.setStyle(buttonStyleOff);
                     rectangle.setFill(Color.web(rectColorOff));
