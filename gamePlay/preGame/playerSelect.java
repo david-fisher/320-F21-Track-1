@@ -24,7 +24,7 @@ public class playerSelect {
     private static int maxSize = 5;     // a preset bound index
     private static int maxAI = maxSize - 1;
     private static final double inputRootWidth = 900; private static final double inputRootHeight = 450;
-    private static Label warning;
+    private static Label warn;
     private static boolean forward = false;
     private static ArrayList<selectSwitch> aiSwitches = new ArrayList<>();
 
@@ -45,9 +45,9 @@ public class playerSelect {
 
     // return the dropDown menu
     private static VBox dropDown(){
-        warning = new Label("Maximum player size is " + maxSize);
-        warning.setId("pre_game_label");
-        warning.setVisible(false);
+        warn = new Label("Maximum player size is " + maxSize);
+        warn.setId("pre_game_label");
+        warn.setVisible(false);
 
         ComboBox<Integer> cBox = new ComboBox<>();
         cBox.setEditable(true);
@@ -71,20 +71,20 @@ public class playerSelect {
                 }
                 catch (Exception e){
                     forward = false;
-                    warning.setText("Please enter an integer");
-                    warning.setVisible(true);
+                    warn.setText("Please enter an integer");
+                    warn.setVisible(true);
                     System.out.println(e.toString());
                     return;
                 }
                 if (num > maxSize){
                     forward = false;
-                    warning.setText("Maximum player size is " + maxSize);
-                    warning.setVisible(true);   // show warningL: over the maximum number
+                    warn.setText("Maximum player size is " + maxSize);
+                    warn.setVisible(true);   // show warningL: over the maximum number
                     return;
                 }
 
                 number = num;
-                warning.setVisible(false);
+                warn.setVisible(false);
                 forward = true;
                 System.out.println("Player number: " + number.toString());
             }
@@ -92,7 +92,7 @@ public class playerSelect {
                 System.out.println("Loading Error: Cannot read from ComboBox");
             }
         }));
-        VBox dropDownMenu = new VBox(cBox, warning);
+        VBox dropDownMenu = new VBox(cBox, warn);
         dropDownMenu.setAlignment(Pos.CENTER);
         return dropDownMenu;
     }
@@ -165,7 +165,7 @@ public class playerSelect {
         // when user click <play>
         submitButton.setOnAction((event -> {
 
-            warning.setVisible(false);
+            warn.setVisible(false);
 
             for (int i = 0; i < inputList.size(); i++){
                 String currentName = inputList.get(i).getText();
@@ -213,7 +213,8 @@ public class playerSelect {
         nextButton.setOnAction((event -> {
 
             if (!forward) {     // over the maximum limit
-                warning.setVisible(true);
+                warn.setVisible(true);
+                warning.warningPop("Please insert a proper number");
                 return;
             }
 
