@@ -1,8 +1,116 @@
 #main-menu-button {
     -fx-font: bold 30pt "Helvetica";
-    -fx-text-fill: #000000;
-    -fx-background-color: #A1B0BA;
+    -fx-text-fill: rgba(255, 255, 255, 0.75);
+    -fx-background-color: #5670f0;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
     -fx-padding: 5;
+}
+
+#board_side_button{
+    -fx-font: bold 25pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255, 0.75);
+    -fx-background-color: #5670f0;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+}
+
+#resume_button{
+    -fx-font: normal 25pt "Helvetica";
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-background-color: #5689f0;
+    -fx-max-height: 30;
+    -fx-min-width: 100;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
+#save_button{
+    -fx-font: normal 25pt "Helvetica";
+    -fx-text-fill: rgb(233, 231, 233);
+    -fx-background-color: #3d424b;
+    -fx-max-height: 30;
+    -fx-min-width: 120;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
+#exit_text{
+    -fx-font: normal 20pt "Helvetica";
+    -fx-text-fill: rgb(255, 255, 255);
+}
+
+#tutorial_text{
+    -fx-font: normal 20pt "Helvetica";
+    -fx-text-fill: rgb(255, 255, 255);
+}
+
+#next_button{
+    -fx-font: normal 25pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255);
+    -fx-background-color: #5670f0;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+    -fx-min-width: 50;
+}
+
+#input_back_button{
+    -fx-font: normal 20pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255);
+    -fx-background-color: #545963;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+    -fx-min-width: 30;
+}
+
+#input_play_button{
+    -fx-font: normal 20pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255);
+    -fx-background-color: #5670f0;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+    -fx-min-width: 30;
+}
+
+#pre_game_label{
+    -fx-font: bold 17pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255);
+}
+
+#pre_game_text{
+    -fx-font: normal 15pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255);
+}
+
+
+.combo-box .combo-box, .list-cell, .list-view{
+    -fx-background-color: #282c34;
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover{
+    -fx-background-color: #454545;
+    -fx-text-fill: #7fcbfb;
+}
+
+.text-field{
+    -fx-font: normal 15pt "Helvetica";
+    -fx-text-fill: white;
+    -fx-background-color: #463c3c;
+}
+
+.text-field:focused{
+    -fx-background-color: #454545;
+    -fx-font: normal 15pt "Helvetica";
+    -fx-text-fill: white;
+}
+
+#transparentBackground {
+    -fx-background-color: transparent;
 }
