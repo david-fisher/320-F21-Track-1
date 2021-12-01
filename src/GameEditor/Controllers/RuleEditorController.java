@@ -3,7 +3,9 @@ package GameEditor.Controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -57,6 +59,7 @@ public class RuleEditorController {
     private String[] deleteButtons = { "d0", "d1", "d2", "d3", "d4" };
     private double orgSceneX, orgSceneY;
     private boolean turnRuleClicked = false;
+    private Set<TextFlow> draggedRules = new HashSet<TextFlow>();
 
 
     @FXML
@@ -95,7 +98,7 @@ public class RuleEditorController {
     //drag and drop for the actions in the tile rule editor
     @FXML
     void dragAndDrop(TextFlow action)
-    {
+    {	
         action.setCursor(Cursor.HAND);
         action.setOnMousePressed((t) -> {
             orgSceneX = t.getSceneX();
@@ -111,7 +114,25 @@ public class RuleEditorController {
             c.setTranslateY(c.getTranslateY() + offsetY);
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
+            
         });
+        action.setOnMouseReleased((t) -> {
+        	if (orgSceneX >385 && orgSceneX<540 && orgSceneY > 155 && orgSceneY <260)
+    		{
+            	draggedRules.add(action);
+    		}
+        	else
+        	{
+        		draggedRules.remove(action);
+        	}
+        });
+    }
+    
+    @FXML
+    //prints the rules that are dragged into the box
+    void okButton()
+    {
+    	System.out.println(draggedRules);
     }
 
     //adding a drop down box for the turn rule editor
