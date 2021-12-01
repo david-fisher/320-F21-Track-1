@@ -2,10 +2,16 @@ package src.main.java.objects;
 
 public class Rule extends Saveable implements IRule {
 	private String type; 
+    
     private int score;     
     private RNG rng;
     private Card card;
     private Tile tile;
+
+    private int repeat;
+    private int constPoints;
+    private RNG variablePoints;
+    private boolean delta;
 
     public Rule(){
         super();
