@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="17888d9b-336f-4c48-bcd7-612c4e54769f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/gamePlay/mainMenu/saveGameViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/mainMenu/saveGameViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePlay/preGame/playerSelect.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/preGame/playerSelect.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/gamePlay/boardGrid/boardLauncher.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="mainMenu.Main" />
+      <module name="320-F21-Track-1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+</project>

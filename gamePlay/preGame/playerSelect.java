@@ -183,7 +183,7 @@ public class playerSelect {
             primaryStage.setScene(boardGrid.gamePlayUI.makeScene(primaryStage, nameList, boardTable));
         }));
 
-        root.addRow(root.getRowCount(), backButton, new Label(), submitButton);
+        root.addRow(getRowCount(root), backButton, new Label(), submitButton);
         root.setAlignment(Pos.CENTER);
         root.setVgap(5);
         root.setHgap(10);
@@ -194,6 +194,20 @@ public class playerSelect {
         scrollShow.setFitToHeight(true); scrollShow.setFitToWidth(true);
 
         return scrollShow;
+    }
+
+    private static int getRowCount(GridPane pane) {
+        int numRows = pane.getRowConstraints().size();
+        for (int i = 0; i < pane.getChildren().size(); i++) {
+            Node child = pane.getChildren().get(i);
+            if (child.isManaged()) {
+                Integer rowIndex = GridPane.getRowIndex(child);
+                if(rowIndex != null){
+                    numRows = Math.max(numRows,rowIndex+1);
+                }
+            }
+        }
+        return numRows;
     }
 
     // scene: init the player number dropdown menu -> input player names
