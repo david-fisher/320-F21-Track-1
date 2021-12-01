@@ -24,7 +24,7 @@ public class gamePlayUI {
 
 
         // right
-        Button saveButton = new Button("Save");
+        Button saveButton = new Button("Pause");
         saveButton.setOnAction(event -> {
             saveGame.popSave(primaryStage);
         });
