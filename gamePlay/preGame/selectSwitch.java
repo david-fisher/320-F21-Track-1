@@ -78,6 +78,7 @@ public class selectSwitch extends HBox{
                     int totalSofar = playerSelect.totalSelectedAI();
                     int maxAI = playerSelect.getMaxAI();
                     if (totalSofar >= maxAI && !state){
+                        warning.warningPop("You can't let all players as AI");
                         return;
                     }
                 }

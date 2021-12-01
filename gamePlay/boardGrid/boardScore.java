@@ -27,7 +27,7 @@ public class boardScore {
         // all possible color background for the scoreboard and turnboard are here
         colorList.add("-fx-background-color: coral; ");
         colorList.add("-fx-background-color: #3b8eba; ");
-        colorList.add("-fx-background-color: #95ba3b; ");
+        colorList.add("-fx-background-color:  #c796a0; ");
 
         int lastUsedNum = 0;
         for (String playerName : nameList) {
@@ -108,7 +108,7 @@ public class boardScore {
         }
 
         // TODO: fill color for score board bounds
-        this.scoreBoard.setSpacing(10);
+//        this.scoreBoard.setSpacing();
 
         return this.scoreBoard;
     }

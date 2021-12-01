@@ -49,6 +49,7 @@ public class saveGame {
         view.setBackground(
                 Helpers.Helper.backgroundColor()
         );
+        view.setStyle("-fx-padding: 20px;");
 
         Scene scene = new Scene(view);
         scene.getStylesheets().add("boardGrid/style.css");

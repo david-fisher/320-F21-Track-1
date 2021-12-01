@@ -59,6 +59,7 @@ public class exitGame {
         popOut.setBackground(
                 Helpers.Helper.backgroundColor()
         );
+        popOut.setStyle("-fx-padding: 20px;");
 
         Scene scene = new Scene(popOut);
         scene.getStylesheets().add("boardGrid/style.css");

@@ -110,8 +110,13 @@ public class Helper {
         return new LinearGradient(
                 0, 1, 1, 1, true,
                 CycleMethod.NO_CYCLE,
-                new Stop(0, Color.web("#282C34FF")),
-                new Stop(1, Color.web("#21252BFF", 0.5))
+                new Stop(0, Color.web(
+                        "#191919"
+                )),
+                new Stop(1, Color.web(
+                        "#031d55"
+                        , 0.5
+                ))
         );
     }
 

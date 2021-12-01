@@ -41,6 +41,7 @@
 #exit_text{
     -fx-font: normal 20pt "Helvetica";
     -fx-text-fill: rgb(255, 255, 255);
+    -fx-padding: 20px;
 }
 
 #tutorial_text{
@@ -206,4 +207,8 @@
 
 #transparentBackground {
     -fx-background-color: transparent;
+}
+
+#test_color{
+    -fx-background-color: #031d55
 }
