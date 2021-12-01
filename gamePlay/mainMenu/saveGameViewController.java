@@ -30,30 +30,26 @@ import java.util.Objects;
 public class saveGameViewController {
     private static TableView<Helper.Games> saveTable = new TableView<Helper.Games>();
     private static Label title = new Label("Saved Games");
-    private static Button cancelButton = Helper.ButtonMaker("Cancel", Font.font("Helvetica",
-            FontWeight.NORMAL,
-            FontPosture.REGULAR,
-            20)
-    );
+    private static Button cancelButton = new Button("Cancel");
+    private static boolean tableLoaded = false;
+    private static Scene savedScene;
 
 
     private static void setTitle(){
-        title.setFont(new Font("Helvetica", 20));
+        title.setId("saved_top_label");
     }
 
-    private static void createTable(){
+    private static void createTable(Stage primaryStage){
         // TODO update game structure
         Helper.Games[] data = Helper.makeGames();
         final ObservableList<Helper.Games> existingGame =
                 FXCollections.observableArrayList();
         Collections.addAll(existingGame, data); // add games
 
-        // saving-game pop-out interface
-        saveTable.setId("saveTable");
 
         // game name column
         TableColumn<Helper.Games, String> gameColumn = new TableColumn<>("game");
-        gameColumn.setMinWidth(200);
+        gameColumn.setMinWidth(400);
         gameColumn.setCellValueFactory(
                 cellData -> (cellData.getValue().getNameString()));
 
@@ -61,7 +57,7 @@ public class saveGameViewController {
 
         // time column
         TableColumn<Helper.Games, String> timeColumn = new TableColumn<>("time");
-        timeColumn.setMinWidth(300);
+        timeColumn.setMinWidth(150);
         timeColumn.setCellValueFactory(
                 cellData -> (cellData.getValue().getDateString()));
 
@@ -73,23 +69,19 @@ public class saveGameViewController {
                 gameColumn,
                 timeColumn
         );
-        addTableButton();
-        saveTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        saveTable.setMaxSize(700, 300);
+        addTableButton(primaryStage);
+        saveTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
 
     private static void setCancel(){
-        cancelButton.setOnAction((ActionEvent event) -> {
-            System.out.println("cancel from saved game interface.");
-        });
-        Helper.adjustButtonSize(cancelButton, 20, 100);
+        cancelButton.setId("saved_cancel_button");
     }
 
 
     // create tableview buttons for each column
-    private static void addTableButton() {
+    private static void addTableButton(Stage primaryStage) {
         TableColumn<Helper.Games, Void> buttonColumn = new TableColumn<>("");
 
         Callback<TableColumn<Helper.Games, Void>, TableCell<Helper.Games, Void>> cellFactory =
@@ -98,7 +90,8 @@ public class saveGameViewController {
                     public TableCell<Helper.Games, Void> call(final TableColumn<Helper.Games, Void> param) {
                         return new TableCell<>() {
 
-                            private final Button button = new Button("Load");   // TODO: load button style
+                            private Button button = new Button("Load");
+
                             {
                                 button.setOnAction((ActionEvent event) -> {
                                     Helper.Games data = getTableView().
@@ -106,7 +99,10 @@ public class saveGameViewController {
                                             get(getIndex());
                                     // TODO: load game function
                                     System.out.println("Load " + data.getName());
+
+                                    primaryStage.setScene(boardGrid.boardScene.makeScene(primaryStage));
                                 });
+                                button.setId("table_load_button");
                             }
 
                             @Override
@@ -118,14 +114,19 @@ public class saveGameViewController {
                     }
                 };
         buttonColumn.setCellFactory(cellFactory);
+        buttonColumn.setMinWidth(100);
         saveTable.getColumns().add(buttonColumn);
+        saveTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
 
     protected static Scene makeScene(Stage primaryStage){
 
+        // don't need to reload again if user is coming back from the cancel button
+        if (tableLoaded) { return savedScene; }
+
         setTitle();
-        createTable();
+        createTable(primaryStage);
         setCancel();
 
         VBox vbox = new VBox();
@@ -159,12 +160,19 @@ public class saveGameViewController {
         // generate scene
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(vbox);
-        return new Scene(stackPane,
-                Screen.getPrimary().getBounds().getWidth()
-                        *0.5    // factors
-                ,
-                Screen.getPrimary().getBounds().getHeight()
-                        *0.5
-        );
+//        stackPane.setStyle("-fx-background-color: transparent");
+        stackPane.setBackground(Helper.saveBackground());
+
+
+        ScrollPane scrollView = new ScrollPane(stackPane);
+        scrollView.setFitToHeight(true);
+        scrollView.setFitToWidth(true);
+
+        savedScene = new Scene(scrollView);
+        savedScene.getStylesheets().add("boardGrid/style.css");
+
+        tableLoaded = true;     // don't want to load twice
+
+        return savedScene;
     }
 }
