@@ -64,7 +64,7 @@
                                                       </Label>
                                                       <Pane layoutX="8.0" layoutY="27.0" prefHeight="124.0" prefWidth="224.0">
                                                          <children>
-                                                            <Button layoutX="181.0" layoutY="90.0" mnemonicParsing="false" text="OK" />
+                                                            <Button layoutX="181.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#okButton" text="OK" />
                                                          </children>
                                                       </Pane>
                                                       <TextFlow fx:id="givePlayer" layoutX="133.0" layoutY="165.0" prefHeight="15.0" prefWidth="79.0">
