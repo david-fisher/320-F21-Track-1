@@ -38,6 +38,17 @@
     -fx-padding: 5;
 }
 
+#home_button{
+    -fx-font: normal 25pt "Helvetica";
+    -fx-text-fill: rgb(233, 231, 233);
+    -fx-background-color: #95ba3b;
+    -fx-max-height: 30;
+    -fx-min-width: 120;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
 #exit_text{
     -fx-font: normal 20pt "Helvetica";
     -fx-text-fill: rgb(255, 255, 255);

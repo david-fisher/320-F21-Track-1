@@ -1,26 +1,52 @@
 package loadSave;
 
 
-import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import mainMenu.Main;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class saveGame {
     public static void popSave(Stage primaryStage){
 
         Stage popStage = new Stage();
 
+        Button homeButton = new Button("Home");
         Button resumeButton = new Button("Resume");
         Button saveButton = new Button("Save");
         resumeButton.setId("resume_button");
         saveButton.setId("save_button");
+        homeButton.setId("home_button");
+        // after click home button
+        homeButton.setOnAction((event -> {
+            System.out.println("Welcome back to the home page");
+
+            popStage.close();
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("MainMenuFXML.fxml")));
+                Scene scene = new Scene(root);
+                primaryStage.setTitle("Game Board Editor");
+                primaryStage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //loader.setController(new SampleController());
+
+        }));
+
         // after click resume button
         resumeButton.setOnAction((event -> {
             popStage.close();
@@ -34,7 +60,7 @@ public class saveGame {
         }));
 
         HBox allButton = new HBox(30);
-        allButton.getChildren().addAll(resumeButton, saveButton);
+        allButton.getChildren().addAll(resumeButton, homeButton, saveButton);
         allButton.setAlignment(Pos.CENTER);
 
         VBox alignmentSettler = new VBox(50);
@@ -44,7 +70,7 @@ public class saveGame {
         view.getChildren().add(alignmentSettler);
         view.setAlignment(Pos.CENTER);
 
-        double viewWidth = 500; double viewHeight = 150;
+        double viewWidth = 550; double viewHeight = 150;
         view.setPrefSize(viewWidth, viewHeight);
         view.setBackground(
                 Helpers.Helper.backgroundColor()
