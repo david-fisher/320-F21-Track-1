@@ -1,5 +1,7 @@
 package GameEditor.Controllers;
 
+import Objects.JSONConverter;
+import Objects.Token;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -152,9 +154,9 @@ public class GameEditorMainController {
         if (gameName.equals("")) {
             gameName = "Game" + new Random().nextInt(10000);
         }
-//        Token newgame = new Token(gameName);
-//        JSONConverter savedGames = new JSONConverter(newgame, "test.json");
-//        savedGames.To_JSON();
+        Token newgame = new Token(gameName);
+        JSONConverter savedGames = new JSONConverter(newgame, "test.json");
+        savedGames.To_JSON();
 
         popup(event, "Game has been saved");
         exitToMainMenu(node);
