@@ -17,7 +17,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button id="main-menu-button" minWidth="300.0" mnemonicParsing="false" onAction="#toEdit" stylesheets="@style.css" text="Edit">
+            <Button id="main-menu-button" minWidth="300.0" mnemonicParsing="false" onAction="#toEditorMenu" stylesheets="@style.css" text="Edit">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
