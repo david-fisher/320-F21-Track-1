@@ -1,6 +1,6 @@
  package GameEditor.Controllers;
 
-import Objects.RNG;
+//import Objects.RNG;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class RNGController {
 
-    private ArrayList<Pair<Integer, RNG>> vars = new ArrayList<Pair<Integer, RNG>>();
+//    private ArrayList<Pair<Integer, RNG>> vars = new ArrayList<Pair<Integer, RNG>>();
 
     @FXML
     private TextField MinField;
@@ -36,7 +36,7 @@ public class RNGController {
             double[] temp = new double[2];
             temp[0] = Double.parseDouble(MinField.getText());
             temp[1] = Double.parseDouble(MaxField.getText());
-            vars.add(new Pair<Integer, RNG>(Integer.parseInt(QuantityField.getText()), new RNG(temp)));
+//            vars.add(new Pair<Integer, RNG>(Integer.parseInt(QuantityField.getText()), new RNG(temp)));
         } else {
             System.out.println("missing fields");
         }

@@ -1,7 +1,5 @@
 package GameEditor.Controllers;
 
-import Objects.JSONConverter;
-import Objects.Token;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +13,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import mainMenu.Main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -151,13 +151,22 @@ public class GameEditorMainController {
         if (gameName.equals("")) {
             gameName = "Game" + new Random().nextInt(10000);
         }
-        Token newgame = new Token(gameName);
-        JSONConverter savedGames = new JSONConverter(newgame, "test.json");
-        savedGames.To_JSON();
+//        Token newgame = new Token(gameName);
+//        JSONConverter savedGames = new JSONConverter(newgame, "test.json");
+//        savedGames.To_JSON();
 
         popup(event, "Game has been saved");
+        exitToMainMenu(node);
 
+    }
 
+    public void exitToMainMenu(Node node) throws IOException {
+        //change stage to mainMenu stage from gamePlay
+        Stage appStage = (Stage) node.getScene().getWindow();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("MainMenuFXML.fxml")));
+        Scene scene = new Scene(root);
+        appStage.setScene(scene);
+        appStage.show();
     }
 
     //creates a popup window
