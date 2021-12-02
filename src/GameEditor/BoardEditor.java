@@ -25,6 +25,7 @@ import javafx.scene.input.*;
 public class BoardEditor {
     double orgSceneX, orgSceneY, xTemp;
     StackPane shapeToDelete;
+    boardGrid theBoardGrid;
     Scene scene;
 
 public void tabs(Group root) {
@@ -67,10 +68,8 @@ public void tabs(Group root) {
     shapeToDelete = null;
     scene.setOnKeyPressed(k -> {
     if (k.getCode() == KeyCode.DELETE) {
-        System.out.println("delete pressed");
         if(shapeToDelete != null) {
-            System.out.println("layout not null");
-            root.getChildren().remove(shapeToDelete);
+            theBoardGrid.getBoard().getChildren().remove(shapeToDelete);
         }
     }
     });
@@ -234,7 +233,8 @@ public StackPane createHexagon(boardGrid root, int x, int y) {
     hexagon.setOnMouseClicked(new EventHandler<MouseEvent>() {
     @Override
     public void handle(MouseEvent mouseEvent) {
-        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+        if(mouseEvent.getButton().equals(MouseButton.PRIMARY) ) { //&& mouseEvent.getClickCount() >= 2){ //enable to select with double-click instead
+            System.out.println("shape clicked");
             shapeToDelete = layout;
         }
     }
@@ -526,6 +526,7 @@ public Group startBoardEditor(Stage stage){
     Group root = new Group();
     boardGrid board = new boardGrid();
     board.createBoard(5, 5);
+    theBoardGrid = board;
     board.getBoard().setTranslateX(100);
     board.getBoard().setTranslateY(100);
     tabs(root);
