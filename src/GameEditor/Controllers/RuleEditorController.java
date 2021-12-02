@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
@@ -60,6 +61,12 @@ public class RuleEditorController {
     private double orgSceneX, orgSceneY;
     private boolean turnRuleClicked = false;
     private Set<TextFlow> draggedRules = new HashSet<TextFlow>();
+    @FXML
+    private TextFlow tileNum1, tileNum2;
+    @FXML
+    private CheckBox tile1, tile2;
+    @FXML
+    private Label tileName, rule1;
 
 
     @FXML
@@ -93,6 +100,8 @@ public class RuleEditorController {
         dragAndDrop(numCards);
         dragAndDrop(tileNum);
         dragAndDrop(numPoints);
+        checked(tileNum1);
+        checked(tileNum2);
     }
 
     //drag and drop for the actions in the tile rule editor
@@ -130,9 +139,25 @@ public class RuleEditorController {
     
     @FXML
     //prints the rules that are dragged into the box
-    void okButton()
+    void saveButton()
+    {		
+		System.out.println(draggedRules);
+    }
+    
+    @FXML
+    void checked(TextFlow action)
     {
-    	System.out.println(draggedRules);
+    	action.getChildren().forEach((tile) -> tile.setOnMouseClicked((t) -> {
+    		CheckBox c = (CheckBox) (t.getSource());
+    		if(c.isSelected())
+    		{
+    			tileName.setText("Tile Selected: tile 1");
+    		}
+    		else
+    		{
+    			tileName.setText("");
+    		}
+    	}));
     }
 
     //adding a drop down box for the turn rule editor
