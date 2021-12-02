@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import GameEditor.Controllers.LocalStorage;
 
  public class RNGController {
 
@@ -58,6 +59,8 @@ import java.util.HashMap;
 
     @FXML
     private void addNewRNG() {
+        LocalStorage storage = LocalStorage.LocalStorage();
+
         System.out.println("hello");
         boolean hasMin = !MinField.getText().equalsIgnoreCase("min");
         boolean hasMax = !MaxField.getText().equalsIgnoreCase("max");
@@ -80,6 +83,9 @@ import java.util.HashMap;
 //            Label label = new Label(name + " Amount: " + rng.getKey() + " \nMin: " + temp[0] + " Max: " + temp[1]);
             Label label = new Label(name + " Type:  \nMin: " + temp[0] + " Max: " + temp[1]);
             dialogContent.getItems().add(0, label);
+            
+            storage.storage.put("RNG", rng);
+
         } else {
             System.out.println("missing fields");
         }

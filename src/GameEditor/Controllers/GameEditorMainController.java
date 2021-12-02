@@ -19,9 +19,7 @@ import mainMenu.Main;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class GameEditorMainController {
 
@@ -158,6 +156,9 @@ public class GameEditorMainController {
         JSONConverter savedGames = new JSONConverter(newgame, "test.json");
         savedGames.To_JSON();
 
+
+        storeGameObjects();
+
         popup(event, "Game has been saved");
         exitToMainMenu(node);
 
@@ -170,6 +171,15 @@ public class GameEditorMainController {
         Scene scene = new Scene(root);
         appStage.setScene(scene);
         appStage.show();
+    }
+
+    //TODO getting the objects to save in the JSON
+    //takes all the objects from localStorage and stores them in the JSON
+    public void storeGameObjects() {
+        LocalStorage localStorage = LocalStorage.LocalStorage();
+        for (Map.Entry<String, Object> entry: localStorage.storage.entrySet()) {
+            System.out.println(entry.getValue());
+        }
     }
 
     //creates a popup window
