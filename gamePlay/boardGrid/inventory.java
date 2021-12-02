@@ -158,18 +158,16 @@ public class inventory {
 
         Platform.setImplicitExit(false);
 
-        popoutScene.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) Platform.exit();
-        });
-
         background.setImage(getBackground(primaryStage));
         background.setEffect(blurEffect);
 
-        draggable(primaryStage, blurBackground);
+//        draggable(primaryStage, blurBackground);
 
 
         popStage.setScene(popoutScene);
         popStage.initModality(Modality.APPLICATION_MODAL);
+        popStage.initOwner(primaryStage);
+//        popStage.setResizable(false);
         popStage.initStyle(StageStyle.TRANSPARENT);
 
         popStage.setX( primaryStage.getX() + 80);
