@@ -40,7 +40,7 @@ public class inventory {
     // get a duplicated background
     private static Image getBackground(Stage stage) {
         // get coordinates
-        int x = (int) stage.getX();
+        int x = (int) stage.getX() - 160;   // configure the starting coordinate if needed
         int y = (int) stage.getY();
         int width = (int) stage.getWidth();
         int height = (int) stage.getHeight();
@@ -161,7 +161,6 @@ public class inventory {
         popoutScene.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) Platform.exit();
         });
-        smokeRectangle(primaryStage);
 
         background.setImage(getBackground(primaryStage));
         background.setEffect(blurEffect);
