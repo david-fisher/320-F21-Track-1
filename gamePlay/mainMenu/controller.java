@@ -33,7 +33,7 @@ public class controller {
         Parent menu = FXMLLoader.load(Objects.requireNonNull(GameEditorMain.class.getResource("Views/GameEditorMain.fxml")));
         Scene mainMenu = new Scene(menu);
         TabPane tabpane = (TabPane) menu.getChildrenUnmodifiable().get(0);
-        tabpane.getTabs().get(0).setContent(new BoardEditor().startBoardEditor());
+        tabpane.getTabs().get(0).setContent(new BoardEditor().startBoardEditor(stage));
         stage.setScene(mainMenu);
     }
 

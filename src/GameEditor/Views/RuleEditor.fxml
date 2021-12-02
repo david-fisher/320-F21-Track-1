@@ -32,7 +32,7 @@
         <tabs>
           <Tab closable="false">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" onMouseEntered="#initializeTileRule" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
                            <children>
@@ -44,8 +44,38 @@
                            <children>
                               <VBox prefHeight="278.0" prefWidth="201.0">
                                  <children>
-                                    <Label contentDisplay="CENTER" text="Insert Game Board here" textAlignment="CENTER" />
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e1" height="258.0" stroke="BLACK" strokeType="INSIDE" width="195.0" />
+                                    <Label contentDisplay="CENTER" text="Insert Game Board here" textAlignment="CENTER">
+                                       <padding>
+                                          <Insets bottom="5.0" />
+                                       </padding></Label>
+                                    <Pane prefHeight="218.0" prefWidth="201.0">
+                                       <children>
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e1" height="124.0" layoutY="6.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
+                                          <TextFlow fx:id="tileNum1" layoutX="14.0" layoutY="14.0">
+                                             <children>
+                                                <CheckBox fx:id="tile1" mnemonicParsing="false" text="Tile 1" />
+                                             </children>
+                                          </TextFlow>
+                                          <TextFlow fx:id="tileNum2" layoutX="75.0" layoutY="14.0" visible="false">
+                                             <children>
+                                                <CheckBox fx:id="tile2" mnemonicParsing="false" text="Tile 2" />
+                                             </children>
+                                          </TextFlow>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </Pane>
+                                    <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="184.0">
+                                             <children>
+                                                <Label layoutX="3.0" layoutY="3.0" text="Current Rules" />
+                                                <Label fx:id="rule1" layoutX="3.0" layoutY="20.0" />
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </ScrollPane>
                                  </children>
                               </VBox>
                               <VBox prefHeight="278.0" prefWidth="257.0">
@@ -56,7 +86,6 @@
                                             <content>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" pickOnBounds="false" prefHeight="411.0" prefWidth="237.0">
                                                    <children>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e1" height="124.0" layoutX="7.0" layoutY="27.0" stroke="BLACK" strokeType="INSIDE" width="226.0" />
                                                       <Label layoutX="9.0" layoutY="6.0" prefHeight="17.0" prefWidth="305.0" text="Drag  actions to the box and click OK to save">
                                                          <font>
                                                             <Font size="12.0" />
@@ -64,7 +93,9 @@
                                                       </Label>
                                                       <Pane layoutX="8.0" layoutY="27.0" prefHeight="124.0" prefWidth="224.0">
                                                          <children>
-                                                            <Button layoutX="181.0" layoutY="90.0" mnemonicParsing="false" text="OK" />
+                                                            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e1" height="124.0" stroke="BLACK" strokeType="INSIDE" width="226.0" />
+                                                            <Button layoutX="173.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#saveButton" text="Save" />
+                                                            <Label fx:id="tileName" layoutX="8.0" layoutY="6.0" />
                                                          </children>
                                                       </Pane>
                                                       <TextFlow fx:id="givePlayer" layoutX="133.0" layoutY="165.0" prefHeight="15.0" prefWidth="79.0">
@@ -114,7 +145,7 @@
                   </AnchorPane>
             </content>
                <graphic>
-                  <StackPane onMouseClicked="#initializeTileRule" prefHeight="150.0" prefWidth="200.0" rotate="90.0">
+                  <StackPane prefHeight="150.0" prefWidth="200.0" rotate="90.0">
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" rotate="90.0" text="Tile Rule" />
                      </children>
@@ -340,4 +371,4 @@
         </tabs>
       </TabPane>
    </left>
-</BorderPane>
+  </BorderPane>
