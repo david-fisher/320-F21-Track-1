@@ -18,7 +18,7 @@ public class gamePlayUI {
 
         ScrollPane scrollView = new ScrollPane();
         BorderPane mainScene = new BorderPane();
-        VBox leftStack = new VBox(150);
+        BorderPane leftStack = new BorderPane();
         VBox rightStack = new VBox(10);
         VBox topStack = new VBox();
 
@@ -62,16 +62,19 @@ public class gamePlayUI {
 
         // board
         GridPane board = boardGrid.createBoard(players, stackTable);
-        moveInfo infoBoard = new moveInfo("Move forward 4 spaces and lose next turn or stay in current space");
+        inventory Inventory = new inventory();
+        Button InventoryButton = Inventory.getInventoryButton(primaryStage);
 
 
         // top
         topStack.getChildren().addAll(boardGrid.createTurns());
 
         // left
-        leftStack.getChildren().addAll(infoBoard.getMoveInfo(), boardGrid.createScore());
-        leftStack.setAlignment(Pos.BOTTOM_CENTER);
+        BorderPane.setAlignment(InventoryButton, Pos.CENTER_LEFT);
+        leftStack.setBottom(boardGrid.createScore());
+        leftStack.setLeft(InventoryButton);
 
+        // main scene
         mainScene.setCenter(board);
         mainScene.setLeft(leftStack);
         mainScene.setRight(rightStack);
