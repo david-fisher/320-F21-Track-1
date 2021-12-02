@@ -4,22 +4,21 @@ public class GameState {
   private List<Player> players;
   private Player curPlayer;
   private Board board;
-  private Stack<Card> deck;
+  private Deck deck;
   private RNG rng;
 
-  public GameState(ArrayList<Player> players, Token gameToLoad){
-    // TODO: Write this function for Omnicron to init game with
-  }
-
-  public GameState(List<Player> players, Board board, List<Card> cards, double[] rngRange) {
+  public GameState(List<Player> players, Board board, Deck cards, double[] rngRange) {
     this.players = new ArrayList<Player>(players);
     this.curPlayer = this.players.get(0);
     this.board = board;
-    this.deck = new Stack<Card>();
-    cards.forEach(card -> this.deck.push(card));
+    this.deck = cards;
     this.rng = new RNG(rngRange);
 
     this.players.forEach(player -> player.moveTo(board.getStartTile()));
+  }
+
+  public GameState(ArrayList<Player> players, Token gameToLoad){
+    // TODO: Write this function for Omnicron to init game with
   }
 
   /*
@@ -48,7 +47,7 @@ public class GameState {
       choices.add(new DrawCardChoice(this.deck.peek()));
     }
 
-    if (!this.curPlayer.hand.isEmpty()) {
+    if (!this.curPlayer.getHand().isEmpty()) {
       choices.add(new PlayCardChoice(this.curPlayer.getHand()));
     }
 
@@ -107,12 +106,12 @@ public class GameState {
   }
 
   // Removes and returns the top card from the deck.
-  public Card popDeck() {
+  public Piece popDeck() {
     return this.deck.pop();
   }
 
-  public ArrayList<Card> getDeck() {
-    return null;
+  public Deck getDeck() {
+    return this.deck;
   }
 
   public void debugPrint() {
