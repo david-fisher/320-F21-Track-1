@@ -96,6 +96,15 @@ public StackPane createRectangle(boardGrid root, int x, int y) {
             rectangle,
             text
     		);
+    rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    @Override
+    public void handle(MouseEvent mouseEvent) {
+        if(mouseEvent.getButton().equals(MouseButton.PRIMARY) ) { //&& mouseEvent.getClickCount() >= 2){ //enable to select with double-click instead
+            System.out.println("shape clicked");
+            shapeToDelete = layout;
+        }
+    }
+    });
     layout.setMaxHeight(50);
     layout.setMaxWidth(50);
     layout.setLayoutX(10);
@@ -125,6 +134,15 @@ public StackPane createCircle(boardGrid root, int x, int y) {
             circle,
             text
     		);
+    circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    @Override
+    public void handle(MouseEvent mouseEvent) {
+        if(mouseEvent.getButton().equals(MouseButton.PRIMARY) ) { //&& mouseEvent.getClickCount() >= 2){ //enable to select with double-click instead
+            System.out.println("shape clicked");
+            shapeToDelete = layout;
+        }
+    }
+    });
     layout.setLayoutX(10);
     layout.setLayoutY(250);
     dragNDrop_StackPane(layout,root, x, y);
@@ -159,6 +177,15 @@ public StackPane createTriangle(boardGrid root, int x, int y) {
             triangle,
             text
     		);
+    triangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    @Override
+    public void handle(MouseEvent mouseEvent) {
+        if(mouseEvent.getButton().equals(MouseButton.PRIMARY) ) { //&& mouseEvent.getClickCount() >= 2){ //enable to select with double-click instead
+            System.out.println("shape clicked");
+            shapeToDelete = layout;
+        }
+    }
+    });
     layout.setLayoutX(10);
     layout.setLayoutY(320);
     dragNDrop_StackPane(layout,root, x, y);
@@ -194,6 +221,15 @@ public StackPane createPentagon(boardGrid root, int x, int y) {
             pentagon,
             text
     		);
+    pentagon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    @Override
+    public void handle(MouseEvent mouseEvent) {
+        if(mouseEvent.getButton().equals(MouseButton.PRIMARY) ) { //&& mouseEvent.getClickCount() >= 2){ //enable to select with double-click instead
+            System.out.println("shape clicked");
+            shapeToDelete = layout;
+        }
+    }
+    });
     layout.setLayoutX(10);
     layout.setLayoutY(400);
     dragNDrop_StackPane(layout,root, x, y);
