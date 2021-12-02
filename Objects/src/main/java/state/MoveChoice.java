@@ -3,8 +3,9 @@ import java.util.*;
 public class MoveChoice extends Choice {
   private Tile tile;
 
-  public MoveChoice(Object data) {
-    super(data);
+  public MoveChoice(Tile tile) {
+    super();
+    this.tile = tile;
   }
 
   // This is for debug printing.
@@ -19,8 +20,8 @@ public class MoveChoice extends Choice {
     return "Movement options: " + tileStrings.toString();
   }
 
-  public void chooseTile(Tile tile) {
-    this.tile = tile;
+  public Tile getTile() {
+    return tile;
   }
 
   public void execute(GameState state) {

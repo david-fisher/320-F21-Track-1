@@ -1,16 +1,17 @@
 public class PlayCardChoice extends Choice {
   private Card card;
 
-  public PlayCardChoice(Object data) {
-    super(data);
+  public PlayCardChoice(Card card) {
+    super();
+    this.card = card;
   }
 
   public String getPrettyData(GameState state) {
     return "";
   }
 
-  public void chooseCard(Card card) {
-    this.card = card;
+  public Card getCard() {
+    return card;
   }
 
   public void execute(GameState state) {
