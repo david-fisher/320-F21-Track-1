@@ -26,7 +26,7 @@ public class Piece extends PTile {
         this.image = image;
     }
 
-    // card constructor
+    // card constructor, does not have coordination attributes 
     Piece(ArrayList<Rule> rules, Hashtable<String,String> attributes, ImageView image){
         super(rules, attributes);
         this.image = image;
