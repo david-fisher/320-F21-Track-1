@@ -16,7 +16,7 @@ public class TokenController {
         Stage app_stage = (Stage) node.getScene().getWindow();
 
         if (tokenType.equals("movementPiece")) {
-            Parent addMovementPiece = FXMLLoader.load(getClass().getResource("TokenUI/MovementPiece.fxml"));
+            Parent addMovementPiece = FXMLLoader.load(getClass().getResource("../Views/MovementPiece.fxml"));
             app_stage.setScene(new Scene(addMovementPiece));
         }
         else if (tokenType == ""){}
@@ -34,7 +34,7 @@ public class TokenController {
     public void onClick(ActionEvent event) throws IOException {
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        Parent addMovementPiece = FXMLLoader.load(getClass().getResource("Views/AddMovementPiece.fxml"));
+        Parent addMovementPiece = FXMLLoader.load(getClass().getResource("../Views/AddMovementPiece.fxml"));
         app_stage.setScene(new Scene (addMovementPiece));
     }
 
