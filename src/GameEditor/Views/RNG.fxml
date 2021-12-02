@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<VBox prefHeight="239.0" prefWidth="537.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.RNGController">
+<VBox prefHeight="239.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.RNGController">
    <children>
-      <AnchorPane prefHeight="615.0">
+      <AnchorPane prefHeight="407.0" prefWidth="549.0">
          <children>
-            <Label fx:id="QuantitySelection" contentDisplay="RIGHT" layoutX="65.0" layoutY="105.0" prefHeight="44.0" prefWidth="399.0" style="-fx-padding:10;" text="Quantity             " visible="false">
-               <graphic>
-                  <TextField fx:id="QuantityField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="170.0" text="Enter Quantity" />
-               </graphic>
-            </Label>
-            <Label fx:id="RangeSelection" contentDisplay="RIGHT" layoutX="65.0" layoutY="149.0" prefHeight="44.0" prefWidth="442.0" style="-fx-padding:10;" text="Range                 " visible="false">
+<!--            <Label fx:id="QuantitySelection" contentDisplay="RIGHT" layoutX="65.0" layoutY="105.0" prefHeight="44.0" prefWidth="399.0" style="-fx-padding:10;" text="Quantity             " visible="false">-->
+<!--               <graphic>-->
+<!--                  <TextField fx:id="QuantityField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="170.0" text="Enter Quantity" />-->
+<!--               </graphic>-->
+<!--            </Label>-->
+            <Label fx:id="RangeSelection" contentDisplay="RIGHT" layoutX="65.0" layoutY="105.0" prefHeight="44.0" prefWidth="442.0" style="-fx-padding:10;" text="Range                 " visible="false">
                <graphic>
                   <Pane>
                      <children>
@@ -40,10 +40,16 @@
                   <ComboBox prefWidth="150.0" />
                </graphic>
             </Label>
-            <Button fx:id="Save" layoutX="361.0" layoutY="2.0" mnemonicParsing="false" text="Save" />
-            <Button fx:id="Cancel" layoutX="410.0" layoutY="2.0" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="Save" layoutX="404.0" layoutY="5.0" mnemonicParsing="false" text="Save" />
             <Button fx:id="CardCreation" layoutX="429.0" layoutY="341.0" mnemonicParsing="false" text="Card Creation" visible="false" />
-            <Button fx:id="AddNewRNG" layoutX="177.0" layoutY="214.0" mnemonicParsing="false" text="Add New RNG" onAction="#addNewRNG"/>
+            <Button fx:id="AddNewRNG" layoutX="177.0" layoutY="214.0" mnemonicParsing="false" onAction="#addNewRNG" text="Add New RNG" />
+            <Label fx:id="Name" contentDisplay="RIGHT" layoutX="65.0" layoutY="7.0" prefHeight="44.0" prefWidth="318.0" style="-fx-padding:10;" text="Name             ">
+               <graphic>
+                  <TextField fx:id="NameField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="170.0" text="Enter Name" />
+               </graphic>
+            </Label>
+            <Button fx:id="Cancel" layoutX="460.0" layoutY="5.0" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="ViewRNG" layoutX="445.0" layoutY="93.0" mnemonicParsing="false" onAction="#viewRNG" text="View RNG" />
          </children>
       </AnchorPane>
    </children>
