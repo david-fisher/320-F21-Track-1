@@ -5,9 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+
+import javax.swing.plaf.synth.Region;
 
 public class TokenController {
     public void changeTokenMenu(ActionEvent event) throws IOException {
@@ -24,21 +27,16 @@ public class TokenController {
     }
 
     public void addMovementPiece(ActionEvent event) throws IOException {
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Node node = (Node) event.getSource();
+        ScrollPane pane = (ScrollPane) node.getParent().getChildrenUnmodifiable().get(1);
+        pane.setContent(FXMLLoader.load(getClass().getResource("../Views/NewMovementPiece.fxml")));
+    }
 
-        Parent addMovementPiece = FXMLLoader.load(getClass().getResource("../Views/AddMovementPiece.fxml"));
-        app_stage.setScene(new Scene (addMovementPiece));
+    public void saveMovementPiece(ActionEvent event) throws IOException {
 
     }
 
-    public void onClick(ActionEvent event) throws IOException {
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        Parent addMovementPiece = FXMLLoader.load(getClass().getResource("Views/AddMovementPiece.fxml"));
-        app_stage.setScene(new Scene (addMovementPiece));
-    }
-
-    public void changeScene(Scene in, Scene out){};
 
     public  void displayNewDeck(){}
 
