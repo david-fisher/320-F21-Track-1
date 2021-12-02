@@ -20,9 +20,12 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.*;
+import javafx.scene.input.*;
 
 public class BoardEditor {
     double orgSceneX, orgSceneY, xTemp;
+    StackPane shapeToDelete;
+    Scene scene;
 
 public void tabs(Group root) {
     // Top tabs ***************************************************************
@@ -61,6 +64,16 @@ public void tabs(Group root) {
     sideBar.setArcHeight(20);
     sideBar.setFill(Color.rgb(220, 220, 220));
     root.getChildren().add(sideBar);
+    shapeToDelete = null;
+    scene.setOnKeyPressed(k -> {
+    if (k.getCode() == KeyCode.DELETE) {
+        System.out.println("delete pressed");
+        if(shapeToDelete != null) {
+            System.out.println("layout not null");
+            root.getChildren().remove(shapeToDelete);
+        }
+    }
+    });
 }
 
 public StackPane createRectangle(boardGrid root, int x, int y) {
@@ -218,6 +231,14 @@ public StackPane createHexagon(boardGrid root, int x, int y) {
             hexagon,
             text
     		);
+    hexagon.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    @Override
+    public void handle(MouseEvent mouseEvent) {
+        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+            shapeToDelete = layout;
+        }
+    }
+    });
     layout.setLayoutX(10);
     layout.setLayoutY(490);
     dragNDrop_StackPane(layout,root, x, y);
@@ -501,6 +522,7 @@ public class boardGrid {
 }
 
 public Group startBoardEditor(Stage stage){
+    scene = stage.getScene();
     Group root = new Group();
     boardGrid board = new boardGrid();
     board.createBoard(5, 5);

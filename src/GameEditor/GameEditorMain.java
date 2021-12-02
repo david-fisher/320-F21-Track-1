@@ -27,8 +27,8 @@ public class GameEditorMain extends Application {
         // Using external file to hide the broken 'Custom color' section on ColorPicker
         mainMenu.getStylesheets().add(getClass().getResource("ColorPickerMod.css").toExternalForm());
         TabPane tabpane = (TabPane) menu.getChildrenUnmodifiable().get(0);
-        tabpane.getTabs().get(0).setContent(new BoardEditor().startBoardEditor(primaryStage));
         primaryStage.setScene(mainMenu);
+        tabpane.getTabs().get(0).setContent(new BoardEditor().startBoardEditor(primaryStage));
         primaryStage.show();
     }
 }
