@@ -89,6 +89,153 @@ public class boardGrid {
         }
     }
 
+<<<<<<< Updated upstream
+=======
+    /*
+    ********************************
+    get cell based on the coordinate
+     */
+    //TODO: This is the function that I need to call in order to do the stackpane animation for dragging
+    public static StackPane getBoardCell(int x, int y){
+        Node node = null;
+        ObservableList<Node> childerns = board.getChildren();
+
+        for (Node n : childerns){
+            if (board.getRowIndex(n) == x && board.getColumnIndex(n) == y){
+                node = n;
+                break;
+            }
+        }
+
+        return (node instanceof StackPane)? (StackPane) node : null;
+    }
+
+    // set drag motion for the cell
+    protected static void setDrag(boardCell cell){
+        /*
+            from Binary-Brother Branch
+         */
+        cell.getStack().setCursor(Cursor.HAND);
+
+        // stack was pressed:
+        cell.getStack().setOnMousePressed((event -> {
+            int orgX = cell.getPosition()[0]; int orgY = cell.getPosition()[1];
+
+            StackPane current = cell.getStack();
+            current.toFront();
+        }));
+
+        // stack was dragged
+        cell.getStack().setOnMouseDragged((event -> {
+
+        }));
+
+
+    }
+    
+    public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
+        // Drag n' Drop Interaction *******************************************************
+            sp.setCursor(Cursor.HAND);
+        
+            sp.setOnMousePressed((t) -> {
+                orgSceneX = t.getSceneX();
+                orgSceneY = t.getSceneY();
+                xTemp = orgSceneX;
+                
+                StackPane c = (StackPane) (t.getSource());
+                c.toFront();
+                });
+        
+            sp.setOnMouseDragged((t) -> {
+                double offsetX = t.getSceneX() - orgSceneX;
+                double offsetY = t.getSceneY() - orgSceneY;
+        
+                StackPane c = (StackPane) (t.getSource());
+        
+                c.setTranslateX(c.getTranslateX() + offsetX);
+                c.setTranslateY(c.getTranslateY() + offsetY);
+        
+                orgSceneX = t.getSceneX();
+                orgSceneY = t.getSceneY();
+                });  
+        
+    	    sp.setOnMouseReleased((t) -> {       
+    	        StackPane c = (StackPane) (t.getSource());
+    	       
+                double tile_size = 50;
+    	        double snapX = (c.getTranslateX()) % tile_size;
+    	        if (snapX > tile_size/2){
+    	        	snapX = (c.getTranslateX()) - snapX + tile_size;
+    	        }
+    	        else {
+    	        	snapX = (c.getTranslateX()) - snapX;
+    	        }
+    	        if (t.getSceneX() >= 100 && t.getSceneX() < (100 + x*tile_size)) {
+    	            c.setTranslateX(snapX);
+    	        }
+    	        else {
+    	        	c.setTranslateX(0);
+    	        }
+    	             
+    	        double snapY = (c.getTranslateY()) % tile_size;
+    	        if (snapY > tile_size/2){
+    	        	snapY = (c.getTranslateY()) - snapY + tile_size;
+    	        }
+    	        else {
+    	        	snapY = (c.getTranslateY()) - snapY;
+    	        }
+    	        
+    	        if (t.getSceneY() >= 100 && t.getSceneY() < (100 + y*tile_size)) {
+    	            c.setTranslateY(snapY);
+    	        }
+    	        else {
+    	        	c.setTranslateY(0);
+    	        }
+    	        
+    	        //checking if we are moving a piece from spawn
+    	        //don't ask why value is 100, it just works
+    	        if (xTemp < 100) {
+    	        	for (int i = 0; i < c.getChildren().size(); i++) {
+    	        		if (c.getChildren().toArray()[i] instanceof Rectangle) {
+    	        			StackPane temp = createRectangle(root, x, y);
+    	        			root.getBoard().add(temp, 0, 0);
+    	        			temp.setTranslateX(-75);
+    	        	    	temp.setTranslateY(75);
+    	        			break;
+    	        		}
+    	        		else if (c.getChildren().toArray()[i] instanceof Circle) {
+    	        			StackPane temp = createCircle(root, x, y);
+    	        			root.getBoard().add(temp, 0, 0);
+    	        			temp.setTranslateX(-75);
+    	        	    	temp.setTranslateY(150);
+    	        			break;
+    	        		}
+    	        		else if (c.getChildren().toArray()[i] instanceof Polygon) {
+    	        			if (((Polygon)(c.getChildren().toArray()[i])).getPoints().size() == 6) {
+    	        				StackPane temp = createTriangle(root, x, y);
+    		        			root.getBoard().add(temp, 0, 0);
+    		        			temp.setTranslateX(-75);
+    		        	    	temp.setTranslateY(225);
+    	            			}
+    	            		else if (((Polygon)(c.getChildren().toArray()[i])).getPoints().size() == 10) {
+    	        				StackPane temp = createPentagon(root, x, y);
+    		        			root.getBoard().add(temp, 0, 0);
+    		        			temp.setTranslateX(-75);
+    		        	    	temp.setTranslateY(300);
+    	            			}
+    	            		else {
+    	            			StackPane temp = createHexagon(root, x, y);
+    		        			root.getBoard().add(temp, 0, 0);
+    		        			temp.setTranslateX(-75);
+    		        	    	temp.setTranslateY(375);
+    	            			}
+    	            		}
+    	        		}
+    	        	}
+    	    });
+    }
+
+>>>>>>> Stashed changes
     public static HBox createScore(){
         return currentScore.scoreBox();
     }
