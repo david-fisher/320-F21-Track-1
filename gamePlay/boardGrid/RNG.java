@@ -1,6 +1,7 @@
 package boardGrid;
 
 import Helpers.Helper;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -9,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,8 +45,13 @@ public class RNG {
         dice.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                value.setOpacity(0);
                 int Num = (int) ((Math.random() * (diceMax-diceMin)) + diceMin);
                 value.setText(String.valueOf(Num));
+                FadeTransition ft = new FadeTransition(Duration.millis(800), value);
+                ft.setFromValue(0);
+                ft.setToValue(1);
+                ft.play();
             }
         });
         dice.setId("board_side_button");
@@ -71,7 +78,12 @@ public class RNG {
         spinner.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                text.setOpacity(0);
                 text.setText(colors[(rand.nextInt(colors.length))]);
+                FadeTransition ft = new FadeTransition(Duration.millis(800), text);
+                ft.setFromValue(0);
+                ft.setToValue(1);
+                ft.play();
             }
         });
         spinner.setId("board_side_button");
@@ -94,7 +106,12 @@ public class RNG {
         deck.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                text.setOpacity(0);
                 text.setText(String.valueOf(drawCard()));
+                FadeTransition ft = new FadeTransition(Duration.millis(800), text);
+                ft.setFromValue(0);
+                ft.setToValue(1);
+                ft.play();
             }
         });
         deck.setId("board_side_button");
