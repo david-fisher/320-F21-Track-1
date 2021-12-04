@@ -2,14 +2,16 @@ package boardGrid;
 
 import Helpers.Helper;
 import javafx.animation.FadeTransition;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.layout.VBox;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -40,18 +42,50 @@ public class RNG {
 
     private Button makeDie(int diceMin, int diceMax, Text value){
         Button dice = new Button();
-        dice.setGraphic(Helper.imageMaker("gamePlay/images/Dice.png", 100, 100));
+        ImageView graph = Helper.imageMaker("gamePlay/images/Dice.png", 100, 100);
+        dice.setGraphic(graph);
 
         dice.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                value.setOpacity(0);
-                int Num = (int) ((Math.random() * (diceMax-diceMin)) + diceMin);
-                value.setText(String.valueOf(Num));
-                FadeTransition ft = new FadeTransition(Duration.millis(800), value);
-                ft.setFromValue(0);
-                ft.setToValue(1);
-                ft.play();
+
+                // rotate 360
+                RotateTransition rotate = new RotateTransition();
+                rotate.setAxis(Rotate.Z_AXIS);
+                rotate.setByAngle(360);
+                rotate.setCycleCount(2);
+                rotate.setDuration(Duration.millis(500));
+                rotate.setAutoReverse(true);
+
+                rotate.setNode(graph);
+
+                // after the animation is done, do:
+                rotate.setOnFinished(event1 -> {
+
+                    RotateTransition rotate2 = new RotateTransition();
+                    rotate2.setAxis(Rotate.Z_AXIS);
+                    rotate2.setByAngle(360);
+                    rotate2.setCycleCount(2);
+                    rotate2.setDuration(Duration.millis(800));
+                    rotate2.setAutoReverse(true);
+
+                    rotate2.setNode(graph);
+
+                    rotate2.setOnFinished(event2 -> {
+                        value.setOpacity(0);
+                        int Num = (int) ((Math.random() * (diceMax-diceMin)) + diceMin);
+                        value.setText(String.valueOf(Num));
+                        FadeTransition ft = new FadeTransition(Duration.millis(800), value);
+                        ft.setFromValue(0);
+                        ft.setToValue(1);
+                        ft.play();
+                    });
+
+                    rotate2.play();
+                });
+
+                rotate.play();
+
             }
         });
         dice.setId("board_side_button");
@@ -74,16 +108,37 @@ public class RNG {
     private Button makeSpinner(String[] colors, Text text){
         Random rand = new Random();
         Button spinner = new Button();
-        spinner.setGraphic(Helper.imageMaker("gamePlay/images/Spinner.png", 100, 100));
+        ImageView graph = Helper.imageMaker("gamePlay/images/Spinner.png", 100, 100);
+        spinner.setGraphic(graph);
         spinner.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                text.setOpacity(0);
-                text.setText(colors[(rand.nextInt(colors.length))]);
-                FadeTransition ft = new FadeTransition(Duration.millis(800), text);
-                ft.setFromValue(0);
-                ft.setToValue(1);
-                ft.play();
+                // rotate 360 + 360 / 8
+                RotateTransition rotate = new RotateTransition();
+                rotate.setAxis(Rotate.Z_AXIS);
+                rotate.setByAngle(405);
+                rotate.setCycleCount(1);
+                rotate.setDuration(Duration.millis(1000));
+                rotate.setAutoReverse(true);
+
+                rotate.setNode(graph);
+
+                // do after the animation is done
+                rotate.setOnFinished(event1 -> {
+
+                    int randIndex = rand.nextInt(colors.length);
+                    text.setOpacity(0);
+                    text.setText(colors[randIndex]);
+                    spinner.setStyle("-fx-background-color: " + colors[randIndex]);
+                    FadeTransition ft = new FadeTransition(Duration.millis(800), text);
+                    ft.setFromValue(0);
+                    ft.setToValue(1);
+                    ft.play();
+                });
+
+                rotate.play();
+
+
             }
         });
         spinner.setId("board_side_button");
