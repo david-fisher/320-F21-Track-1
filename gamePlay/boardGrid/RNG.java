@@ -2,6 +2,7 @@ package boardGrid;
 
 import Helpers.Helper;
 import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
@@ -157,16 +159,34 @@ public class RNG {
     public Button makeDeck(Text text){
         Button deck = new Button();
         Collections.shuffle(curDeck);
-        deck.setGraphic(Helper.imageMaker("gamePlay/images/Deck.png", 100, 100));
+
+        ImageView deckBackground = Helper.imageMaker("gamePlay/images/Deck.png", 100, 100);
+        deck.setGraphic(deckBackground);
+
         deck.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                text.setOpacity(0);
-                text.setText(String.valueOf(drawCard()));
-                FadeTransition ft = new FadeTransition(Duration.millis(800), text);
-                ft.setFromValue(0);
-                ft.setToValue(1);
-                ft.play();
+
+                // flip card animation
+                RotateTransition rotate = new RotateTransition();
+                rotate.setAxis(Rotate.Y_AXIS);
+                rotate.setByAngle(180);
+                rotate.setInterpolator(Interpolator.LINEAR);
+                rotate.setCycleCount(1);
+                rotate.setDuration(Duration.millis(750));
+                rotate.setAutoReverse(true);
+
+                rotate.setNode(deckBackground);
+                rotate.setOnFinished(event1 -> {
+
+                    text.setOpacity(0);
+                    text.setText(String.valueOf(drawCard()));
+                    FadeTransition ft = new FadeTransition(Duration.millis(800), text);
+                    ft.setFromValue(0);
+                    ft.setToValue(1);
+                    ft.play();
+                });
+                rotate.play();
             }
         });
         deck.setId("board_side_button");
