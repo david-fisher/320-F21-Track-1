@@ -41,7 +41,9 @@
                 </StackPane>
             </graphic>
             <content>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" >
+                   <fx:include source="MovementPiece.fxml"></fx:include>
+                </AnchorPane>
             </content>
         </Tab>
         <Tab>
