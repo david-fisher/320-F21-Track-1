@@ -1,13 +1,10 @@
 package boardGrid;
 
-import javafx.scene.layout.*;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -34,19 +31,11 @@ public class boardGrid {
                 board.add(table.get(i).get(j).
                                 getCellObject(currentScore, currentTurn),    // button or board element
                         i,  // x coordinate
-                        j); // y coordinate
+                        j   // y coordinate
+                );
+                setDrag(table.get(i).get(j));
             }
         }
-
-        //animation test
-        Rectangle rect = new Rectangle(80, 80);
-        rect.setArcHeight(16);
-        rect.setArcWidth(16);
-        rect.setFill(Color.GOLD);
-
-        StackPane temp = getBoardCell(1, 1);
-        temp.getChildren().remove(0, 2);
-        temp.getChildren().add(rect);
     }
 
     // convert possible stackPane table to boardCell table
@@ -196,6 +185,11 @@ public class boardGrid {
         }
 
         loadGrid(stackToCell(cellTable));   // load from a 2d array
+
+        // testing update board cell
+        StackPane a = getBoardCell(3, 3);
+        a.getChildren().remove(0, 2);
+        a.getChildren().addAll(getBoardCell(1, 0).getChildren());
 
         return board;
     }

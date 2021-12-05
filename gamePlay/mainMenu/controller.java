@@ -23,7 +23,13 @@ public class controller {
         Scene scene = new Scene(root);
         stage.setScene(scene);
     }
-
+    @FXML
+    public void toEditorMenu(javafx.event.ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("editormenu.fxml")));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+    }
     @FXML
     public void toEdit(javafx.event.ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
