@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="17888d9b-336f-4c48-bcd7-612c4e54769f" name="Changes" comment="" />
+    <list default="true" id="17888d9b-336f-4c48-bcd7-612c4e54769f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/320-F21-Track-1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/320-F21-Track-1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePlay/boardGrid/boardGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/boardGrid/boardGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePlay/boardGrid/gamePlayUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/boardGrid/gamePlayUI.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +18,16 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/gamePlay/boardGrid/boardLauncher.java" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="ProjectId" id="21shEm2Y9Crhk8vjTo5yMy8FHwH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gson-2.8.9.jar" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -28,7 +41,19 @@
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="17888d9b-336f-4c48-bcd7-612c4e54769f" name="Changes" comment="" />
+      <created>1638735630681</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1638735630681</updated>
+      <workItem from="1638735643585" duration="823000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

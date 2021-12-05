@@ -89,8 +89,7 @@ public class boardGrid {
         }
     }
 
-<<<<<<< Updated upstream
-=======
+
     /*
     ********************************
     get cell based on the coordinate
@@ -192,50 +191,10 @@ public class boardGrid {
     	        	c.setTranslateY(0);
     	        }
     	        
-    	        //checking if we are moving a piece from spawn
-    	        //don't ask why value is 100, it just works
-    	        if (xTemp < 100) {
-    	        	for (int i = 0; i < c.getChildren().size(); i++) {
-    	        		if (c.getChildren().toArray()[i] instanceof Rectangle) {
-    	        			StackPane temp = createRectangle(root, x, y);
-    	        			root.getBoard().add(temp, 0, 0);
-    	        			temp.setTranslateX(-75);
-    	        	    	temp.setTranslateY(75);
-    	        			break;
-    	        		}
-    	        		else if (c.getChildren().toArray()[i] instanceof Circle) {
-    	        			StackPane temp = createCircle(root, x, y);
-    	        			root.getBoard().add(temp, 0, 0);
-    	        			temp.setTranslateX(-75);
-    	        	    	temp.setTranslateY(150);
-    	        			break;
-    	        		}
-    	        		else if (c.getChildren().toArray()[i] instanceof Polygon) {
-    	        			if (((Polygon)(c.getChildren().toArray()[i])).getPoints().size() == 6) {
-    	        				StackPane temp = createTriangle(root, x, y);
-    		        			root.getBoard().add(temp, 0, 0);
-    		        			temp.setTranslateX(-75);
-    		        	    	temp.setTranslateY(225);
-    	            			}
-    	            		else if (((Polygon)(c.getChildren().toArray()[i])).getPoints().size() == 10) {
-    	        				StackPane temp = createPentagon(root, x, y);
-    		        			root.getBoard().add(temp, 0, 0);
-    		        			temp.setTranslateX(-75);
-    		        	    	temp.setTranslateY(300);
-    	            			}
-    	            		else {
-    	            			StackPane temp = createHexagon(root, x, y);
-    		        			root.getBoard().add(temp, 0, 0);
-    		        			temp.setTranslateX(-75);
-    		        	    	temp.setTranslateY(375);
-    	            			}
-    	            		}
-    	        		}
-    	        	}
+
     	    });
     }
 
->>>>>>> Stashed changes
     public static HBox createScore(){
         return currentScore.scoreBox();
     }
