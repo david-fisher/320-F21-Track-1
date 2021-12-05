@@ -6,6 +6,8 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -35,6 +37,16 @@ public class boardGrid {
                         j); // y coordinate
             }
         }
+
+        //animation test
+        Rectangle rect = new Rectangle(80, 80);
+        rect.setArcHeight(16);
+        rect.setArcWidth(16);
+        rect.setFill(Color.GOLD);
+
+        StackPane temp = getBoardCell(1, 1);
+        temp.getChildren().remove(0, 2);
+        temp.getChildren().add(rect);
     }
 
     // convert possible stackPane table to boardCell table
@@ -93,7 +105,6 @@ public class boardGrid {
             );
         }
     }
-
 
     /*
     ********************************
