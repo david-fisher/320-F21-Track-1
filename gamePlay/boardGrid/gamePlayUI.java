@@ -11,6 +11,7 @@ import loadSave.exitGame;
 import loadSave.saveGame;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class gamePlayUI {
 
@@ -56,8 +57,12 @@ public class gamePlayUI {
 
         exitButton.setId("board_side_button");
 
+        //TODO: Remove this test stuff during integration
+        String[] colorsTest = {"Blue","Red", "Orange", "Yellow"};
+        ArrayList<Integer> deck = new ArrayList<>(Arrays.asList(6, 6, 6, 12, 400, 7, 8, 9));
+        RNG rng = new RNG(1, 20, colorsTest, deck);
 
-        rightStack.getChildren().addAll(saveButton, exitButton);
+        rightStack.getChildren().addAll(saveButton, exitButton, rng.getObjects());
 
 
         // board

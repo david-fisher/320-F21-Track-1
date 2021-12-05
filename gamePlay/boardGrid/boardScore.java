@@ -29,6 +29,12 @@ public class boardScore {
         colorList.add("-fx-background-color: #3b8eba; ");
         colorList.add("-fx-background-color:  #c796a0; ");
 
+        if (nameList.size() < 3){
+            colorList.remove(2);
+            if (nameList.size() < 2){ colorList.remove(1); }
+        }
+
+
         int lastUsedNum = 0;
         for (String playerName : nameList) {
             String name = playerName == null ?
