@@ -8,9 +8,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
@@ -25,24 +25,24 @@ public class RNG {
     Button dButton;
     Button sButton;
     Button deckButton;
-    Text dText;
-    Text sText;
-    Text deckText;
+    Label dText;
+    Label sText;
+    Label deckText;
     ArrayList<Integer> curDeck;
     ArrayList<Integer> drawnDeck;
 
     public RNG(int diceMin, int diceMax, String[] colors, ArrayList<Integer> deck){
-        this.dText = textMaker();
+        this.dText = labelMaker();
         this.dButton = makeDie(diceMin, diceMax, this.dText);
-        this.sText = textMaker();
+        this.sText = labelMaker();
         this.sButton = makeSpinner(colors, sText);
         this.curDeck = (ArrayList<Integer>) deck.clone();
         this.drawnDeck = new ArrayList<Integer>();
-        this.deckText = textMaker();
+        this.deckText = labelMaker();
         this.deckButton = makeDeck(deckText);
     }
 
-    private Button makeDie(int diceMin, int diceMax, Text value){
+    private Button makeDie(int diceMin, int diceMax, Label value){
         Button dice = new Button();
         ImageView graph = Helper.imageMaker("gamePlay/images/Dice.png", 100, 100);
         dice.setGraphic(graph);
@@ -94,10 +94,15 @@ public class RNG {
         return dice;
     }
 
-    private Text textMaker(){
-        Text text = new Text("--");
-        text.setFont(Font.font("Helvetica", 25));
-        return text;
+    private Label labelMaker(){
+        Label label = new Label("--");
+        label.setFont(Font.font("Helvetica", 25));
+        label.setStyle("-fx-background-color: #787f8c; "
+//                    "-fx-text-alignment: center;" +
+//                    "-fx-max-width: 50;" +
+//                        "-fx-min-width: 50"
+        );
+        return label;
     }
 
     public int getDiceVal(){
@@ -107,7 +112,7 @@ public class RNG {
         dText.setText(s);
     }
 
-    private Button makeSpinner(String[] colors, Text text){
+    private Button makeSpinner(String[] colors, Label text){
         Random rand = new Random();
         Button spinner = new Button();
         ImageView graph = Helper.imageMaker("gamePlay/images/Spinner.png", 100, 100);
@@ -156,7 +161,7 @@ public class RNG {
         sText.setText(s);
     }
 
-    public Button makeDeck(Text text){
+    public Button makeDeck(Label text){
         Button deck = new Button();
         Collections.shuffle(curDeck);
 
