@@ -7,7 +7,7 @@
 
 <StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainMenu.controller">
    <children>
-      <VBox alignment="CENTER" style="-fx-background-color: #21252b;" stylesheets="@style.css">
+      <VBox alignment="CENTER" stylesheets="@style.css">
          <children>
             <Button id="main-menu-button" minWidth="300.0" mnemonicParsing="false" onAction="#toModeMenu" stylesheets="@style.css" text="New Game">
                <VBox.margin>

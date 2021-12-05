@@ -1,6 +1,11 @@
 package boardGrid;
 
 import javafx.scene.layout.*;
+import javafx.collections.ObservableList;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
 
 import java.util.ArrayList;
 
@@ -130,69 +135,6 @@ public class boardGrid {
         }));
 
 
-    }
-    
-    public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
-        // Drag n' Drop Interaction *******************************************************
-            sp.setCursor(Cursor.HAND);
-        
-            sp.setOnMousePressed((t) -> {
-                orgSceneX = t.getSceneX();
-                orgSceneY = t.getSceneY();
-                xTemp = orgSceneX;
-                
-                StackPane c = (StackPane) (t.getSource());
-                c.toFront();
-                });
-        
-            sp.setOnMouseDragged((t) -> {
-                double offsetX = t.getSceneX() - orgSceneX;
-                double offsetY = t.getSceneY() - orgSceneY;
-        
-                StackPane c = (StackPane) (t.getSource());
-        
-                c.setTranslateX(c.getTranslateX() + offsetX);
-                c.setTranslateY(c.getTranslateY() + offsetY);
-        
-                orgSceneX = t.getSceneX();
-                orgSceneY = t.getSceneY();
-                });  
-        
-    	    sp.setOnMouseReleased((t) -> {       
-    	        StackPane c = (StackPane) (t.getSource());
-    	       
-                double tile_size = 50;
-    	        double snapX = (c.getTranslateX()) % tile_size;
-    	        if (snapX > tile_size/2){
-    	        	snapX = (c.getTranslateX()) - snapX + tile_size;
-    	        }
-    	        else {
-    	        	snapX = (c.getTranslateX()) - snapX;
-    	        }
-    	        if (t.getSceneX() >= 100 && t.getSceneX() < (100 + x*tile_size)) {
-    	            c.setTranslateX(snapX);
-    	        }
-    	        else {
-    	        	c.setTranslateX(0);
-    	        }
-    	             
-    	        double snapY = (c.getTranslateY()) % tile_size;
-    	        if (snapY > tile_size/2){
-    	        	snapY = (c.getTranslateY()) - snapY + tile_size;
-    	        }
-    	        else {
-    	        	snapY = (c.getTranslateY()) - snapY;
-    	        }
-    	        
-    	        if (t.getSceneY() >= 100 && t.getSceneY() < (100 + y*tile_size)) {
-    	            c.setTranslateY(snapY);
-    	        }
-    	        else {
-    	        	c.setTranslateY(0);
-    	        }
-    	        
-
-    	    });
     }
 
     public static HBox createScore(){

@@ -4,8 +4,13 @@
     <list default="true" id="17888d9b-336f-4c48-bcd7-612c4e54769f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/320-F21-Track-1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/320-F21-Track-1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePlay/boardGrid/boardCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/boardGrid/boardCell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePlay/boardGrid/boardGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/boardGrid/boardGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamePlay/boardGrid/gamePlayUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/boardGrid/gamePlayUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePlay/out/production/320-F21-Track-1/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/out/production/320-F21-Track-1/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePlay/out/production/320-F21-Track-1/mainMenu/MainMenuFXML.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/out/production/320-F21-Track-1/mainMenu/MainMenuFXML.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePlay/out/production/320-F21-Track-1/mainMenu/PlayGameFXML.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/out/production/320-F21-Track-1/mainMenu/PlayGameFXML.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePlay/out/production/320-F21-Track-1/mainMenu/editormenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/out/production/320-F21-Track-1/mainMenu/editormenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamePlay/out/production/320-F21-Track-1/mainMenu/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/out/production/320-F21-Track-1/mainMenu/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +36,12 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../../../Program Files/AdoptOpenJDK/jdk-11.0.4.11-hotspot" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="mainMenu.Main" />
       <module name="320-F21-Track-1" />
       <method v="2">
@@ -50,6 +58,9 @@
       <option name="presentableId" value="Default" />
       <updated>1638735630681</updated>
       <workItem from="1638735643585" duration="823000" />
+      <workItem from="1638736733887" duration="397000" />
+      <workItem from="1638737213469" duration="174000" />
+      <workItem from="1638737466734" duration="933000" />
     </task>
     <servers />
   </component>
