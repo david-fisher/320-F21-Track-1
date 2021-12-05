@@ -97,11 +97,11 @@ public class RNG {
     private Label labelMaker(){
         Label label = new Label("--");
         label.setFont(Font.font("Helvetica", 25));
-        label.setStyle("-fx-background-color: #787f8c; "
+//        label.setStyle("-fx-background-color: #787f8c; "
 //                    "-fx-text-alignment: center;" +
 //                    "-fx-max-width: 50;" +
 //                        "-fx-min-width: 50"
-        );
+//        );
         return label;
     }
 
