@@ -2,8 +2,10 @@ package GameEditor.Controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -17,9 +19,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -33,7 +40,6 @@ public class RuleEditorController {
 
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private ComboBox<String> dropdown0, dropdown1, dropdown2, dropdown3, dropdown4;
     @FXML
@@ -46,7 +52,6 @@ public class RuleEditorController {
     private Button changeTransition;
     @FXML
     private Button deleteTransition;
-    
     @FXML
     private TextFlow takeFromPlayer, givePlayer, movePlayer, tileNum, numCards, numPoints;
     
@@ -55,12 +60,15 @@ public class RuleEditorController {
     
     @FXML
     private ComboBox<String>[] dropdowns = new ComboBox[5];
+    private List<String> turnList = new ArrayList<String>();
     private int numVisible = 1;
     private int[] visible = { 1, 0,0,0,0};
     private String[] deleteButtons = { "d0", "d1", "d2", "d3", "d4" };
     private double orgSceneX, orgSceneY;
     private boolean turnRuleClicked = false;
-    private Set<TextFlow> draggedRules = new HashSet<TextFlow>();
+    private List<TextFlow> draggedRules = new ArrayList<TextFlow>();
+    private ListView dialogContent = new ListView();
+    
     @FXML
     private TextFlow tileNum1, tileNum2;
     @FXML
@@ -137,11 +145,84 @@ public class RuleEditorController {
         });
     }
     
-    @FXML
     //prints the rules that are dragged into the box
+    @FXML
     void saveButton()
     {		
-		System.out.println(draggedRules);
+    	for(TextFlow rule: draggedRules)
+    	{
+    		if(!dialogContent.getItems().contains(rule.getId()))
+    		{
+    			if(rule.getChildren().size()==1)
+    			{
+            		dialogContent.getItems().add(rule.getChildren().get(0).getAccessibleText());
+    			}
+    			else if(rule.getChildren().get(0) instanceof Label)
+    			{
+    				TextField userInput = (TextField) rule.getChildren().get(1);
+    				dialogContent.getItems().add(rule.getChildren().get(0).getAccessibleText() + " " + userInput.getText());
+    			}
+    			else if(rule.getChildren().get(0) instanceof TextField)
+    			{
+    				TextField userInput = (TextField) rule.getChildren().get(0);
+    				dialogContent.getItems().add(userInput.getText() + " " + rule.getChildren().get(1).getAccessibleText());
+    			}
+    		}
+    	}
+    }
+    
+    //save the tile rules, currently only prints
+    @FXML
+    void saveTileRule()
+    {
+    	System.out.println(draggedRules);
+    }
+    
+    //save the order of turn rules
+    @FXML
+    void saveTurnRule()
+    {
+    	int index =0;
+    	turnList.removeAll(turnList);
+    	for(ComboBox dropdown: dropdowns)
+    	{
+    		if(dropdown.getValue() !=null)
+    		{
+    			turnList.add(dropdown.getValue().toString());
+    		}
+    	}
+    	Dialog<String> addTurnsList = new Dialog<String>();
+    	if(turnList.size()==0)
+    	{
+    		addTurnsList.setTitle("Invalid Turn Rules");
+            ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            addTurnsList.getDialogPane().getButtonTypes().add(type);
+            addTurnsList.getDialogPane().setContentText("The turn list must have at least one rule, please choose an option for at least one dropdown!");
+            addTurnsList.showAndWait();
+    	}
+    	else
+    	{
+    		String content = "Here is the order of rules the player will follow on their turn: ";
+    		String turns = String.join(", ", turnList);
+    		content+=turns;
+    		addTurnsList.setTitle("Saving Turn Rules");
+    		addTurnsList.getDialogPane().setContentText(content);
+    		ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            addTurnsList.getDialogPane().getButtonTypes().add(type);
+    		addTurnsList.showAndWait();
+    	}
+    }
+    
+    //view the current tile rules in a new pop up
+    @FXML
+    void viewRules()
+    {
+    	Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("Current Tile Rules");
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(type);
+        dialog.getDialogPane().setContent(dialogContent);
+        dialog.showAndWait();
     }
     
     @FXML
@@ -194,6 +275,7 @@ public class RuleEditorController {
         }
     }
     
+    //initialize the movement rule
     @FXML
     void intializeMovementRule(MouseEvent event) {
         modifyTransitionButtons.setVisible(false);
