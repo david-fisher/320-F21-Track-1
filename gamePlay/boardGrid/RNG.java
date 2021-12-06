@@ -30,6 +30,7 @@ public class RNG {
     Label deckText;
     ArrayList<Integer> curDeck;
     ArrayList<Integer> drawnDeck;
+    private boolean mutux = false;  // a c++ like lock
 
     public RNG(int diceMin, int diceMax, String[] colors, ArrayList<Integer> deck){
         this.dText = labelMaker();
@@ -47,10 +48,15 @@ public class RNG {
         ImageView graph = Helper.imageMaker("gamePlay/images/Dice.png", 100, 100);
         dice.setGraphic(graph);
 
+
+
         dice.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
 
+                // write a lock, make sure only one animation at a time
+                if (mutux) { return; }
+                mutux = true;
                 // rotate 360
                 RotateTransition rotate = new RotateTransition();
                 rotate.setAxis(Rotate.Z_AXIS);
@@ -81,6 +87,7 @@ public class RNG {
                         ft.setFromValue(0);
                         ft.setToValue(1);
                         ft.play();
+                        mutux = false;
                     });
 
                     rotate2.play();
@@ -120,6 +127,11 @@ public class RNG {
         spinner.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+
+                // write a lock, make sure only one animation at a time
+                if (mutux) { return; }
+                mutux = true;
+
                 // rotate 360 + 360 / 8
                 RotateTransition rotate = new RotateTransition();
                 rotate.setAxis(Rotate.Z_AXIS);
@@ -141,6 +153,7 @@ public class RNG {
                     ft.setFromValue(0);
                     ft.setToValue(1);
                     ft.play();
+                    mutux = false;
                 });
 
                 rotate.play();
@@ -168,9 +181,14 @@ public class RNG {
         ImageView deckBackground = Helper.imageMaker("gamePlay/images/Deck.png", 100, 100);
         deck.setGraphic(deckBackground);
 
+
         deck.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+
+                // write a lock, make sure only one animation at a time
+                if (mutux) { return; }
+                mutux = true;
 
                 // flip card animation
                 RotateTransition rotate = new RotateTransition();
@@ -190,6 +208,7 @@ public class RNG {
                     ft.setFromValue(0);
                     ft.setToValue(1);
                     ft.play();
+                    mutux = false;
                 });
                 rotate.play();
             }
