@@ -89,37 +89,37 @@
                                                             <Label fx:id="tileName" layoutX="8.0" layoutY="6.0" />
                                                          </children>
                                                       </Pane>
-                                                      <TextFlow fx:id="givePlayer" layoutX="133.0" layoutY="165.0" prefHeight="15.0" prefWidth="79.0">
+                                                      <TextFlow fx:id="givePlayer" layoutX="133.0" layoutY="165.0" prefHeight="17.0" prefWidth="68.0">
                                                          <children>
-                                                            <Label accessibleText="Give player ..." text="Give Player ..." />
+                                                            <Label accessibleText="Give player " text="Give player " />
                                                          </children>
                                                       </TextFlow>
-                                                      <TextFlow fx:id="movePlayer" layoutX="14.0" layoutY="189.0" prefHeight="18.0" prefWidth="95.0">
+                                                      <TextFlow fx:id="movePlayer" layoutX="14.0" layoutY="189.0" prefHeight="18.0" prefWidth="86.0">
                                                          <children>
-                                                            <Label accessibleText="Move player to ..." prefHeight="11.0" prefWidth="92.0" text="Move player to ..." />
+                                                            <Label accessibleText="Move player to " prefHeight="17.0" prefWidth="85.0" text="Move player to " />
                                                          </children>
                                                       </TextFlow>
                                                       <TextFlow fx:id="tileNum" layoutX="154.0" layoutY="193.0">
                                                          <children>
-                                                            <Label accessibleText="Tile " text="Tile  " />
+                                                            <Label accessibleText="tile" text="tile  " />
                                                             <TextField prefHeight="26.0" prefWidth="33.0" promptText="_" />
                                                          </children>
                                                       </TextFlow>
                                                       <TextFlow fx:id="numCards" layoutX="98.0" layoutY="237.0">
                                                          <children>
                                                             <TextField prefHeight="26.0" prefWidth="33.0" promptText="_" />
-                                                            <Label accessibleText="cards " text="  Cards" />
+                                                            <Label accessibleText="cards " text="  cards" />
                                                          </children>
                                                       </TextFlow>
                                                       <TextFlow fx:id="numPoints" layoutX="15.0" layoutY="238.0">
                                                          <children>
                                                             <TextField prefHeight="26.0" prefWidth="35.0" promptText="_" />
-                                                            <Label accessibleText="points" text="  Points" />
+                                                            <Label accessibleText="points" text="  points" />
                                                          </children>
                                                       </TextFlow>
-                                                      <TextFlow fx:id="takeFromPlayer" layoutX="15.0" layoutY="163.0" prefHeight="21.0" prefWidth="110.0">
+                                                      <TextFlow fx:id="takeFromPlayer" layoutX="15.0" layoutY="163.0" prefHeight="21.0" prefWidth="67.0">
                                                          <children>
-                                                            <Label accessibleText="Take from player ... " text="Take from player..." />
+                                                            <Label accessibleText="Take away " text="Take away " />
                                                          </children>
                                                       </TextFlow>
                                                    </children>

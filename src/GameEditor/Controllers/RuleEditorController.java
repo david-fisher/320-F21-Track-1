@@ -136,7 +136,10 @@ public class RuleEditorController {
         action.setOnMouseReleased((t) -> {
         	if (orgSceneX >385 && orgSceneX<540 && orgSceneY > 155 && orgSceneY <260)
     		{
-            	draggedRules.add(action);
+        		if(!draggedRules.contains(action))
+        		{
+                	draggedRules.add(action);
+        		}
     		}
         	else
         	{
@@ -145,30 +148,69 @@ public class RuleEditorController {
         });
     }
     
-    //prints the rules that are dragged into the box
+    //checks for valid rules and saves them to the list of rules
     @FXML
     void saveButton()
-    {		
+    {	
+    	if(draggedRules.size()!=2)
+		{
+    		invalidTileRule("Please drag two options to the rectangle to save the rule");
+	        return;
+		}
+    	else
+    	{
+    		String[] rules = {draggedRules.get(0).getId().toString(), draggedRules.get(1).getId().toString()};
+    		Boolean valid = true;
+    		switch(rules[0])
+    		{
+    		case "takeFromPlayer": if(!rules[1].equals("numCards") && !rules[1].equals("numPoints")) {valid = false;} break;
+    		case "tileNum": if(!rules[1].equals("movePlayer")) {valid = false;} break;
+    		case "givePlayer": if(!rules[1].equals("numCards") && !rules[1].equals("numPoints")) {valid = false;} break;
+    		case "numPoints": if(!rules[1].equals("takeFromPlayer") && !rules[1].equals("givePlayer")) {valid = false;} break;
+    		case "numCards": if(!rules[1].equals("takeFromPlayer") && !rules[1].equals("givePlayer")) {valid = false;} break;
+    		case "movePlayer": if(!rules[1].equals("tileNum")) {valid = false;} break;
+    		}
+    		if(!valid)
+    		{
+    			invalidTileRule("Oops, that is an invalid combination for a tile rule. Please drag two valid options to the rectangle.");
+    			return;
+    		}
+    	}
+    	String ruleToAdd = "";
     	for(TextFlow rule: draggedRules)
     	{
     		if(!dialogContent.getItems().contains(rule.getId()))
     		{
-    			if(rule.getChildren().size()==1)
-    			{
-            		dialogContent.getItems().add(rule.getChildren().get(0).getAccessibleText());
+    		    if (rule.getChildren().size()==1)
+    		    {
+    		    	ruleToAdd = rule.getChildren().get(0).getAccessibleText() + ruleToAdd;
     			}
     			else if(rule.getChildren().get(0) instanceof Label)
     			{
     				TextField userInput = (TextField) rule.getChildren().get(1);
-    				dialogContent.getItems().add(rule.getChildren().get(0).getAccessibleText() + " " + userInput.getText());
+    				if(userInput.getText()=="") {invalidTileRule("Please provide an input for the text field."); return; }
+    				ruleToAdd += rule.getChildren().get(0).getAccessibleText() + " " + userInput.getText();
     			}
     			else if(rule.getChildren().get(0) instanceof TextField)
     			{
     				TextField userInput = (TextField) rule.getChildren().get(0);
-    				dialogContent.getItems().add(userInput.getText() + " " + rule.getChildren().get(1).getAccessibleText());
+    				if(userInput.getText()=="") {invalidTileRule("Please provide an input for the text field."); return; }
+    				ruleToAdd += userInput.getText() + " " + rule.getChildren().get(1).getAccessibleText();
     			}
     		}
     	}
+    	dialogContent.getItems().add(ruleToAdd);
+    }
+    
+    //shows the popup if there is an invalid input
+    void invalidTileRule(String content)
+    {
+    	Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("Invalid Tile Rule");
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(type);
+        dialog.getDialogPane().setContentText(content);
+        dialog.showAndWait();
     }
     
     //save the tile rules, currently only prints
@@ -212,6 +254,7 @@ public class RuleEditorController {
     		addTurnsList.showAndWait();
     	}
     }
+    
     
     //view the current tile rules in a new pop up
     @FXML
