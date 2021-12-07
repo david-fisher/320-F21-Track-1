@@ -18,6 +18,8 @@ import java.util.HashMap;
 //    private HashMap<String, Pair<Integer, RNG>> map = new HashMap<String, Pair<Integer, RNG>>();
     private HashMap<String, RNG> map = new HashMap<String, RNG>();
 
+    private Alert a = new Alert(Alert.AlertType.NONE);
+
     private ListView dialogContent = new ListView();
     private EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e) {
@@ -58,7 +60,6 @@ import java.util.HashMap;
 
     @FXML
     private void addNewRNG() {
-        System.out.println("hello");
         boolean hasMin = !MinField.getText().equalsIgnoreCase("min");
         boolean hasMax = !MaxField.getText().equalsIgnoreCase("max");
 //        boolean hasQuantity = !QuantityField.getText().equalsIgnoreCase("enter quantity");
@@ -70,8 +71,16 @@ import java.util.HashMap;
 //            System.out.println(QuantityField.getText());
             String name = NameField.getText();
             double[] temp = new double[2];
-            temp[0] = Double.parseDouble(MinField.getText());
-            temp[1] = Double.parseDouble(MaxField.getText());
+            try {
+                temp[0] = Double.parseDouble(MinField.getText());
+                temp[1] = Double.parseDouble(MaxField.getText());
+            } catch (NumberFormatException nfe) {
+                a.setAlertType(Alert.AlertType.ERROR);
+                a.setContentText("Input Error");
+                a.show();
+                return;
+            }
+
 //            Pair<Integer, RNG> rng = new Pair<Integer, RNG>(Integer.parseInt(QuantityField.getText()), new RNG(temp));
             RNG rng = new RNG(temp);
             vars.add(rng);
@@ -81,7 +90,9 @@ import java.util.HashMap;
             Label label = new Label(name + " Type:  \nMin: " + temp[0] + " Max: " + temp[1]);
             dialogContent.getItems().add(0, label);
         } else {
-            System.out.println("missing fields");
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setContentText("Missing Fields in input");
+            a.show();
         }
     }
 
