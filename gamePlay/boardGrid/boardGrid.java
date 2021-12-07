@@ -188,7 +188,8 @@ public class boardGrid {
 
         // testing update board cell
         StackPane a = getBoardCell(3, 3);
-        a.getChildren().remove(2);
+        a.getChildren().remove(0, 2);
+        a.getChildren().addAll(getBoardCell(1, 0).getChildren());
 
         return board;
     }
