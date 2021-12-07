@@ -153,6 +153,12 @@
     -fx-min-width: 40;
 }
 
+#greeting_label{
+    -fx-font: normal 20pt "Helvetica";
+    -fx-text-fill: rgb(3, 29, 85);
+    -fx-text-alignment: center ;
+}
+
 .combo-box .combo-box, .list-cell, .list-view{
     -fx-background-color: #282c34;
     -fx-text-fill: white;

@@ -1,17 +1,25 @@
 package loadSave;
 
 import javafx.animation.FillTransition;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import mainMenu.Main;
 
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class winPopout {
 
@@ -20,6 +28,7 @@ public class winPopout {
 
         Rectangle colorBackground = new Rectangle(500, 300);
 
+        // all colors will occur are below
         ArrayList<Color> colorList = new ArrayList<>();
         colorList.add(Color.BLUE);
         colorList.add(Color.GREEN);
@@ -28,34 +37,66 @@ public class winPopout {
         colorList.add(Color.WHITESMOKE);
         colorList.add(Color.GREY);
         colorList.add(Color.WHITE);
+        colorList.add(Color.DARKORANGE);
 
         ArrayList<FillTransition> transitions = new ArrayList<>();
-        for (Color c : colorList){
+
+        // TODO: changing how many time you want the color transit here
+        for (int i = 0; i < colorList.size() * 100; i++){
             FillTransition ft = new FillTransition(Duration.millis(100), colorBackground);
-            ft.setToValue(c);
+            int index = i % colorList.size();
+            ft.setToValue(colorList.get(index));
             ft.setAutoReverse(true);
             transitions.add(ft);
         }
 
+        /*
+        don't change anything in the loop down below
+         */
         for (int i = 0; i < transitions.size(); i++){
-            if ((i + 1) < transitions.size()){
-                int tempIndex = i;
-                transitions.get(i).setOnFinished(event -> {
-                    transitions.get(tempIndex + 1).play();
+            int index = i;
+            if ((index + 1) < transitions.size()){
+                transitions.get(index).setOnFinished(event -> {
+                    transitions.get(index + 1).play();
                 });
             }
-            if (i == 0){
-                transitions.get(i).play();
+            if (index == 0){
+                transitions.get(index).play();
             }
         }
 
+        Button closeButton = new Button("Close");
+        closeButton.setId("close_popout");
 
+        closeButton.setOnAction(event -> {
+            System.out.println("You closed winning message");
+            winStage.close();
+
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("MainMenuFXML.fxml")));
+                Scene scene = new Scene(root);
+                primaryStage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Label greetingMessage = new Label("Congrats!\r\n" + winnerName + " won the game");
+        greetingMessage.setId("greeting_label");
+
+        VBox topBar = new VBox();
+        topBar.getChildren().add(closeButton);
+        topBar.setAlignment(Pos.TOP_LEFT);
+
+        greetingMessage.setAlignment(Pos.CENTER);
 
         StackPane stack = new StackPane();
-        stack.getChildren().add(colorBackground);
+        stack.getChildren().addAll(colorBackground, greetingMessage, topBar);
 
 
         Scene scene = new Scene(stack);
+        scene.getStylesheets().add("boardGrid/style.css");
 
         winStage.setScene(scene);
         winStage.initStyle(StageStyle.TRANSPARENT);

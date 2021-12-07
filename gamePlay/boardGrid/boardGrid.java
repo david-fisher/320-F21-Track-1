@@ -5,6 +5,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class boardGrid {
     private static ArrayList<String> playerList;
 
     // load an arraylist to the grid
-    private static void loadGrid(ArrayList<ArrayList<boardCell>> table){
+    private static void loadGrid(Stage primaryStage, ArrayList<ArrayList<boardCell>> table){
         /*
         table:
             [i] is width
@@ -29,7 +30,7 @@ public class boardGrid {
                 boardCell currentCell = table.get(i).get(j);
                 if (currentCell == null) { continue; }  // empty cell element
                 board.add(table.get(i).get(j).
-                                getCellObject(currentScore, currentTurn),    // button or board element
+                                getCellObject(primaryStage, currentScore, currentTurn),    // button or board element
                         i,  // x coordinate
                         j   // y coordinate
                 );
@@ -76,19 +77,19 @@ public class boardGrid {
 
     }
 
-    public void updateCell(boardCell cell, int x, int y, StackPane object){
+    public void updateCell(Stage primaryStage, boardCell cell, int x, int y, StackPane object){
         // TODO: replace cell method
         try{
             board.getChildren().remove(x, y);
             board.add(
-                    cell.getCellObject(currentScore, currentTurn),
+                    cell.getCellObject(primaryStage, currentScore, currentTurn),
                     x,
                     y
             );
         }
         catch (Exception ignored) {
             board.add(
-                    cell.getCellObject(currentScore, currentTurn),
+                    cell.getCellObject(primaryStage, currentScore, currentTurn),
                     x,
                     y
             );
@@ -146,7 +147,7 @@ public class boardGrid {
     }
 
 
-    public static GridPane createBoard(ArrayList<String> players, ArrayList<ArrayList<StackPane>> cellTable){
+    public static GridPane createBoard(Stage primaryStage, ArrayList<String> players, ArrayList<ArrayList<StackPane>> cellTable){
 
 
         width = cellTable.size();
@@ -184,7 +185,7 @@ public class boardGrid {
                     add(row);
         }
 
-        loadGrid(stackToCell(cellTable));   // load from a 2d array
+        loadGrid(primaryStage, stackToCell(cellTable));   // load from a 2d array
 
         // testing update board cell
         StackPane a = getBoardCell(3, 3);
