@@ -1,0 +1,48 @@
+.button {
+    -fx-font: bold 15pt "Helvetica";
+    -fx-text-fill: rgba(255, 255, 255, 0.75);
+    -fx-background-color: #5670f0;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+.combo-box .combo-box, .list-cell, .list-view{
+    -fx-background-color: #282c34;
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover{
+    -fx-background-color: #454545;
+    -fx-text-fill: #7fcbfb;
+}
+
+.text-field{
+    -fx-font: normal 10pt "Helvetica";
+    -fx-text-fill: white;
+    -fx-background-color: #5670f0;
+}
+
+.text{
+    -fx-font: normal 10pt "Helvetica";
+    -fx-text-color: white;
+    -fx-padding: 5;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+
+.label{
+    -fx-font: normal 10pt "Helvetica";
+    -fx-text-fill: white;
+    -fx-padding: 5;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+#background{
+    -fx-background-color: #454545;
+}
+
+.tab{
+   -fx-background-color: #5670f0;
+}
