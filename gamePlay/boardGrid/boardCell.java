@@ -99,6 +99,12 @@ public class boardCell {
                     score.updateScore(String playerName, int amount)
                      */
                     score.addOne(currentTurn.getCurrentPlayer());
+
+                    if (score.getPlayerScoreByName(currentTurn.getCurrentPlayer()) > 5){
+                        loadSave.winPopout.winScene(null, currentTurn.getCurrentPlayer());
+                        return;
+                    }
+
                     currentTurn.next();
                 }
         );
