@@ -23,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.RuleEditorController">
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.RuleEditorController" stylesheets="@rule.css">
    <top>
       <TabPane minHeight="0.0" minWidth="700.0" prefHeight="0.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0" tabMaxWidth="118.0" tabMinHeight="50.0" tabMinWidth="118.0" BorderPane.alignment="CENTER" />
    </top>
@@ -36,7 +36,7 @@
                      <children>
                         <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Save Rule" />
+                              <Button mnemonicParsing="false" onAction="#saveTileRule" text="Save Rule" />
                               <Button mnemonicParsing="false" prefWidth="56.0" text="Cancel" />
                            </children>
                         </HBox>
@@ -44,13 +44,13 @@
                            <children>
                               <VBox prefHeight="278.0" prefWidth="201.0">
                                  <children>
-                                    <Label contentDisplay="CENTER" text="Insert Game Board here" textAlignment="CENTER">
+                                    <Label contentDisplay="CENTER" text="Choose a tile to add a rule" textAlignment="CENTER">
                                        <padding>
                                           <Insets bottom="5.0" />
                                        </padding></Label>
-                                    <Pane prefHeight="218.0" prefWidth="201.0">
+                                    <Pane prefHeight="234.0" prefWidth="201.0">
                                        <children>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e1" height="124.0" layoutY="6.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e1" height="214.0" layoutY="6.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
                                           <TextFlow fx:id="tileNum1" layoutX="14.0" layoutY="14.0">
                                              <children>
                                                 <CheckBox fx:id="tile1" mnemonicParsing="false" text="Tile 1" />
@@ -66,16 +66,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </Pane>
-                                    <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                                      <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="184.0">
-                                             <children>
-                                                <Label layoutX="3.0" layoutY="3.0" text="Current Rules" />
-                                                <Label fx:id="rule1" layoutX="3.0" layoutY="20.0" />
-                                             </children>
-                                          </AnchorPane>
-                                      </content>
-                                    </ScrollPane>
+                                    <Button mnemonicParsing="false" onAction="#viewRules" text="View Current Rules" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="278.0" prefWidth="257.0">
@@ -98,37 +89,37 @@
                                                             <Label fx:id="tileName" layoutX="8.0" layoutY="6.0" />
                                                          </children>
                                                       </Pane>
-                                                      <TextFlow fx:id="givePlayer" layoutX="133.0" layoutY="165.0" prefHeight="15.0" prefWidth="79.0">
+                                                      <TextFlow fx:id="givePlayer" layoutX="133.0" layoutY="165.0" prefHeight="17.0" prefWidth="68.0">
                                                          <children>
-                                                            <Label text="Give Player ..." />
+                                                            <Label accessibleText="Give player " text="Give player " />
                                                          </children>
                                                       </TextFlow>
-                                                      <TextFlow fx:id="movePlayer" layoutX="14.0" layoutY="189.0" prefHeight="18.0" prefWidth="95.0">
+                                                      <TextFlow fx:id="movePlayer" layoutX="14.0" layoutY="189.0" prefHeight="18.0" prefWidth="86.0">
                                                          <children>
-                                                            <Label prefHeight="11.0" prefWidth="92.0" text="Move player to ..." />
+                                                            <Label accessibleText="Move player to " prefHeight="17.0" prefWidth="85.0" text="Move player to " />
                                                          </children>
                                                       </TextFlow>
                                                       <TextFlow fx:id="tileNum" layoutX="154.0" layoutY="193.0">
                                                          <children>
-                                                            <Label text="Tile  " />
+                                                            <Label accessibleText="tile" text="tile  " />
                                                             <TextField prefHeight="26.0" prefWidth="33.0" promptText="_" />
                                                          </children>
                                                       </TextFlow>
                                                       <TextFlow fx:id="numCards" layoutX="98.0" layoutY="237.0">
                                                          <children>
                                                             <TextField prefHeight="26.0" prefWidth="33.0" promptText="_" />
-                                                            <Label text="  Cards" />
+                                                            <Label accessibleText="cards " text="  cards" />
                                                          </children>
                                                       </TextFlow>
                                                       <TextFlow fx:id="numPoints" layoutX="15.0" layoutY="238.0">
                                                          <children>
                                                             <TextField prefHeight="26.0" prefWidth="35.0" promptText="_" />
-                                                            <Label text="  Points" />
+                                                            <Label accessibleText="points" text="  points" />
                                                          </children>
                                                       </TextFlow>
-                                                      <TextFlow fx:id="takeFromPlayer" layoutX="15.0" layoutY="163.0" prefHeight="21.0" prefWidth="110.0">
+                                                      <TextFlow fx:id="takeFromPlayer" layoutX="15.0" layoutY="163.0" prefHeight="21.0" prefWidth="67.0">
                                                          <children>
-                                                            <Label text="Take from player..." />
+                                                            <Label accessibleText="Take away " text="Take away " />
                                                          </children>
                                                       </TextFlow>
                                                    </children>
@@ -306,7 +297,7 @@
                      </Pane>
                         <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Save Rule" />
+                              <Button mnemonicParsing="false" onAction="#saveTurnRule" text="Save Rule" />
                               <Button mnemonicParsing="false" prefWidth="56.0" text="Cancel" />
                            </children>
                         </HBox>
