@@ -1,11 +1,15 @@
 public class DrawCardRule extends Rule {
-  int repeat; // 1, 2, 3, .... , MAX
+  private int repeat; // 1, 2, 3, .... , MAX
+
+  public DrawCardRule() {
+    this(1);
+  }
 
   public DrawCardRule(int repeat) {
     this.repeat = repeat;
   }
 
   public void execute(GameState state) {
-    state.getCurPlayer().addCard(state.popDeck());
+    state.addChoice(new DrawCardChoice(state.getDeck(), repeat));
   }
 }

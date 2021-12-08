@@ -1,12 +1,14 @@
-public class PlayCardRule extends Rule {
-  int repeat; // 1, 2, 3, .... , MAX
+import java.util.*;
 
-  public PlayCardRule(int repeat) {
+public class PlayCardRule extends Rule {
+  public PlayCardRule() {
     super();
-    this.repeat = repeat;
   }
 
   public void execute(GameState state) {
-    state.getCurPlayer().getHand().forEach(card -> state.addChoice(new PlayCardChoice(card)));
+    if (state.getCurPlayer().getHand().get().size() == 0) {
+      state.addChoice(new PassChoice());
+    }
+    state.getCurPlayer().getHand().get().forEach(card -> state.addChoice(new PlayCardChoice(card)));
   }
 }

@@ -1,9 +1,11 @@
 public class DrawCardChoice extends Choice {
-  Deck deck;
+  private Deck deck;
+  private int amount;
   
-  public DrawCardChoice(Deck deck) {
+  public DrawCardChoice(Deck deck, int amount) {
     super();
     this.deck = deck;
+    this.amount = amount;
   }
 
   public String getPrettyData(GameState state) {
@@ -15,6 +17,16 @@ public class DrawCardChoice extends Choice {
   }
 
   public void execute(GameState state) {
-    state.getCurPlayer().addCard(state.popDeck());
+    for (int i = 0; i < amount; i++) {
+      state.getCurPlayer().addCard(state.popDeck());
+    }
+  }
+
+  public String toString() {
+    return "Draw " + amount + " from " + deck.toString();
+  }
+
+  public int[] getPoints() {
+    return new int[] {0,0};
   }
 }
