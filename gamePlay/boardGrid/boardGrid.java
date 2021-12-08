@@ -1,5 +1,9 @@
 package boardGrid;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -28,7 +32,9 @@ public class boardGrid {
                 board.add(table.get(i).get(j).
                                 getCellObject(primaryStage, currentScore, currentTurn),    // button or board element
                         i,  // x coordinate
-                        j); // y coordinate
+                        j   // y coordinate
+                );
+                setDrag(table.get(i).get(j));
             }
         }
     }
@@ -88,6 +94,48 @@ public class boardGrid {
                     y
             );
         }
+    }
+
+    /*
+    ********************************
+    get cell based on the coordinate
+     */
+    //TODO: This is the function that I need to call in order to do the stackpane animation for dragging
+    public static StackPane getBoardCell(int x, int y){
+        Node node = null;
+        ObservableList<Node> childerns = board.getChildren();
+
+        for (Node n : childerns){
+            if (board.getRowIndex(n) == x && board.getColumnIndex(n) == y){
+                node = n;
+                break;
+            }
+        }
+
+        return (node instanceof StackPane)? (StackPane) node : null;
+    }
+
+    // set drag motion for the cell
+    protected static void setDrag(boardCell cell){
+        /*
+            from Binary-Brother Branch
+         */
+        cell.getStack().setCursor(Cursor.HAND);
+
+        // stack was pressed:
+        cell.getStack().setOnMousePressed((event -> {
+            int orgX = cell.getPosition()[0]; int orgY = cell.getPosition()[1];
+
+            StackPane current = cell.getStack();
+            current.toFront();
+        }));
+
+        // stack was dragged
+        cell.getStack().setOnMouseDragged((event -> {
+
+        }));
+
+
     }
 
     public static HBox createScore(){
