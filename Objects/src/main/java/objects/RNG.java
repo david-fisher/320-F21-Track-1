@@ -83,14 +83,17 @@ public class RNG extends Saveable {
         return current_seed;
     }
 
+    // generate an array of random doubles, the length of array would be the number of repeats specified
     public double[] ran_double(){
-        double[] result; result = new double[this.repeat];
+        double[] result; 
+        result = new double[this.repeat];
         for(int i=0; i < this.repeat; i++){
             result[i] = rand.nextDouble()*(this.range[1]-this.range[0]) + this.range[0];
         }
         return result;
     }
 
+    // generate an array of random floats, the length of array would be the number of repeats specified
     public float[] ran_float(){
         float[] result; result = new float[this.repeat];
         for(int i=0; i < this.repeat; i++){
@@ -99,6 +102,7 @@ public class RNG extends Saveable {
         return result;
     }
 
+    // generate an array of random integers, the length of array would be the number of repeats specified
     public int[] ran_int(){
         int[] result; result = new int[this.repeat];
         for(int i=0; i < this.repeat; i++){
@@ -107,6 +111,8 @@ public class RNG extends Saveable {
         return result;
     }
 
+    // return a random arrayList of rules, length specified by the number of repeats
+    //   parem: input - an arrayList of rules from which the output will randomly take from
     public ArrayList<Rule> ran_rule(ArrayList<Rule> input){
         ArrayList<Rule> result = new ArrayList<Rule>();
         for(int i=0; i < this.repeat; i++){
@@ -116,6 +122,8 @@ public class RNG extends Saveable {
         return result;
     }
  
+    // return a random arrayList of pieces, length specified by the number of repeats
+    //   parem: input - an arrayList of pieces from which the output will randomly take from
     public ArrayList<Piece> ran_piece(ArrayList<Piece> input){
         ArrayList<Piece> result = new ArrayList<Piece>();
         for(int i=0; i < this.repeat; i++){
