@@ -1,135 +1,77 @@
-package Objects;
+package src.main.java.objects;
 
 import java.util.*;
 
-public class Tile extends Saveable{
+public class Tile extends GameObject {
 
-    final int x,y; Hashtable<String,String> attributes; ArrayList<Rule> rules; Hashtable<String,Tile> neighbors;
+    private ArrayList<Tile> neighbors; private Deck deck;
 
     public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes){
-        this.ID = UUID.randomUUID().toString();
-        this.x = x;
-        this.y = y;
-        this.attributes = attributes;
-        this.rules = rules;
-        this.neighbors = new Hashtable<String,Tile>();
+        super(x, y, rules, attributes);
+        this.neighbors = new ArrayList<Tile>();
+        this.deck = new Deck();
     }
 
-    public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes, Hashtable<String,Tile> neighbors){
-        this.ID = UUID.randomUUID().toString();
-        this.x = x;
-        this.y = y;
-        this.attributes = attributes;
-        this.rules = rules;
+    public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes, ArrayList<Tile> neighbors){
+        super(x, y, rules, attributes);
         this.neighbors = neighbors;
+        this.deck = new Deck();
     }
-    public Tile(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes, Hashtable<String,Tile> neighbors){
-        this.ID = id;
-        this.x = x;
-        this.y = y;
-        this.attributes = attributes;
-        this.rules = rules;
+
+    public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes, ArrayList<Tile> neighbors, Deck deck){
+        super(x, y, rules, attributes);
         this.neighbors = neighbors;
+        this.deck = deck;
     }
 
-    public int get_x(){return this.x;}
-
-    public int get_y(){return this.y;}
-
-    public ArrayList<Integer> get_coordinate(){
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        result.add(this.x);
-        result.add(this.y);
-        return result;
+    public Tile(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String,String> attributes, ArrayList<Tile> neighbors, Deck deck){
+        super(id, x, y, rules, attributes);
+        this.neighbors = neighbors;
+        this.deck = deck;
+    }
+    
+    public Deck get_deck() {
+    	return this.deck;
     }
 
-    public ArrayList<Rule> get_rules(){
-        return this.rules;
-    }
-
-    public Hashtable<String,String> get_attributes(){
-        return this.attributes;
-    }
-
-    public Hashtable<String,Tile> get_neighbors(){
+    public ArrayList<Tile> get_neighbors(){
         return this.neighbors;
     }
 
-    public Hashtable<String,Tile> update_neighbor(String direction, Tile new_neighbor){
-        this.neighbors.put(direction, new_neighbor);
+    public ArrayList<Tile> update_neighbor(Tile new_neighbor){
+        try {
+            int index = this.neighbors.indexOf(tile_findByID(new_neighbor.get_id()));
+		    this.neighbors.set(index, new_neighbor);
+        } catch (Exception e) {
+            this.neighbors.add(new_neighbor);
+        }
         return this.neighbors;
     }
 
-    public Hashtable<String,Tile> remove_neighbor(String direction){
-        this.neighbors.remove(direction);
+    public ArrayList<Tile> remove_neighbor(Tile input){
+        try {
+		    this.neighbors.remove(this.neighbors.indexOf(tile_findByID(input.get_id())));
+        } catch (Exception e) {
+        	System.out.println(String.format("Error: Unable to remove target neighbor tile: %s", input.get_id()));
+            System.out.println(e);
+        }	
         return this.neighbors;
     }
 
-    public Hashtable<String,Tile> update_neighbors(Hashtable<String,Tile> new_neighbors){
-        this.neighbors.putAll(new_neighbors);
+    public ArrayList<Tile> update_neighbors(ArrayList<Tile> new_neighbors){
+        for (Tile new_neighbor: new_neighbors){
+            update_neighbor(new_neighbor);
+        }
         return this.neighbors;
     }
 
-    public Hashtable<String,Tile> remove_neighbors(){
+    public ArrayList<Tile> remove_neighbors(){
         this.neighbors.clear();
         return this.neighbors;
     }
 
-    public Hashtable<String,String> update_attribute(String new_key, String new_attribute){
-        this.attributes.put(new_key, new_attribute);
-        return this.attributes;
-    }
-
-    public Hashtable<String,String> remove_attribute(String key){
-        this.attributes.remove(key);
-        return this.attributes;
-    }
-
-    public Hashtable<String,String> update_attributes(Hashtable<String,String> new_attributes){
-        this.attributes.putAll(new_attributes);
-        return this.attributes;
-    }
-
-    public Hashtable<String,String> remove_attributes(){
-        this.attributes.clear();
-        return this.attributes;
-    }
-
-    public ArrayList<Rule> add_rule(Rule new_rule){
-        this.rules.add(new_rule);
-        return this.rules;
-    }
-
-    public boolean remove_rule(Rule target_rule){
-        return this.rules.remove(findByID(target_rule.ID));
-    }
-
-    public Rule findByID(String ID) {
-	    return this.rules.stream().filter(rule -> rule.ID == ID).findFirst().orElse(null);
+    public Tile tile_findByID(String ID) {
+	    return this.neighbors.stream().filter(tile -> tile.get_id().equals(ID)).findFirst().orElse(null);
 	}
 
-
-    @Override
-    public Hashtable<String, String> to_json(){
-        Hashtable<String, String> result = new Hashtable<String, String>();
-        // result.put("id", this.ID);
-        // result.put("x", new String(Integer.toString(this.x)));
-        // result.put("y", new String(Integer.toString(this.y)));
-        // String rule_ids = "";
-        // for(int i = 0; i < this.rules.size(); i++){
-        //     rule_ids += " " + this.rules.get(i).ID;
-        // }
-        // result.put("rules id", rule_ids);
-        // String next_tiles_ids = "";
-        // for(int j = 0; j < this.next_tiles.size(); j++){
-        //     next_tiles_ids += " " + this.next_tiles.get(j).ID;
-        // }
-        // result.put("next tile ids", next_tiles_ids);
-        return result;
-    }
-
-
-    public Object get_peices() {
-        return null;
-    }
 }

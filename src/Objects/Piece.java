@@ -1,9 +1,9 @@
-package Objects;
+package src.main.java.objects;
 
 import java.util.*;
 import javafx.scene.image.ImageView;
 
-public class Piece extends PTile {
+public class Piece extends GameObject {
     private transient ImageView image;
 
     public Piece(ArrayList<Rule> rules, Hashtable<String,String> attributes){

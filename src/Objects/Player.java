@@ -1,33 +1,55 @@
-package Objects;
+package src.main.java.objects;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class Player extends Saveable {
-    Score score; Tile current_tile;
+    private Score score; private Tile current_tile; private Deck deck;
+    private String name; private Boolean isAI;
 
     public Player(){
-        this.ID = UUID.randomUUID().toString();
+        super();
+        this.isAI = false;
         this.score = new Score();
         this.current_tile = null;
-    } 
+        this.deck = new Deck();
+    }
+
+    public Player(String name, Boolean isAI) {
+        super();
+        this.name = name;
+        this.isAI = true;
+        this.score = new Score();
+        this.current_tile = null;
+        this.deck = new Deck();
+    }
 
     public Player(Score score){
-        this.ID = UUID.randomUUID().toString();
+        super();
+        this.isAI = false;
         this.score = score;
         this.current_tile = null;
+        this.deck = new Deck();
     } 
 
     public Player(Tile current_tile){
-        this.ID = UUID.randomUUID().toString();
+        super();
+        this.isAI = false;
         this.score = new Score();
         this.current_tile = current_tile;
+        this.deck = new Deck();
     } 
 
-    public Player(String id, Score score, Tile current_tile){
-        this.ID = id;
+    public Player(String id, Score score, Tile current_tile, Deck deck){
+        super(id);
+        this.isAI = false;
         this.score = score;
         this.current_tile = current_tile;
+        this.deck = deck;
     }
+
+    public Deck get_deck() {
+		return deck;
+	}
 
     public int get_score(){
         return this.score.get_score();
@@ -44,16 +66,5 @@ public class Player extends Saveable {
 
     public void update_tile(Tile new_tile){
         this.current_tile = new_tile;
-    }
-    
-    @Override
-    public Hashtable<String, String> to_json(){
-        Hashtable<String, String> result = new Hashtable<String, String>();
-        result.put("id", this.ID);
-        result.put("score", this.score.get_id());
-        result.put("current tile", this.current_tile.get_id());
-        return result;
-    } 
-
-    
+    }   
 }

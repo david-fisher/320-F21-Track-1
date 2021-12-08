@@ -2,7 +2,14 @@ package src.main.java.objects;
 
 import java.util.*;
 
+// general class for a game object such as a game piece or a tile
 public class GameObject extends Saveable {
+    /*
+    parem: x - the x coordinate of the object
+           y - the y coordinate of the object
+           attributes - a hashtable of attributes, e.g. {"color", "red"}
+           rules - rules that the object holds 
+    */
 	private final int x,y; private Hashtable<String,String> attributes; private ArrayList<Rule> rules;
 
     public GameObject(ArrayList<Rule> rules, Hashtable<String,String> attributes){

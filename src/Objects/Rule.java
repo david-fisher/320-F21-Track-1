@@ -1,60 +1,52 @@
-package Objects;
+package src.main.java.objects;
 
-import java.util.*;
+public class Rule extends Saveable implements IRule {
+	private String type; 
+    
+    private int score;     
+    private RNG rng;
+    private Card card;
+    private Tile tile;
 
-public class Rule implements IRule{
-    final String ID;
-    String rule; int score; String type; RNG rng;
+    private int repeat;
+    private int constPoints;
+    private RNG variablePoints;
+    private boolean delta;
 
     public Rule(){
-        this.ID = UUID.randomUUID().toString();
+        super();
         this.score = 0;
         this.type = "";
-        this.rule = "";
         this.rng = new RNG();
     }
 
-    public Rule(String rule){
-        this.ID = UUID.randomUUID().toString();
-        this.score = 0;
-        this.type = "";
-        this.rule = rule;
-        this.rng = new RNG();
-    }
-
-    public Rule(String rule, int score){
-        this.ID = UUID.randomUUID().toString();
+    public Rule(int score){
+    	super();
         this.score = score;
         this.type = "";
-        this.rule = rule;
         this.rng = new RNG();
     }
 
-    public Rule(String rule, int score, String type){
-        this.ID = UUID.randomUUID().toString();
+    public Rule(int score, String type){
+    	super();
         this.score = score;
         this.type = type;
-        this.rule = rule;
         this.rng = new RNG();
     }
 
-    public Rule(String rule, int score, String type, RNG rng){
-        this.ID = UUID.randomUUID().toString();
+    public Rule(int score, String type, RNG rng){
+    	super();
         this.score = score;
         this.type = type;
-        this.rule = rule;
         this.rng = rng;
     }
 
-    public Rule(String id, String rule, int score, String type, RNG rng){
-        this.ID = id;
+    public Rule(String id, int score, String type, RNG rng){
+    	super(id);
         this.score = score;
         this.type = type;
-        this.rule = rule;
         this.rng = rng;
     }
-
-    public String get_id() { return this.ID; }
 
     public RNG get_rng() { return this.rng; }
 
@@ -72,14 +64,8 @@ public class Rule implements IRule{
         return this.score;
     }
 
-    public void update_rule(String new_rule, String new_type) {
-        this.rule = new_rule;
+    public void update_rule_type(String new_type) {
         this.type = new_type;
     }
 
-    public String to_string() {
-        // to-do
-        String str = "This rule is about " + this.rule;
-        return str;
-    }
 }

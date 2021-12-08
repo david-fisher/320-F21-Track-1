@@ -1,12 +1,14 @@
-package Objects;
+package src.main.java.objects;
 
 import java.util.*;
 
 /* 
 Class return an array of generated random elements
 */
-public class RNG extends Saveable{
-    int repeat, seed; double[] range; Random rand;
+public class RNG extends Saveable {
+	private int repeat, seed; private double[] range;
+    //private transient Random rand;
+    private Random rand;
     /*
     Attributes:
         ID: every random generator has an unique ID
@@ -16,7 +18,7 @@ public class RNG extends Saveable{
     */
 
     public RNG(){
-        this.ID = UUID.randomUUID().toString();
+        super();
         this.range = new double[]{0,1};
         this.repeat = 1;
         this.seed = -1;
@@ -24,7 +26,7 @@ public class RNG extends Saveable{
     }
 
     public RNG(double[] range){
-        this.ID = UUID.randomUUID().toString();
+    	super();
         this.range = range;
         this.repeat = 1;
         this.seed = -1;
@@ -32,7 +34,7 @@ public class RNG extends Saveable{
     }
 
     public RNG(String id, double[] range){
-        this.ID = id;
+    	super();
         this.range = range;
         this.repeat = 1;
         this.seed = -1;
@@ -40,7 +42,7 @@ public class RNG extends Saveable{
     }
 
     public RNG(double[] range, int repeat){
-        this.ID = UUID.randomUUID().toString();
+    	super();
         this.range = range;
         this.seed = -1;
         this.repeat = repeat;
@@ -48,7 +50,7 @@ public class RNG extends Saveable{
     }
     
     public RNG(String id, double[] range, int repeat){
-        this.ID = id;
+    	super(id);
         this.range = range;
         this.seed = -1;
         this.repeat = repeat;
@@ -56,7 +58,7 @@ public class RNG extends Saveable{
     }
     
     public RNG(String id, double[] range, int seed, int repeat){
-        this.ID = id;
+    	super(id);
         this.range = range;
         this.seed = seed;
         this.repeat = repeat;
@@ -81,7 +83,6 @@ public class RNG extends Saveable{
         return current_seed;
     }
 
-
     public double[] ran_double(){
         double[] result; result = new double[this.repeat];
         for(int i=0; i < this.repeat; i++){
@@ -101,23 +102,26 @@ public class RNG extends Saveable{
     public int[] ran_int(){
         int[] result; result = new int[this.repeat];
         for(int i=0; i < this.repeat; i++){
-            result[i] =  rand.nextInt((int)(this.range[1]-this.range[0])+1) + (int)this.range[0];
+            result[i] = rand.nextInt((int)(this.range[1]-this.range[0])+1) + (int)this.range[0];
         }
         return result;
     }
 
-    @Override
-    public Hashtable<String, String> to_json(){
-        Hashtable<String, String> result = new Hashtable<String, String>();
-        result.put("id", this.ID);
-        String ranges = "";
-        for(int i = 0; i < 2; i++){
-            ranges += " " + this.range[i];
+    public ArrayList<Rule> ran_rule(ArrayList<Rule> input){
+        ArrayList<Rule> result = new ArrayList<Rule>();
+        for(int i=0; i < this.repeat; i++){
+            int index = rand.nextInt((int)(this.range[1]-this.range[0])+1) + (int)this.range[0];
+            result.add(input.get(index));
         }
-        result.put("ranges", ranges);
-        result.put("repeat", new String(Integer.toString(this.repeat)));
-        result.put("seed", new String(Integer.toString(this.seed)));
         return result;
     }
-
+ 
+    public ArrayList<Piece> ran_piece(ArrayList<Piece> input){
+        ArrayList<Piece> result = new ArrayList<Piece>();
+        for(int i=0; i < this.repeat; i++){
+            int index = rand.nextInt((int)(this.range[1]-this.range[0])+1) + (int)this.range[0];
+            result.add(input.get(index));
+        }
+        return result;
+    }
 }
