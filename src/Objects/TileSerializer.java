@@ -1,4 +1,4 @@
-package Objects;
+package src.main.java.objects;
 
 import java.lang.reflect.Type;
 import java.util.*;
@@ -10,13 +10,11 @@ public class TileSerializer implements JsonSerializer<Tile> {
 	public JsonElement serialize(Tile tile, Type type, JsonSerializationContext context) {
 		JsonObject obj = new JsonObject();
 		
-		JsonObject neighbors = new JsonObject();
-		for (Map.Entry<String, Tile> entry : tile.get_neighbors().entrySet()) {
-			String key = entry.getKey();
-			Tile val = entry.getValue();
-			
-			neighbors.addProperty(key, val.get_id());
+		JsonArray neighbors = new JsonArray();
+		for (Tile neighbor : tile.get_neighbors()) {
+			neighbors.add(neighbor.get_id());
 		}
+		
 		JsonObject attributes = new JsonObject();
 		for (Map.Entry<String, String> entry : tile.get_attributes().entrySet()) {
 			String key = entry.getKey();
@@ -26,7 +24,7 @@ public class TileSerializer implements JsonSerializer<Tile> {
 		}
 		
 		obj.add("neighbors", neighbors);
-		obj.add("pieces", context.serialize(tile.get_peices()));
+		obj.add("deck", context.serialize(tile.get_deck()));
 		obj.add("x", context.serialize(tile.get_x()));
 		obj.add("y", context.serialize(tile.get_y()));
 		obj.add("attributes", attributes);

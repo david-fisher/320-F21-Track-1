@@ -1,8 +1,9 @@
-package Objects;
+package src.main.java.objects;
 
 import java.io.*;
 import com.google.gson.*;
 
+//Class to read and write into a JSON file
 public class JSONConverter {
 	private String fileLocation;
 	private Token token;
@@ -20,12 +21,14 @@ public class JSONConverter {
 		gson = gsonBuilder.setPrettyPrinting().create();
 	}
 	
+	//Writing into a JSON which will be stored in fileLocation
 	public void To_JSON() throws IOException {
 		FileWriter fw = new FileWriter(fileLocation);
 		gson.toJson(token, fw);
 		fw.close();
 	}
 	
+	//Reading from a JSON at fileLocation
 	public Token From_JSON() throws IOException {
 		FileReader fr = new FileReader(fileLocation);
 		BufferedReader br = new BufferedReader(fr);

@@ -1,8 +1,8 @@
-package Objects;
+package src.main.java.objects;
 
 import java.util.*;
 
-public interface IBoard{
+public interface IBoard {
     public ArrayList<Tile> get_tiles ();
     public ArrayList<Tile> update_tile (Tile new_tile);
     public ArrayList<Tile> remove_tile(Tile tile);

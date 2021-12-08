@@ -1,39 +1,55 @@
-package Objects;
+package src.main.java.objects;
 
 import java.util.*;
 
-public class Board implements IBoard{
-	
-	
-	private String ID;	
-
+public class Board extends Saveable implements IBoard {
+	/* 
+	parem: tiles - an array list of tiles on the board
+           rules - an array list of rules on the board
+		   deck  - a deck of game pieces (including cards) for the board
+	*/
 	private ArrayList<Tile> tiles;
 	private ArrayList<Rule> rules;
-	
+	private Deck deck;
 	
 	public Board(){
-		this(UUID.randomUUID().toString());
+		super();
+		this.tiles = new ArrayList<Tile>();
+		this.rules = new ArrayList<Rule>();
+		this.deck = new Deck();
 	}
 	
-	public Board(String ID) {
-		this(ID, new ArrayList<Tile>());
+	public Board(ArrayList<Tile> tiles) {
+		super();
+		this.tiles = tiles;
+		this.rules = new ArrayList<Rule>();
+		this.deck = new Deck();
 	}
 	
-	public Board(String ID, ArrayList<Tile> tiles) {
-		this(ID, tiles, new ArrayList<Rule>());
-	}
-	
-	public Board(String ID, ArrayList<Tile> tiles, ArrayList<Rule> rules) {
-		this.ID = ID;
+	public Board(ArrayList<Tile> tiles, ArrayList<Rule> rules) {
+		super();
 		this.tiles = tiles;
 		this.rules = rules;
-		
+		this.deck = new Deck();
+	}
+	
+	public Board(ArrayList<Tile> tiles, ArrayList<Rule> rules, Deck deck) {
+		super();
+		this.tiles = tiles;
+		this.rules = rules;
+		this.deck = deck;
 	}
 
-	public String getID() {
-		return ID;
+	public Board(String ID, ArrayList<Tile> tiles, ArrayList<Rule> rules, Deck deck) {
+		super(ID);
+		this.tiles = tiles;
+		this.rules = rules;
+		this.deck = deck;
 	}
 
+	public Deck get_deck() {
+		return deck;
+	}
 	
 	@Override
 	public ArrayList<Tile> get_tiles() {
@@ -43,14 +59,14 @@ public class Board implements IBoard{
 	@Override
 	// new tile ID must match ID of tile to be replaced
 	public ArrayList<Tile> update_tile(Tile new_tile) {
-		int index = tiles.indexOf(tile_findByID(new_tile.ID));
+		int index = tiles.indexOf(tile_findByID(new_tile.get_id()));
 		tiles.set(index, new_tile);
 		return tiles;	
 	}
 
 	@Override
 	public ArrayList<Tile> remove_tile(Tile tile) {
-		int index = tiles.indexOf(tile_findByID(tile.ID));
+		int index = tiles.indexOf(tile_findByID(tile.get_id()));
 		tiles.remove(index);
 		return tiles;
 	}
@@ -80,22 +96,17 @@ public class Board implements IBoard{
 
 	@Override
 	public Rule remove_rule(Rule target_rule) {
-		int index = rules.indexOf(rule_findByID(target_rule.ID));
+		int index = rules.indexOf(rule_findByID(target_rule.get_id()));
 		return rules.remove(index);
-
-		
 	}
 
 	@Override
 	public Rule rule_findByID(String ID) {
-	    return this.rules.stream().filter(rule -> rule.ID == ID).findFirst().orElse(null);
+	    return this.rules.stream().filter(rule -> rule.get_id().equals(ID)).findFirst().orElse(null);
 	}
 
 	@Override
 	public Tile tile_findByID(String ID) {
-	    return this.tiles.stream().filter(tile -> tile.ID == ID).findFirst().orElse(null);
+	    return this.tiles.stream().filter(tile -> tile.get_id().equals(ID)).findFirst().orElse(null);
 	}
-	
-	
-	
 }
