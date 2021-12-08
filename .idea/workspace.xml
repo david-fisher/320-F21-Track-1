@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="17888d9b-336f-4c48-bcd7-612c4e54769f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePlay/boardGrid/boardGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/boardGrid/boardGrid.java" afterDir="false" />
@@ -9,12 +10,16 @@
       <change beforePath="$PROJECT_DIR$/gamePlay/mainMenu/Helpers/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/mainMenu/Helpers/Helper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gamePlay/preGame/playerSelect.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamePlay/preGame/playerSelect.java" afterDir="false" />
     </list>
+=======
+    <list default="true" id="17888d9b-336f-4c48-bcd7-612c4e54769f" name="Changes" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+<<<<<<< Updated upstream
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -74,5 +79,41 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+=======
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="omnicron-temp2" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/gamePlay/mainMenu/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/gamePlay/boardGrid/boardCell.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/gamePlay/boardGrid/boardGrid.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/gamePlay/boardGrid/boardLauncher.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/gamePlay/boardGrid/boardScene.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/gamePlay/boardGrid/gamePlayUI.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+>>>>>>> Stashed changes
   </component>
 </project>
