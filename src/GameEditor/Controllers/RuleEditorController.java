@@ -33,6 +33,10 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
@@ -43,15 +47,17 @@ public class RuleEditorController {
     @FXML
     private ComboBox<String> dropdown0, dropdown1, dropdown2, dropdown3, dropdown4;
     @FXML
-    private Button transition;
+    private Rectangle selectedTile1 = null;
+    @FXML
+    private Rectangle selectedTile2 = null;
+    @FXML
+    private StackPane board;
     @FXML
     private Button addTransition;
     @FXML
-    private HBox modifyTransitionButtons;
-    @FXML
-    private Button changeTransition;
-    @FXML
-    private Button deleteTransition;
+    private Label addMessage;
+    
+    private boolean addTransitionSelected = false;
     @FXML
     private TextFlow takeFromPlayer, givePlayer, movePlayer, tileNum, numCards, numPoints;
     
@@ -318,28 +324,47 @@ public class RuleEditorController {
         }
     }
     
-    //initialize the movement rule
-    @FXML
-    void intializeMovementRule(MouseEvent event) {
-        modifyTransitionButtons.setVisible(false);
-        addTransition.setVisible(true);
+    @FXML 
+    void intializeMovementRule () {
+    	addMessage.setVisible(false);
     }
     
     @FXML
-    void selectTransition(MouseEvent event) {
-        addTransition.setVisible(false);
-        modifyTransitionButtons.setVisible(true);
+    void clickAddTransition(MouseEvent event) {
+    	addTransitionSelected = !addTransitionSelected;
+    	if (addTransitionSelected) {
+    		addMessage.setVisible(true);
+    		addTransition.setText("Cancel");
+    	} else {
+    		// cancel selected
+    		addTransition.setText("Add Transition");
+    		addMessage.setVisible(false);
+    		selectedTile1.setFill(Color.BLACK);
+    		selectedTile2.setFill(Color.BLACK);
+    		selectedTile1 = null;
+    		selectedTile2 = null;
+    	}
     }
     
     @FXML
-    void changeTransition(MouseEvent event) {
-        currentTransition = (currentTransition+1) % 3;
-        transition.setText(transitions[currentTransition]);
-    }
-
-    @FXML
-    void deleteTransition(MouseEvent event) {
-        transition.setVisible(false);
+    void selectTile(MouseEvent event) {
+    	if(addTransitionSelected) {
+	    	Rectangle tile = (Rectangle) event.getSource();
+	    	if (selectedTile1 == null) {
+	    		selectedTile1 = tile;
+	    		tile.setFill(Color.RED);
+	    	} else if (selectedTile2 == null) {
+	    		selectedTile2 = tile;
+	    		tile.setFill(Color.RED);
+	    		Line line = new Line(selectedTile1.getTranslateX(), selectedTile1.getTranslateY(), selectedTile2.getTranslateX(), selectedTile2.getTranslateY());
+	    		
+	    		line.setTranslateX(tile.getWidth() / 2);
+	    		
+	    		line.setTranslateY(tile.getHeight() / 2);
+	    		line.setStroke(Color.WHITE);
+	    		board.getChildren().add(line);
+	    	} 
+    	}
     }
 
 }

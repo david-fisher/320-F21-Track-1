@@ -14,7 +14,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -23,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.RuleEditorController" stylesheets="@rule.css">
+<BorderPane stylesheets="@rule.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.RuleEditorController">
    <top>
       <TabPane minHeight="0.0" minWidth="700.0" prefHeight="0.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0" tabMaxWidth="118.0" tabMinHeight="50.0" tabMinWidth="118.0" BorderPane.alignment="CENTER" />
    </top>
@@ -44,14 +43,10 @@
                            <children>
                               <VBox prefHeight="278.0" prefWidth="201.0">
                                  <children>
-                                    <Label contentDisplay="CENTER" text="Choose a tile to add a rule" textAlignment="CENTER">
-                                       <padding>
-                                          <Insets bottom="5.0" />
-                                       </padding></Label>
                                     <Pane prefHeight="234.0" prefWidth="201.0">
                                        <children>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e1" height="214.0" layoutY="6.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
-                                          <TextFlow fx:id="tileNum1" layoutX="14.0" layoutY="14.0">
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e1" height="236.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
+                                          <TextFlow fx:id="tileNum1" layoutX="14.0" layoutY="29.0">
                                              <children>
                                                 <CheckBox fx:id="tile1" mnemonicParsing="false" text="Tile 1" />
                                              </children>
@@ -61,6 +56,11 @@
                                                 <CheckBox fx:id="tile2" mnemonicParsing="false" text="Tile 2" />
                                              </children>
                                           </TextFlow>
+                                          <Label contentDisplay="CENTER" layoutX="8.0" layoutY="-1.0" text="Choose a tile to add a rule" textAlignment="CENTER">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -77,9 +77,9 @@
                                             <content>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" pickOnBounds="false" prefHeight="411.0" prefWidth="237.0">
                                                    <children>
-                                                      <Label layoutX="9.0" layoutY="6.0" prefHeight="17.0" prefWidth="305.0" text="Drag  actions to the box and click OK to save">
+                                                      <Label layoutX="-1.0" layoutY="1.0" prefHeight="26.0" prefWidth="311.0" text="Drag actions to the box and click save">
                                                          <font>
-                                                            <Font size="12.0" />
+                                                            <Font size="7.0" />
                                                          </font>
                                                       </Label>
                                                       <Pane layoutX="8.0" layoutY="27.0" prefHeight="124.0" prefWidth="224.0">
@@ -94,9 +94,9 @@
                                                             <Label accessibleText="Give player " text="Give player " />
                                                          </children>
                                                       </TextFlow>
-                                                      <TextFlow fx:id="movePlayer" layoutX="14.0" layoutY="189.0" prefHeight="18.0" prefWidth="86.0">
+                                                      <TextFlow fx:id="movePlayer" layoutX="14.0" layoutY="189.0" prefHeight="26.0" prefWidth="100.0">
                                                          <children>
-                                                            <Label accessibleText="Move player to " prefHeight="17.0" prefWidth="85.0" text="Move player to " />
+                                                            <Label accessibleText="Move player to " prefHeight="26.0" prefWidth="103.0" text="Move player to " />
                                                          </children>
                                                       </TextFlow>
                                                       <TextFlow fx:id="tileNum" layoutX="154.0" layoutY="193.0">
@@ -105,7 +105,7 @@
                                                             <TextField prefHeight="26.0" prefWidth="33.0" promptText="_" />
                                                          </children>
                                                       </TextFlow>
-                                                      <TextFlow fx:id="numCards" layoutX="98.0" layoutY="237.0">
+                                                      <TextFlow fx:id="numCards" layoutX="125.0" layoutY="238.0">
                                                          <children>
                                                             <TextField prefHeight="26.0" prefWidth="33.0" promptText="_" />
                                                             <Label accessibleText="cards " text="  cards" />
@@ -162,30 +162,15 @@
                               </VBox>
                               <VBox alignment="TOP_CENTER" prefHeight="276.0" prefWidth="307.0" spacing="10.0">
                                  <children>
-                                    <FlowPane hgap="10.0" prefHeight="219.0" prefWidth="306.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;" vgap="10.0">
+                                    <StackPane fx:id="board" alignment="TOP_LEFT" prefHeight="240.0" prefWidth="200.0" style="-fx-background-color: E5E5E5;">
                                        <children>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bcc1c6" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
-                                          <Button fx:id="transition" mnemonicParsing="false" onMouseClicked="#selectTransition" text="→" />
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bcc1c6" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                    </FlowPane>
-                                    <StackPane prefHeight="37.0" prefWidth="306.0">
-                                       <children>
-                                          <Button fx:id="addTransition" mnemonicParsing="false" text="Add Transition" />
-                                          <HBox fx:id="modifyTransitionButtons" alignment="CENTER" prefHeight="103.0" prefWidth="314.0" spacing="10.0">
-                                             <children>
-                                                <Button mnemonicParsing="false" onMouseClicked="#changeTransition" text="Change Transition" />
-                                                <Button fx:id="deleteTransition" mnemonicParsing="false" onMouseClicked="#deleteTransition" text="Delete Tansition" />
-                                             </children>
-                                          </HBox>
+                                          <Rectangle fx:id="t1" arcHeight="5.0" arcWidth="5.0" fill="#101111" height="45.0" onMousePressed="#selectTile" stroke="BLACK" strokeType="INSIDE" width="45.0" />
+                                          <Rectangle fx:id="t3" arcHeight="5.0" arcWidth="5.0" fill="#101111" height="45.0" onMousePressed="#selectTile" stroke="BLACK" strokeType="INSIDE" translateX="100.0" width="45.0" />
+                                          <Rectangle fx:id="t2" arcHeight="5.0" arcWidth="5.0" fill="#101111" height="45.0" onMousePressed="#selectTile" stroke="BLACK" strokeType="INSIDE" translateY="100.0" width="45.0" />
                                        </children>
                                     </StackPane>
+                                    <Button fx:id="addTransition" mnemonicParsing="false" onMousePressed="#clickAddTransition" text="Add Transition" />
+                                    <Label fx:id="addMessage" text="Select two tiles to add a transition." />
                                  </children>
                               </VBox>
                            </children>
@@ -200,6 +185,40 @@
                      </children>
                   </StackPane>
                </graphic>
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Save Rule" />
+                              <Button mnemonicParsing="false" prefWidth="56.0" text="Cancel" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="21.0" layoutY="62.0" prefHeight="276.0" prefWidth="460.0">
+                           <children>
+                              <VBox prefHeight="276.0" prefWidth="155.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Allow multiple players on the same tile" wrapText="true" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="276.0" prefWidth="307.0" spacing="10.0">
+                                 <children>
+                                    <StackPane fx:id="board" alignment="TOP_LEFT" prefHeight="240.0" prefWidth="200.0">
+                                       <children>
+                                          <Rectangle fx:id="t1" arcHeight="5.0" arcWidth="5.0" fill="#101111" height="45.0" onMousePressed="#selectTile" stroke="BLACK" strokeType="INSIDE" width="45.0" />
+                                          <Rectangle fx:id="t3" arcHeight="5.0" arcWidth="5.0" fill="#101111" height="45.0" onMousePressed="#selectTile" stroke="BLACK" strokeType="INSIDE" translateX="100.0" width="45.0" />
+                                          <Rectangle fx:id="t2" arcHeight="5.0" arcWidth="5.0" fill="#101111" height="45.0" onMousePressed="#selectTile" stroke="BLACK" strokeType="INSIDE" translateY="100.0" width="45.0" />
+                                       </children>
+                                    </StackPane>
+                                    <Button fx:id="addTransition" mnemonicParsing="false" onMousePressed="#clickAddTransition" text="Add Transition" />
+                                    <Label fx:id="addMessage" text="Select two tiles to add a transition." />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </content>
             </Tab>
             <Tab closable="false">
                <content>
