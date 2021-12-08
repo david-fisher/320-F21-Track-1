@@ -42,6 +42,8 @@ public class inventory {
     private static final ImageView background = new ImageView();
     private static Button closeButton = new Button("Close");
 
+    private static boolean contentsUpdated = true;
+
     // get a duplicated background
     private static Image getBackground(Stage stage) {
         // get coordinates
@@ -142,6 +144,9 @@ public class inventory {
 
     //TODO: Get an array list and loop through that to add all images and add scroll bar
     protected static void showCards(){
+
+        if (!contentsUpdated) { return; }   // don't duplicate contents
+
         try {
             ImageView cardTest = getDummyData();
             HBox hBox_card = new HBox();
@@ -155,6 +160,8 @@ public class inventory {
             StackPane cards = new StackPane();
             cards.getChildren().addAll(oneCardPane);
             contents.getChildren().add(cards);
+            canvas.getChildren().add(contents);
+            contentsUpdated = false;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -171,7 +178,6 @@ public class inventory {
 
         showCards();
 
-        canvas.getChildren().add(contents);
         blurBackground.getChildren().setAll(background, canvas);
         blurBackground.setStyle("-fx-background-color: null");
 
