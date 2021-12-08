@@ -153,6 +153,18 @@
     -fx-min-width: 40;
 }
 
+#greeting_label1{
+    -fx-font: bold 30pt "Helvetica";
+    -fx-text-fill: rgb(3, 29, 85);
+    -fx-text-alignment: center ;
+}
+
+#greeting_label2{
+    -fx-font: bold 25pt "Helvetica";
+    -fx-text-fill: rgb(3, 29, 85);
+    -fx-text-alignment: center ;
+}
+
 .combo-box .combo-box, .list-cell, .list-view{
     -fx-background-color: #282c34;
     -fx-text-fill: white;

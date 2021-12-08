@@ -3,7 +3,9 @@ package GameEditor.Controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
@@ -57,6 +60,13 @@ public class RuleEditorController {
     private String[] deleteButtons = { "d0", "d1", "d2", "d3", "d4" };
     private double orgSceneX, orgSceneY;
     private boolean turnRuleClicked = false;
+    private Set<TextFlow> draggedRules = new HashSet<TextFlow>();
+    @FXML
+    private TextFlow tileNum1, tileNum2;
+    @FXML
+    private CheckBox tile1, tile2;
+    @FXML
+    private Label tileName, rule1;
 
 
     @FXML
@@ -90,12 +100,14 @@ public class RuleEditorController {
         dragAndDrop(numCards);
         dragAndDrop(tileNum);
         dragAndDrop(numPoints);
+        checked(tileNum1);
+        checked(tileNum2);
     }
 
     //drag and drop for the actions in the tile rule editor
     @FXML
     void dragAndDrop(TextFlow action)
-    {
+    {	
         action.setCursor(Cursor.HAND);
         action.setOnMousePressed((t) -> {
             orgSceneX = t.getSceneX();
@@ -111,7 +123,41 @@ public class RuleEditorController {
             c.setTranslateY(c.getTranslateY() + offsetY);
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
+            
         });
+        action.setOnMouseReleased((t) -> {
+        	if (orgSceneX >385 && orgSceneX<540 && orgSceneY > 155 && orgSceneY <260)
+    		{
+            	draggedRules.add(action);
+    		}
+        	else
+        	{
+        		draggedRules.remove(action);
+        	}
+        });
+    }
+    
+    @FXML
+    //prints the rules that are dragged into the box
+    void saveButton()
+    {		
+		System.out.println(draggedRules);
+    }
+    
+    @FXML
+    void checked(TextFlow action)
+    {
+    	action.getChildren().forEach((tile) -> tile.setOnMouseClicked((t) -> {
+    		CheckBox c = (CheckBox) (t.getSource());
+    		if(c.isSelected())
+    		{
+    			tileName.setText("Tile Selected: tile 1");
+    		}
+    		else
+    		{
+    			tileName.setText("");
+    		}
+    	}));
     }
 
     //adding a drop down box for the turn rule editor

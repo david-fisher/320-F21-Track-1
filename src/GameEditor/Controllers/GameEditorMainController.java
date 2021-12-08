@@ -1,24 +1,27 @@
 package GameEditor.Controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
+import Objects.JSONConverter;
+import Objects.Token;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import mainMenu.Main;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 public class GameEditorMainController {
 
@@ -26,15 +29,7 @@ public class GameEditorMainController {
     private ResourceBundle resources;
 
     @FXML
-    private ComboBox<String> dropdown0;
-    @FXML
-    private ComboBox<String> dropdown1;
-    @FXML
-    private ComboBox<String> dropdown2;
-    @FXML
-    private ComboBox<String> dropdown3;
-    @FXML
-    private ComboBox<String> dropdown4;
+    private ComboBox<String> dropdown0, dropdown1, dropdown2, dropdown3, dropdown4;
     @FXML
     private Button transition;
     @FXML
@@ -104,36 +99,6 @@ public class GameEditorMainController {
             }
         }
     }
-
-    @FXML
-    void mousePressed(MouseEvent event) {
-        ((Node) event.getSource()).setCursor(Cursor.HAND);
-        ((Node) event.getSource()).setOnMouseDragged((t) -> {
-            double offsetX = t.getSceneX() - orgSceneX;
-            double offsetY = t.getSceneY() - orgSceneY;
-
-            TextFlow c = (TextFlow) (t.getSource());
-
-            c.setTranslateX(c.getTranslateX() + offsetX);
-            c.setTranslateY(c.getTranslateY() + offsetY);
-
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-        });
-    }
-
-    @FXML
-    void mouseReleased(MouseEvent event) {
-
-        ((Node) event.getSource()).setOnMousePressed((t) -> {
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-
-            TextFlow c = (TextFlow) (t.getSource());
-            c.toFront();
-
-        });
-    }
     
     @FXML
     void intializeMovementRule(MouseEvent event) {
@@ -172,13 +137,50 @@ public class GameEditorMainController {
         else {}
     }
 
+    //TODO
+    /*
+        Confirmation prompt of game being saved.
+        Don't exit the scene until pressing the actual exit button.
+        After save, can continue to edit. If saved, and editing, just re-edit in
+        the database, rather than a new savedGame.
+     */
+    
     @FXML
-    //controller method to add BoardEditor node to corresponding tab in GameEditorMain
-    private Tab boardEditor;
+    public void saveGame(Event event) throws IOException {
+        Node node = (Node) event.getSource();
+        //saveGame
+        TextField text = (TextField) node.getParent().getChildrenUnmodifiable().get(0);
+        String gameName = text.getText();
+        if (gameName.equals("")) {
+            gameName = "Game" + new Random().nextInt(10000);
+        }
+        Token newgame = new Token(gameName);
+        JSONConverter savedGames = new JSONConverter(newgame, "test.json");
+        savedGames.To_JSON();
 
+        popup(event, "Game has been saved");
+        exitToMainMenu(node);
 
+    }
 
+    public void exitToMainMenu(Node node) throws IOException {
+        //change stage to mainMenu stage from gamePlay
+        Stage appStage = (Stage) node.getScene().getWindow();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("MainMenuFXML.fxml")));
+        Scene scene = new Scene(root);
+        appStage.setScene(scene);
+        appStage.show();
+    }
 
-
+    //creates a popup window
+    @FXML
+    public void popup(Event event, String argument) {
+        BorderPane borderPane = new BorderPane();
+        Scene scene = new Scene(borderPane, 300, 200);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle(argument);
+        stage.show();
+    }
 
 }
