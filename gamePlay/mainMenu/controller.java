@@ -1,10 +1,13 @@
 package mainMenu;
 
+import GameEditor.BoardEditor;
+import GameEditor.GameEditorMain;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import boardGrid.*;
@@ -20,13 +23,24 @@ public class controller {
         Scene scene = new Scene(root);
         stage.setScene(scene);
     }
-
     @FXML
-    public void toEdit(javafx.event.ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    public void toEditorMenu(javafx.event.ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("editormenu.fxml")));
         Scene scene = new Scene(root);
         stage.setScene(scene);
+    }
+    @FXML
+    public void toEdit(javafx.event.ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("editormenu.fxml")));
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
+        Parent menu = FXMLLoader.load(Objects.requireNonNull(GameEditorMain.class.getResource("Views/GameEditorMain.fxml")));
+        Scene mainMenu = new Scene(menu);
+        TabPane tabpane = (TabPane) menu.getChildrenUnmodifiable().get(0);
+        tabpane.getTabs().get(0).setContent(new BoardEditor().startBoardEditor(stage));
+        stage.setScene(mainMenu);
     }
 
     @FXML

@@ -1,87 +1,102 @@
 package boardGrid;
 
 import Helpers.Helper;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import mainMenu.Main;
+import loadSave.exitGame;
+import loadSave.saveGame;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Arrays;
 
 public class gamePlayUI {
 
     public static Scene makeScene(Stage primaryStage, ArrayList<String> players, ArrayList<ArrayList<StackPane>> stackTable) {
 
+        ScrollPane scrollView = new ScrollPane();
         BorderPane mainScene = new BorderPane();
-        VBox leftStack = new VBox(150);
-        VBox rightStack = new VBox();
+        BorderPane leftStack = new BorderPane();
+        VBox rightStack = new VBox(10);
         VBox topStack = new VBox();
 
 
         // right
-        Button saveButton = Helper.ButtonMaker("Save", null);
-        saveButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Stage saveStage = new Stage();
-                Parent root = null;
-                try {
-                    Parent r = FXMLLoader.load(Objects.requireNonNull(boardGrid.class.getResource("pause.fxml")));
-                    Scene scene = new Scene(r);
-                    saveStage.setScene(scene);
-                    saveStage.initModality(Modality.APPLICATION_MODAL);
-                    saveStage.show();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        Button saveButton = new Button("Pause");
+        saveButton.setOnAction(event -> {
+            saveGame.popSave(primaryStage);
         });
-        Button editButton = Helper.ButtonMaker("Edit", null);
+//        saveButton.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                Stage saveStage = new Stage();
+//                Parent root = null;
+//                try {
+//                    Parent r = FXMLLoader.load(Objects.requireNonNull(boardGrid.class.getResource("pause.fxml")));
+//                    Scene scene = new Scene(r);
+//                    saveStage.setScene(scene);
+//                    saveStage.initModality(Modality.APPLICATION_MODAL);
+//                    saveStage.show();
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+
         
-        Button exitButton = Helper.ButtonMaker("Exit", null);
-        exitButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Platform.exit();
-            }
-        });
+        Button exitButton = new Button("Exit");
+        exitButton.setOnAction((event -> {
+            exitGame.popExit(primaryStage);
+        }));
 
+        saveButton.setId("board_side_button");
 
-        rightStack.getChildren().addAll(saveButton, editButton, exitButton);
+        exitButton.setId("board_side_button");
+
+        //TODO: Remove this test stuff during integration
+        String[] colorsTest = {"Blue","Red", "Orange", "Yellow"};
+        ArrayList<Integer> deck = new ArrayList<>(Arrays.asList(6, 6, 6, 12, 400, 7, 8, 9));
+        RNG rng = new RNG(1, 20, colorsTest, deck);
+
+        rightStack.getChildren().addAll(saveButton, exitButton, rng.getObjects());
 
 
         // board
-        GridPane board = boardGrid.createBoard(players, stackTable);
-        moveInfo infoBoard = new moveInfo("Move forward 4 spaces and lose next turn or stay in current space");
+        GridPane board = boardGrid.createBoard(primaryStage, players, stackTable);
+        inventory Inventory = new inventory();
+        Button InventoryButton = Inventory.getInventoryButton(primaryStage);
 
 
         // top
         topStack.getChildren().addAll(boardGrid.createTurns());
 
         // left
-        leftStack.getChildren().addAll(infoBoard.getMoveInfo(), boardGrid.createScore());
-        leftStack.setAlignment(Pos.BOTTOM_CENTER);
+        BorderPane.setAlignment(InventoryButton, Pos.CENTER_LEFT);
+        leftStack.setBottom(boardGrid.createScore());
+        leftStack.setLeft(InventoryButton);
 
+        // main scene
         mainScene.setCenter(board);
         mainScene.setLeft(leftStack);
         mainScene.setRight(rightStack);
         mainScene.setTop(topStack);
+        mainScene.setBackground(
+                new Background(
+                        new BackgroundFill(Helper.backgroundStyle(), null, null)
+                )
+        );
 
-        return new Scene(mainScene);
+        scrollView.setFitToHeight(true);
+        scrollView.setFitToWidth(true);
+        scrollView.setContent(mainScene);
+
+        Scene scene = new Scene(scrollView);
+        scene.getStylesheets().add("boardGrid/style.css");
+
+        return scene;
     }
 }

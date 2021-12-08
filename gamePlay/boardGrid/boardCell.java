@@ -9,6 +9,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import loadSave.winGame;
 
 public class boardCell {
     private final ImageView imageView;
@@ -67,7 +69,9 @@ public class boardCell {
         this.stack = s;
     }
 
-    public StackPane getCellObject(boardScore score, turns currentTurn){
+    protected StackPane getStack() { return this.stack; }
+
+    public StackPane getCellObject(Stage primaryStage, boardScore score, turns currentTurn){
         if (stack == null){ // if binary-brother can provide the cell stack pane for us, we don't have to recreate it
             stack = new StackPane();
 
@@ -97,6 +101,12 @@ public class boardCell {
                     score.updateScore(String playerName, int amount)
                      */
                     score.addOne(currentTurn.getCurrentPlayer());
+
+                    if (score.getPlayerScoreByName(currentTurn.getCurrentPlayer()) >= 5){
+                        winGame.winScene(primaryStage, currentTurn.getCurrentPlayer());
+                        return;
+                    }
+
                     currentTurn.next();
                 }
         );
