@@ -5,19 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import javafx.animation.PathTransition;
-import javafx.animation.Timeline;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,7 +19,6 @@ public class boardLauncher extends Application {
             for (int j = 0; j < size[1]; j++){
                 row.add(null);
             }
-
             stackTable.add(row);
         }
 
@@ -43,6 +29,7 @@ public class boardLauncher extends Application {
 
         Scene scene = gamePlayUI.makeScene(stage, playerList, stackTable);
         stage.setTitle("Game Board");
+
 
         stage.setScene(scene);
         stage.show();

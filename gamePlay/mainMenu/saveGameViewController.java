@@ -93,10 +93,10 @@ public class saveGameViewController {
         TableColumn<Helper.Games, Void> buttonColumn = new TableColumn<>("");
 
         Callback<TableColumn<Helper.Games, Void>, TableCell<Helper.Games, Void>> cellFactory =
-                new Callback<TableColumn<Helper.Games, Void>, TableCell<Helper.Games, Void>>() {  // callback function
+                new Callback<>() {  // callback function
                     @Override
                     public TableCell<Helper.Games, Void> call(final TableColumn<Helper.Games, Void> param) {
-                        return new TableCell<Helper.Games, Void>() {
+                        return new TableCell<>() {
 
                             private final Button button = new Button("Load");   // TODO: load button style
                             {

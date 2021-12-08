@@ -10,8 +10,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.scene.Node;
-
 
 import java.util.ArrayList;
 
@@ -113,24 +111,10 @@ public class playerSelect {
             primaryStage.setScene(boardGrid.gamePlayUI.makeScene(primaryStage, nameList, boardTable));
         }));
 
-        root.addRow(getRowCount(root), submitButton);
+        root.addRow(root.getRowCount(), submitButton);
         root.setAlignment(Pos.CENTER);
 
         return root;
-    }
-
-    private static int getRowCount(GridPane pane) {
-        int numRows = pane.getRowConstraints().size();
-        for (int i = 0; i < pane.getChildren().size(); i++) {
-            Node child = pane.getChildren().get(i);
-            if (child.isManaged()) {
-                Integer rowIndex = GridPane.getRowIndex(child);
-                if(rowIndex != null){
-                    numRows = Math.max(numRows,rowIndex+1);
-                }
-            }
-        }
-        return numRows;
     }
 
 }

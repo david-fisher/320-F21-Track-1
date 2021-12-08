@@ -71,7 +71,7 @@ public class boardCell {
 
     protected StackPane getStack() { return this.stack; }
 
-    public StackPane getCellObject(boardScore score, turns currentTurn){
+    public StackPane getCellObject(Stage primaryStage, boardScore score, turns currentTurn){
         if (stack == null){ // if binary-brother can provide the cell stack pane for us, we don't have to recreate it
             stack = new StackPane();
 

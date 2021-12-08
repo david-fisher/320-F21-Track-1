@@ -4,13 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -104,36 +98,6 @@ public class Helper {
         Text t = new Text(s);
         t.setFont(Font.font("Arial Regular", FontWeight.NORMAL, FontPosture.ITALIC, 20));
         return t;
-    }
-
-    public static LinearGradient backgroundStyle() {
-        return new LinearGradient(
-                0, 1, 1, 1, true,
-                CycleMethod.NO_CYCLE,
-                new Stop(0, Color.web(
-                        "#191919"
-                )),
-                new Stop(1, Color.web(
-                        "#031d55"
-                        , 0.5
-                ))
-        );
-    }
-
-    public static Background backgroundColor(){
-        return new Background(
-                new BackgroundFill(
-                        Color.rgb(33, 37, 43), null, null
-                )
-        );
-    }
-
-    public static Background saveBackground(){
-        return new Background(
-                new BackgroundFill(
-                        Color.rgb(55, 55, 60), null, null
-                )
-        );
     }
 
 

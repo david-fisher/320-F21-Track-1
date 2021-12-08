@@ -24,8 +24,6 @@ public class GameEditorMain extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent menu = FXMLLoader.load(getClass().getResource("Views/GameEditorMain.fxml"));
         Scene mainMenu = new Scene(menu);
-        // Using external file to hide the broken 'Custom color' section on ColorPicker
-        mainMenu.getStylesheets().add(getClass().getResource("ColorPickerMod.css").toExternalForm());
         TabPane tabpane = (TabPane) menu.getChildrenUnmodifiable().get(0);
         tabpane.getTabs().get(0).setContent(new BoardEditor().startBoardEditor(primaryStage));
         primaryStage.setScene(mainMenu);

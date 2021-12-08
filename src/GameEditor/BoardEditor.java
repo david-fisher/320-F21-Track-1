@@ -56,19 +56,19 @@ public void tabs(Group root) {
     Rectangle sideBar = new Rectangle();
     sideBar.setY(150);
     sideBar.setWidth(100);
-    sideBar.setHeight(460);
+    sideBar.setHeight(410);
     sideBar.setArcWidth(20);
     sideBar.setArcHeight(20);
     sideBar.setFill(Color.rgb(220, 220, 220));
     root.getChildren().add(sideBar);
 }
 
-public StackPane createRectangle(boardGrid root, int x, int y) {
+public StackPane createRectangle(boardGrid root) {
     Rectangle rectangle = new Rectangle(50,50);
     TextField text = new TextField ("+1");
     //Making the TextField transparent, so we dont see the whole input box
     text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
-    text.setMaxWidth(60);
+    text.setMaxWidth(30);
     text.setAlignment(Pos.CENTER);
     
     //Adding shadow for text, for better readability
@@ -88,12 +88,12 @@ public StackPane createRectangle(boardGrid root, int x, int y) {
     layout.setMaxWidth(50);
     layout.setLayoutX(10);
     layout.setLayoutY(180);
-    dragNDrop_StackPane(layout,root, x, y);
+    dragNDrop_StackPane(layout,root);
     rightClick_StackPane(layout,root);
     return layout;
 }
 
-public StackPane createCircle(boardGrid root, int x, int y) {
+public StackPane createCircle(boardGrid root) {
     Circle circle = new Circle(25);
     TextField text = new TextField ("Circle");
     //Making the TextField transparent, so we dont see the whole input box
@@ -115,12 +115,12 @@ public StackPane createCircle(boardGrid root, int x, int y) {
     		);
     layout.setLayoutX(10);
     layout.setLayoutY(250);
-    dragNDrop_StackPane(layout,root, x, y);
+    dragNDrop_StackPane(layout,root);
     rightClick_StackPane(layout,root);
     return layout;
 }
 
-public StackPane createTriangle(boardGrid root, int x, int y) {
+public StackPane createTriangle(boardGrid root) {
     Polygon triangle = new Polygon();
     triangle.getPoints().addAll(new Double[]{
             50.0, 325.0,
@@ -149,12 +149,12 @@ public StackPane createTriangle(boardGrid root, int x, int y) {
     		);
     layout.setLayoutX(10);
     layout.setLayoutY(320);
-    dragNDrop_StackPane(layout,root, x, y);
+    dragNDrop_StackPane(layout,root);
     rightClick_StackPane(layout,root);
     return layout;
 }
 
-public StackPane createPentagon(boardGrid root, int x, int y) {
+public StackPane createPentagon(boardGrid root) {
     Polygon pentagon = new Polygon();
     pentagon.getPoints().addAll(new Double[]{
             50.0, 400.0,
@@ -184,12 +184,12 @@ public StackPane createPentagon(boardGrid root, int x, int y) {
     		);
     layout.setLayoutX(10);
     layout.setLayoutY(400);
-    dragNDrop_StackPane(layout,root, x, y);
+    dragNDrop_StackPane(layout,root);
     rightClick_StackPane(layout,root);
     return layout;
 }
 
-public StackPane createHexagon(boardGrid root, int x, int y) {
+public StackPane createHexagon(boardGrid root) {
     Polygon hexagon = new Polygon();
     hexagon.getPoints().addAll(new Double[]{
             62.5, 485.0,
@@ -220,12 +220,12 @@ public StackPane createHexagon(boardGrid root, int x, int y) {
     		);
     layout.setLayoutX(10);
     layout.setLayoutY(490);
-    dragNDrop_StackPane(layout,root, x, y);
+    dragNDrop_StackPane(layout,root);
     rightClick_StackPane(layout,root);
     return layout;
 }
 
-public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
+public void dragNDrop_StackPane(StackPane sp, boardGrid root) {
     // Drag n' Drop Interaction *******************************************************
         sp.setCursor(Cursor.HAND);
     
@@ -254,30 +254,30 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	    sp.setOnMouseReleased((t) -> {       
 	        StackPane c = (StackPane) (t.getSource());
 	       
-            double tile_size = 50;
-	        double snapX = (c.getTranslateX()) % tile_size;
-	        if (snapX > tile_size/2){
-	        	snapX = (c.getTranslateX()) - snapX + tile_size;
+	
+	        double snapX = (c.getTranslateX()) % 50;
+	        if (snapX > 25.0){
+	        	snapX = (c.getTranslateX()) - snapX + 50;
 	        }
 	        else {
 	        	snapX = (c.getTranslateX()) - snapX;
 	        }
-	        if (t.getSceneX() >= 100 && t.getSceneX() < (100 + x*tile_size)) {
+	        if (t.getSceneX() >= 100 && t.getSceneX() < 650) {
 	            c.setTranslateX(snapX);
 	        }
 	        else {
 	        	c.setTranslateX(0);
 	        }
 	             
-	        double snapY = (c.getTranslateY()) % tile_size;
-	        if (snapY > tile_size/2){
-	        	snapY = (c.getTranslateY()) - snapY + tile_size;
+	        double snapY = (c.getTranslateY()) % 50;
+	        if (snapY > 25.0){
+	        	snapY = (c.getTranslateY()) - snapY + 50;
 	        }
 	        else {
 	        	snapY = (c.getTranslateY()) - snapY;
 	        }
 	        
-	        if (t.getSceneY() >= 100 && t.getSceneY() < (100 + y*tile_size)) {
+	        if (t.getSceneY() >= 100 && t.getSceneY() < 650) {
 	            c.setTranslateY(snapY);
 	        }
 	        else {
@@ -289,14 +289,14 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	        if (xTemp < 100) {
 	        	for (int i = 0; i < c.getChildren().size(); i++) {
 	        		if (c.getChildren().toArray()[i] instanceof Rectangle) {
-	        			StackPane temp = createRectangle(root, x, y);
+	        			StackPane temp = createRectangle(root);
 	        			root.getBoard().add(temp, 0, 0);
 	        			temp.setTranslateX(-75);
 	        	    	temp.setTranslateY(75);
 	        			break;
 	        		}
 	        		else if (c.getChildren().toArray()[i] instanceof Circle) {
-	        			StackPane temp = createCircle(root, x, y);
+	        			StackPane temp = createCircle(root);
 	        			root.getBoard().add(temp, 0, 0);
 	        			temp.setTranslateX(-75);
 	        	    	temp.setTranslateY(150);
@@ -304,19 +304,19 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	        		}
 	        		else if (c.getChildren().toArray()[i] instanceof Polygon) {
 	        			if (((Polygon)(c.getChildren().toArray()[i])).getPoints().size() == 6) {
-	        				StackPane temp = createTriangle(root, x, y);
+	        				StackPane temp = createTriangle(root);
 		        			root.getBoard().add(temp, 0, 0);
 		        			temp.setTranslateX(-75);
 		        	    	temp.setTranslateY(225);
 	            			}
 	            		else if (((Polygon)(c.getChildren().toArray()[i])).getPoints().size() == 10) {
-	        				StackPane temp = createPentagon(root, x, y);
+	        				StackPane temp = createPentagon(root);
 		        			root.getBoard().add(temp, 0, 0);
 		        			temp.setTranslateX(-75);
 		        	    	temp.setTranslateY(300);
 	            			}
 	            		else {
-	            			StackPane temp = createHexagon(root, x, y);
+	            			StackPane temp = createHexagon(root);
 		        			root.getBoard().add(temp, 0, 0);
 		        			temp.setTranslateX(-75);
 		        	    	temp.setTranslateY(375);
@@ -349,10 +349,7 @@ public void rightClick_StackPane(StackPane sp, boardGrid root){
          
         //Show open file dialog
         File file = fileChooser.showOpenDialog(null);
-        //Store image path into sp
-        //Can be retrieve using sp.getUserData()
-        String imgPath = file.getAbsolutePath();
-        if(imgPath!=null){sp.setUserData(imgPath);}
+                  
         try {
             BufferedImage bufferedImage = ImageIO.read(file);
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
@@ -403,11 +400,13 @@ backgrounduploader_item.setOnAction(UploadEventHandler);
 public class boardGrid {
     // grid pane
     private GridPane board = new GridPane();
+    private int height = 10, width = 10;
     
-    public void createBoard(int x, int y){
+    public void createBoard(){
     	board.setGridLinesVisible(true);
+
         // column constraints
-        for (int i = 0; i < x; i++){
+        for (int i = 0; i <= width; i++){
             ColumnConstraints column = new ColumnConstraints();
             column.setMinWidth(50);
             column.setMaxWidth(50);
@@ -415,7 +414,7 @@ public class boardGrid {
         }
 
         // row constraints
-        for (int j  = 0; j < y; j++){
+        for (int j  = 0; j <= height; j++){
             RowConstraints row = new RowConstraints();
             row.setMinHeight(50);
             row.setMaxHeight(50);
@@ -423,92 +422,74 @@ public class boardGrid {
         }
     }
     
-    public void addInitialPieces(int x, int y) {
-    	StackPane tmp1 = createRectangle(this, x, y);
+    public void addInitialPieces() {
+    	StackPane tmp1 = createRectangle(this);
     	board.add(tmp1, 0, 0);
     	tmp1.setTranslateX(-75);
     	tmp1.setTranslateY(75);
     	
-    	StackPane tmp2 = createCircle(this, x, y);
+    	StackPane tmp2 = createCircle(this);
     	board.add(tmp2, 0, 0);
     	tmp2.setTranslateX(-75);
     	tmp2.setTranslateY(150);
     	
-    	StackPane tmp3 = createTriangle(this, x, y);
+    	StackPane tmp3 = createTriangle(this);
     	board.add(tmp3, 0, 0);
     	tmp3.setTranslateX(-75);
     	tmp3.setTranslateY(225);
     	
-    	StackPane tmp4 = createPentagon(this, x, y);
+    	StackPane tmp4 = createPentagon(this);
     	board.add(tmp4, 0, 0);
     	tmp4.setTranslateX(-75);
     	tmp4.setTranslateY(300);
     	
-    	StackPane tmp5 = createHexagon(this, x, y);
+    	StackPane tmp5 = createHexagon(this);
     	board.add(tmp5, 0, 0);
     	tmp5.setTranslateX(-75);
     	tmp5.setTranslateY(375);
-
-        Label l = new Label("Board Dimensions:");
-        board.add(l, 0, 0);
-        l.setMinWidth(100);
-        l.setTranslateX(-100);
-    	l.setTranslateY(425);
-
-        ComboBox<Integer> x_value = new ComboBox<Integer>();
-        x_value.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
-        x_value.setPromptText("X");
-        x_value.setOnAction((event) -> {
-            resize(x_value.getSelectionModel().getSelectedItem(), y);
-        });
-        board.add(x_value, 0, 0);
-        x_value.setTranslateX(-100);
-    	x_value.setTranslateY(450);
-
-        ComboBox<Integer> y_value = new ComboBox<Integer>();
-        y_value.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
-        y_value.setPromptText("Y");
-        y_value.setOnAction((event) -> {
-            resize(x, y_value.getSelectionModel().getSelectedItem());
-        });
-        board.add(y_value, 0, 0);
-        y_value.setTranslateX(-50);
-    	y_value.setTranslateY(450);
     }
     
     public GridPane getBoard() {
     	return board;
-    }
-
-    public void resize(int x, int y) {
-        board.getChildren().remove(1, board.getChildren().size());
-        this.addInitialPieces(x, y);
-        board.getColumnConstraints().clear();
-        board.getRowConstraints().clear();
-        for (int i = 0; i < x; i++){
-            ColumnConstraints column = new ColumnConstraints();
-            column.setMinWidth(50);
-            column.setMaxWidth(50);
-            board.getColumnConstraints().add(column);
-        }
-        for (int j  = 0; j < y; j++){
-            RowConstraints row = new RowConstraints();
-            row.setMinHeight(50);
-            row.setMaxHeight(50);
-            board.getRowConstraints().add(row);
-        }
     }
 }
 
 public Group startBoardEditor(Stage stage){
     Group root = new Group();
     boardGrid board = new boardGrid();
-    board.createBoard(5, 5);
+    board.createBoard();
     board.getBoard().setTranslateX(100);
     board.getBoard().setTranslateY(100);
+    
+    // Testing 
     tabs(root);
-    board.addInitialPieces(5, 5);
+    board.addInitialPieces();
+//    board.getBoard().add(createRectangle(board), 0, 0);
+//    board.getBoard().add(createRectangle(board), 1, 1);
+//    board.getBoard().add(createTriangle(board), 10, 10);
+//    board.getBoard().add(createPentagon(board), 0, 10);
+//    board.getBoard().add(createHexagon(board), 10, 0);
     root.getChildren().add(board.getBoard());
     return root;
+    // Initial Setup
+//    tabs(root);
+
+//    createRectangle(root);
+//    createCircle(root);
+//    createTriangle(root);
+//    createPentagon(root);
+//    createHexagon(root);
+    
+    //Scene scene = new Scene(root, 700, 700, Color.rgb(105, 162, 255));
+
+    //stage.setTitle("Board Editor");
+    //stage.setScene(scene);
+    
+    // Using external file to hide the broken 'Custom color' section on ColorPicker
+    //scene.getStylesheets().add(getClass().getResource("ColorPickerMod.css").toExternalForm());
+    //stage.show();
+
+    
 }
+
 }
