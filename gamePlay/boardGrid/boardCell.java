@@ -10,6 +10,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import loadSave.winGame;
 
 public class boardCell {
     private final ImageView imageView;
@@ -102,7 +103,7 @@ public class boardCell {
                     score.addOne(currentTurn.getCurrentPlayer());
 
                     if (score.getPlayerScoreByName(currentTurn.getCurrentPlayer()) >= 5){
-                        loadSave.winPopout.winScene(primaryStage, currentTurn.getCurrentPlayer());
+                        winGame.winScene(primaryStage, currentTurn.getCurrentPlayer());
                         return;
                     }
 

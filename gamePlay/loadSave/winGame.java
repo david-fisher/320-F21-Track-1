@@ -1,16 +1,19 @@
 package loadSave;
 
 import javafx.animation.FillTransition;
+import javafx.animation.RotateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -21,9 +24,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class winPopout {
+public class winGame {
 
     public static void winScene(Stage primaryStage, String winnerName){
+        // TODO: changing how many time you want the color transit her
+        int loopNumber = 1000;
+
         Stage winStage = new Stage();
 
         Rectangle colorBackground = new Rectangle(500, 300);
@@ -37,12 +43,11 @@ public class winPopout {
         colorList.add(Color.WHITESMOKE);
         colorList.add(Color.GREY);
         colorList.add(Color.WHITE);
-        colorList.add(Color.DARKORANGE);
+        colorList.add(Color.DARKORANGE);    // final color
 
         ArrayList<FillTransition> transitions = new ArrayList<>();
 
-        // TODO: changing how many time you want the color transit here
-        for (int i = 0; i < colorList.size() * 100; i++){
+        for (int i = 0; i < colorList.size() * loopNumber; i++){
             FillTransition ft = new FillTransition(Duration.millis(100), colorBackground);
             int index = i % colorList.size();
             ft.setToValue(colorList.get(index));
@@ -82,17 +87,41 @@ public class winPopout {
             }
         });
 
-        Label greetingMessage = new Label("Congrats!\r\n" + winnerName + " won the game");
-        greetingMessage.setId("greeting_label");
+        Label greetingMessage1 = new Label("Congratulation!");
+        Label greetingMessage2 = new Label(winnerName + " won the game");
+        greetingMessage1.setId("greeting_label1");
+        greetingMessage2.setId("greeting_label2");
+
+        ImageView trophy = Helpers.Helper.imageMaker("gamePlay/images/trophy.png", 50, 50);
+        assert trophy != null;
+        trophy.setRotate(-15);
+
+        RotateTransition swing = new RotateTransition();
+        swing.setAxis(Rotate.Z_AXIS);
+        swing.setByAngle(30);   // swing angle
+        swing.setCycleCount(
+                (colorList.size() * 100 * loopNumber) / 500
+        );
+        swing.setDuration(Duration.millis(500));
+        swing.setAutoReverse(true);
+        swing.setNode(trophy);
+
+        swing.setOnFinished(event -> {
+            trophy.setRotate(0);    // rotate back to the original position
+        });
+
+        swing.play();
+
+        VBox messageBox = new VBox(5, trophy, greetingMessage1, greetingMessage2);
 
         VBox topBar = new VBox();
         topBar.getChildren().add(closeButton);
         topBar.setAlignment(Pos.TOP_LEFT);
 
-        greetingMessage.setAlignment(Pos.CENTER);
+        messageBox.setAlignment(Pos.CENTER);
 
         StackPane stack = new StackPane();
-        stack.getChildren().addAll(colorBackground, greetingMessage, topBar);
+        stack.getChildren().addAll(colorBackground, messageBox, topBar);
 
 
         Scene scene = new Scene(stack);
