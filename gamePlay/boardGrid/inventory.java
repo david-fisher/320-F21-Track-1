@@ -11,14 +11,12 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
@@ -31,6 +29,7 @@ import java.io.FileNotFoundException;
 public class inventory {
 
     private static final HBox contents = new HBox(10);
+    private static final ScrollPane scrollView = new ScrollPane();
     private static final VBox canvas = new VBox(10);
 
     private static double xCoordinate;
@@ -144,7 +143,9 @@ public class inventory {
 
     //TODO: Get an array list and loop through that to add all images and add scroll bar
     protected static void showCards(){
-
+        /*
+            TODO: only change the `contents`, don't edit anything else
+        */
         if (!contentsUpdated) { return; }   // don't duplicate contents
 
         try {
@@ -160,7 +161,12 @@ public class inventory {
             StackPane cards = new StackPane();
             cards.getChildren().addAll(oneCardPane);
             contents.getChildren().add(cards);
-            canvas.getChildren().add(contents);
+            contents.setStyle("-fx-background-color: transparent");
+
+            // add contents(HBox) into a scroll pane
+            scrollView.setContent(contents);
+
+            canvas.getChildren().add(scrollView);
             contentsUpdated = false;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
