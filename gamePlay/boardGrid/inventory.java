@@ -10,19 +10,27 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Stack;
 
 public class inventory {
 
@@ -135,6 +143,27 @@ public class inventory {
     }
 
 
+    //TODO: Get an array list and loop through that to add all images and add scroll bar
+    protected static void showCards(){
+        try {
+            ImageView cardTest = getDummyData();
+            HBox hBox_card = new HBox();
+            String style_outter = "-fx-border-color: black;" + "-fx-border-width: 5;";
+            hBox_card.setStyle(style_outter);
+
+            Pane oneCardPane = new Pane();
+            hBox_card.getChildren().add(cardTest);
+
+            oneCardPane.getChildren().add(hBox_card);
+
+            StackPane cards = new StackPane();
+            cards.getChildren().addAll(oneCardPane);
+            contents.getChildren().add(cards);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     // take the primary stage and contents
     private static void showInventory(Stage primaryStage){
@@ -143,6 +172,8 @@ public class inventory {
         StackPane blurBackground = new StackPane();
 
         setupContentClose(popStage, blurBackground);
+
+        showCards();
 
         blurBackground.getChildren().setAll(background, contents);
         blurBackground.setStyle("-fx-background-color: null");
@@ -190,4 +221,15 @@ public class inventory {
 
         return inventoryButton;
     }
+
+    public static ImageView getDummyData() throws FileNotFoundException {
+        InputStream stream = new FileInputStream("gamePlay/images/Dice.png");
+        Image image = new Image(stream);
+        ImageView cardTest = new ImageView();
+        cardTest.setImage(image);
+
+        return cardTest;
+    }
+
+
 }
