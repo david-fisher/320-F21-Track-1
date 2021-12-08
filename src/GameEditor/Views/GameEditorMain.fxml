@@ -44,7 +44,7 @@
                      <children>
                         <TextField layoutX="259.0" layoutY="120.0" text="Input Game Name" />
                         <Button layoutX="235.0" layoutY="192.0" mnemonicParsing="false" onAction="#saveGame" text="Save" />
-                        <Button layoutX="359.0" layoutY="192.0" mnemonicParsing="false" text="Exit without saving" onAction="#exit"/>
+                        <Button layoutX="359.0" layoutY="192.0" mnemonicParsing="false" text="Exit without saving" onAction="#exitToMainMenu"/>
                      </children></AnchorPane>
                 </content>
             </Tab>
