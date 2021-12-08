@@ -43,14 +43,10 @@
                            <children>
                               <VBox prefHeight="278.0" prefWidth="201.0">
                                  <children>
-                                    <Label contentDisplay="CENTER" text="Choose a tile to add a rule" textAlignment="CENTER">
-                                       <padding>
-                                          <Insets bottom="5.0" />
-                                       </padding></Label>
                                     <Pane prefHeight="234.0" prefWidth="201.0">
                                        <children>
-                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e1" height="214.0" layoutY="6.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
-                                          <TextFlow fx:id="tileNum1" layoutX="14.0" layoutY="14.0">
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e1" height="236.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
+                                          <TextFlow fx:id="tileNum1" layoutX="14.0" layoutY="29.0">
                                              <children>
                                                 <CheckBox fx:id="tile1" mnemonicParsing="false" text="Tile 1" />
                                              </children>
@@ -60,6 +56,11 @@
                                                 <CheckBox fx:id="tile2" mnemonicParsing="false" text="Tile 2" />
                                              </children>
                                           </TextFlow>
+                                          <Label contentDisplay="CENTER" layoutX="8.0" layoutY="-1.0" text="Choose a tile to add a rule" textAlignment="CENTER">
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </Label>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -76,9 +77,9 @@
                                             <content>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" pickOnBounds="false" prefHeight="411.0" prefWidth="237.0">
                                                    <children>
-                                                      <Label layoutX="9.0" layoutY="6.0" prefHeight="17.0" prefWidth="305.0" text="Drag  actions to the box and click OK to save">
+                                                      <Label layoutX="-1.0" layoutY="1.0" prefHeight="26.0" prefWidth="311.0" text="Drag actions to the box and click save">
                                                          <font>
-                                                            <Font size="12.0" />
+                                                            <Font size="7.0" />
                                                          </font>
                                                       </Label>
                                                       <Pane layoutX="8.0" layoutY="27.0" prefHeight="124.0" prefWidth="224.0">
@@ -93,9 +94,9 @@
                                                             <Label accessibleText="Give player " text="Give player " />
                                                          </children>
                                                       </TextFlow>
-                                                      <TextFlow fx:id="movePlayer" layoutX="14.0" layoutY="189.0" prefHeight="18.0" prefWidth="86.0">
+                                                      <TextFlow fx:id="movePlayer" layoutX="14.0" layoutY="189.0" prefHeight="26.0" prefWidth="100.0">
                                                          <children>
-                                                            <Label accessibleText="Move player to " prefHeight="17.0" prefWidth="85.0" text="Move player to " />
+                                                            <Label accessibleText="Move player to " prefHeight="26.0" prefWidth="103.0" text="Move player to " />
                                                          </children>
                                                       </TextFlow>
                                                       <TextFlow fx:id="tileNum" layoutX="154.0" layoutY="193.0">
@@ -104,7 +105,7 @@
                                                             <TextField prefHeight="26.0" prefWidth="33.0" promptText="_" />
                                                          </children>
                                                       </TextFlow>
-                                                      <TextFlow fx:id="numCards" layoutX="98.0" layoutY="237.0">
+                                                      <TextFlow fx:id="numCards" layoutX="125.0" layoutY="238.0">
                                                          <children>
                                                             <TextField prefHeight="26.0" prefWidth="33.0" promptText="_" />
                                                             <Label accessibleText="cards " text="  cards" />
