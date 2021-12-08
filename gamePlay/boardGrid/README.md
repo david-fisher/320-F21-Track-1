@@ -25,5 +25,5 @@
 ### TODO
 * add mouse drag and drop motion in [cell](boardCell.java)
 * use [Tile](../../Objects/Tile.java) rather than `StackPane` for the cell objects
-* create another scene for a user to input players' names
+* create another scene for a user to input players' names **DONE**
 
