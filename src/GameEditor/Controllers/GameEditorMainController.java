@@ -165,7 +165,7 @@ public class GameEditorMainController {
         Stage app_stage = (Stage) node.getScene().getWindow();
 
         if (tokenType.equals("gameToken")) {
-            Parent addMovementPiece = FXMLLoader.load(getClass().getResource("Views/customToken.fxml"));
+            Parent addMovementPiece = FXMLLoader.load(getClass().getResource("../Views/customToken.fxml"));
             app_stage.setScene(new Scene(addMovementPiece));
         }
         else if (tokenType == ""){}
