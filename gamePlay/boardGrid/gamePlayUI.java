@@ -66,7 +66,7 @@ public class gamePlayUI {
 
 
         // board
-        GridPane board = boardGrid.createBoard(players, stackTable);
+        GridPane board = boardGrid.createBoard(primaryStage, players, stackTable);
         inventory Inventory = new inventory();
         Button InventoryButton = Inventory.getInventoryButton(primaryStage);
 
