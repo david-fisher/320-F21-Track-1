@@ -2,9 +2,11 @@ package src.main.java.objects;
 
 import java.util.*;
 
+//Class to generate a unique ID
 public class Saveable {
     private final String ID;
     
+    //Generating a new unique ID
     public Saveable(){
         this.ID = UUID.randomUUID().toString();
     }
