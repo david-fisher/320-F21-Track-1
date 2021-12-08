@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -17,24 +18,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Stack;
 
 public class inventory {
 
     private static final HBox contents = new HBox(10);
+    private static final VBox canvas = new VBox(10);
 
     private static double xCoordinate;
     private static double yCoordinate;
@@ -148,8 +145,7 @@ public class inventory {
         try {
             ImageView cardTest = getDummyData();
             HBox hBox_card = new HBox();
-            String style_outter = "-fx-border-color: black;" + "-fx-border-width: 5;";
-            hBox_card.setStyle(style_outter);
+            hBox_card.setStyle("-fx-border-color: black;" + "-fx-border-width: 5;");
 
             Pane oneCardPane = new Pane();
             hBox_card.getChildren().add(cardTest);
@@ -175,7 +171,8 @@ public class inventory {
 
         showCards();
 
-        blurBackground.getChildren().setAll(background, contents);
+        canvas.getChildren().add(contents);
+        blurBackground.getChildren().setAll(background, canvas);
         blurBackground.setStyle("-fx-background-color: null");
 
         double width = 700, height = 300;
@@ -217,17 +214,18 @@ public class inventory {
         });
 
         closeButton.setId("close_popout");
-        contents.getChildren().add(closeButton);
+        HBox temp = new HBox(closeButton);
+        temp.setAlignment(Pos.TOP_LEFT);
+
+        if (canvas.getChildren().size() == 0){
+            canvas.getChildren().add(temp);
+        }
 
         return inventoryButton;
     }
 
     public static ImageView getDummyData() throws FileNotFoundException {
-        InputStream stream = new FileInputStream("gamePlay/images/Dice.png");
-        Image image = new Image(stream);
-        ImageView cardTest = new ImageView();
-        cardTest.setImage(image);
-
+        ImageView cardTest = Helpers.Helper.imageMaker("gamePlay/images/Dice.png", 50, 50);
         return cardTest;
     }
 
