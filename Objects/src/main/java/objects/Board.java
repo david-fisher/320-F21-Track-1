@@ -3,7 +3,11 @@ package src.main.java.objects;
 import java.util.*;
 
 public class Board extends Saveable implements IBoard {
-	
+	/* 
+	parem: tiles - an array list of tiles on the board
+           rules - an array list of rules on the board
+		   deck  - a deck of game pieces (including cards) for the board
+	*/
 	private ArrayList<Tile> tiles;
 	private ArrayList<Rule> rules;
 	private Deck deck;
