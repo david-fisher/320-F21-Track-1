@@ -6,17 +6,17 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
@@ -24,9 +24,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.FileNotFoundException;
+
 public class inventory {
 
     private static final HBox contents = new HBox(10);
+    private static final ScrollPane scrollView = new ScrollPane();
+    private static final VBox canvas = new VBox(10);
 
     private static double xCoordinate;
     private static double yCoordinate;
@@ -36,6 +40,8 @@ public class inventory {
 
     private static final ImageView background = new ImageView();
     private static Button closeButton = new Button("Close");
+
+    private static boolean contentsUpdated = true;
 
     // get a duplicated background
     private static Image getBackground(Stage stage) {
@@ -135,6 +141,38 @@ public class inventory {
     }
 
 
+    //TODO: Get an array list and loop through that to add all images and add scroll bar
+    protected static void showCards(){
+        /*
+            TODO: only change the `contents`, don't edit anything else
+        */
+        if (!contentsUpdated) { return; }   // don't duplicate contents
+
+        try {
+            ImageView cardTest = getDummyData();
+            HBox hBox_card = new HBox();
+            hBox_card.setStyle("-fx-border-color: black;" + "-fx-border-width: 5;");
+
+            Pane oneCardPane = new Pane();
+            hBox_card.getChildren().add(cardTest);
+
+            oneCardPane.getChildren().add(hBox_card);
+
+            StackPane cards = new StackPane();
+            cards.getChildren().addAll(oneCardPane);
+            contents.getChildren().add(cards);
+            contents.setStyle("-fx-background-color: transparent");
+
+            // add contents(HBox) into a scroll pane
+            scrollView.setContent(contents);
+
+            canvas.getChildren().add(scrollView);
+            contentsUpdated = false;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     // take the primary stage and contents
     private static void showInventory(Stage primaryStage){
@@ -144,7 +182,9 @@ public class inventory {
 
         setupContentClose(popStage, blurBackground);
 
-        blurBackground.getChildren().setAll(background, contents);
+        showCards();
+
+        blurBackground.getChildren().setAll(background, canvas);
         blurBackground.setStyle("-fx-background-color: null");
 
         double width = 700, height = 300;
@@ -186,8 +226,20 @@ public class inventory {
         });
 
         closeButton.setId("close_popout");
-        contents.getChildren().add(closeButton);
+        HBox temp = new HBox(closeButton);
+        temp.setAlignment(Pos.TOP_LEFT);
+
+        if (canvas.getChildren().size() == 0){
+            canvas.getChildren().add(temp);
+        }
 
         return inventoryButton;
     }
+
+    public static ImageView getDummyData() throws FileNotFoundException {
+        ImageView cardTest = Helpers.Helper.imageMaker("gamePlay/images/Dice.png", 50, 50);
+        return cardTest;
+    }
+
+
 }

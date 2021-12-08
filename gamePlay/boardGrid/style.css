@@ -175,6 +175,21 @@
     -fx-text-fill: #7fcbfb;
 }
 
+.combo-box-base .arrow-button{
+    -fx-border-color: transparent;
+    -fx-border-width: 5;
+    -fx-border-radius: 10;
+    -fx-background-color: #175f79;
+}
+
+.combo-box-base .arrow-button .arrow {
+    -fx-background-color: transparent;
+    -fx-min-height: 10;
+    -fx-min-width: 10;
+    -fx-border-color: white;
+    -fx-border-width: 1;
+}
+
 .text-field{
     -fx-font: normal 20pt "Helvetica";
     -fx-text-fill: white;
@@ -243,6 +258,14 @@
 .table-view > .virtual-flow > .scroll-bar > .increment-button,
 .table-view > .virtual-flow > .scroll-bar > .decrement-button {
     -fx-opacity: 0;
+}
+
+.scroll-pane{
+    -fx-background-color:transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
 }
 
 #transparentBackground {
