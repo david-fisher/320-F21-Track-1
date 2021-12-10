@@ -26,6 +26,17 @@ public class Board extends Saveable implements IBoard {
 		this.rules = new ArrayList<Rule>();
 		this.deck = new Deck();
 	}
+
+	public Board(ArrayList<Tile> tiles, Tile startTile) {
+		super();
+		this.tiles = tiles;
+		this.rules = new ArrayList<Rule>();
+		this.deck = new Deck();
+		if (!this.tiles.contains(startTile)) {
+			throw new IllegalArgumentException("The start tile must be a member of the board's tiles.");
+		}
+		this.startTile = startTile;
+	}
 	
 	public Board(ArrayList<Tile> tiles, ArrayList<Rule> rules) {
 		super();
@@ -50,6 +61,14 @@ public class Board extends Saveable implements IBoard {
 
 	public Deck get_deck() {
 		return deck;
+	}
+
+	public Tile getStartTile() {
+		return this.startTile;
+	}
+
+	public boolean containsTile(Tile tile) {
+		return this.tiles.contains(tile);
 	}
 	
 	@Override
