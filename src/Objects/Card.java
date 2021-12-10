@@ -11,7 +11,26 @@ import java.util.*;
 */
 public class Card extends RuleList {
   public Card() {
-    super();
-    this.rules = new ArrayList<Rule>();
+    this(0);
+  }
+
+  public Card(ArrayList<Rule> rules) {
+    this(rules, 0);
+  }
+
+  public Card(int constant) {
+    this(new ArrayList<Rule>(), constant);
+  }
+
+  public Card(int[] range) {
+    this(new ArrayList<Rule>(), range);
+  }
+
+  public Card(ArrayList<Rule> rules, int constant) {
+    super(rules, constant);
+  }
+  
+  public Card(ArrayList<Rule> rules, int[] range) {
+    super(rules, range);
   }
 }
