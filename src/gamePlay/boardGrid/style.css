@@ -1,12 +1,3 @@
-#main-menu-button {
-    -fx-font: bold 30pt "Helvetica";
-    -fx-text-fill: #000000;
-    -fx-background-color: #A1B0BA;
-    -fx-border-radius: 20;
-    -fx-background-radius: 20;
-    -fx-padding: 5;
-}
-
 #board_side_button{
     -fx-font: bold 25pt "Helvetica";
     -fx-text-fill: rgba(255, 255, 255, 0.75);
@@ -147,6 +138,11 @@
     -fx-min-width: 40;
 }
 
+#saved_cancel_button:hover{
+    -fx-text-fill: rgb(30, 33, 37);
+    -fx-background-color: #777a80;
+}
+
 #table_load_button{
     -fx-font: normal 20pt "Helvetica";
     -fx-text-fill: rgba(255, 255, 255);
@@ -155,6 +151,10 @@
     -fx-background-radius: 20;
     -fx-padding: 5;
     -fx-min-width: 40;
+}
+
+#table_load_button:hover{
+    -fx-background-color: #1c59d3;
 }
 
 #inventory_button{
@@ -179,6 +179,10 @@
     -fx-min-width: 40;
 }
 
+#close_popout:hover{
+    -fx-background-color: #b12d2d;
+}
+
 #greeting_label1{
     -fx-font: bold 30pt "Helvetica";
     -fx-text-fill: rgb(3, 29, 85);
@@ -196,7 +200,10 @@
     -fx-text-fill: white;
 }
 
-.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover{
+.combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-popup .list-view .list-cell:filled:selected:hover,
+.combo-box-popup .list-view .list-cell:filled:hover
+{
     -fx-background-color: #454545;
     -fx-text-fill: #7fcbfb;
 }
@@ -205,7 +212,11 @@
     -fx-border-color: transparent;
     -fx-border-width: 5;
     -fx-border-radius: 10;
-    -fx-background-color: #175f79;
+    -fx-background-color: #1c59d3;
+}
+
+.combo-box-base .arrow-button:hover{
+    -fx-background-color: #315fba;
 }
 
 .combo-box-base .arrow-button .arrow {
@@ -222,7 +233,7 @@
     -fx-background-color: #463c3c;
 }
 
-.text-field:focused{
+.text-field:focused, .text-field:hover{
     -fx-background-color: #454545;
     -fx-font: normal 20pt "Helvetica";
     -fx-text-fill: white;
@@ -276,7 +287,7 @@
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #6f1f6f;
+    -fx-background-color: #6b386b;
     -fx-background-insets: 0;
     -fx-background-radius: 1;
 }
