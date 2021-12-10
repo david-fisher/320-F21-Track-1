@@ -11,6 +11,7 @@ public class Board extends Saveable implements IBoard {
 	private ArrayList<Tile> tiles;
 	private ArrayList<Rule> rules;
 	private Deck deck;
+	private Tile startTile;
 	
 	public Board(){
 		super();
