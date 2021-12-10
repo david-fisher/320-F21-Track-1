@@ -15,6 +15,15 @@ public class PlayCardChoice extends Choice {
   }
 
   public void execute(GameState state) {
-    this.card.executeRules(state);
+    state.getCurPlayer().removeCard(card);
+    card.executeRules(state);
+  }
+  
+  public String toString() {
+    return "(" + getPoints()[0] + "-" + getPoints()[1] + " Points) Play " + card.toString();
+  }
+
+  public int[] getPoints() {
+    return card.getScore();
   }
 }

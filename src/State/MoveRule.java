@@ -1,7 +1,8 @@
+import java.util.*;
+
 public class MoveRule extends Rule {
-  int repeat; // 1, 2, 3, .... , MAX
-  RNG stepCount; // Dice, Spinner
-  ArrayList<Tile> destinations = new ArrayList<Tile>();
+  private int stepCount; // Dice, Spinner
+  private ArrayList<Tile> destinations = new ArrayList<Tile>();
 
   public MoveRule(Tile destination) {
     super();
@@ -9,9 +10,8 @@ public class MoveRule extends Rule {
     this.destinations.add(destination);
   }
 
-  public MoveRule(int repeat, RNG stepCount) {
+  public MoveRule(int stepCount) {
     super();
-    this.repeat = repeat;
     this.stepCount = stepCount;
   }
 
@@ -20,6 +20,9 @@ public class MoveRule extends Rule {
     if (stepCount > 0) {
       destinations.addAll(state.getNextTiles(player.getTile(), stepCount)); 
     }
-    destinations.forEach(tile -> state.addChoice(new MoveChoice(destination)));
+    destinations.forEach(tile -> state.addChoice(new MoveChoice(tile)));
+    if (destinations.size() == 0) {
+      state.addChoice(new PassChoice());
+    }
   }
 }
