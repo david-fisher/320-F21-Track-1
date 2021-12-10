@@ -27,6 +27,12 @@
     -fx-padding: 5;
 }
 
+#board_side_button:hover, #resume_button:hover{
+    -fx-font: bold 25pt "Helvetica";
+    -fx-background-color: #6893e9;
+    -fx-text-fill: #1a1616;
+}
+
 #save_button{
     -fx-font: normal 25pt "Helvetica";
     -fx-text-fill: rgb(233, 231, 233);
@@ -53,6 +59,11 @@
     -fx-font: normal 20pt "Helvetica";
     -fx-text-fill: rgb(255, 255, 255);
     -fx-padding: 20px;
+}
+
+#save_button:hover, #home_button:hover{
+    -fx-text-fill: #1a1616;
+    -fx-background-color: grey;
 }
 
 #tutorial_text{
@@ -100,6 +111,16 @@
     -fx-min-width: 30;
 }
 
+
+#next_button:hover, #input_play_button:hover{
+    -fx-text-fill: rgb(241, 197, 197);
+    -fx-background-color: #677de7;
+}
+
+#back_button:hover, #input_back_button:hover{
+    -fx-background-color: #4e5054;
+}
+
 #pre_game_label{
     -fx-font: bold 17pt "Helvetica";
     -fx-text-fill: rgba(255, 255, 255);
@@ -141,6 +162,11 @@
     -fx-text-fill: rgba(255, 255, 255);
     -fx-background-color: #545963;
     -fx-padding: 10;
+}
+
+#inventory_button:hover{
+    -fx-text-fill: rgb(57, 44, 44);
+    -fx-background-color: #babec7;
 }
 
 #close_popout{
@@ -207,7 +233,11 @@
 }
 
 .table-view:focused{
-    -fx-background-color: transparent;
+    -fx-background-color: #23262a;
+}
+
+.table-view:hover{
+    -fx-background-color: #17181a;
 }
 
 .table-view .column-header-background{
@@ -234,6 +264,11 @@
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
 }
+
+.table-row-cell:odd:hover, .table-row-cell:hover{
+    -fx-background-color: grey;
+}
+
 .table-row-cell:odd{
     -fx-background-color: -fx-table-cell-border-color, #2d2f32;
     -fx-background-insets: 0, 0 0 1 0;
@@ -241,7 +276,7 @@
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #991111;
+    -fx-background-color: #6f1f6f;
     -fx-background-insets: 0;
     -fx-background-radius: 1;
 }
