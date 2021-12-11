@@ -3,68 +3,105 @@ package src.main.java.objects;
 import java.util.*;
 
 public class Deck extends Saveable{
-    /*
-    parem: pieces - an array list of pieces (including cards)
-    */
-    ArrayList<Piece> pieces;
+    // cards: list of cards in the deck
+    // cardQueue: list of cards in order to be drawn
+    private ArrayList<Card> cards;
+    private ArrayList<Card> cardQueue;
 
     public Deck(){
         super();
-        this.pieces = new ArrayList<Piece>();
+        this.cards = new ArrayList<Card>();
     }
 
-    public Deck(ArrayList<Piece> pieces){
+    public Deck(ArrayList<Piece> cards){
     	super();
-        this.pieces = pieces;
+        this.cards = cards;
     }
+
+    // Unused constructors
     
-    public Deck(String id, ArrayList<Piece> pieces){
-    	super(id);
-        this.pieces = pieces;
+    // public Deck(String id, ArrayList<Piece> pieces){
+    // 	super(id);
+    //     this.pieces = pieces;
+    // }
+
+    public boolean isEmpty(){
+        return this.cards.isEmpty();
     }
 
-    public ArrayList<Piece> get_pieces(){
-        return this.pieces;
+    public ArrayList<Card> get() {
+        return cards;
     }
 
-    // add new piece into deck
-    public ArrayList<Piece> update_piece(Piece new_piece){
+    public Card peek(){
+        return this.cards.get(0);
+    }
+
+    public Card pop(){
+        if (this.cardQueue.isEmpty()) {
+            resetDeck();
+        }
+        Card output = cardQueue.get(0);
+        cardQueue.remove(0);
+        return output;
+    }
+
+    public void resetDeck() {
+        cardQueue = new ArrayList<Card>(cards);
+        Collections.shuffle(cardQueue);
+    }
+
+    // Add a new card into the deck
+    public ArrayList<Card> addCard(Card updatedCard){
         try {
-            int index = this.pieces.indexOf(piece_findByID(new_piece.get_id()));
-		    this.pieces.set(index, new_piece);
+            // If the card is found then it already exists
+            int index = this.cards.indexOf(findCardByID(new_piece.get_id()));
+		    System.out.println("Card already exists");
         } catch (Exception e) {
-            this.pieces.add(new_piece);
+            // If there is an error finding the card then we know that it can be added
+            this.cards.add(new_piece);
         }
         return this.pieces;
     }
 
-    // remove a piece from deck, takes the piece that needs removal of as parem
-    public ArrayList<Piece> remove_piece(Piece input){
+    // Update a card in the deck
+    public ArrayList<Card> updateCard(Card newCard){
         try {
-		    this.pieces.remove(this.pieces.indexOf(piece_findByID(input.get_id())));
+            int index = this.cards.indexOf(findCardByID(newCard.get_id()));
+		    this.pieces.set(index, newCard);
         } catch (Exception e) {
-        	System.out.println("Error: Unable to remove target piece:");
+            System.out.println("Error: Card not found in deck.");
+        }
+        return this.cards;
+    }
+
+    // Add a list of cards into the deck, takes an array list of cards to add
+    public ArrayList<Piece> addCards(ArrayList<Card> newCards){
+        for (Card newCard: newCards){
+            addCard(newCard);
+        }
+        return this.cards;
+    }
+
+    // remove a card from the deck, takes the card that needs removal of as parem
+    public ArrayList<Piece> removeCard(Card input){
+        try {
+		    this.cards.remove(this.cards.indexOf(findCardByID(input.get_id())));
+        } catch (Exception e) {
+        	System.out.println("Error: Unable to remove target card:");
             System.out.println(e);
         }		
-        return this.pieces;
+        return this.cards;
     }
 
-    // add a list of pieces into the deck, takes an array list of pieces that need to be added
-    public ArrayList<Piece> update_pieces(ArrayList<Piece> new_pieces){
-        for (Piece new_piece: new_pieces){
-            update_piece(new_piece);
-        }
-        return this.pieces;
+    // Clear all cards from deck
+    public ArrayList<Piece> removeCards(){
+        this.cards.clear();
+        return this.cards;
     }
 
-    // clear all pieces from deck
-    public ArrayList<Piece> remove_pieces(){
-        this.pieces.clear();
-        return this.pieces;
-    }
-
-    // find a piece in the deck by ID, return null if not found
-    public Piece piece_findByID(String ID) {
-	    return this.pieces.stream().filter(piece -> piece.get_id().equals(ID)).findFirst().orElse(null);
+    // Find a card in the deck by ID, return null if not found
+    public Piece findCardByID(String ID) {
+	    return this.cards.stream().filter(card -> card.get_id().equals(ID)).findFirst().orElse(null);
 	}
 }
