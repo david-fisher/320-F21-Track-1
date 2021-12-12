@@ -3,7 +3,7 @@ package Objects;
 import java.util.*;
 
 public class Tile extends GameObject {
-
+    
     private ArrayList<Tile> neighbors;
     private Deck deck;
 
@@ -59,14 +59,6 @@ public class Tile extends GameObject {
         super(id, x, y, rules, attributes, range);
         this.neighbors = neighbors;
         this.deck = deck;
-    }
-
-    public int getX() {
-        return this.x;
-    }
-
-    public int getY() {
-        return this.y;
     }
 
     public Deck get_deck() {
