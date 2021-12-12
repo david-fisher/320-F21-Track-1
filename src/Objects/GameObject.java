@@ -10,7 +10,17 @@ public class GameObject extends Saveable {
            attributes - a hashtable of attributes, e.g. {"color", "red"}
            rules - rules that the object holds 
     */
-	private final int x,y; private Hashtable<String,String> attributes; private ArrayList<Rule> rules;
+	private final int x,y;
+    private Hashtable<String,String> attributes;
+    private ArrayList<Rule> rules;
+
+    // This attribute probably shouldn't be a part of this class
+    private RNG score;
+
+    public GameObject(ArrayList<Rule> rules) {
+        super();
+        this.rules = rules;
+    }
 
     public GameObject(ArrayList<Rule> rules, Hashtable<String,String> attributes){
         super();
@@ -48,27 +58,27 @@ public class GameObject extends Saveable {
 
     public int get_y(){return this.y;}
 
-    public ArrayList<Integer> get_coordinate(){
+    public ArrayList<Integer> getCoordinate(){
         ArrayList<Integer> result = new ArrayList<Integer>();
         result.add(this.x);
         result.add(this.y);
         return result;
     }
 
-    public ArrayList<Rule> get_rules(){
+    public ArrayList<Rule> getRules(){
         return this.rules;
     }
 
-    public Hashtable<String,String> get_attributes(){
+    public Hashtable<String,String> getAttributes(){
         return this.attributes;
     }
 
-    public Hashtable<String,String> update_attribute(String new_key, String new_attribute){
+    public Hashtable<String,String> updateAttribute(String new_key, String new_attribute){
         this.attributes.put(new_key, new_attribute);
         return this.attributes;
     }
 
-    public Hashtable<String,String> remove_attribute(String key){
+    public Hashtable<String,String> removeAttribute(String key){
     	try {
     		this.attributes.remove(key);
         } catch (Exception e) {
@@ -78,22 +88,26 @@ public class GameObject extends Saveable {
         return this.attributes;
     }
 
-    public Hashtable<String,String> update_attributes(Hashtable<String,String> new_attributes){
+    public Hashtable<String,String> updateAttributes(Hashtable<String,String> new_attributes){
         this.attributes.putAll(new_attributes);
         return this.attributes;
     }
 
-    public Hashtable<String,String> remove_attributes(){
+    public Hashtable<String,String> removeAttributes(){
         this.attributes.clear();
         return this.attributes;
     }
 
-    public ArrayList<Rule> add_rule(Rule new_rule){
+    public ArrayList<Rule> addRule(Rule new_rule){
         this.rules.add(new_rule);
         return this.rules;
     }
 
-    public ArrayList<Rule> remove_rule(Rule target_rule){
+    public void setRules(ArrayList<Rule> rules) {
+        this.rules = rules;
+    }
+
+    public ArrayList<Rule> removeRule(Rule target_rule){
     	try {
     		this.rules.remove(findByID(target_rule.get_id()));
         } catch (Exception e) {
@@ -101,6 +115,11 @@ public class GameObject extends Saveable {
             System.out.println(e);
         }
         return this.rules;
+    }
+
+    public void executeRules(GameState state) {
+        state.enqueueRules(rules);
+        state.getCurPlayer().deltaScore(score.pop());
     }
 
     public Rule findByID(String ID) {
