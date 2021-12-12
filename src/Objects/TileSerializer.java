@@ -16,7 +16,7 @@ public class TileSerializer implements JsonSerializer<Tile> {
 		}
 
 		JsonObject attributes = new JsonObject();
-		for (Map.Entry<String, String> entry : tile.get_attributes().entrySet()) {
+		for (Map.Entry<String, String> entry : tile.getAttributes().entrySet()) {
 			String key = entry.getKey();
 			String val = entry.getValue();
 
@@ -25,10 +25,10 @@ public class TileSerializer implements JsonSerializer<Tile> {
 
 		obj.add("neighbors", neighbors);
 		obj.add("deck", context.serialize(tile.get_deck()));
-		obj.add("x", context.serialize(tile.get_x()));
-		obj.add("y", context.serialize(tile.get_y()));
+		obj.add("x", context.serialize(tile.getX()));
+		obj.add("y", context.serialize(tile.getY()));
 		obj.add("attributes", attributes);
-		obj.add("rules", context.serialize(tile.get_rules()));
+		obj.add("rules", context.serialize(tile.getRules()));
 		obj.add("ID", context.serialize(tile.get_id()));
 		return obj;
 	}
