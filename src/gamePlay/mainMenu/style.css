@@ -1,6 +1,7 @@
 #main-menu-button {
     -fx-font: bold 30pt "Helvetica";
     -fx-text-fill: rgba(255, 255, 255, 0.75);
+    -fx-text-alignment: center;
     -fx-background-color: #5670f0;
     -fx-border-radius: 20;
     -fx-background-radius: 20;

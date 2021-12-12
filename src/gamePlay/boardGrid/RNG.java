@@ -4,15 +4,18 @@ import gamePlay.mainMenu.Helpers.Helper;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
@@ -41,6 +44,19 @@ public class RNG {
         this.drawnDeck = new ArrayList<Integer>();
         this.deckText = labelMaker();
         this.deckButton = makeDeck(deckText);
+    }
+
+    private void afterHover(Node node, String standardStyle, String hoverStyle){
+        node.styleProperty()
+                .bind(
+                        Bindings.when(node.hoverProperty())
+                                .then(
+                                        new SimpleStringProperty(hoverStyle)
+                                )
+                                .otherwise(
+                                        new SimpleStringProperty(standardStyle)
+                                )
+        );
     }
 
     private Button makeDie(int diceMin, int diceMax, Label value){
@@ -148,7 +164,18 @@ public class RNG {
                     int randIndex = rand.nextInt(colors.length);
                     text.setOpacity(0);
                     text.setText(colors[randIndex]);
-                    spinner.setStyle("-fx-background-color: " + colors[randIndex]);
+
+                    Color c = Color.valueOf(colors[randIndex]);
+                    // rgba is the current color with additional opacity when hover
+                    String rgba = "rgba(" + c.getRed() * 255 + "," + c.getGreen() * 255 + "," + c.getBlue() * 255 + ", 0.7)";
+
+
+                    afterHover(spinner,
+                            "-fx-background-color: " + colors[randIndex],
+                            "-fx-background-color: " + rgba
+                            );
+//                    spinner.setStyle("-fx-background-color: " + colors[randIndex]);
+
                     FadeTransition ft = new FadeTransition(Duration.millis(800), text);
                     ft.setFromValue(0);
                     ft.setToValue(1);

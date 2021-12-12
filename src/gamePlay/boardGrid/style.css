@@ -19,7 +19,6 @@
 }
 
 #board_side_button:hover, #resume_button:hover{
-    -fx-font: bold 25pt "Helvetica";
     -fx-background-color: #6893e9;
     -fx-text-fill: #1a1616;
 }
