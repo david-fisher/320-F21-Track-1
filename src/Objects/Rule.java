@@ -1,5 +1,7 @@
 package Objects;
 
+import State.*;
+
 public abstract class Rule extends Saveable {
     private int score;
     private RNG rng;
