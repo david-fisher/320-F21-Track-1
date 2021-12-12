@@ -1,4 +1,5 @@
 package Objects;
+import State.GameState;
 
 import State.*;
 
@@ -13,5 +14,4 @@ public abstract class Rule extends Saveable {
     }
 
     public abstract void execute(GameState state);
-
 }
