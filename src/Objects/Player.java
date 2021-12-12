@@ -3,7 +3,7 @@ package src.main.java.objects;
 import java.util.ArrayList;
 
 public class Player extends Saveable {
-    private Score score;
+    private int score;
     private Tile currentTile;
     private Deck hand;
     private String name;
@@ -11,12 +11,12 @@ public class Player extends Saveable {
     public Player(){
         super();
         this.isAI = false;
-        this.score = new Score();
+        this.score = 0;
         this.currentTile = null;
         this.hand = new Deck();
     }
 
-    public Player(Score score){
+    public Player(int score){
         super();
         this.isAI = false;
         this.score = score;
@@ -27,12 +27,12 @@ public class Player extends Saveable {
     public Player(Tile currentTile){
         super();
         this.isAI = false;
-        this.score = new Score();
+        this.score = 0;
         this.currentTile = currentTile;
         this.hand = new Deck();
     } 
 
-    public Player(String id, Score score, Tile currentTile, Deck hand){
+    public Player(String id, int score, Tile currentTile, Deck hand){
         super(id);
         this.isAI = false;
         this.score = score;
