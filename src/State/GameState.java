@@ -71,13 +71,13 @@ public class GameState {
   private ArrayList<Tile> tileSearch(Tile curTile, int steps, Tile lastTile) {
     ArrayList<Tile> output = new ArrayList<Tile>();
     if (steps == 1) {
-      output = curTile.getNeighbors();
+      output = curTile.get_neighbors();
       if (lastTile != null) {
         output.remove(lastTile);
       }
       return output;
     }
-    for (Tile neighbor : curTile.getNeighbors()) {
+    for (Tile neighbor : curTile.get_neighbors()) {
       if (neighbor != lastTile) {
         merge(output, tileSearch(neighbor, steps - 1, curTile));
       }
