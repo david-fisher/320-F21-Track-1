@@ -73,9 +73,9 @@ public class RNGController {
             System.out.println(MaxField.getText());
             // System.out.println(QuantityField.getText());
             String name = NameField.getText();
-            double[] temp = new double[2];
-            temp[0] = Double.parseDouble(MinField.getText());
-            temp[1] = Double.parseDouble(MaxField.getText());
+            int[] temp = new int[2];
+            temp[0] = Integer.parseInt(MinField.getText());
+            temp[1] = Integer.parseInt(MaxField.getText());
             // Pair<Integer, RNG> rng = new Pair<Integer,
             // RNG>(Integer.parseInt(QuantityField.getText()), new RNG(temp));
             RNG rng = new RNG(temp);
