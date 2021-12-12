@@ -1,7 +1,8 @@
 package Objects;
+
 import State.GameState;
 
-import State.*;
+import State.*; // Do not remove this "unused import"; those that inherit from it need it.
 
 public abstract class Rule extends Saveable {
     private int score;
