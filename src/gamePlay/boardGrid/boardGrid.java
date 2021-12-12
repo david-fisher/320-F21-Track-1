@@ -1,10 +1,17 @@
 package gamePlay.boardGrid;
 
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -12,6 +19,8 @@ import java.util.ArrayList;
 
 public class boardGrid {
     // grid pane
+    private static double orgSceneX, orgSceneY, xTemp;
+    private static StackPane shapeToDelete;
     protected static GridPane board = new GridPane();
     private static int height = 10, width = 10;
     private static boardScore currentScore;
@@ -37,6 +46,8 @@ public class boardGrid {
                 setDrag(table.get(i).get(j));
             }
         }
+        StackPane child = createRectangle(0,0);
+        board.add(child, 0,0);
     }
 
     // convert possible stackPane table to boardCell table
@@ -77,6 +88,103 @@ public class boardGrid {
 
     }
 
+    public static void dragNDrop_StackPane(StackPane sp, int x, int y) {
+        // Drag n' Drop Interaction *******************************************************
+        sp.setCursor(Cursor.HAND);
+
+        sp.setOnMousePressed((t) -> {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            xTemp = orgSceneX;
+
+            StackPane c = (StackPane) (t.getSource());
+            c.toFront();
+        });
+
+        sp.setOnMouseDragged((t) -> {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+
+            StackPane c = (StackPane) (t.getSource());
+
+            c.setTranslateX(c.getTranslateX() + offsetX);
+            c.setTranslateY(c.getTranslateY() + offsetY);
+
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+        });
+
+        sp.setOnMouseReleased((t) -> {
+            StackPane c = (StackPane) (t.getSource());
+
+            double tile_size = 80;
+            double snapX = (c.getTranslateX()) % tile_size;
+            if (snapX > tile_size/2){
+                snapX = (c.getTranslateX()) - snapX + tile_size;
+            }
+            else {
+                snapX = (c.getTranslateX()) - snapX;
+            }
+            if (t.getSceneX() >= 100 && t.getSceneX() < (100 + x*tile_size)) {
+                c.setTranslateX(snapX);
+            }
+            else {
+                c.setTranslateX(0);
+            }
+
+            double snapY = (c.getTranslateY()) % tile_size;
+            if (snapY > tile_size/2){
+                snapY = (c.getTranslateY()) - snapY + tile_size;
+            }
+            else {
+                snapY = (c.getTranslateY()) - snapY;
+            }
+
+            if (t.getSceneY() >= 100 && t.getSceneY() < (100 + y*tile_size)) {
+                c.setTranslateY(snapY);
+            }
+            else {
+                c.setTranslateY(0);
+            }
+
+        });
+    }
+
+    public static StackPane createRectangle(int x, int y) {
+        Rectangle rectangle = new Rectangle(80,80);
+        //TextField text = new TextField ("+1");
+        //Making the TextField transparent, so we dont see the whole input box
+        //text.setStyle("-fx-background-color:transparent;-fx-text-fill: white;-fx-focus-color: transparent;");
+        //text.setMaxWidth(60);
+        //text.setAlignment(Pos.CENTER);
+
+        //Adding shadow for text, for better readability
+        DropShadow shadow = new DropShadow();
+        shadow.setSpread(0.6);
+        shadow.setHeight(5);
+        shadow.setWidth(5);
+        //text.setEffect(shadow);
+
+        //Create a stackPane for TextField and Shape
+        StackPane layout = new StackPane();
+        layout.getChildren().addAll(rectangle);
+        rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(mouseEvent.getButton().equals(MouseButton.PRIMARY) ) { //&& mouseEvent.getClickCount() >= 2){ //enable to select with double-click instead
+                    System.out.println("shape clicked");
+                    shapeToDelete = layout;
+                }
+            }
+        });
+        layout.setMaxHeight(50);
+        layout.setMaxWidth(50);
+        layout.setLayoutX(10);
+        layout.setLayoutY(180);
+        dragNDrop_StackPane(layout,x, y);
+        return layout;
+    }
+
     public void updateCell(Stage primaryStage, boardCell cell, int x, int y, StackPane object){
         // TODO: replace cell method
         try{
@@ -95,6 +203,7 @@ public class boardGrid {
             );
         }
     }
+
 
     /*
     ********************************
