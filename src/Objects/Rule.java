@@ -1,4 +1,4 @@
-package objects;
+package Objects;
 
 public abstract class Rule extends Saveable {
     private int score;

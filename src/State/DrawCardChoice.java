@@ -1,6 +1,6 @@
-package state;
+package State;
 
-import objects.*;
+import Objects.*;
 
 public class DrawCardChoice extends Choice {
   private Deck deck;

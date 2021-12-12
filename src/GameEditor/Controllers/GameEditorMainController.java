@@ -14,14 +14,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import mainMenu.Main;
-import objects.JSONConverter;
-import objects.Token;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
+
+import Objects.JSONConverter;
+import Objects.Token;
 
 public class GameEditorMainController {
 

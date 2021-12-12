@@ -1,7 +1,8 @@
-package objects;
+package Objects;
 
-import state.*;
 import java.util.*;
+
+import State.*;
 
 // general class for a game object such as a game piece or a tile
 public class GameObject extends Saveable {

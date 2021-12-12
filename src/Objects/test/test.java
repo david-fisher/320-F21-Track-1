@@ -1,4 +1,4 @@
-package objects.test;
+package Objects.test;
 
 import java.util.*;
 

@@ -1,6 +1,6 @@
-package state;
+package State;
 
-import objects.*;
+import Objects.*;
 
 public class WinChoice extends Choice {
   private Player player;

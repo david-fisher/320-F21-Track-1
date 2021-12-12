@@ -1,4 +1,4 @@
-package state;
+package State;
 
 public class PassChoice extends Choice {
 

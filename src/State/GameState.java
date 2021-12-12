@@ -1,7 +1,8 @@
-package state;
+package State;
 
-import objects.*;
 import java.util.*;
+
+import Objects.*;
 
 public class GameState {
   private List<Player> players;

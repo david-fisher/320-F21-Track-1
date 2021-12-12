@@ -1,7 +1,8 @@
-package objects;
+package Objects;
 
-import state.*;
 import java.util.*;
+
+import State.*;
 
 public class PlayCardRule extends Rule {
   public PlayCardRule() {
