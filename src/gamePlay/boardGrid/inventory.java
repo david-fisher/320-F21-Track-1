@@ -25,6 +25,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class inventory {
 
@@ -142,32 +143,36 @@ public class inventory {
 
 
     //TODO: Get an array list and loop through that to add all images and add scroll bar
+    //highlight selected card
+    //different method to load and different to show so it doesn't load from scratch every time
     protected static void showCards(){
-        /*
-            TODO: only change the `contents`, don't edit anything else
-        */
+
         if (!contentsUpdated) { return; }   // don't duplicate contents
 
         try {
-            ImageView cardTest = getDummyData();
-            HBox hBox_card = new HBox();
-            hBox_card.setStyle("-fx-border-color: black;" + "-fx-border-width: 5;");
+            ArrayList<ImageView> cardTest = getDummyData();
+            AnchorPane cards = new AnchorPane();
+            double spacing = 200.0;
+            for(ImageView card : cardTest){
+                HBox hBox_card = new HBox();
+                hBox_card.setStyle("-fx-border-color: black;" + "-fx-border-width: 5;");
+                hBox_card.getChildren().add(card);
 
-            Pane oneCardPane = new Pane();
-            hBox_card.getChildren().add(cardTest);
+                AnchorPane.setRightAnchor(hBox_card, spacing);
+                spacing += 100.0;
 
-            oneCardPane.getChildren().add(hBox_card);
+                cards.getChildren().addAll(hBox_card);
+            }
 
-            StackPane cards = new StackPane();
-            cards.getChildren().addAll(oneCardPane);
             contents.getChildren().add(cards);
             contents.setStyle("-fx-background-color: transparent");
 
-            // add contents(HBox) into a scroll pane
             scrollView.setContent(contents);
+            // TODO: change side bar here
 
             canvas.getChildren().add(scrollView);
             contentsUpdated = false;
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -236,9 +241,30 @@ public class inventory {
         return inventoryButton;
     }
 
-    public static ImageView getDummyData() throws FileNotFoundException {
-        ImageView cardTest = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Dice.png", 50, 50);
-        return cardTest;
+    public static ArrayList<ImageView> getDummyData() throws FileNotFoundException {
+        ImageView cardTest = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Dice.png", 70, 70);
+        ImageView cardTest2 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
+        ImageView cardTest3 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
+        ImageView cardTest4 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
+        ImageView cardTest5 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
+        ImageView cardTest6 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
+        ImageView cardTest7 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
+        ImageView cardTest8 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
+        ImageView cardTest9 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
+        ImageView cardTest10 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Dice.png", 70, 70);
+
+        ArrayList<ImageView> cardList = new ArrayList<>();
+        cardList.add(cardTest);
+        cardList.add(cardTest2);
+        cardList.add(cardTest3);
+        cardList.add(cardTest4);
+        cardList.add(cardTest5);
+        cardList.add(cardTest6);
+        cardList.add(cardTest7);
+        cardList.add(cardTest8);
+        cardList.add(cardTest9);
+        cardList.add(cardTest10);
+        return cardList;
     }
 
 
