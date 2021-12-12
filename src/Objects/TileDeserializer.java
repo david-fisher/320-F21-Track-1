@@ -23,6 +23,6 @@ public class TileDeserializer implements JsonDeserializer<Tile> {
 		}.getType());
 		Deck deck = context.deserialize(j.get("deck"), Deck.class);
 
-		return new Tile(id, x, y, rules, attributes, neighbors, deck);
+		return new Tile(id, x, y, rules, attributes, neighbors, deck, 0);
 	}
 }
