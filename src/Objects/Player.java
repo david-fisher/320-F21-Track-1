@@ -1,40 +1,40 @@
 package Objects;
 
-import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class Player extends Saveable {
     private int score;
     private Tile currentTile;
     private Deck hand;
-    private String name;
+    private Hashtable<String, String> attributes;
 
-    public Player() {
+    public Player(Hashtable<String, String> attributes) {
         super();
-        this.isAI = false;
+        this.attributes = attributes;
         this.score = 0;
         this.currentTile = null;
         this.hand = new Deck();
     }
 
-    public Player(int score) {
+    public Player(int score, Hashtable<String, String> attributes) {
         super();
-        this.isAI = false;
+        this.attributes = attributes;
         this.score = score;
         this.currentTile = null;
         this.hand = new Deck();
     }
 
-    public Player(Tile currentTile) {
+    public Player(Tile currentTile, Hashtable<String, String> attributes) {
         super();
-        this.isAI = false;
+        this.attributes = attributes;
         this.score = 0;
         this.currentTile = currentTile;
         this.hand = new Deck();
     }
 
-    public Player(String id, int score, Tile currentTile, Deck hand) {
+    public Player(String id, int score, Tile currentTile, Deck hand, Hashtable<String, String> attributes) {
         super(id);
-        this.isAI = false;
+        this.attributes = attributes;
         this.score = score;
         this.currentTile = currentTile;
         this.hand = hand;
@@ -59,12 +59,12 @@ public class Player extends Saveable {
     }
 
     public int getScore() {
-        return this.score.get_score();
+        return this.score;
     }
 
     public int updateScore(int change) {
-        this.score.update(change);
-        return get_score();
+        this.score = change;
+        return getScore();
     }
 
     public void deltaScore(int delta) {
