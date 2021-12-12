@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import static java.lang.Double.min;
+
 
 public class RNG {
     Button dButton;
@@ -167,8 +169,10 @@ public class RNG {
 
                     Color c = Color.valueOf(colors[randIndex]);
                     // rgba is the current color with additional opacity when hover
-                    String rgba = "rgba(" + c.getRed() * 255 + "," + c.getGreen() * 255 + "," + c.getBlue() * 255 + ", 0.7)";
-
+                    String rgba = "rgba(" + min(255, c.getRed() * 255 + 50) + ","
+                            + min(255, c.getGreen() * 255 + 50) + ","
+                            + min(255, c.getBlue() * 255 + 50)
+                            + ", 1.0)";
 
                     afterHover(spinner,
                             "-fx-background-color: " + colors[randIndex],
