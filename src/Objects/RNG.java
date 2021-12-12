@@ -7,7 +7,7 @@ Class return an array of generated random elements
 */
 public class RNG extends Saveable {
     private int repeat, seed;
-    private double[] range;
+    private int[] range;
     // private transient Random rand;
     private Random rand;
     /*
@@ -20,29 +20,21 @@ public class RNG extends Saveable {
 
     public RNG() {
         super();
-        this.range = new double[] { 0, 1 };
+        this.range = new int[] { 0, 1 };
         this.repeat = 1;
         this.seed = -1;
         this.rand = new Random();
     }
 
-    public RNG(double constant) {
+    public RNG(int constant) {
         super();
-        this.range = new double[] { constant, constant };
+        this.range = new int[] { constant, constant };
         this.repeat = 1;
         this.seed = -1;
         this.rand = new Random();
     }
 
-    public RNG(double[] range) {
-        super();
-        this.range = range;
-        this.repeat = 1;
-        this.seed = -1;
-        this.rand = new Random();
-    }
-
-    public RNG(String id, double[] range) {
+    public RNG(int[] range) {
         super();
         this.range = range;
         this.repeat = 1;
@@ -50,7 +42,15 @@ public class RNG extends Saveable {
         this.rand = new Random();
     }
 
-    public RNG(double[] range, int repeat) {
+    public RNG(String id, int[] range) {
+        super();
+        this.range = range;
+        this.repeat = 1;
+        this.seed = -1;
+        this.rand = new Random();
+    }
+
+    public RNG(int[] range, int repeat) {
         super();
         this.range = range;
         this.seed = -1;
@@ -58,7 +58,7 @@ public class RNG extends Saveable {
         this.rand = new Random();
     }
 
-    public RNG(String id, double[] range, int repeat) {
+    public RNG(String id, int[] range, int repeat) {
         super(id);
         this.range = range;
         this.seed = -1;
@@ -66,7 +66,7 @@ public class RNG extends Saveable {
         this.rand = new Random();
     }
 
-    public RNG(String id, double[] range, int seed, int repeat) {
+    public RNG(String id, int[] range, int seed, int repeat) {
         super(id);
         this.range = range;
         this.seed = seed;
@@ -98,7 +98,7 @@ public class RNG extends Saveable {
 
     public double[] randDouble() {
         double[] result;
-        result = new double[this.repeat];
+        result = new int[this.repeat];
         for (int i = 0; i < this.repeat; i++) {
             result[i] = rand.nextDouble() * (this.range[1] - this.range[0]) + this.range[0];
         }
