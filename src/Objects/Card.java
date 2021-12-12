@@ -9,7 +9,7 @@ import java.util.*;
   - It can be used by a player.
   When a Card is used, its Rules are executed and then it is discarded from the player's hand.
 */
-public class Card extends RuleList {
+public class Card extends GameObject {
   public Card() {
     this(0);
   }
