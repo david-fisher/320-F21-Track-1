@@ -27,6 +27,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class inventory {
@@ -154,6 +155,7 @@ public class inventory {
         try {
             ArrayList<ImageView> cardTest = getDummyData();
             AnchorPane cards = new AnchorPane();
+            ArrayList<HBox> hboxes = new ArrayList<>();
 
             double spacing = 200.0;
             for(ImageView card : cardTest){
@@ -163,7 +165,7 @@ public class inventory {
 
                 AnchorPane.setRightAnchor(hBox_card, spacing);
                 spacing += 100.0;
-
+                hboxes.add(hBox_card);
                 cards.getChildren().addAll(hBox_card);
             }
 
@@ -182,10 +184,13 @@ public class inventory {
                 public void handle(MouseEvent event) {
                     System.out.println("mouse click detected! "+event.getSource());
                     System.out.println(event.getX());
-                    AnchorPane ap = (AnchorPane) event.getSource();
 
-                    Node target = (Node) event.getTarget();
-                    target.setStyle("-fx-border-color: red;" + "-fx-border-width: 5;");
+                    if (event.getTarget() != cards) {
+                        Node target = (Node) event.getTarget();
+                        target.setStyle("-fx-border-color: red;" + "-fx-border-width: 5;");
+                        int index = getCardIndex(target, hboxes);
+                        System.out.println("INDEX: " + index);
+                    }
 
                 }
             });
@@ -195,6 +200,17 @@ public class inventory {
             e.printStackTrace();
         }
 
+    }
+
+    private static int getCardIndex(Node hbox_target, ArrayList<HBox> hBoxes){
+        int index = -1;
+        for(int i = 0; i < hBoxes.size(); i++){
+            if(hBoxes.get(i).equals(hbox_target)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     // take the primary stage and contents
