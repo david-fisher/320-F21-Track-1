@@ -1,7 +1,4 @@
 package State;
-
-import java.util.*;
-
 import Objects.*;
 
 public class MoveChoice extends Choice {
