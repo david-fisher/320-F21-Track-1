@@ -114,8 +114,8 @@ public class GameObject extends Saveable {
         return this.y;
     }
 
-    public RNG getScore() {
-        return this.score;
+    public int[] getScore() {
+        return this.score.getRange();
     }
 
     public ArrayList<Integer> getCoordinate() {
@@ -179,7 +179,7 @@ public class GameObject extends Saveable {
 
     public void executeRules(GameState state) {
         state.enqueueRules(rules);
-        state.getCurPlayer().deltaScore(score.randInt()[0]);
+        state.getCurPlayer().deltaScore(score.randInt());
     }
 
     public Rule findByID(String ID) {

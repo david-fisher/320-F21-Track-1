@@ -2,10 +2,6 @@ package Objects;
 import State.GameState;
 
 public abstract class Rule extends Saveable {
-    private int score;
-    private RNG rng;
-    private Card card;
-    private Tile tile;
 
     public Rule() {
         super();
