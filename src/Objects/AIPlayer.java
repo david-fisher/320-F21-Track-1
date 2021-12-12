@@ -6,8 +6,8 @@ import State.*;
 
 public class AIPlayer extends Player {
 
-  public AIPlayer(Tile startPos) {
-    super(startPos);
+  public AIPlayer(Tile startPos, Hashtable<String, String> attributes) {
+    super(startPos, attributes);
   }
 
   public Choice choose(ArrayList<Choice> choices) {
