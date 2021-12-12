@@ -13,45 +13,91 @@ public class GameObject extends Saveable {
     private final int x, y;
     private Hashtable<String, String> attributes;
     private ArrayList<Rule> rules;
-
-    // This attribute probably shouldn't be a part of this class
     private RNG score;
 
-    public GameObject(ArrayList<Rule> rules) {
+    public GameObject(ArrayList<Rule> rules, int constant) {
         super();
         this.rules = rules;
     }
 
-    public GameObject(ArrayList<Rule> rules, Hashtable<String, String> attributes) {
+    public GameObject(ArrayList<Rule> rules, Hashtable<String, String> attributes, int constant) {
         super();
         this.x = -1;
         this.y = -1;
         this.attributes = attributes;
         this.rules = rules;
+        this.score = new RNG(constant);
     }
 
-    public GameObject(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes) {
+    public GameObject(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes, int constants) {
         super();
         this.x = x;
         this.y = y;
         this.attributes = attributes;
         this.rules = rules;
+        this.score = new RNG(constant);
     }
 
-    public GameObject(String id, ArrayList<Rule> rules, Hashtable<String, String> attributes) {
+    public GameObject(String id, ArrayList<Rule> rules, Hashtable<String, String> attributes, int constant) {
         super(id);
         this.x = -1;
         this.y = -1;
         this.attributes = attributes;
         this.rules = rules;
+        this.score = new RNG(constant);
     }
 
-    public GameObject(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes) {
+    public GameObject(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes,
+            int constant) {
         super(id);
         this.x = x;
         this.y = y;
         this.attributes = attributes;
         this.rules = rules;
+        this.score = new RNG(constant);
+    }
+
+    public GameObject(ArrayList<Rule> rules, int[] range) {
+        super();
+        this.rules = rules;
+        this.score = new RNG(range);
+    }
+
+    public GameObject(ArrayList<Rule> rules, Hashtable<String, String> attributes, int[] range) {
+        super();
+        this.x = -1;
+        this.y = -1;
+        this.attributes = attributes;
+        this.rules = rules;
+        this.score = new RNG(range);
+    }
+
+    public GameObject(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes, int[] range) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.attributes = attributes;
+        this.rules = rules;
+        this.score = new RNG(range);
+    }
+
+    public GameObject(String id, ArrayList<Rule> rules, Hashtable<String, String> attributes, int[] range) {
+        super(id);
+        this.x = -1;
+        this.y = -1;
+        this.attributes = attributes;
+        this.rules = rules;
+        this.score = new RNG(range);
+    }
+
+    public GameObject(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes,
+            int[] range) {
+        super(id);
+        this.x = x;
+        this.y = y;
+        this.attributes = attributes;
+        this.rules = rules;
+        this.score = new RNG(range);
     }
 
     public int get_x() {
