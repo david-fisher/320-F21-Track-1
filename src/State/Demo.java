@@ -53,6 +53,6 @@ public class Demo {
   }
 
   private static void printPoints(Player player) {
-    System.out.println("Total Points: " + player.getPoints());
+    System.out.println("Total Points: " + player.getScore());
   }
 }

@@ -36,7 +36,7 @@ public class GameState {
     choices.get(choice).execute(this); // Execute the choice the last player has made.
     choices.clear();
     for (Player p : players) {
-      if (p.getPoints() > winCondition) {
+      if (p.getScore() > winCondition) {
         choices.add(new WinChoice(p));
         return choices;
       }
