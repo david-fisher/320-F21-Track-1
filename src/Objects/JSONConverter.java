@@ -1,4 +1,4 @@
-package src.main.java.objects;
+package objects;
 
 import java.io.*;
 import com.google.gson.*;
@@ -9,7 +9,7 @@ public class JSONConverter {
 	private Token token;
 	private GsonBuilder gsonBuilder;
 	private Gson gson;
-	
+
 	public JSONConverter(Token token, String fileLocation) {
 		this.fileLocation = fileLocation;
 		this.token = token;
@@ -20,15 +20,15 @@ public class JSONConverter {
 		gsonBuilder.registerTypeAdapter(Token.class, new TokenDeserializer());
 		gson = gsonBuilder.setPrettyPrinting().create();
 	}
-	
-	//Writing into a JSON which will be stored in fileLocation
+
+	// Writing into a JSON which will be stored in fileLocation
 	public void To_JSON() throws IOException {
 		FileWriter fw = new FileWriter(fileLocation);
 		gson.toJson(token, fw);
 		fw.close();
 	}
-	
-	//Reading from a JSON at fileLocation
+
+	// Reading from a JSON at fileLocation
 	public Token From_JSON() throws IOException {
 		FileReader fr = new FileReader(fileLocation);
 		BufferedReader br = new BufferedReader(fr);

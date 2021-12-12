@@ -1,5 +1,5 @@
-package src.main.java.objects;
-import src.main.java.*;
+package objects;
+
 import java.util.*;
 
 /*
@@ -29,7 +29,7 @@ public class Card extends GameObject {
   public Card(ArrayList<Rule> rules, int constant) {
     super(rules, constant);
   }
-  
+
   public Card(ArrayList<Rule> rules, int[] range) {
     super(rules, range);
   }

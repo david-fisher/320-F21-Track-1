@@ -1,31 +1,31 @@
-package src.main.java.objects;
+package objects;
 
 import java.util.*;
 
-public class Deck extends Saveable{
+public class Deck extends Saveable {
     // cards: list of cards in the deck
     // cardQueue: list of cards in order to be drawn
     private ArrayList<Card> cards;
     private ArrayList<Card> cardQueue;
 
-    public Deck(){
+    public Deck() {
         super();
         this.cards = new ArrayList<Card>();
     }
 
-    public Deck(ArrayList<Piece> cards){
-    	super();
+    public Deck(ArrayList<Piece> cards) {
+        super();
         this.cards = cards;
     }
 
     // Unused constructors
-    
+
     // public Deck(String id, ArrayList<Piece> pieces){
-    // 	super(id);
-    //     this.pieces = pieces;
+    // super(id);
+    // this.pieces = pieces;
     // }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return this.cards.isEmpty();
     }
 
@@ -33,11 +33,11 @@ public class Deck extends Saveable{
         return cards;
     }
 
-    public Card peek(){
+    public Card peek() {
         return this.cards.get(0);
     }
 
-    public Card pop(){
+    public Card pop() {
         if (this.cardQueue.isEmpty()) {
             resetDeck();
         }
@@ -52,11 +52,11 @@ public class Deck extends Saveable{
     }
 
     // Add a new card into the deck
-    public ArrayList<Card> addCard(Card updatedCard){
+    public ArrayList<Card> addCard(Card updatedCard) {
         try {
             // If the card is found then it already exists
             int index = this.cards.indexOf(findCardByID(new_piece.get_id()));
-		    System.out.println("Card already exists");
+            System.out.println("Card already exists");
         } catch (Exception e) {
             // If there is an error finding the card then we know that it can be added
             this.cards.add(new_piece);
@@ -65,10 +65,10 @@ public class Deck extends Saveable{
     }
 
     // Update a card in the deck
-    public ArrayList<Card> updateCard(Card newCard){
+    public ArrayList<Card> updateCard(Card newCard) {
         try {
             int index = this.cards.indexOf(findCardByID(newCard.get_id()));
-		    this.pieces.set(index, newCard);
+            this.pieces.set(index, newCard);
         } catch (Exception e) {
             System.out.println("Error: Card not found in deck.");
         }
@@ -76,32 +76,32 @@ public class Deck extends Saveable{
     }
 
     // Add a list of cards into the deck, takes an array list of cards to add
-    public ArrayList<Piece> addCards(ArrayList<Card> newCards){
-        for (Card newCard: newCards){
+    public ArrayList<Piece> addCards(ArrayList<Card> newCards) {
+        for (Card newCard : newCards) {
             addCard(newCard);
         }
         return this.cards;
     }
 
     // remove a card from the deck, takes the card that needs removal of as parem
-    public ArrayList<Piece> removeCard(Card input){
+    public ArrayList<Piece> removeCard(Card input) {
         try {
-		    this.cards.remove(this.cards.indexOf(findCardByID(input.get_id())));
+            this.cards.remove(this.cards.indexOf(findCardByID(input.get_id())));
         } catch (Exception e) {
-        	System.out.println("Error: Unable to remove target card:");
+            System.out.println("Error: Unable to remove target card:");
             System.out.println(e);
-        }		
+        }
         return this.cards;
     }
 
     // Clear all cards from deck
-    public ArrayList<Piece> removeCards(){
+    public ArrayList<Piece> removeCards() {
         this.cards.clear();
         return this.cards;
     }
 
     // Find a card in the deck by ID, return null if not found
     public Piece findCardByID(String ID) {
-	    return this.cards.stream().filter(card -> card.get_id().equals(ID)).findFirst().orElse(null);
-	}
+        return this.cards.stream().filter(card -> card.get_id().equals(ID)).findFirst().orElse(null);
+    }
 }

@@ -1,7 +1,11 @@
+package state;
+
+import objects.*;
+
 public class DrawCardChoice extends Choice {
   private Deck deck;
   private int amount;
-  
+
   public DrawCardChoice(Deck deck, int amount) {
     super();
     this.deck = deck;
@@ -27,6 +31,6 @@ public class DrawCardChoice extends Choice {
   }
 
   public int[] getPoints() {
-    return new int[] {0,0};
+    return new int[] { 0, 0 };
   }
 }

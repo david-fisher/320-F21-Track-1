@@ -1,3 +1,6 @@
+package state;
+
+import objects.*;
 import java.util.*;
 
 public class Demo {
@@ -11,7 +14,7 @@ public class Demo {
     Tile t3 = new Tile(3);
     ArrayList<Rule> t4Rule = new ArrayList<Rule>();
     t4Rule.add(new MoveRule(t2));
-    Tile t4 = new Tile(t4Rule, new int[] {4,9});
+    Tile t4 = new Tile(t4Rule, new int[] { 4, 9 });
     t1.setNeighbors(new ArrayList<Tile>(Arrays.asList(t2)));
     t2.setNeighbors(new ArrayList<Tile>(Arrays.asList(t3, t4)));
     t3.setNeighbors(new ArrayList<Tile>(Arrays.asList(t4)));
@@ -28,14 +31,15 @@ public class Demo {
     Player p1 = new Player(board.getStartTile());
 
     Card card1 = new Card(5);
-    Card card2 = new Card(new int[] {2,11});
+    Card card2 = new Card(new int[] { 2, 11 });
 
     Deck deck = new Deck(new ArrayList<Card>(Arrays.asList(card1, card2)));
 
-    ArrayList<Rule> rules = new ArrayList<Rule>(Arrays.asList(new PlayCardRule(), new MoveRule(2), new DrawCardRule(2), new PlayCardRule()));
+    ArrayList<Rule> rules = new ArrayList<Rule>(
+        Arrays.asList(new PlayCardRule(), new MoveRule(2), new DrawCardRule(2), new PlayCardRule()));
 
     GameState state = new GameState(new ArrayList<Player>(Arrays.asList(p1)), board, deck, rules, 100);
-    
+
     List<Choice> choices = state.progressGame();
     Scanner input = new Scanner(System.in);
     while (!(choices.get(0) instanceof WinChoice)) {

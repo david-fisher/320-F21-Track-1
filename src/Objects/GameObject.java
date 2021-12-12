@@ -1,5 +1,6 @@
-package src.main.java.objects;
+package objects;
 
+import state.*;
 import java.util.*;
 
 // general class for a game object such as a game piece or a tile

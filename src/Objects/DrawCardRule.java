@@ -1,3 +1,7 @@
+package objects;
+
+import state.*;
+
 public class DrawCardRule extends Rule {
   private int repeat; // 1, 2, 3, .... , MAX
 

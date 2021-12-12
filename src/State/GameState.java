@@ -1,3 +1,6 @@
+package state;
+
+import objects.*;
 import java.util.*;
 
 public class GameState {
@@ -9,7 +12,7 @@ public class GameState {
   private int winCondition;
 
   private Rule curRule;
-  
+
   private ArrayList<Choice> choices;
   private ArrayList<Rule> ruleQueue;
 

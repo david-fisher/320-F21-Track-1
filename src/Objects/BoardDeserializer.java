@@ -1,4 +1,4 @@
-package src.main.java.objects;
+package objects;
 
 import java.lang.reflect.Type;
 import java.util.*;
@@ -10,12 +10,14 @@ public class BoardDeserializer implements JsonDeserializer<Board> {
 	@Override
 	public Board deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
 		JsonObject j = json.getAsJsonObject();
-		
+
 		String id = context.deserialize(j.get("ID"), String.class);
-		ArrayList<Tile> tiles = context.deserialize(j.get("tiles"), new TypeToken<List<Tile>>(){}.getType());
-		ArrayList<Rule> rules = context.deserialize(j.get("rules"), new TypeToken<List<Rule>>(){}.getType());
+		ArrayList<Tile> tiles = context.deserialize(j.get("tiles"), new TypeToken<List<Tile>>() {
+		}.getType());
+		ArrayList<Rule> rules = context.deserialize(j.get("rules"), new TypeToken<List<Rule>>() {
+		}.getType());
 		Deck deck = context.deserialize(j.get("deck"), Deck.class);
-		
+
 		Board board = new Board(id, tiles, rules, deck);
 		for (Tile tile : board.get_tiles()) {
 			ArrayList<Tile> neighbors = new ArrayList<>();
@@ -24,7 +26,7 @@ public class BoardDeserializer implements JsonDeserializer<Board> {
 			}
 			tile.update_neighbors(neighbors);
 		}
-		
+
 		return board;
 	}
 }

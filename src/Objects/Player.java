@@ -1,4 +1,4 @@
-package src.main.java.objects;
+package objects;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ public class Player extends Saveable {
     private Deck hand;
     private String name;
 
-    public Player(){
+    public Player() {
         super();
         this.isAI = false;
         this.score = 0;
@@ -16,23 +16,23 @@ public class Player extends Saveable {
         this.hand = new Deck();
     }
 
-    public Player(int score){
+    public Player(int score) {
         super();
         this.isAI = false;
         this.score = score;
         this.currentTile = null;
         this.hand = new Deck();
-    } 
+    }
 
-    public Player(Tile currentTile){
+    public Player(Tile currentTile) {
         super();
         this.isAI = false;
         this.score = 0;
         this.currentTile = currentTile;
         this.hand = new Deck();
-    } 
+    }
 
-    public Player(String id, int score, Tile currentTile, Deck hand){
+    public Player(String id, int score, Tile currentTile, Deck hand) {
         super(id);
         this.isAI = false;
         this.score = score;
@@ -41,8 +41,8 @@ public class Player extends Saveable {
     }
 
     public Deck getHand() {
-		return hand;
-	}
+        return hand;
+    }
 
     public void addCard(Card card) {
         this.hand.addCard(card);
@@ -55,14 +55,14 @@ public class Player extends Saveable {
     // Prerequisite: the tile is on the board.
     public void moveTo(Tile tile) {
         this.currentTile = tile;
-        //userInterface.movePlayer(this, tile);
+        // userInterface.movePlayer(this, tile);
     }
 
-    public int getScore(){
+    public int getScore() {
         return this.score.get_score();
     }
 
-    public int updateScore(int change){
+    public int updateScore(int change) {
         this.score.update(change);
         return get_score();
     }
@@ -71,11 +71,11 @@ public class Player extends Saveable {
         this.score += delta;
     }
 
-    public Tile getTile(){
+    public Tile getTile() {
         return this.currentTile;
     }
 
-    public void updateTile(Tile new_tile){
+    public void updateTile(Tile new_tile) {
         this.currentTile = new_tile;
-    }   
+    }
 }

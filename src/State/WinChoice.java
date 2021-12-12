@@ -1,4 +1,6 @@
-import java.util.*;
+package state;
+
+import objects.*;
 
 public class WinChoice extends Choice {
   private Player player;
@@ -12,13 +14,14 @@ public class WinChoice extends Choice {
     return player;
   }
 
-  public void execute(GameState state) {}
+  public void execute(GameState state) {
+  }
 
   public String toString() {
     return player.toString() + " wins";
   }
 
   public int[] getPoints() {
-    return new int[] {0,0};
+    return new int[] { 0, 0 };
   }
 }

@@ -1,3 +1,6 @@
+package objects;
+
+import state.*;
 import java.util.*;
 
 public class AIPlayer extends Player {

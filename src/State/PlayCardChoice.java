@@ -1,3 +1,7 @@
+package state;
+
+import objects.*;
+
 public class PlayCardChoice extends Choice {
   private Card card;
 
@@ -18,7 +22,7 @@ public class PlayCardChoice extends Choice {
     state.getCurPlayer().removeCard(card);
     card.executeRules(state);
   }
-  
+
   public String toString() {
     return "(" + getPoints()[0] + "-" + getPoints()[1] + " Points) Play " + card.toString();
   }

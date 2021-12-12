@@ -1,12 +1,12 @@
-package src.main.java.objects;
+package objects;
 
-abstract class Rule extends Saveable {
-    private int score;     
+public abstract class Rule extends Saveable {
+    private int score;
     private RNG rng;
     private Card card;
     private Tile tile;
 
-    public Rule(){
+    public Rule() {
         super();
     }
 

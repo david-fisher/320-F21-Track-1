@@ -1,3 +1,6 @@
+package objects;
+
+import state.*;
 import java.util.*;
 
 public class MoveRule extends Rule {
@@ -18,7 +21,7 @@ public class MoveRule extends Rule {
   public void execute(GameState state) {
     Player player = state.getCurPlayer();
     if (stepCount > 0) {
-      destinations.addAll(state.getNextTiles(player.getTile(), stepCount)); 
+      destinations.addAll(state.getNextTiles(player.getTile(), stepCount));
     }
     destinations.forEach(tile -> state.addChoice(new MoveChoice(tile)));
     if (destinations.size() == 0) {
