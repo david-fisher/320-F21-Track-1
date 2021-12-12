@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -16,6 +17,7 @@ import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -152,6 +154,7 @@ public class inventory {
         try {
             ArrayList<ImageView> cardTest = getDummyData();
             AnchorPane cards = new AnchorPane();
+
             double spacing = 200.0;
             for(ImageView card : cardTest){
                 HBox hBox_card = new HBox();
@@ -172,6 +175,21 @@ public class inventory {
 
             canvas.getChildren().add(scrollView);
             contentsUpdated = false;
+
+            // TODO: onclick method --> get the index in array list as well
+            cards.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    System.out.println("mouse click detected! "+event.getSource());
+                    System.out.println(event.getX());
+                    AnchorPane ap = (AnchorPane) event.getSource();
+
+                    Node target = (Node) event.getTarget();
+                    target.setStyle("-fx-border-color: red;" + "-fx-border-width: 5;");
+
+                }
+            });
+            // TODO: Add cavas.getChildren.addAll --> button for playing the card
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
