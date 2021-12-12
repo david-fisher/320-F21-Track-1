@@ -18,7 +18,7 @@ public class TokenDeserializer implements JsonDeserializer<Token> {
 
 		Token token = new Token(id, players, board);
 		for (Player player : token.get_players()) {
-			player.update_tile(board.tile_findByID(player.get_Tile().get_id()));
+			player.updateTile(board.tile_findByID(player.getTile().get_id()));
 		}
 
 		return token;

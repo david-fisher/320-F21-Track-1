@@ -1,4 +1,8 @@
 package Objects;
+<<<<<<< HEAD
+=======
+
+>>>>>>> d190abaef0a1e0d85e9819a610a52046b3b4d07b
 import State.*;
 
 public class PlayCardRule extends Rule {
