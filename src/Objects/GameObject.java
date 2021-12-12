@@ -100,12 +100,16 @@ public class GameObject extends Saveable {
         this.score = new RNG(range);
     }
 
-    public int get_x() {
+    public int getX() {
         return this.x;
     }
 
-    public int get_y() {
+    public int getY() {
         return this.y;
+    }
+
+    public int getScore() {
+        return this.score;
     }
 
     public ArrayList<Integer> getCoordinate() {
