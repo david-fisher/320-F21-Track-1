@@ -7,29 +7,56 @@ public class Tile extends GameObject {
     private ArrayList<Tile> neighbors;
     private Deck deck;
 
-    public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes) {
-        super(x, y, rules, attributes);
+    public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes, int constant) {
+        super(x, y, rules, attributes, constant);
         this.neighbors = new ArrayList<Tile>();
         this.deck = new Deck();
     }
 
     public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes,
-            ArrayList<Tile> neighbors) {
-        super(x, y, rules, attributes);
+            ArrayList<Tile> neighbors, int constant) {
+        super(x, y, rules, attributes, constant);
         this.neighbors = neighbors;
         this.deck = new Deck();
     }
 
     public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes,
-            ArrayList<Tile> neighbors, Deck deck) {
-        super(x, y, rules, attributes);
+            ArrayList<Tile> neighbors, Deck deck, int constant) {
+        super(x, y, rules, attributes, constant);
         this.neighbors = neighbors;
         this.deck = deck;
     }
 
     public Tile(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes,
-            ArrayList<Tile> neighbors, Deck deck) {
-        super(id, x, y, rules, attributes);
+            ArrayList<Tile> neighbors, Deck deck, int constant) {
+        super(id, x, y, rules, attributes, constant);
+        this.neighbors = neighbors;
+        this.deck = deck;
+    }
+
+    public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes, int[] range) {
+        super(x, y, rules, attributes, range);
+        this.neighbors = new ArrayList<Tile>();
+        this.deck = new Deck();
+    }
+
+    public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes,
+            ArrayList<Tile> neighbors, int[] range) {
+        super(x, y, rules, attributes, range);
+        this.neighbors = neighbors;
+        this.deck = new Deck();
+    }
+
+    public Tile(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes,
+            ArrayList<Tile> neighbors, Deck deck, int[] range) {
+        super(x, y, rules, attributes, range);
+        this.neighbors = neighbors;
+        this.deck = deck;
+    }
+
+    public Tile(String id, int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes,
+            ArrayList<Tile> neighbors, Deck deck, int[] range) {
+        super(id, x, y, rules, attributes, range);
         this.neighbors = neighbors;
         this.deck = deck;
     }
