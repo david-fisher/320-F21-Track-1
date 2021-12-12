@@ -36,7 +36,7 @@
                         <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#saveTileRule" text="Save Rule" />
-                              <Button mnemonicParsing="false" prefWidth="56.0" text="Cancel" />
+                              <Button mnemonicParsing="false" text="Cancel" />
                            </children>
                         </HBox>
                         <HBox layoutX="21.0" layoutY="62.0" prefHeight="276.0" prefWidth="460.0">
@@ -46,21 +46,15 @@
                                     <Pane prefHeight="234.0" prefWidth="201.0">
                                        <children>
                                           <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e1" height="236.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="198.0" />
-                                          <TextFlow fx:id="tileNum1" layoutX="14.0" layoutY="29.0">
+                                          <VBox fx:id="tiles" layoutX="13.0" prefHeight="200.0" prefWidth="179.0">
                                              <children>
-                                                <CheckBox fx:id="tile1" mnemonicParsing="false" text="Tile 1" />
+                                                <Label contentDisplay="CENTER" text="Choose a tile to add a rule" textAlignment="CENTER">
+                                                   <padding>
+                                                      <Insets bottom="5.0" />
+                                                   </padding>
+                                                </Label>
                                              </children>
-                                          </TextFlow>
-                                          <TextFlow fx:id="tileNum2" layoutX="75.0" layoutY="14.0" visible="false">
-                                             <children>
-                                                <CheckBox fx:id="tile2" mnemonicParsing="false" text="Tile 2" />
-                                             </children>
-                                          </TextFlow>
-                                          <Label contentDisplay="CENTER" layoutX="8.0" layoutY="-1.0" text="Choose a tile to add a rule" textAlignment="CENTER">
-                                             <padding>
-                                                <Insets bottom="5.0" />
-                                             </padding>
-                                          </Label>
+                                          </VBox>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -99,11 +93,13 @@
                                                             <Label accessibleText="Move player to " prefHeight="26.0" prefWidth="103.0" text="Move player to " />
                                                          </children>
                                                       </TextFlow>
-                                                      <TextFlow fx:id="tileNum" layoutX="154.0" layoutY="193.0">
+                                                      <TextFlow fx:id="tileNum" layoutX="128.0" layoutY="190.0" prefHeight="33.0" prefWidth="93.0">
                                                          <children>
-                                                            <Label accessibleText="tile" text="tile  " />
-                                                            <TextField prefHeight="26.0" prefWidth="33.0" promptText="_" />
+                                                            <ComboBox fx:id="tileOptions" prefHeight="25.0" prefWidth="81.0" promptText="Tile" />
                                                          </children>
+                                                         <padding>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </padding>
                                                       </TextFlow>
                                                       <TextFlow fx:id="numCards" layoutX="125.0" layoutY="238.0">
                                                          <children>
@@ -181,7 +177,7 @@
                <graphic>
                   <StackPane onMouseClicked="#intializeMovementRule" prefHeight="150.0" prefWidth="200.0" rotate="90.0">
                      <children>
-                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="95.0" rotate="90.0" text="Movement Rule" StackPane.alignment="CENTER" />
+                        <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="104.0" rotate="90.0" text="Movement Rule" StackPane.alignment="CENTER" />
                      </children>
                   </StackPane>
                </graphic>
@@ -191,7 +187,7 @@
                         <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
                            <children>
                               <Button mnemonicParsing="false" text="Save Rule" />
-                              <Button mnemonicParsing="false" prefWidth="56.0" text="Cancel" />
+                              <Button mnemonicParsing="false" text="Cancel" />
                            </children>
                         </HBox>
                         <HBox layoutX="21.0" layoutY="62.0" prefHeight="276.0" prefWidth="460.0">
@@ -317,7 +313,7 @@
                         <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#saveTurnRule" text="Save Rule" />
-                              <Button mnemonicParsing="false" prefWidth="56.0" text="Cancel" />
+                              <Button mnemonicParsing="false" text="Cancel" />
                            </children>
                         </HBox>
                   </children>
@@ -340,7 +336,7 @@
                               <HBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="454.0" spacing="5.0">
                                  <children>
                                     <Button mnemonicParsing="false" text="Save Rule" />
-                                    <Button mnemonicParsing="false" prefWidth="56.0" text="Cancel" />
+                                    <Button mnemonicParsing="false" text="Cancel" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="40.0" prefWidth="454.0" spacing="5.0">
