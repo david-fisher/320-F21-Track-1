@@ -61,6 +61,14 @@ public class Tile extends GameObject {
         this.deck = deck;
     }
 
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
     public Deck get_deck() {
         return this.deck;
     }
