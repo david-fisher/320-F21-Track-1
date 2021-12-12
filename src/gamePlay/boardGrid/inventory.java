@@ -168,7 +168,7 @@ public class inventory {
             contents.setStyle("-fx-background-color: transparent");
 
             scrollView.setContent(contents);
-            // TODO: change side bar here
+            scrollView.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
             canvas.getChildren().add(scrollView);
             contentsUpdated = false;
