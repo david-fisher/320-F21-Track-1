@@ -19,6 +19,8 @@ public class GameObject extends Saveable {
 
     public GameObject(ArrayList<Rule> rules, int constant) {
         super();
+        this.x = -1;
+        this.y = -1;
         this.rules = rules;
     }
 
@@ -31,7 +33,7 @@ public class GameObject extends Saveable {
         this.score = new RNG(constant);
     }
 
-    public GameObject(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes, int constants) {
+    public GameObject(int x, int y, ArrayList<Rule> rules, Hashtable<String, String> attributes, int constant) {
         super();
         this.x = x;
         this.y = y;
@@ -61,6 +63,8 @@ public class GameObject extends Saveable {
 
     public GameObject(ArrayList<Rule> rules, int[] range) {
         super();
+        this.x = -1;
+        this.y = -1;
         this.rules = rules;
         this.score = new RNG(range);
     }
@@ -110,7 +114,7 @@ public class GameObject extends Saveable {
         return this.y;
     }
 
-    public int getScore() {
+    public RNG getScore() {
         return this.score;
     }
 
@@ -175,7 +179,7 @@ public class GameObject extends Saveable {
 
     public void executeRules(GameState state) {
         state.enqueueRules(rules);
-        state.getCurPlayer().deltaScore(score.randInt());
+        state.getCurPlayer().deltaScore(score.randInt()[0]);
     }
 
     public Rule findByID(String ID) {
