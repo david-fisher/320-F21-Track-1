@@ -156,17 +156,29 @@ public class inventory {
             ArrayList<ImageView> cardTest = getDummyData();
             AnchorPane cards = new AnchorPane();
             ArrayList<HBox> hboxes = new ArrayList<>();
+            ArrayList<Boolean> selectedList = new ArrayList<>();
 
             double spacing = 200.0;
             for(ImageView card : cardTest){
                 HBox hBox_card = new HBox();
+                selectedList.add(false);
                 hBox_card.setStyle("-fx-border-color: black;" + "-fx-border-width: 5;");
                 hBox_card.getChildren().add(card);
 
                 // TODO: Varsha, I replaced the events handler here
                 hBox_card.setOnMouseClicked(event -> {
-                    hBox_card.setStyle("-fx-border-color: red;" + "-fx-border-width: 5;");
                     int index = getCardIndex(hBox_card, hboxes);
+
+                    boolean currentMode = selectedList.get(index);
+
+                    hBox_card.setStyle((currentMode?
+                            "-fx-border-color: black;"
+                            : "-fx-border-color: red;")
+                            + "-fx-border-width: 5;"
+                    );
+
+                    selectedList.set(index, !currentMode);
+
                     System.out.println("INDEX: " + index);
                 });
 
