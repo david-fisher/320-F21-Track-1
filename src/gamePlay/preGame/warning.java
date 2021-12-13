@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import gamePlay.mainMenu.Main;
+import gamePlay.mainMenu.Helpers.Helper;
 
 public class warning {
 
@@ -29,7 +29,7 @@ public class warning {
         VBox view = new VBox(30);
         view.getChildren().addAll(warningMessage, resumeButton);
         view.setAlignment(Pos.CENTER);
-        view.setBackground(Main.saveBackground());
+        view.setBackground(Helper.saveBackground());
 
         view.setStyle("-fx-padding: 20px;");
 
