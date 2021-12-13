@@ -56,7 +56,7 @@ public class TokenController {
     private int[] visible;
 
     @FXML
-    void initialize() {
+    public void initialize() {
         initializeCustomTokens();
     }
 
@@ -111,6 +111,7 @@ public class TokenController {
     //Methods for Custom Tokens
     @FXML
     void displayTokenEditor(ActionEvent event) {
+
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("/GameEditor/Views/NewCustomToken.fxml"));
@@ -122,6 +123,8 @@ public class TokenController {
         catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
     @FXML
