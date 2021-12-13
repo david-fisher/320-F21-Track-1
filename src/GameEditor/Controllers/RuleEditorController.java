@@ -33,25 +33,37 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import Objects.JSONConverter;
+import Objects.Rule;
+import Objects.Token;
+import Objects.Board;
+import Objects.Tile;
 
 public class RuleEditorController {
 
     @FXML
     private ResourceBundle resources;
     @FXML
-    private ComboBox<String> dropdown0, dropdown1, dropdown2, dropdown3, dropdown4;
+    private ComboBox<String> dropdown0, dropdown1, dropdown2, dropdown3, dropdown4, tileOptions;
     @FXML
-    private Button transition;
+    private Rectangle selectedTile1 = null;
+    @FXML
+    private Rectangle selectedTile2 = null;
+    @FXML
+    private StackPane board;
     @FXML
     private Button addTransition;
     @FXML
-    private HBox modifyTransitionButtons;
-    @FXML
-    private Button changeTransition;
-    @FXML
-    private Button deleteTransition;
+    private Label addMessage;
+    
+    private boolean addTransitionSelected = false;
     @FXML
     private TextFlow takeFromPlayer, givePlayer, movePlayer, tileNum, numCards, numPoints;
     
@@ -68,13 +80,16 @@ public class RuleEditorController {
     private boolean turnRuleClicked = false;
     private List<TextFlow> draggedRules = new ArrayList<TextFlow>();
     private ListView dialogContent = new ListView();
+    private Boolean initialized = false;
     
     @FXML
-    private TextFlow tileNum1, tileNum2;
-    @FXML
-    private CheckBox tile1, tile2;
-    @FXML
     private Label tileName, rule1;
+    @FXML
+    private VBox tiles;
+    private Board newBoard;
+    private ArrayList<Tile> tileObjs;
+    private String currTile;
+    private ArrayList<String> currentTiles = new ArrayList<String>();
 
 
     @FXML
@@ -107,9 +122,36 @@ public class RuleEditorController {
         dragAndDrop(movePlayer);
         dragAndDrop(numCards);
         dragAndDrop(tileNum);
-        dragAndDrop(numPoints);
-        checked(tileNum1);
-        checked(tileNum2);
+        dragAndDrop(numPoints);       
+        
+        if(!initialized)
+        {
+        	
+        	 Tile tile1 = new Tile("Tile 1", 1, 1, null, null, null);
+             Tile tile2 = new Tile("Tile 2", 1, 2, null, null, null);
+             Tile tile3 = new Tile("Tile 3", 2, 2, null, null, null);
+             Tile tile4 = new Tile("Tile 4", 2, 1, null, null, null);
+             tileObjs = new ArrayList<Tile>();
+             tileObjs.add(tile1);
+             tileObjs.add(tile2);
+             tileObjs.add(tile3);
+             tileObjs.add(tile4);
+
+        	newBoard = new Board("tempBoard", tileObjs);
+            for(Tile tile: tileObjs)
+            {
+                tileOptions.getItems().add(tile.ID);
+            	TextFlow tf = new TextFlow();
+            	tf.setAccessibleText(tile.ID);
+            	CheckBox cb = new CheckBox();
+            	cb.setText(tile.ID);
+            	cb.setAccessibleText(tile.ID);
+            	tf.getChildren().add(cb);
+            	tiles.getChildren().add(tf);
+            	checked(tf);
+            }
+            initialized = true;
+        }
     }
 
     //drag and drop for the actions in the tile rule editor
@@ -152,6 +194,11 @@ public class RuleEditorController {
     @FXML
     void saveButton()
     {	
+    	if(currentTiles.isEmpty())
+    	{
+    		invalidTileRule("Oops, please select one or more tiles");
+    		return;
+    	}
     	if(draggedRules.size()!=2)
 		{
     		invalidTileRule("Please drag two options to the rectangle to save the rule");
@@ -183,7 +230,16 @@ public class RuleEditorController {
     		{
     		    if (rule.getChildren().size()==1)
     		    {
-    		    	ruleToAdd = rule.getChildren().get(0).getAccessibleText() + ruleToAdd;
+    		    	if(rule.getChildren().get(0) instanceof Label)
+    		    	{
+        		    	ruleToAdd = rule.getChildren().get(0).getAccessibleText() + ruleToAdd;
+    		    	}
+    		    	else
+    		    	{
+    		    		ComboBox tileOption = (ComboBox) rule.getChildren().get(0);
+        				if(tileOption.getValue()== null) {invalidTileRule("Please choose a tile from the dropdown."); return; }
+    		    		ruleToAdd = ruleToAdd + tileOption.getValue();
+    		    	}
     			}
     			else if(rule.getChildren().get(0) instanceof Label)
     			{
@@ -199,7 +255,17 @@ public class RuleEditorController {
     			}
     		}
     	}
-    	dialogContent.getItems().add(ruleToAdd);
+    	for(String tile: currentTiles)
+    	{
+    		if(!dialogContent.getItems().contains(tile + ": " + ruleToAdd))
+    		{
+            	dialogContent.getItems().add(tile + ": " + ruleToAdd);
+    		}
+    		else
+    		{
+            	invalidTileRule("Oops, \""+ tile + ": " + ruleToAdd   +"\" already exists");
+    		}
+    	}
     }
     
     //shows the popup if there is an invalid input
@@ -213,10 +279,25 @@ public class RuleEditorController {
         dialog.showAndWait();
     }
     
+    private EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+        public void handle(ActionEvent e) {
+            if (dialogContent.getSelectionModel().getSelectedIndices().size() != 0) {
+                int index = (int) dialogContent.getSelectionModel().getSelectedIndices().get(0);
+                dialogContent.getItems().remove(index);
+            }
+        }
+    };
+    
     //save the tile rules, currently only prints
     @FXML
-    void saveTileRule()
+    void saveTileRule() throws IOException
     {
+    	Token newgame = new Token("game1");
+    	newgame.update_gameboard(newBoard);
+    	newgame.get_gameboard().update_tiles(tileObjs);
+    	System.out.println(newgame.get_gameboard().get_tiles().get(0).ID);
+        JSONConverter savedGames = new JSONConverter(newgame, "test.json");
+        savedGames.To_JSON();
     	System.out.println(draggedRules);
     }
     
@@ -260,12 +341,16 @@ public class RuleEditorController {
     @FXML
     void viewRules()
     {
+    	Button delete = new Button("delete");
+        delete.setOnAction(event);
+        dialogContent.getItems().add(delete);
     	Dialog<String> dialog = new Dialog<String>();
         dialog.setTitle("Current Tile Rules");
         ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(type);
         dialog.getDialogPane().setContent(dialogContent);
         dialog.showAndWait();
+        dialogContent.getItems().remove(delete);
     }
     
     @FXML
@@ -275,13 +360,18 @@ public class RuleEditorController {
     		CheckBox c = (CheckBox) (t.getSource());
     		if(c.isSelected())
     		{
-    			tileName.setText("Tile Selected: tile 1");
+    			currentTiles.add(c.getAccessibleText());
+    			tileName.setText("Tile(s) Selected: " + String.join(", ", currentTiles));
+
     		}
     		else
     		{
-    			tileName.setText("");
+    			currentTiles.remove(currentTiles.indexOf(c.getAccessibleText()));
+    			tileName.setText("Tile(s) Selected: " + String.join(", ", currentTiles));
+
     		}
     	}));
+
     }
 
     //adding a drop down box for the turn rule editor
@@ -318,28 +408,47 @@ public class RuleEditorController {
         }
     }
     
-    //initialize the movement rule
-    @FXML
-    void intializeMovementRule(MouseEvent event) {
-        modifyTransitionButtons.setVisible(false);
-        addTransition.setVisible(true);
+    @FXML 
+    void intializeMovementRule () {
+    	addMessage.setVisible(false);
     }
     
     @FXML
-    void selectTransition(MouseEvent event) {
-        addTransition.setVisible(false);
-        modifyTransitionButtons.setVisible(true);
+    void clickAddTransition(MouseEvent event) {
+    	addTransitionSelected = !addTransitionSelected;
+    	if (addTransitionSelected) {
+    		addMessage.setVisible(true);
+    		addTransition.setText("Cancel");
+    	} else {
+    		// cancel selected
+    		addTransition.setText("Add Transition");
+    		addMessage.setVisible(false);
+    		selectedTile1.setFill(Color.BLACK);
+    		selectedTile2.setFill(Color.BLACK);
+    		selectedTile1 = null;
+    		selectedTile2 = null;
+    	}
     }
     
     @FXML
-    void changeTransition(MouseEvent event) {
-        currentTransition = (currentTransition+1) % 3;
-        transition.setText(transitions[currentTransition]);
-    }
-
-    @FXML
-    void deleteTransition(MouseEvent event) {
-        transition.setVisible(false);
+    void selectTile(MouseEvent event) {
+    	if(addTransitionSelected) {
+	    	Rectangle tile = (Rectangle) event.getSource();
+	    	if (selectedTile1 == null) {
+	    		selectedTile1 = tile;
+	    		tile.setFill(Color.RED);
+	    	} else if (selectedTile2 == null) {
+	    		selectedTile2 = tile;
+	    		tile.setFill(Color.RED);
+	    		Line line = new Line(selectedTile1.getTranslateX(), selectedTile1.getTranslateY(), selectedTile2.getTranslateX(), selectedTile2.getTranslateY());
+	    		
+	    		line.setTranslateX(tile.getWidth() / 2);
+	    		
+	    		line.setTranslateY(tile.getHeight() / 2);
+	    		line.setStroke(Color.WHITE);
+	    		board.getChildren().add(line);
+	    	} 
+    	}
     }
 
 }

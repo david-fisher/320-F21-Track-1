@@ -15,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import mainMenu.Main;
+//import mainMenu.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -159,14 +159,14 @@ public class GameEditorMainController {
         savedGames.To_JSON();
 
         popup(event, "Game has been saved");
-        exitToMainMenu(node);
+//        exitToMainMenu(node);
 
     }
 
     public void exitToMainMenu(Node node) throws IOException {
         //change stage to mainMenu stage from gamePlay
         Stage appStage = (Stage) node.getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("MainMenuFXML.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainMenuFXML.fxml")));
         Scene scene = new Scene(root);
         appStage.setScene(scene);
         appStage.show();

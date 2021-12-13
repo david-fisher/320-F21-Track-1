@@ -46,3 +46,11 @@
 .tab{
    -fx-background-color: #5670f0;
 }
+
+.tab:selected{
+    -fx-background-color: #ADD8E6;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: black;
+}
