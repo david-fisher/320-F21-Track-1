@@ -93,8 +93,5 @@ public class Sandbox {
   // Helper method to print the total points for a player.
   private static void printPoints(Player player) {
     System.out.println("Total Points: " + player.getPoints());
-  }package State;
-
-public class Sandbox {
-  
+  }
 }
