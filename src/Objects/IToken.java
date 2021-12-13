@@ -1,3 +1,5 @@
+package src.main.java.objects;
+
 import java.util.*;
 
 public interface IToken {

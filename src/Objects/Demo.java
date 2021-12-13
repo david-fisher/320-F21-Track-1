@@ -1,4 +1,7 @@
+package src.main.java.objects;
+
 import java.util.*;
+import java.io.*;
 
 public class Demo {
     public static void print(String str){System.out.println(str);}
@@ -9,11 +12,20 @@ public class Demo {
             | a | b |
             | c | d |
         */
+
+        Piece pa = new Piece(0, 0, new ArrayList<Rule>(), new Hashtable<String, String>());
+
         Tile a = new Tile(0, 0, new ArrayList<Rule>(), new Hashtable<String,String>(){{put("color", "blue");}});
         Tile b = new Tile(0, 1, new ArrayList<Rule>(), new Hashtable<String,String>());
         Tile c = new Tile(1, 0, new ArrayList<Rule>(), new Hashtable<String,String>());
         Tile d = new Tile(1, 1, new ArrayList<Rule>(), new Hashtable<String,String>());
         print(String.format("Current tile: id: %30s; x: %2d; y: %2d;", a.get_id(), a.get_x(), a.get_y()));
+
+        a.get_deck().update_piece(pa);
+        ArrayList<Piece> AP = a.get_deck().get_pieces();
+        for (int m=0; m < AP.size(); m++){
+            print(AP.get(m).get_id());
+        }
 
         a.update_attribute("brightness", "3");
         Hashtable<String,String> attributes = a.get_attributes();
@@ -42,7 +54,7 @@ public class Demo {
             print(String.format("\t\tattribute: %12s; value: %6s;", key, temp));
         }
 
-        a.remove_attributes();
+        //a.remove_attributes();
         attributes = a.get_attributes();
         setofAttributes = attributes.keySet();
         print("\tattributes after erase entire attributes:");
@@ -52,16 +64,14 @@ public class Demo {
         }
 
 
-        a.update_neighbor("right", b);
-        b.update_neighbor("left", a);
-        a.update_neighbor("down", c);
-        c.update_neighbor("up", a);
-        Hashtable<String,Tile> neighbors = a.get_neighbors();
-        Set<String> setofDirection = neighbors.keySet();
+        a.update_neighbor(b);
+        //b.update_neighbor(a);
+        a.update_neighbor(c);
+        //c.update_neighbor(a);
+        ArrayList<Tile> neighbors = a.get_neighbors();
         print("\tneighbors:");
-        for(String key: setofDirection){
-            Tile temp = neighbors.get(key);
-            print(String.format("\t\tdirection: %6s; x: %2d; y: %2d", key, temp.get_x(), temp.get_y()));
+        for(Tile neighbor: neighbors){
+            print(String.format("\t\tx: %2d; y: %2d", neighbor.get_x(), neighbor.get_y()));
         }
 
         return new ArrayList<Tile>(){{add(a);add(b);add(c);add(d);}};
@@ -72,7 +82,8 @@ public class Demo {
             | a (Player) | b |
             | c          | d |
         */
-        Tile a = tiles().get(0);
+        ArrayList<Tile> tile = tiles();
+        Tile a = tile.get(0);
         Player one = new Player(a);
         print(String.format("Player: %s, Score: %d", one.get_id(), one.get_score()));
         one.update_score(3);
@@ -89,8 +100,8 @@ public class Demo {
             | c | d          |
         */
         print(String.format("Current location: (%d,%d)", one.get_Tile().get_x(), one.get_Tile().get_y()));
-        Hashtable<String,Tile> neighbors = one.get_Tile().get_neighbors();
-        one.update_tile(neighbors.get("right"));
+        ArrayList<Tile> neighbors = one.get_Tile().get_neighbors();
+        one.update_tile(neighbors.get(0));
         print(String.format("Current location: (%d,%d)", one.get_Tile().get_x(), one.get_Tile().get_y()));
         return one;
     }
@@ -110,20 +121,31 @@ public class Demo {
         
         // removing tile d from board
         print(String.format("\nCurrent number of Tiles: %2d", board.get_tiles().size()));
-        board.remove_tile(d);
+        //board.remove_tile(d);
         print(String.format("Current number of Tiles: %2d", board.get_tiles().size()));
 
         return board;
     }
 
-    public static void Token(){
+    public static Token Token(){
         Token token = new Token();
         token.update_gameboard(Board());
         token.update_player(Player());
+        token.get_players().get(0).update_tile(token.get_gameboard().get_tiles().get(2));
         print(String.format("Successfully update gameboard: '%s' and player object: '%s' into token",
-                             token.get_gameboard().getID(), token.get_players().get(0).get_id()));
+                             token.get_gameboard().get_id(), token.get_players().get(0).get_id()));
 
+        return token;
     }
+    
+    public static Token JSON() throws IOException{
+    	Token token = Token();
+		JSONConverter json = new JSONConverter(token, "Token.json");
+		json.To_JSON();
+		print(String.format("Successfully convert the token object with ID: %s into JSON file",
+                token.get_id()));
+		return json.From_JSON();
+	}
 
     public static int[] RNG_10_INT(){
         int num = 100;
@@ -136,13 +158,14 @@ public class Demo {
         }
         return result;
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         // Board();
-        Token();
+        //Token();
+    	JSON();
+        //JSONConverter jsonConverter = new JSONConverter(JSON(), "After.json");
+        //jsonConverter.To_JSON();
         // RNG_10_INT();
         // tiles();
         // Player();
-        
     }
-
 }
