@@ -32,10 +32,7 @@ public class BoardEditor {
     StackPane shapeToDelete;
     boardGrid theBoardGrid;
     Scene scene;
-    // Testing ***************************************************
     Board currBoard = new Board();
-    
-    // ***********************************************************
 
 public void tabs(Group root) {
     // Top tabs ***************************************************************
@@ -368,6 +365,12 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	        		}
 	        	}
 	        updateTileArrayList(root);
+	        // Work in progress, need to discuss
+//	        Token token = new Token();
+//			JSONConverter json = new JSONConverter(token, "Token.json");
+//			try {
+//				json.To_JSON();
+//			} catch (IOException e) {}
 	    });
 }
 
@@ -554,18 +557,25 @@ public void updateTileArrayList(boardGrid root){
 				int tmpX = (int) (tmp.getTranslateX() / 50);
 				int tmpY = (int) (tmp.getTranslateY() / 50);
 				Hashtable<String,String> tmpAtr = new Hashtable<String,String>();
-				tmpAtr.put("color", "blue");
-				tmpAtr.put("text", "+1");
-				tmpAtr.put("scale", "1");
-				tmpAtr.put("picture", "No idea but should be a file location");
-				System.out.println(tmpAtr);
 				
+				for (int j = 0; j < tmp.getChildren().size(); j++) {
+					if (tmp.getChildren().toArray()[j] instanceof Shape) {
+						Shape tmpShape = (Shape) tmp.getChildren().toArray()[j];
+						Paint tmpPaint = tmpShape.getFill();
+						tmpAtr.put("color", tmpPaint.toString());
+					}
+					else if (tmp.getChildren().toArray()[j] instanceof TextField) {
+						TextField tmpText = (TextField) tmp.getChildren().toArray()[j];
+						tmpAtr.put("text", tmpText.getText());
+					}
+				}
 				Tile tmpTile = new Tile(tmpX, tmpY, new ArrayList<Rule>(), tmpAtr);
 				tmpTilesArr.add(tmpTile);
 			}
 		}
 	}
 	currBoard.update_tiles(tmpTilesArr);
+	System.out.println(currBoard.get_tiles());
 }
 
 public Group startBoardEditor(Stage stage){
