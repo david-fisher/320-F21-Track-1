@@ -9,28 +9,28 @@ public class Sandbox {
     ArrayList<Player> players = new ArrayList<Player>();
     // Instantiate Tile 1 with constructor argument constant=1, fixing its score to
     // 1.
-    Tile t1 = new Tile(1);
+    Tile t1 = new Tile(-1, -1, null, null, 2);
     // Instantiate list of rules for Tile 2.
     ArrayList<Rule> t2Rule = new ArrayList<Rule>();
     // Add a DrawCardRule to the list with constructor argument repeat=2, meaning 2
     // cards can be drawn.
     t2Rule.add(new DrawCardRule(2));
     // Instantiate Tile 2 with rules=t2Rule and constant=2.
-    Tile t2 = new Tile(t2Rule, 2);
+    Tile t2 = new Tile(-1, -1, t2Rule, null, 0);
     // Instantiate Tile 3 with constant=3.
-    Tile t3 = new Tile(3);
+    Tile t3 = new Tile(-1, -1, null, null, 3);
     // Instantiate list of rules for Tile 4.
     ArrayList<Rule> t4Rule = new ArrayList<Rule>();
     // Add a new MoveRule to t4Rule with argument destination=t2.
     t4Rule.add(new MoveRule(t2));
     // Instantiate Tile 4 with rules t4Rule and RNG score range between 4 and 9.
-    Tile t4 = new Tile(t4Rule, new int[] { 4, 9 });
+    Tile t4 = new Tile(-1, -1, t4Rule, null, new int[] { 4, 9 });
     // Set t1's neighbor to t2.
-    t1.setNeighbors(new ArrayList<Tile>(Arrays.asList(t2)));
+    t1.update_neighbors(new ArrayList<Tile>(Arrays.asList(t2)));
     // Set t2's neighbors to t3 and t4.
-    t2.setNeighbors(new ArrayList<Tile>(Arrays.asList(t3, t4)));
+    t2.update_neighbors(new ArrayList<Tile>(Arrays.asList(t3, t4)));
     // Set t3's neighbor to t4.
-    t3.setNeighbors(new ArrayList<Tile>(Arrays.asList(t4)));
+    t3.update_neighbors(new ArrayList<Tile>(Arrays.asList(t4)));
     // Add the tiles to a list of tiles.
     ArrayList<Tile> tiles = new ArrayList<Tile>();
     tiles.add(t1);
@@ -39,13 +39,13 @@ public class Sandbox {
     tiles.add(t4);
 
     // Add a new player to the player list with starting tile t1. [unused?]
-    players.add(new Player(t1));
+    players.add(new Player(t1, null));
 
     // Instantiate a board with tiles t1 through t4 and starting tile t1.
-    Board board = new Board(Arrays.asList(t1, t2, t3, t4), t1);
+    Board board = new Board(new ArrayList<Tile>(Arrays.asList(t1, t2, t3, t4)), t1);
 
     // Instantiate a new player to start on the board (duplicate?).
-    Player p1 = new Player(board.getStartTile());
+    Player p1 = new Player(board.getStartTile(), null);
 
     // Instantiate Card 1 with score constant 5.
     Card card1 = new Card(5);
@@ -92,6 +92,6 @@ public class Sandbox {
 
   // Helper method to print the total points for a player.
   private static void printPoints(Player player) {
-    System.out.println("Total Points: " + player.getPoints());
+    System.out.println("Total Points: " + player.getScore());
   }
 }
