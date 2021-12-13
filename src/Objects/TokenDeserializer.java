@@ -1,4 +1,4 @@
-package src.main.java.objects;
+package Objects;
 
 import java.lang.reflect.Type;
 import java.util.*;

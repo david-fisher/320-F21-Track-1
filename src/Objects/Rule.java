@@ -1,4 +1,4 @@
-package src.main.java.objects;
+package Objects;
 
 public class Rule extends Saveable implements IRule {
 	private String type; 

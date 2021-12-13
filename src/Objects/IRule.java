@@ -1,4 +1,4 @@
-package src.main.java.objects;
+package Objects;
 
 public interface IRule {
 	public RNG get_rng();
