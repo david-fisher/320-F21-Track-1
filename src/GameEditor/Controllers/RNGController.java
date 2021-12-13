@@ -73,10 +73,10 @@ import java.util.HashMap;
             System.out.println(MaxField.getText());
 //            System.out.println(QuantityField.getText());
             String name = NameField.getText();
-            double[] temp = new double[2];
+            int[] temp = new int[2];
             try {
-                temp[0] = Double.parseDouble(MinField.getText());
-                temp[1] = Double.parseDouble(MaxField.getText());
+                temp[0] = Integer.parseInt(MinField.getText());
+                temp[1] = Integer.parseInt(MaxField.getText());
             } catch (NumberFormatException nfe) {
                 a.setAlertType(Alert.AlertType.ERROR);
                 a.setContentText("Input Error");
