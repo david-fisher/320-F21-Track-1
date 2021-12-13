@@ -1,6 +1,5 @@
 package GameEditor.Controllers;
 
-import Objects.*;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,15 +63,15 @@ public class GameEditorMainController {
     //takes all the objects from localStorage and stores them in the JSON
     public void storeGameObjects(String game) throws IOException {
         for (Map.Entry<String, Object> entry: localStorage.storage.entrySet()) {
-            Rule rule = new Rule();
-            rule.update_rng((RNG) entry.getValue());
-            Board boardTemp  = new Board();
-            boardTemp.add_rule(rule);
-
-            Token newgame = new Token();
-            newgame.update_gameboard(boardTemp);
-            JSONConverter savedGames = new JSONConverter(newgame, "test.json");
-            savedGames.To_JSON();
+//            Rule rule = new Rule();
+//            rule.update_rng((RNG) entry.getValue());
+//            Board boardTemp  = new Board();
+//            boardTemp.add_rule(rule);
+//
+//            Token newgame = new Token();
+//            newgame.update_gameboard(boardTemp);
+//            JSONConverter savedGames = new JSONConverter(newgame, "test.json");
+//            savedGames.To_JSON();
         }
     }
 

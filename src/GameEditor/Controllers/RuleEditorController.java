@@ -1,53 +1,27 @@
 package GameEditor.Controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
-
-import javafx.application.Application;
+import Objects.Board;
+import Objects.JSONConverter;
+import Objects.Tile;
+import Objects.Token;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
-import Objects.JSONConverter;
-import Objects.Rule;
-import Objects.Token;
-import Objects.Board;
-import Objects.Tile;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.*;
 
 public class RuleEditorController {
 
@@ -127,36 +101,36 @@ public class RuleEditorController {
         dragAndDrop(movePlayer);
         dragAndDrop(numCards);
         dragAndDrop(tileNum);
-        dragAndDrop(numPoints);       
-        
-        if(!initialized)
-        {
-        	
-        	 Tile tile1 = new Tile("Tile 1", 1, 1, null, null, null);
-             Tile tile2 = new Tile("Tile 2", 1, 2, null, null, null);
-             Tile tile3 = new Tile("Tile 3", 2, 2, null, null, null);
-             Tile tile4 = new Tile("Tile 4", 2, 1, null, null, null);
-             tileObjs = new ArrayList<Tile>();
-             tileObjs.add(tile1);
-             tileObjs.add(tile2);
-             tileObjs.add(tile3);
-             tileObjs.add(tile4);
-
-        	newBoard = new Board("tempBoard", tileObjs);
-            for(Tile tile: tileObjs)
-            {
-                tileOptions.getItems().add(tile.ID);
-            	TextFlow tf = new TextFlow();
-            	tf.setAccessibleText(tile.ID);
-            	CheckBox cb = new CheckBox();
-            	cb.setText(tile.ID);
-            	cb.setAccessibleText(tile.ID);
-            	tf.getChildren().add(cb);
-            	tiles.getChildren().add(tf);
-            	checked(tf);
-            }
-            initialized = true;
-        }
+        dragAndDrop(numPoints);
+		//TODO FIX backend call
+//        if(!initialized)
+//        {
+//
+//        	 Tile tile1 = new Tile("Tile 1", 1, 1, null, null, null);
+//             Tile tile2 = new Tile("Tile 2", 1, 2, null, null, null);
+//             Tile tile3 = new Tile("Tile 3", 2, 2, null, null, null);
+//             Tile tile4 = new Tile("Tile 4", 2, 1, null, null, null);
+//             tileObjs = new ArrayList<Tile>();
+//             tileObjs.add(tile1);
+//             tileObjs.add(tile2);
+//             tileObjs.add(tile3);
+//             tileObjs.add(tile4);
+//
+//        	newBoard = new Board("tempBoard", tileObjs);
+//            for(Tile tile: tileObjs)
+//            {
+//                tileOptions.getItems().add(tile.ID);
+//            	TextFlow tf = new TextFlow();
+//            	tf.setAccessibleText(tile.ID);
+//            	CheckBox cb = new CheckBox();
+//            	cb.setText(tile.ID);
+//            	cb.setAccessibleText(tile.ID);
+//            	tf.getChildren().add(cb);
+//            	tiles.getChildren().add(tf);
+//            	checked(tf);
+//            }
+//            initialized = true;
+//        }
     }
 
     //drag and drop for the actions in the tile rule editor
@@ -300,7 +274,8 @@ public class RuleEditorController {
     	Token newgame = new Token("game1");
     	newgame.update_gameboard(newBoard);
     	newgame.get_gameboard().update_tiles(tileObjs);
-    	System.out.println(newgame.get_gameboard().get_tiles().get(0).ID);
+    	//TODO FIX backend call
+    	//System.out.println(newgame.get_gameboard().get_tiles().get(0).ID);
         JSONConverter savedGames = new JSONConverter(newgame, "test.json");
         savedGames.To_JSON();
     	System.out.println(draggedRules);
