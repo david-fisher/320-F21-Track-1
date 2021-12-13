@@ -95,15 +95,16 @@ public class TokenController {
         else {}
     }
 
+    //displays popup for creating a new movement piece
     public void addMovementPiece(ActionEvent event) throws IOException {
-        Node node = (Node) event.getSource();
-        ScrollPane pane = (ScrollPane) node.getParent().getChildrenUnmodifiable().get(1);
-        pane.setContent(FXMLLoader.load(getClass().getResource("../Views/NewMovementPiece.fxml")));
+        Parent root = FXMLLoader.load(getClass().getResource("../Views/NewMovementPiece.fxml"));
+        Stage customTokenEditor = new Stage();
+        customTokenEditor.setTitle("New Movement Piece");
+        customTokenEditor.setScene(new Scene(root));
+        customTokenEditor.show();
     }
 
-    public void saveMovementPiece(ActionEvent event) throws IOException {
-
-    }
+    public void saveMovementPiece(ActionEvent event) throws IOException {}
 
 
     //Methods for Custom Tokens
