@@ -1,5 +1,6 @@
 package GameEditor.Controllers;
 
+import GameEditor.DeckIds;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class TokenController {
-
+    private DeckIds ids = DeckIds.getInstance();
     //Token Editor Screen Data
     @FXML
     private Button saveButton, cancelButton;
