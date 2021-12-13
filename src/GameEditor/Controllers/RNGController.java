@@ -1,5 +1,6 @@
  package GameEditor.Controllers;
 
+import GameEditor.DeckIds;
 import Objects.RNG;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -17,6 +18,7 @@ import java.util.HashMap;
     private ArrayList<RNG> vars = new ArrayList<RNG>();
 //    private HashMap<String, Pair<Integer, RNG>> map = new HashMap<String, Pair<Integer, RNG>>();
     private HashMap<String, RNG> map = new HashMap<String, RNG>();
+    private DeckIds ids = DeckIds.getInstance();
 
     private Alert a = new Alert(Alert.AlertType.NONE);
 
@@ -45,6 +47,7 @@ import java.util.HashMap;
 
     @FXML
     private void viewRNG() {
+
         Dialog<String> dialog = new Dialog<String>();
         //Setting the title
         dialog.setTitle("RNG List");
@@ -70,10 +73,10 @@ import java.util.HashMap;
             System.out.println(MaxField.getText());
 //            System.out.println(QuantityField.getText());
             String name = NameField.getText();
-            double[] temp = new double[2];
+            int[] temp = new int[2];
             try {
-                temp[0] = Double.parseDouble(MinField.getText());
-                temp[1] = Double.parseDouble(MaxField.getText());
+                temp[0] = Integer.parseInt(MinField.getText());
+                temp[1] = Integer.parseInt(MaxField.getText());
             } catch (NumberFormatException nfe) {
                 a.setAlertType(Alert.AlertType.ERROR);
                 a.setContentText("Input Error");
@@ -108,7 +111,15 @@ import java.util.HashMap;
     @FXML
     private Label DeckSelection;
 
+    @FXML
+    private ComboBox Decks;
+
+    public void updateDeckSelection() {
+        Decks.getItems().setAll(ids.Ids());
+    }
+
     public void initialize() {
+        updateDeckSelection();
         Button b = new Button("Delete RNG");
         b.setOnAction(event);
         dialogContent.getItems().add(b);
@@ -119,8 +130,9 @@ import java.util.HashMap;
                     switch(oldVal) {
 //                        case "Dice": RangeSelection.setVisible(false); QuantitySelection.setVisible(false); break;
 //                        case "Spinner": RangeSelection.setVisible(false); QuantitySelection.setVisible(false); break;
-                        case "Dice": RangeSelection.setVisible(false); break;
-                        case "Spinner": RangeSelection.setVisible(false); break;
+                        case "Dice":
+                        case "Spinner":
+                            RangeSelection.setVisible(false); break;
                         case "Cards": DeckSelection.setVisible(false); break;
                     }
                 }
@@ -128,9 +140,10 @@ import java.util.HashMap;
                     switch(newVal) {
 //                        case "Dice": RangeSelection.setVisible(true); QuantitySelection.setVisible(true); break;
 //                        case "Spinner": RangeSelection.setVisible(true); QuantitySelection.setVisible(true); break;
-                        case "Dice": RangeSelection.setVisible(true); break;
-                        case "Spinner": RangeSelection.setVisible(true); break;
-                        case "Cards": DeckSelection.setVisible(true); break;
+                        case "Dice":
+                        case "Spinner":
+                            RangeSelection.setVisible(true); break;
+                        case "Cards": DeckSelection.setVisible(true); updateDeckSelection(); break;
                     }
                 }
             }

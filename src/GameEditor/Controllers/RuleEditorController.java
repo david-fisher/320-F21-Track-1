@@ -1,50 +1,27 @@
 package GameEditor.Controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
-
-import javafx.application.Application;
+import Objects.Board;
+import Objects.JSONConverter;
+import Objects.Tile;
+import Objects.Token;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
+import javafx.scene.shape.Polyline;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
-import Objects.JSONConverter;
-import Objects.Rule;
-import Objects.Token;
-import Objects.Board;
-import Objects.Tile;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.*;
 
 public class RuleEditorController {
 
@@ -57,18 +34,20 @@ public class RuleEditorController {
     @FXML
     private Rectangle selectedTile2 = null;
     @FXML
-    private StackPane board;
+    private Pane board;
     @FXML
-    private Button addTransition;
+    private Button addTransition, changeTransition, deleteTransition;
     @FXML
-    private Label addMessage;
-    
-    private boolean addTransitionSelected = false;
+    private Label addMessage, transitionAlreadyExists;
+    @FXML
+    private HBox addButtonContainer, transitionButtonContainer;
     @FXML
     private TextFlow takeFromPlayer, givePlayer, movePlayer, tileNum, numCards, numPoints;
     
-    private String[] transitions = {"\u2192", "\u2190", "\u2194"};
-    private int currentTransition = 0;
+    // hash table with array tile 1 tile 2 and value group
+    private Hashtable<List<Rectangle>, Polyline> tileMapping = new Hashtable<List<Rectangle>, Polyline>();
+    
+    private boolean addTransitionSelected = false;
     
     @FXML
     private ComboBox<String>[] dropdowns = new ComboBox[5];
@@ -122,36 +101,36 @@ public class RuleEditorController {
         dragAndDrop(movePlayer);
         dragAndDrop(numCards);
         dragAndDrop(tileNum);
-        dragAndDrop(numPoints);       
-        
-        if(!initialized)
-        {
-        	
-        	 Tile tile1 = new Tile("Tile 1", 1, 1, null, null, null);
-             Tile tile2 = new Tile("Tile 2", 1, 2, null, null, null);
-             Tile tile3 = new Tile("Tile 3", 2, 2, null, null, null);
-             Tile tile4 = new Tile("Tile 4", 2, 1, null, null, null);
-             tileObjs = new ArrayList<Tile>();
-             tileObjs.add(tile1);
-             tileObjs.add(tile2);
-             tileObjs.add(tile3);
-             tileObjs.add(tile4);
-
-        	newBoard = new Board("tempBoard", tileObjs);
-            for(Tile tile: tileObjs)
-            {
-                tileOptions.getItems().add(tile.ID);
-            	TextFlow tf = new TextFlow();
-            	tf.setAccessibleText(tile.ID);
-            	CheckBox cb = new CheckBox();
-            	cb.setText(tile.ID);
-            	cb.setAccessibleText(tile.ID);
-            	tf.getChildren().add(cb);
-            	tiles.getChildren().add(tf);
-            	checked(tf);
-            }
-            initialized = true;
-        }
+        dragAndDrop(numPoints);
+		//TODO FIX backend call
+//        if(!initialized)
+//        {
+//
+//        	 Tile tile1 = new Tile("Tile 1", 1, 1, null, null, null);
+//             Tile tile2 = new Tile("Tile 2", 1, 2, null, null, null);
+//             Tile tile3 = new Tile("Tile 3", 2, 2, null, null, null);
+//             Tile tile4 = new Tile("Tile 4", 2, 1, null, null, null);
+//             tileObjs = new ArrayList<Tile>();
+//             tileObjs.add(tile1);
+//             tileObjs.add(tile2);
+//             tileObjs.add(tile3);
+//             tileObjs.add(tile4);
+//
+//        	newBoard = new Board("tempBoard", tileObjs);
+//            for(Tile tile: tileObjs)
+//            {
+//                tileOptions.getItems().add(tile.ID);
+//            	TextFlow tf = new TextFlow();
+//            	tf.setAccessibleText(tile.ID);
+//            	CheckBox cb = new CheckBox();
+//            	cb.setText(tile.ID);
+//            	cb.setAccessibleText(tile.ID);
+//            	tf.getChildren().add(cb);
+//            	tiles.getChildren().add(tf);
+//            	checked(tf);
+//            }
+//            initialized = true;
+//        }
     }
 
     //drag and drop for the actions in the tile rule editor
@@ -295,7 +274,8 @@ public class RuleEditorController {
     	Token newgame = new Token("game1");
     	newgame.update_gameboard(newBoard);
     	newgame.get_gameboard().update_tiles(tileObjs);
-    	System.out.println(newgame.get_gameboard().get_tiles().get(0).ID);
+    	//TODO FIX backend call
+    	//System.out.println(newgame.get_gameboard().get_tiles().get(0).ID);
         JSONConverter savedGames = new JSONConverter(newgame, "test.json");
         savedGames.To_JSON();
     	System.out.println(draggedRules);
@@ -408,28 +388,40 @@ public class RuleEditorController {
         }
     }
     
+ // initializes movementRule editor
     @FXML 
-    void intializeMovementRule () {
+    void intializeMovementRule() {
     	addMessage.setVisible(false);
+    	transitionAlreadyExists.setVisible(false);
+    	transitionButtonContainer.setVisible(false);
     }
     
+    // handles add transition and cancel buttons
     @FXML
     void clickAddTransition(MouseEvent event) {
     	addTransitionSelected = !addTransitionSelected;
     	if (addTransitionSelected) {
+    		transitionAlreadyExists.setVisible(false);
     		addMessage.setVisible(true);
+    		addMessage.toFront();
     		addTransition.setText("Cancel");
     	} else {
     		// cancel selected
     		addTransition.setText("Add Transition");
     		addMessage.setVisible(false);
-    		selectedTile1.setFill(Color.BLACK);
-    		selectedTile2.setFill(Color.BLACK);
+    		if (selectedTile1 != null) {
+    			selectedTile1.setFill(Color.BLACK);
+    		}
+    		if (selectedTile2 != null) {
+    			selectedTile2.setFill(Color.BLACK);	
+    		}
     		selectedTile1 = null;
     		selectedTile2 = null;
     	}
     }
     
+    // highlighting selected tiles and drawing a transition arrow between them
+    // also handles editing and deleting a transition
     @FXML
     void selectTile(MouseEvent event) {
     	if(addTransitionSelected) {
@@ -440,15 +432,79 @@ public class RuleEditorController {
 	    	} else if (selectedTile2 == null) {
 	    		selectedTile2 = tile;
 	    		tile.setFill(Color.RED);
-	    		Line line = new Line(selectedTile1.getTranslateX(), selectedTile1.getTranslateY(), selectedTile2.getTranslateX(), selectedTile2.getTranslateY());
 	    		
-	    		line.setTranslateX(tile.getWidth() / 2);
-	    		
-	    		line.setTranslateY(tile.getHeight() / 2);
-	    		line.setStroke(Color.WHITE);
-	    		board.getChildren().add(line);
+	    		//computing arrowhead points
+	    		double arrowAngle = Math.toRadians(45.0);
+	            double arrowLength = 10.0;
+
+	            double lineAngle = Math.atan2(selectedTile1.getLayoutY() - selectedTile2.getLayoutY(), selectedTile1.getLayoutX() - selectedTile2.getLayoutX());
+
+	            double x1 = Math.cos(lineAngle + arrowAngle) * arrowLength + selectedTile2.getLayoutX();
+	            double y1 = Math.sin(lineAngle + arrowAngle) * arrowLength + selectedTile2.getLayoutY();
+
+	            double x2 = Math.cos(lineAngle - arrowAngle) * arrowLength + selectedTile2.getLayoutX();
+	            double y2 = Math.sin(lineAngle - arrowAngle) * arrowLength + selectedTile2.getLayoutY();
+	      
+	            Polyline arrow = new Polyline();
+	            arrow.getPoints().addAll(new Double[]{
+	            		selectedTile1.getLayoutX(), selectedTile1.getLayoutY(), 
+	            		selectedTile2.getLayoutX(), selectedTile2.getLayoutY(),
+	            		selectedTile2.getLayoutX(), selectedTile2.getLayoutY(), 
+	            		x1, y1,
+	            		selectedTile2.getLayoutX(), selectedTile2.getLayoutY(), 
+	            		x2, y2
+	            });
+	            arrow.setStroke(Color.GREEN);
+	            arrow.setStrokeWidth(2);
+	            arrow.setTranslateX(tile.getWidth() / 2);
+	            arrow.setTranslateY(tile.getHeight() / 2);
+	            
+	            // check if the selected tiles already have a transition
+	            Rectangle tiles[] = {selectedTile1, selectedTile2};
+	            Rectangle reverseTiles[] = {selectedTile2, selectedTile1};
+	            if (tileMapping.containsKey(Arrays.asList(tiles)) || tileMapping.containsKey(Arrays.asList(reverseTiles))) {
+	            	addMessage.setVisible(false);
+	            	transitionAlreadyExists.setVisible(true);
+	            } else {
+	            	// Creating selectTransition handler
+	            	EventHandler<MouseEvent> selectTransition = new EventHandler<MouseEvent>() { 
+	                    @Override 
+	                    public void handle(MouseEvent e) { 
+	                    	Polyline transition = (Polyline) e.getSource();
+	                    	transition.setStroke(Color.RED);
+	                    	addButtonContainer.setVisible(false);
+	                    	transitionButtonContainer.setVisible(true);
+	                    } 
+	                 };
+	                 arrow.setOnMousePressed(selectTransition);
+
+	                 tileMapping.put(Arrays.asList(tiles), arrow);
+	                 board.getChildren().add(arrow);	
+	            }
+	            
+	            // after arrow is drawn, revert button to Add Transition and revert to initial tiles and messages
+	            addTransition.setText("Add Transition");
+	    		addMessage.setVisible(false);
+	    		selectedTile1.setFill(Color.BLACK);
+	    		selectedTile2.setFill(Color.BLACK);
+	    		addTransitionSelected = !addTransitionSelected;
+	    		selectedTile1 = null;
+	    		selectedTile2 = null;
 	    	} 
     	}
     }
+    
+    //
+    @FXML
+	void changeTransition(MouseEvent event) {
+		
+	}
+	
+    //
+	@FXML
+	void deleteTransition(MouseEvent event) {
+		
+	}	
+
 
 }
