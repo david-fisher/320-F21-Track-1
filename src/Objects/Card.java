@@ -1,5 +1,5 @@
-package src.main.java.objects;
-import src.main.java.*;
+package Objects;
+
 import java.util.*;
 
 /*
@@ -9,9 +9,28 @@ import java.util.*;
   - It can be used by a player.
   When a Card is used, its Rules are executed and then it is discarded from the player's hand.
 */
-public class Card extends RuleList {
+public class Card extends GameObject {
   public Card() {
-    super();
-    this.rules = new ArrayList<Rule>();
+    this(0);
+  }
+
+  public Card(ArrayList<Rule> rules) {
+    this(rules, 0);
+  }
+
+  public Card(int constant) {
+    this(new ArrayList<Rule>(), constant);
+  }
+
+  public Card(int[] range) {
+    this(new ArrayList<Rule>(), range);
+  }
+
+  public Card(ArrayList<Rule> rules, int constant) {
+    super(rules, constant);
+  }
+
+  public Card(ArrayList<Rule> rules, int[] range) {
+    super(rules, range);
   }
 }

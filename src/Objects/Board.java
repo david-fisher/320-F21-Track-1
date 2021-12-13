@@ -1,38 +1,50 @@
-package src.main.java.objects;
+package Objects;
 
 import java.util.*;
 
 public class Board extends Saveable implements IBoard {
-	/* 
-	parem: tiles - an array list of tiles on the board
-           rules - an array list of rules on the board
-		   deck  - a deck of game pieces (including cards) for the board
-	*/
+	/*
+	 * parem: tiles - an array list of tiles on the board
+	 * rules - an array list of rules on the board
+	 * deck - a deck of game pieces (including cards) for the board
+	 */
 	private ArrayList<Tile> tiles;
 	private ArrayList<Rule> rules;
 	private Deck deck;
-	
-	public Board(){
+	private Tile startTile;
+
+	public Board() {
 		super();
 		this.tiles = new ArrayList<Tile>();
 		this.rules = new ArrayList<Rule>();
 		this.deck = new Deck();
 	}
-	
+
 	public Board(ArrayList<Tile> tiles) {
 		super();
 		this.tiles = tiles;
 		this.rules = new ArrayList<Rule>();
 		this.deck = new Deck();
 	}
-	
+
+	public Board(ArrayList<Tile> tiles, Tile startTile) {
+		super();
+		this.tiles = tiles;
+		this.rules = new ArrayList<Rule>();
+		this.deck = new Deck();
+		if (!this.tiles.contains(startTile)) {
+			throw new IllegalArgumentException("The start tile must be a member of the board's tiles.");
+		}
+		this.startTile = startTile;
+	}
+
 	public Board(ArrayList<Tile> tiles, ArrayList<Rule> rules) {
 		super();
 		this.tiles = tiles;
 		this.rules = rules;
 		this.deck = new Deck();
 	}
-	
+
 	public Board(ArrayList<Tile> tiles, ArrayList<Rule> rules, Deck deck) {
 		super();
 		this.tiles = tiles;
@@ -50,7 +62,15 @@ public class Board extends Saveable implements IBoard {
 	public Deck get_deck() {
 		return deck;
 	}
-	
+
+	public Tile getStartTile() {
+		return this.startTile;
+	}
+
+	public boolean containsTile(Tile tile) {
+		return this.tiles.contains(tile);
+	}
+
 	@Override
 	public ArrayList<Tile> get_tiles() {
 		return tiles;
@@ -61,7 +81,7 @@ public class Board extends Saveable implements IBoard {
 	public ArrayList<Tile> update_tile(Tile new_tile) {
 		int index = tiles.indexOf(tile_findByID(new_tile.get_id()));
 		tiles.set(index, new_tile);
-		return tiles;	
+		return tiles;
 	}
 
 	@Override
@@ -102,11 +122,11 @@ public class Board extends Saveable implements IBoard {
 
 	@Override
 	public Rule rule_findByID(String ID) {
-	    return this.rules.stream().filter(rule -> rule.get_id().equals(ID)).findFirst().orElse(null);
+		return this.rules.stream().filter(rule -> rule.get_id().equals(ID)).findFirst().orElse(null);
 	}
 
 	@Override
 	public Tile tile_findByID(String ID) {
-	    return this.tiles.stream().filter(tile -> tile.get_id().equals(ID)).findFirst().orElse(null);
+		return this.tiles.stream().filter(tile -> tile.get_id().equals(ID)).findFirst().orElse(null);
 	}
 }

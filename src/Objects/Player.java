@@ -1,70 +1,81 @@
-package src.main.java.objects;
+package Objects;
 
-import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class Player extends Saveable {
-    private Score score; private Tile current_tile; private Deck deck;
-    private String name; private Boolean isAI;
+    private int score;
+    private Tile currentTile;
+    private Deck hand;
+    private Hashtable<String, String> attributes;
 
-    public Player(){
+    public Player(Hashtable<String, String> attributes) {
         super();
-        this.isAI = false;
-        this.score = new Score();
-        this.current_tile = null;
-        this.deck = new Deck();
+        this.attributes = attributes;
+        this.score = 0;
+        this.currentTile = null;
+        this.hand = new Deck();
     }
 
-    public Player(String name, Boolean isAI) {
+    public Player(int score, Hashtable<String, String> attributes) {
         super();
-        this.name = name;
-        this.isAI = true;
-        this.score = new Score();
-        this.current_tile = null;
-        this.deck = new Deck();
-    }
-
-    public Player(Score score){
-        super();
-        this.isAI = false;
+        this.attributes = attributes;
         this.score = score;
-        this.current_tile = null;
-        this.deck = new Deck();
-    } 
+        this.currentTile = null;
+        this.hand = new Deck();
+    }
 
-    public Player(Tile current_tile){
+    public Player(Tile currentTile, Hashtable<String, String> attributes) {
         super();
-        this.isAI = false;
-        this.score = new Score();
-        this.current_tile = current_tile;
-        this.deck = new Deck();
-    } 
+        this.attributes = attributes;
+        this.score = 0;
+        this.currentTile = currentTile;
+        this.hand = new Deck();
+    }
 
-    public Player(String id, Score score, Tile current_tile, Deck deck){
+    public Player(String id, int score, Tile currentTile, Deck hand, Hashtable<String, String> attributes) {
         super(id);
-        this.isAI = false;
+        this.attributes = attributes;
         this.score = score;
-        this.current_tile = current_tile;
-        this.deck = deck;
+        this.currentTile = currentTile;
+        this.hand = hand;
     }
 
-    public Deck get_deck() {
-		return deck;
-	}
-
-    public int get_score(){
-        return this.score.get_score();
+    public Deck getHand() {
+        return hand;
     }
 
-    public int update_score(int change){
-        this.score.update(change);
-        return get_score();
+    public void addCard(Card card) {
+        this.hand.addCard(card);
     }
 
-    public Tile get_Tile(){
-        return this.current_tile;
+    public void removeCard(Card card) {
+        this.hand.removeCard(card);
     }
 
-    public void update_tile(Tile new_tile){
-        this.current_tile = new_tile;
-    }   
+    // Prerequisite: the tile is on the board.
+    public void moveTo(Tile tile) {
+        this.currentTile = tile;
+        // userInterface.movePlayer(this, tile);
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public int updateScore(int change) {
+        this.score = change;
+        return getScore();
+    }
+
+    public void deltaScore(int delta) {
+        this.score += delta;
+    }
+
+    public Tile getTile() {
+        return this.currentTile;
+    }
+
+    public void updateTile(Tile new_tile) {
+        this.currentTile = new_tile;
+    }
 }

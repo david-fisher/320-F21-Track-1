@@ -1,7 +1,5 @@
 package GameEditor.Controllers;
 
-import Objects.JSONConverter;
-import Objects.Token;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +21,9 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import Objects.JSONConverter;
+import Objects.Token;
+
 public class GameEditorMainController {
 
     @FXML
@@ -40,14 +41,14 @@ public class GameEditorMainController {
     private Button changeTransition;
     @FXML
     private Button deleteTransition;
-    
-    private String[] transitions = {"\u2192", "\u2190", "\u2194"};
+
+    private String[] transitions = { "\u2192", "\u2190", "\u2194" };
     private int currentTransition = 0;
-    
+
     @FXML
     private ComboBox<String>[] dropdowns = new ComboBox[5];
     private int numVisible = 1;
-    private int[] visible = { 1, 0,0,0,0};
+    private int[] visible = { 1, 0, 0, 0, 0 };
     private String[] deleteButtons = { "d0", "d1", "d2", "d3", "d4" };
     private double orgSceneX, orgSceneY;
 
@@ -61,10 +62,14 @@ public class GameEditorMainController {
         dropdowns[2] = dropdown2;
         dropdowns[3] = dropdown3;
         dropdowns[4] = dropdown4;
-        dropdowns[1].getParent().setManaged(false);;
-        dropdowns[2].getParent().setManaged(false);;
-        dropdowns[3].getParent().setManaged(false);;
-        dropdowns[4].getParent().setManaged(false);;
+        dropdowns[1].getParent().setManaged(false);
+        ;
+        dropdowns[2].getParent().setManaged(false);
+        ;
+        dropdowns[3].getParent().setManaged(false);
+        ;
+        dropdowns[4].getParent().setManaged(false);
+        ;
     }
 
     @FXML
@@ -86,7 +91,8 @@ public class GameEditorMainController {
 
     @FXML
     void deleteDropDown(MouseEvent event) {
-        // make the appropriate nodes not visible and clear and selection for that dropdown
+        // make the appropriate nodes not visible and clear and selection for that
+        // dropdown
         ((Node) event.getSource()).getParent().setVisible(false);
         ((Node) event.getSource()).getParent().setManaged(false);
         ((ComboBox<String>) ((Node) event.getSource()).getParent().getChildrenUnmodifiable().get(0)).getSelectionModel()
@@ -99,28 +105,28 @@ public class GameEditorMainController {
             }
         }
     }
-    
+
     @FXML
     void intializeMovementRule(MouseEvent event) {
-    	modifyTransitionButtons.setVisible(false);
-    	addTransition.setVisible(true);
+        modifyTransitionButtons.setVisible(false);
+        addTransition.setVisible(true);
     }
-    
+
     @FXML
     void selectTransition(MouseEvent event) {
-    	addTransition.setVisible(false);
-    	modifyTransitionButtons.setVisible(true);
+        addTransition.setVisible(false);
+        modifyTransitionButtons.setVisible(true);
     }
-    
+
     @FXML
     void changeTransition(MouseEvent event) {
-    	currentTransition = (currentTransition+1) % 3;
-    	transition.setText(transitions[currentTransition]);
+        currentTransition = (currentTransition + 1) % 3;
+        transition.setText(transitions[currentTransition]);
     }
 
     @FXML
     void deleteTransition(MouseEvent event) {
-    	transition.setVisible(false);
+        transition.setVisible(false);
     }
 
     @FXML
@@ -132,23 +138,23 @@ public class GameEditorMainController {
         if (tokenType.equals("gameToken")) {
             Parent addMovementPiece = FXMLLoader.load(getClass().getResource("Views/customToken.fxml"));
             app_stage.setScene(new Scene(addMovementPiece));
+        } else if (tokenType == "") {
+        } else {
         }
-        else if (tokenType == ""){}
-        else {}
     }
 
-    //TODO
+    // TODO
     /*
-        Confirmation prompt of game being saved.
-        Don't exit the scene until pressing the actual exit button.
-        After save, can continue to edit. If saved, and editing, just re-edit in
-        the database, rather than a new savedGame.
+     * Confirmation prompt of game being saved.
+     * Don't exit the scene until pressing the actual exit button.
+     * After save, can continue to edit. If saved, and editing, just re-edit in
+     * the database, rather than a new savedGame.
      */
-    
+
     @FXML
     public void saveGame(Event event) throws IOException {
         Node node = (Node) event.getSource();
-        //saveGame
+        // saveGame
         TextField text = (TextField) node.getParent().getChildrenUnmodifiable().get(0);
         String gameName = text.getText();
         if (gameName.equals("")) {
@@ -164,7 +170,7 @@ public class GameEditorMainController {
     }
 
     public void exitToMainMenu(Node node) throws IOException {
-        //change stage to mainMenu stage from gamePlay
+        // change stage to mainMenu stage from gamePlay
         Stage appStage = (Stage) node.getScene().getWindow();
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("MainMenuFXML.fxml")));
         Scene scene = new Scene(root);
@@ -172,7 +178,7 @@ public class GameEditorMainController {
         appStage.show();
     }
 
-    //creates a popup window
+    // creates a popup window
     @FXML
     public void popup(Event event, String argument) {
         BorderPane borderPane = new BorderPane();

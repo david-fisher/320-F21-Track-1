@@ -1,24 +1,33 @@
+package Objects;
+
 import java.util.*;
 
+import State.*;
+
 public class MoveRule extends Rule {
-  private int stepCount; // Dice, Spinner
+  private RNG stepCount; // Dice, Spinner
   private ArrayList<Tile> destinations = new ArrayList<Tile>();
 
   public MoveRule(Tile destination) {
     super();
-    this.stepCount = 0;
+    this.stepCount = null;
     this.destinations.add(destination);
   }
-
-  public MoveRule(int stepCount) {
+  
+  public MoveRule(RNG stepCount) {
     super();
     this.stepCount = stepCount;
   }
 
+  public MoveRule(int stepCount) {
+    super();
+    this.stepCount = new RNG(stepCount);
+  }
+
   public void execute(GameState state) {
     Player player = state.getCurPlayer();
-    if (stepCount > 0) {
-      destinations.addAll(state.getNextTiles(player.getTile(), stepCount)); 
+    if (stepCount != null) {
+      destinations.addAll(state.getNextTiles(player.getTile(), stepCount.randInt()));
     }
     destinations.forEach(tile -> state.addChoice(new MoveChoice(tile)));
     if (destinations.size() == 0) {
