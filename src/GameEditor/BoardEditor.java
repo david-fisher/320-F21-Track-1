@@ -3,6 +3,9 @@ package GameEditor;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 import javax.imageio.ImageIO;
 
 import javafx.application.*;
@@ -22,40 +25,23 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.*;
 import javafx.scene.input.*;
 
+import Objects.*;
+
 public class BoardEditor {
     double orgSceneX, orgSceneY, xTemp;
     StackPane shapeToDelete;
     boardGrid theBoardGrid;
     Scene scene;
+    // Testing ***************************************************
+    Board currBoard = new Board();
+    
+    // ***********************************************************
 
 public void tabs(Group root) {
     // Top tabs ***************************************************************
     Button boardEditor = new Button("Board Editor");
     boardEditor.setPrefSize(100,100);
-    /*
-    Button ruleEditor = new Button("Rule Editor");
-    ruleEditor.setPrefSize(100, 100);
-    ruleEditor.setTranslateX(100);
-    
-    Button RNG = new Button("RNG");
-    RNG.setPrefSize(100, 100);
-    RNG.setTranslateX(200);
-    
-    Button gameOptions = new Button("Game Options");
-    gameOptions.setPrefSize(100, 100);
-    gameOptions.setTranslateX(300);
-    
-    Button gameTokens = new Button("Game Tokens");
-    gameTokens.setPrefSize(100, 100);
-    gameTokens.setTranslateX(400);
-    
-    TextField gameName = new TextField();
-    gameName.setPrefSize(300, 100);
-    gameName.setTranslateX(500);
-    gameName.setPromptText("Input the name of the board");
-    
-    root.getChildren().addAll(boardEditor, ruleEditor, RNG, gameOptions, gameTokens, gameName);
-    */
+
     // Side bar *****************************************************************
     Rectangle sideBar = new Rectangle();
     sideBar.setY(150);
@@ -308,7 +294,7 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
             orgSceneY = t.getSceneY();
             });  
     
-	    sp.setOnMouseReleased((t) -> {       
+	    sp.setOnMouseReleased((t) -> {
 	        StackPane c = (StackPane) (t.getSource());
 	       
             double tile_size = 50;
@@ -381,6 +367,7 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	            		}
 	        		}
 	        	}
+	        updateTileArrayList(root);
 	    });
 }
 
@@ -555,6 +542,30 @@ public class boardGrid {
             board.getRowConstraints().add(row);
         }
     }
+}
+
+public void updateTileArrayList(boardGrid root){
+	int size = root.getBoard().getChildren().size();
+	ArrayList<Tile> tmpTilesArr = new ArrayList<Tile>();
+	for (int i = 0; i < size; i ++) {
+		if (root.getBoard().getChildren().toArray()[i] instanceof StackPane) {
+			StackPane tmp = (StackPane) root.getBoard().getChildren().toArray()[i];
+			if (tmp.getTranslateX() >= 0 && tmp.getTranslateY() >= 0) {
+				int tmpX = (int) (tmp.getTranslateX() / 50);
+				int tmpY = (int) (tmp.getTranslateY() / 50);
+				Hashtable<String,String> tmpAtr = new Hashtable<String,String>();
+				tmpAtr.put("color", "blue");
+				tmpAtr.put("text", "+1");
+				tmpAtr.put("scale", "1");
+				tmpAtr.put("picture", "No idea but should be a file location");
+				System.out.println(tmpAtr);
+				
+				Tile tmpTile = new Tile(tmpX, tmpY, new ArrayList<Rule>(), tmpAtr);
+				tmpTilesArr.add(tmpTile);
+			}
+		}
+	}
+	currBoard.update_tiles(tmpTilesArr);
 }
 
 public Group startBoardEditor(Stage stage){
