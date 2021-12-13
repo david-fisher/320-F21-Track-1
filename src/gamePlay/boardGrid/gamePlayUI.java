@@ -1,14 +1,14 @@
-package boardGrid;
+package gamePlay.boardGrid;
 
-import Helpers.Helper;
+import gamePlay.mainMenu.Helpers.Helper;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import loadSave.exitGame;
-import loadSave.saveGame;
+import gamePlay.loadSave.exitGame;
+import gamePlay.loadSave.saveGame;
 
 import java.util.ArrayList;
 

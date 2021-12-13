@@ -1,4 +1,4 @@
-package loadSave;
+package gamePlay.loadSave;
 
 
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import mainMenu.Main;
+import gamePlay.mainMenu.Main;
+import gamePlay.preGame.preGame;
+import gamePlay.mainMenu.Helpers.Helper;
+
 
 import java.io.IOException;
 import java.util.Objects;
@@ -56,7 +59,7 @@ public class saveGame {
             System.out.println("You have saved a game");
 
             popStage.close();   // close pop out menu
-            primaryStage.setScene(preGame.preGame.makeScene(primaryStage)); // back to the new game selection
+            primaryStage.setScene(preGame.makeScene(primaryStage)); // back to the new game selection
         }));
 
         HBox allButton = new HBox(30);
@@ -73,7 +76,7 @@ public class saveGame {
         double viewWidth = 550; double viewHeight = 150;
         view.setPrefSize(viewWidth, viewHeight);
         view.setBackground(
-                Helpers.Helper.backgroundColor()
+                Helper.backgroundColor()
         );
         view.setStyle("-fx-padding: 20px;");
 

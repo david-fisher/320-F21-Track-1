@@ -1,4 +1,4 @@
-package boardGrid;
+package gamePlay.boardGrid;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;

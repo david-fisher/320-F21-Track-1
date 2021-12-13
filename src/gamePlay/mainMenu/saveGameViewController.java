@@ -1,6 +1,7 @@
-package mainMenu;
+package gamePlay.mainMenu;
 
-import Helpers.Helper;
+import gamePlay.mainMenu.Helpers.Helper;
+import gamePlay.boardGrid.boardScene;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -100,7 +101,7 @@ public class saveGameViewController {
                                     // TODO: load game function
                                     System.out.println("Load " + data.getName());
 
-                                    primaryStage.setScene(boardGrid.boardScene.makeScene(primaryStage));
+                                    primaryStage.setScene(boardScene.makeScene(primaryStage));
                                 });
                                 button.setId("table_load_button");
                             }

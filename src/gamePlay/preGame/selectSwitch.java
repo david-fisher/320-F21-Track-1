@@ -1,4 +1,4 @@
-package preGame;
+package gamePlay.preGame;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;

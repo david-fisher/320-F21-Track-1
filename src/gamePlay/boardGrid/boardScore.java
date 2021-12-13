@@ -1,4 +1,4 @@
-package boardGrid;
+package gamePlay.boardGrid;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;

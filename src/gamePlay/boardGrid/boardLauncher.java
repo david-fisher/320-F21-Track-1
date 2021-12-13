@@ -1,14 +1,18 @@
-package boardGrid;
+package gamePlay.boardGrid;
 
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class boardScene {
+public class boardLauncher extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
 
-    public static Scene makeScene(Stage stage){
         int[] size = {8, 7};
         ArrayList<ArrayList<StackPane>> stackTable = new ArrayList<>();
         for (int i = 0; i < size[0]; i++){
@@ -25,6 +29,14 @@ public class boardScene {
         playerList.add("Marius");
 
         Scene scene = gamePlayUI.makeScene(stage, playerList, stackTable);
-        return scene;
+        stage.setTitle("Game Board");
+
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
     }
 }

@@ -1,4 +1,4 @@
-package boardGrid;
+package gamePlay.boardGrid;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;

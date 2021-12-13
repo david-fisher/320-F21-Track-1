@@ -1,6 +1,6 @@
-package boardGrid;
+package gamePlay.boardGrid;
 
-import Helpers.Helper;
+import gamePlay.mainMenu.Helpers.Helper;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;

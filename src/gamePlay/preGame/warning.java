@@ -1,4 +1,4 @@
-package preGame;
+package gamePlay.preGame;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import gamePlay.mainMenu.Main;
 
 public class warning {
 
@@ -28,7 +29,7 @@ public class warning {
         VBox view = new VBox(30);
         view.getChildren().addAll(warningMessage, resumeButton);
         view.setAlignment(Pos.CENTER);
-        view.setBackground(Helpers.Helper.saveBackground());
+        view.setBackground(Main.saveBackground());
 
         view.setStyle("-fx-padding: 20px;");
 

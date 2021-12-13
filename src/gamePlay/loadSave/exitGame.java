@@ -1,5 +1,6 @@
-package loadSave;
+package gamePlay.loadSave;
 
+import gamePlay.mainMenu.Helpers.Helper;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -57,7 +58,7 @@ public class exitGame {
         popOut.setPrefSize(popOutWidth, popOutHeight);
 
         popOut.setBackground(
-                Helpers.Helper.backgroundColor()
+                Helper.backgroundColor()
         );
         popOut.setStyle("-fx-padding: 20px;");
 

@@ -1,4 +1,4 @@
-package preGame;
+package gamePlay.preGame;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -11,6 +11,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import gamePlay.boardGrid.gamePlayUI;
+import gamePlay.mainMenu.Helpers.Helper;
+import gamePlay.mainMenu.Main;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -180,7 +183,7 @@ public class playerSelect {
             }
 
             primaryStage.centerOnScreen();
-            primaryStage.setScene(boardGrid.gamePlayUI.makeScene(primaryStage, nameList, boardTable));
+            primaryStage.setScene(gamePlayUI.makeScene(primaryStage, nameList, boardTable));
         }));
 
         root.addRow(root.getRowCount(), backButton, new Label(), submitButton);
@@ -188,7 +191,7 @@ public class playerSelect {
         root.setVgap(5);
         root.setHgap(10);
         root.setPrefSize(inputRootWidth, inputRootHeight);
-        root.setBackground(Helpers.Helper.backgroundColor());
+        root.setBackground(Helper.backgroundColor());
 
         ScrollPane scrollShow = new ScrollPane(root);
         scrollShow.setFitToHeight(true); scrollShow.setFitToWidth(true);
@@ -234,7 +237,7 @@ public class playerSelect {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Parent root = null;
             try {
-                root = FXMLLoader.load(Objects.requireNonNull(mainMenu.Main.class.getResource("PlayGameFXML.fxml")));
+                root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PlayGameFXML.fxml")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -251,7 +254,7 @@ public class playerSelect {
         numSelect.setAlignment(Pos.CENTER);
         numSelect.setPrefSize(inputRootWidth, inputRootHeight);
         numSelect.setBackground(
-                Helpers.Helper.backgroundColor()
+                Helper.backgroundColor()
         );
 
         ScrollPane scrollShow = new ScrollPane(numSelect);

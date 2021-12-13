@@ -1,4 +1,4 @@
-package mainMenu;
+package gamePlay.mainMenu;
 
 import GameEditor.BoardEditor;
 import GameEditor.GameEditorMain;
@@ -10,7 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import boardGrid.*;
+import gamePlay.boardGrid.*;
+import gamePlay.preGame.preGame;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -58,7 +59,7 @@ public class controller {
 //        Scene scene = new Scene(root);
 //        stage.setScene(scene);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(preGame.preGame.makeScene(stage));
+        stage.setScene(preGame.makeScene(stage));
     }
 
     @FXML

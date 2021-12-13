@@ -1,4 +1,4 @@
-package preGame;
+package gamePlay.preGame;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

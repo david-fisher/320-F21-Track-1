@@ -1,4 +1,4 @@
-package Helpers;
+package gamePlay.mainMenu.Helpers;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;

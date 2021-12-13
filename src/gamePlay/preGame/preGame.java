@@ -1,4 +1,4 @@
-package preGame;
+package gamePlay.preGame;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
