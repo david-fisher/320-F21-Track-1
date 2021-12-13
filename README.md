@@ -9,9 +9,10 @@
 ## What is a Game Editor?
 A game editor provides a platform for game editing
 ## Structure 
-* [game play](gamePlay/README.md)
-* [Objects](Objects)
-* [src](src)
+* [game play](src/gamePlay/README.md)
+* [game editor](src/GameEditor)
+* [objects](src/Objects)
+* [state](src/State)
 
 ##Setup
 ### Linux Installation
