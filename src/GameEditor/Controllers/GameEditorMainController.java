@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import mainMenu.Main;
+import gamePlay.mainMenu.Main;
 
 import java.io.IOException;
 import java.util.Map;
