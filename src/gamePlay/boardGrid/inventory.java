@@ -163,6 +163,13 @@ public class inventory {
                 hBox_card.setStyle("-fx-border-color: black;" + "-fx-border-width: 5;");
                 hBox_card.getChildren().add(card);
 
+                // TODO: Varsha, I replaced the events handler here
+                hBox_card.setOnMouseClicked(event -> {
+                    hBox_card.setStyle("-fx-border-color: red;" + "-fx-border-width: 5;");
+                    int index = getCardIndex(hBox_card, hboxes);
+                    System.out.println("INDEX: " + index);
+                });
+
                 AnchorPane.setRightAnchor(hBox_card, spacing);
                 spacing += 100.0;
                 hboxes.add(hBox_card);
@@ -179,21 +186,27 @@ public class inventory {
             contentsUpdated = false;
 
             // TODO: onclick method --> get the index in array list as well
-            cards.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    System.out.println("mouse click detected! "+event.getSource());
-                    System.out.println(event.getX());
-
-                    if (event.getTarget() != cards) {
-                        Node target = (Node) event.getTarget();
-                        target.setStyle("-fx-border-color: red;" + "-fx-border-width: 5;");
-                        int index = getCardIndex(target, hboxes);
-                        System.out.println("INDEX: " + index);
-                    }
-
-                }
-            });
+//            cards.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                @Override
+//                public void handle(MouseEvent event) {
+//                    System.out.println("mouse click detected! "+event.getSource());
+//                    System.out.println(event.getX());
+//
+//                    if (event.getTarget() != cards) {
+//
+//                        if (event.getTarget() instanceof ImageView){
+//
+//                            return;
+//                        }
+//
+//                        Node target = (Node) event.getTarget();
+//                        target.setStyle("-fx-border-color: red;" + "-fx-border-width: 5;");
+//                        int index = getCardIndex(target, hboxes);
+//                        System.out.println("INDEX: " + index);
+//                    }
+//
+//                }
+//            });
             // TODO: Add cavas.getChildren.addAll --> button for playing the card
 
         } catch (FileNotFoundException e) {
