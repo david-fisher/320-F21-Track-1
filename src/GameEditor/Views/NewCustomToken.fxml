@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="200.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.TokenController">
    <children>
       <TextField fx:id="nameField" layoutX="7.0" layoutY="6.0" prefHeight="26.0" prefWidth="164.0" promptText="Enter Name" />
@@ -25,14 +24,14 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="376.0" layoutY="8.0" mnemonicParsing="false" onAction="#cancelToken" prefWidth="60.0" text="Cancel" />
-      <Button layoutX="309.0" layoutY="8.0" mnemonicParsing="false" onAction="#saveToken" prefWidth="60.0" text="Save" />
-      <CheckBox layoutX="196.0" layoutY="160.0" mnemonicParsing="false" text="Miscellaneous Token" />
-      <CheckBox layoutX="197.0" layoutY="115.0" mnemonicParsing="false" onAction="#enableValue" text="Play Money" />
+      <Button fx:id="cancelButton" layoutX="376.0" layoutY="8.0" mnemonicParsing="false" onAction="#cancelToken" prefWidth="60.0" text="Cancel" />
+      <Button fx:id="saveButton" layoutX="309.0" layoutY="8.0" mnemonicParsing="false" onAction="#saveToken" prefWidth="60.0" text="Save" />
+      <CheckBox fx:id="isMiscToken" layoutX="196.0" layoutY="160.0" mnemonicParsing="false" onAction="#setMiscToken" text="Miscellaneous Token" />
+      <CheckBox fx:id="isPlayMoney" layoutX="197.0" layoutY="115.0" mnemonicParsing="false" onAction="#setPlayMoney" text="Play Money" />
       <Pane fx:id="valuePane" disable="true" layoutX="258.0" layoutY="131.0" prefHeight="32.0" prefWidth="125.0">
          <children>
             <Label layoutX="1.0" layoutY="8.0" prefHeight="17.0" prefWidth="43.0" text="Value:" />
-            <TextField layoutX="48.0" layoutY="6.0" prefHeight="18.0" prefWidth="30.0">
+            <TextField fx:id="valueBox" layoutX="48.0" layoutY="6.0" prefHeight="21.0" prefWidth="49.0">
                <font>
                   <Font size="11.0" />
                </font>
