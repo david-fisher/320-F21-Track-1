@@ -29,6 +29,7 @@ import Objects.*;
 
 public class BoardEditor {
     double orgSceneX, orgSceneY, xTemp;
+    boolean moved; 
     StackPane shapeToDelete;
     boardGrid theBoardGrid;
     Scene scene;
@@ -273,43 +274,37 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
             xTemp = orgSceneX;
-            
             StackPane c = (StackPane) (t.getSource());
             c.toFront();
+            moved = false;
             });
     
         sp.setOnMouseDragged((t) -> {
             double offsetX = t.getSceneX() - orgSceneX;
             double offsetY = t.getSceneY() - orgSceneY;
-    
             StackPane c = (StackPane) (t.getSource());
-    
+            moved = true;
             c.setTranslateX(c.getTranslateX() + offsetX);
             c.setTranslateY(c.getTranslateY() + offsetY);
-    
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
             });  
     
 	    sp.setOnMouseReleased((t) -> {
 	        StackPane c = (StackPane) (t.getSource());
-	       
+	        //checking if we are just clicked on a piece in spawn, not moving it
+	        if (xTemp < 75.0 && !moved) {
+	        	return;
+        	}
             double tile_size = 50;
 	        double snapX = (c.getTranslateX()) % tile_size;
+	        double snapY = (c.getTranslateY()) % tile_size;
 	        if (snapX > tile_size/2){
 	        	snapX = (c.getTranslateX()) - snapX + tile_size;
 	        }
 	        else {
 	        	snapX = (c.getTranslateX()) - snapX;
 	        }
-	        if (t.getSceneX() >= 100 && t.getSceneX() < (100 + x*tile_size)) {
-	            c.setTranslateX(snapX);
-	        }
-	        else {
-	        	c.setTranslateX(0);
-	        }
-	             
-	        double snapY = (c.getTranslateY()) % tile_size;
 	        if (snapY > tile_size/2){
 	        	snapY = (c.getTranslateY()) - snapY + tile_size;
 	        }
@@ -317,16 +312,34 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	        	snapY = (c.getTranslateY()) - snapY;
 	        }
 	        
-	        if (t.getSceneY() >= 100 && t.getSceneY() < (100 + y*tile_size)) {
+	        boolean deleted = false;
+	        ArrayList<Tile> currTiles = currBoard.get_tiles();
+	        for (int i = 0; i < currTiles.size(); i++) {
+	        	if (currTiles.get(i).get_x() == (int) (snapX/50) && currTiles.get(i).get_y() == (int) (snapY/50) && moved) {
+	        		root.getBoard().getChildren().remove(c);
+	        		deleted = true;
+	        	}
+	        }
+	        
+	        if (!deleted && t.getSceneX() >= 100 && t.getSceneX() < (100 + x*tile_size)) {
+	            c.setTranslateX(snapX);
+	        }
+	        else if (!deleted) {
+	        	c.setTranslateX(0);
+	        }
+	        
+	        if (!deleted && t.getSceneY() >= 100 && t.getSceneY() < (100 + y*tile_size)) {
 	            c.setTranslateY(snapY);
 	        }
-	        else {
+	        else if (!deleted) {
 	        	c.setTranslateY(0);
 	        }
 	        
+	     
 	        //checking if we are moving a piece from spawn
 	        //don't ask why value is 100, it just works
-	        if (xTemp < 100) {
+	        
+	        if (xTemp < 75.0) {
 	        	for (int i = 0; i < c.getChildren().size(); i++) {
 	        		if (c.getChildren().toArray()[i] instanceof Rectangle) {
 	        			StackPane temp = createRectangle(root, x, y);
@@ -430,7 +443,7 @@ backgrounduploader_item.setOnAction(UploadEventHandler);
         @Override
         public void handle(ActionEvent event)
         {
-            root.getBoard().getChildren().remove(sp);
+           root.getBoard().getChildren().remove(sp);
         }
     });
 
@@ -550,6 +563,7 @@ public class boardGrid {
 public void updateTileArrayList(boardGrid root){
 	int size = root.getBoard().getChildren().size();
 	ArrayList<Tile> tmpTilesArr = new ArrayList<Tile>();
+	System.out.println(root.getBoard().getChildren().toArray());
 	for (int i = 0; i < size; i ++) {
 		if (root.getBoard().getChildren().toArray()[i] instanceof StackPane) {
 			StackPane tmp = (StackPane) root.getBoard().getChildren().toArray()[i];
