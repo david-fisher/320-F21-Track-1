@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.GameEditorMainController">
+<BorderPane  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.GameEditorMainController">
 <top>
-    <TabPane minHeight="650.0" minWidth="700.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0" tabMaxWidth="118.0" tabMinHeight="50.0" tabMinWidth="118.0" BorderPane.alignment="CENTER">
+    <TabPane id="background" stylesheets="@main.css" minHeight="650.0" minWidth="700.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0" tabMaxWidth="118.0" tabMinHeight="50.0" tabMinWidth="118.0" BorderPane.alignment="CENTER">
         <tabs>
             <Tab fx:id="boardEditor" text="Board Editor">
                 <content>
