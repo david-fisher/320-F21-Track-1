@@ -1,7 +1,12 @@
 package Objects;
 
-import java.io.*;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 //Class to read and write into a JSON file
 public class JSONConverter {
