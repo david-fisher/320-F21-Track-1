@@ -668,18 +668,20 @@ public Group startBoardEditor(Stage stage){
     // Testing localStorage
     localStorage = LocalStorage.getInstance();
     
-    currBoard = new Board();
-    currBoard.updateDimensions(5, 5);
-    Tile a = new Tile(0, 0, new ArrayList<Rule>(), new Hashtable<String,String>(), 0);
-    a.getAttributes().put("color", "0x000000ff");
-    a.getAttributes().put("shape", "circle");
-    a.getAttributes().put("text", "fu");
-    System.out.println(a.get_id());
-    ArrayList<Tile> tiles = new ArrayList<Tile>();
-    tiles.add(a);
-    currBoard.update_tiles(tiles);
+    // Dummy data, use to test out localStorage
     
-    localStorage.storage.put("board", currBoard);
+//    currBoard = new Board();
+//    currBoard.updateDimensions(5, 5);
+//    Tile a = new Tile(0, 0, new ArrayList<Rule>(), new Hashtable<String,String>(), 0);
+//    a.getAttributes().put("color", "0x000000ff");
+//    a.getAttributes().put("shape", "circle");
+//    a.getAttributes().put("text", "fu");
+//    System.out.println(a.get_id());
+//    ArrayList<Tile> tiles = new ArrayList<Tile>();
+//    tiles.add(a);
+//    currBoard.update_tiles(tiles);
+//    
+//    localStorage.storage.put("board", currBoard);
     
     if (localStorage.storage.containsKey("board")){
     	currBoard = (Board) localStorage.storage.get("board");
