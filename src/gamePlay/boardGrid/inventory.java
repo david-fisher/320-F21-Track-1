@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -16,6 +17,7 @@ import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -25,6 +27,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class inventory {
@@ -152,15 +155,36 @@ public class inventory {
         try {
             ArrayList<ImageView> cardTest = getDummyData();
             AnchorPane cards = new AnchorPane();
+            ArrayList<HBox> hboxes = new ArrayList<>();
+            ArrayList<Boolean> selectedList = new ArrayList<>();
+
             double spacing = 200.0;
             for(ImageView card : cardTest){
                 HBox hBox_card = new HBox();
+                selectedList.add(false);
                 hBox_card.setStyle("-fx-border-color: black;" + "-fx-border-width: 5;");
                 hBox_card.getChildren().add(card);
 
+                // TODO: Varsha, I replaced the events handler here
+                hBox_card.setOnMouseClicked(event -> {
+                    int index = getCardIndex(hBox_card, hboxes);
+
+                    boolean currentMode = selectedList.get(index);
+
+                    hBox_card.setStyle((currentMode?
+                            "-fx-border-color: black;"
+                            : "-fx-border-color: red;")
+                            + "-fx-border-width: 5;"
+                    );
+
+                    selectedList.set(index, !currentMode);
+
+                    System.out.println("INDEX: " + index);
+                });
+
                 AnchorPane.setRightAnchor(hBox_card, spacing);
                 spacing += 100.0;
-
+                hboxes.add(hBox_card);
                 cards.getChildren().addAll(hBox_card);
             }
 
@@ -173,10 +197,45 @@ public class inventory {
             canvas.getChildren().add(scrollView);
             contentsUpdated = false;
 
+            // TODO: onclick method --> get the index in array list as well
+//            cards.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                @Override
+//                public void handle(MouseEvent event) {
+//                    System.out.println("mouse click detected! "+event.getSource());
+//                    System.out.println(event.getX());
+//
+//                    if (event.getTarget() != cards) {
+//
+//                        if (event.getTarget() instanceof ImageView){
+//
+//                            return;
+//                        }
+//
+//                        Node target = (Node) event.getTarget();
+//                        target.setStyle("-fx-border-color: red;" + "-fx-border-width: 5;");
+//                        int index = getCardIndex(target, hboxes);
+//                        System.out.println("INDEX: " + index);
+//                    }
+//
+//                }
+//            });
+            // TODO: Add cavas.getChildren.addAll --> button for playing the card
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private static int getCardIndex(Node hbox_target, ArrayList<HBox> hBoxes){
+        int index = -1;
+        for(int i = 0; i < hBoxes.size(); i++){
+            if(hBoxes.get(i).equals(hbox_target)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     // take the primary stage and contents
