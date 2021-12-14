@@ -32,8 +32,7 @@ public class BoardEditor {
     StackPane shapeToDelete;
     boardGrid theBoardGrid;
     Scene scene;
-//    Board currBoard = new Board();
-    ArrayList<Tile> tiles = new ArrayList<Tile>();
+    Board currBoard;
 
 public void tabs(Group root) {
     // Top tabs ***************************************************************
@@ -545,6 +544,7 @@ public class boardGrid {
             row.setMaxHeight(50);
             board.getRowConstraints().add(row);
         }
+        currBoard.updateDimensions(x, y);
         updateTileArrayList(this);
     }
 }
@@ -576,12 +576,17 @@ public void updateTileArrayList(boardGrid root){
 			}
 		}
 	}
-	tiles = tmpTilesArr;
+	currBoard.update_tiles(tmpTilesArr);
+	System.out.println(currBoard.getDimensionX());
+	System.out.println(currBoard.getDimensionY());
+	System.out.println(currBoard.get_tiles());
 }
 
 public Group startBoardEditor(Stage stage){
     scene = stage.getScene();
     Group root = new Group();
+    currBoard = new Board();
+    currBoard.updateDimensions(5, 5);
     boardGrid board = new boardGrid();
     board.createBoard(5, 5);
     theBoardGrid = board;
@@ -593,11 +598,11 @@ public Group startBoardEditor(Stage stage){
     Button saveButton = new Button("Save Board");
     saveButton.setTranslateX(15);
     saveButton.setTranslateY(625);
-    saveButton.setOnAction(new EventHandler<ActionEvent>() {
-        public void handle(ActionEvent event) {
-            localStorage =
-        }
-    });
+//    saveButton.setOnAction(new EventHandler<ActionEvent>() {
+//        public void handle(ActionEvent event) {
+//            localStorage =
+//        }
+//    });
     
     root.getChildren().add(saveButton);
     // Testing

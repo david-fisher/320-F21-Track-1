@@ -11,6 +11,7 @@ public class Board extends Saveable implements IBoard {
 	private ArrayList<Tile> tiles;
 	private ArrayList<Rule> rules;
 	private Deck deck;
+	private int dimensionX, dimensionY;
 	
 	public Board(){
 		super();
@@ -108,5 +109,18 @@ public class Board extends Saveable implements IBoard {
 	@Override
 	public Tile tile_findByID(String ID) {
 	    return this.tiles.stream().filter(tile -> tile.get_id().equals(ID)).findFirst().orElse(null);
+	}
+	
+	public void updateDimensions(int x, int y) {
+		this.dimensionX = x;
+		this.dimensionY = y;
+	}
+	
+	public int getDimensionX() {
+		return this.dimensionX;
+	}
+	
+	public int getDimensionY() {
+		return this.dimensionY;
 	}
 }
