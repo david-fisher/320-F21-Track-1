@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<VBox prefHeight="239.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.RNGController">
+<VBox prefHeight="239.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.RNGController" >
    <children>
       <AnchorPane prefHeight="407.0" prefWidth="549.0">
          <children>
@@ -37,7 +37,7 @@
             </Label>
             <Label fx:id="DeckSelection" contentDisplay="RIGHT" layoutX="65.0" layoutY="101.0" prefHeight="51.0" prefWidth="296.0" style="-fx-padding:10;" text="Select Deck        " visible="false">
                <graphic>
-                  <ComboBox prefWidth="150.0" />
+                  <ComboBox fx:id="Decks" prefWidth="150.0" />
                </graphic>
             </Label>
             <Button fx:id="Save" layoutX="404.0" layoutY="5.0" mnemonicParsing="false" text="Save" />
