@@ -4,12 +4,16 @@ import java.util.*;
 
 public class Savable {
     private final String ID;
-    public Savable(){
+
+    public Savable() {
         this.ID = UUID.randomUUID().toString();
     }
-    public Savable(String id){
+
+    public Savable(String id) {
         this.ID = id;
     }
-    
-    public String get_id(){return this.ID;}
+
+    public String get_id() {
+        return this.ID;
+    }
 }
