@@ -1,8 +1,9 @@
 package Objects;
 
-import java.util.*;
+import State.GameState;
 
-import State.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 // general class for a game object such as a game piece or a tile
 public class GameObject extends Saveable {
