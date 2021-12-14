@@ -2,7 +2,7 @@ package GameEditor.Controllers;
 
 import java.util.HashMap;
 
-//TODO initialize localStorage
+//TODO initialize localStorage when editing saved game
 /*
     - be able to open a previously created game, re-edit it using this.
     -get based on key value pairs
@@ -11,13 +11,12 @@ import java.util.HashMap;
 public class LocalStorage {
     private static LocalStorage single_instance = null;
     public HashMap<String, Object> storage;
-
+    
     private LocalStorage()
     {
         storage = new HashMap<String, Object>();
     }
 
-    // Static method
     // Static method to create instance of Singleton class
     public static LocalStorage getInstance()
     {
@@ -27,6 +26,7 @@ public class LocalStorage {
         return single_instance;
     }
 
+    //resets the localStorageObject
     public static void reset() {
         if (single_instance != null) single_instance.storage = new HashMap<String, Object>();
     }
