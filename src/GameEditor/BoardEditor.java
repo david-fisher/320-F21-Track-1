@@ -706,7 +706,7 @@ public Group startBoardEditor(Stage stage){
     saveButton.setOnAction(new EventHandler<ActionEvent>() {
         public void handle(ActionEvent event) {
         	updateTileArrayList(board);
-            localStorage.storage.put("board", currBoard);
+            localStorage.storage.replace("board", currBoard);
             System.out.println(localStorage.storage);
         }
     });
