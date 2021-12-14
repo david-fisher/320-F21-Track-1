@@ -8,7 +8,7 @@ import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 
-import javafx.application.*;
+//import javafx.application.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -32,7 +32,8 @@ public class BoardEditor {
     StackPane shapeToDelete;
     boardGrid theBoardGrid;
     Scene scene;
-    Board currBoard = new Board();
+//    Board currBoard = new Board();
+    ArrayList<Tile> tiles = new ArrayList<Tile>();
 
 public void tabs(Group root) {
     // Top tabs ***************************************************************
@@ -544,6 +545,7 @@ public class boardGrid {
             row.setMaxHeight(50);
             board.getRowConstraints().add(row);
         }
+        updateTileArrayList(this);
     }
 }
 
@@ -574,8 +576,7 @@ public void updateTileArrayList(boardGrid root){
 			}
 		}
 	}
-	currBoard.update_tiles(tmpTilesArr);
-	System.out.println(currBoard.get_tiles());
+	tiles = tmpTilesArr;
 }
 
 public Group startBoardEditor(Stage stage){
