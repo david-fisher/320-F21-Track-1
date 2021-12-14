@@ -8,6 +8,7 @@ import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 
+import GameEditor.Controllers.LocalStorage;
 //import javafx.application.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -34,6 +35,7 @@ public class BoardEditor {
     boardGrid theBoardGrid;
     Scene scene;
     Board currBoard;
+    LocalStorage localStorage;
 
 public void tabs(Group root) {
     // Top tabs ***************************************************************
@@ -464,7 +466,7 @@ public class boardGrid {
     // grid pane
     private GridPane board = new GridPane();
     
-    public void createBoard(int x, int y){
+    public void createBoard(ArrayList<Tile> tiles, int x, int y){
     	board.setGridLinesVisible(true);
         // column constraints
         for (int i = 0; i < x; i++){
@@ -480,6 +482,44 @@ public class boardGrid {
             row.setMinHeight(50);
             row.setMaxHeight(50);
             board.getRowConstraints().add(row);
+        }
+        
+        StackPane tmp = null;
+        for (Tile tmpTile: tiles) {
+        	String shape = tmpTile.get_attributes().get("shape");
+        	String color = tmpTile.get_attributes().get("color");
+        	String text = tmpTile.get_attributes().get("text");
+        	
+        	switch (shape) {
+        		case "circle":
+        	    	tmp = createCircle(this, x, y);
+        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
+        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        			break;
+        		case "rectangle":
+        	    	tmp = createRectangle(this, x, y);
+        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
+        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        			break;
+        		case "triangle":
+        	    	tmp = createTriangle(this, x, y);
+        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
+        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        			break;
+        		case "pentagon":
+        	    	tmp = createPentagon(this, x, y);
+        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
+        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        			break;
+        		case "hexagon":
+        	    	tmp = createHexagon(this, x, y);
+        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
+        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        			break;
+        		default:
+        			break;
+        	}
+    		this.board.add(tmp, tmpTile.get_x(), tmpTile.get_y());	
         }
     }
     
@@ -565,7 +605,7 @@ public class boardGrid {
 public void updateTileArrayList(boardGrid root){
 	int size = root.getBoard().getChildren().size();
 	ArrayList<Tile> tmpTilesArr = new ArrayList<Tile>();
-	System.out.println(root.getBoard().getChildren().toArray());
+	
 	for (int i = 0; i < size; i ++) {
 		if (root.getBoard().getChildren().toArray()[i] instanceof StackPane) {
 			StackPane tmp = (StackPane) root.getBoard().getChildren().toArray()[i];
@@ -576,11 +616,34 @@ public void updateTileArrayList(boardGrid root){
 				
 				for (int j = 0; j < tmp.getChildren().size(); j++) {
 					if (tmp.getChildren().toArray()[j] instanceof Shape) {
+						
+						// Checks to see what color
 						Shape tmpShape = (Shape) tmp.getChildren().toArray()[j];
 						Paint tmpPaint = tmpShape.getFill();
 						tmpAtr.put("color", tmpPaint.toString());
+						
+						// Checks to see what shape
+						if (tmp.getChildren().toArray()[j] instanceof Rectangle) {
+		        			tmpAtr.put("shape", "rectangle");
+		        		}
+		        		else if (tmp.getChildren().toArray()[j] instanceof Circle) {
+		        			tmpAtr.put("shape", "circle");
+		        		}
+		        		else if (tmp.getChildren().toArray()[j] instanceof Polygon) {
+		        			if (((Polygon)(tmp.getChildren().toArray()[j])).getPoints().size() == 6) {
+			        			tmpAtr.put("shape", "triangle");
+		            		}
+		            		else if (((Polygon)(tmp.getChildren().toArray()[j])).getPoints().size() == 10) {
+			        			tmpAtr.put("shape", "pentagon");
+		            		}
+		            		else {
+			        			tmpAtr.put("shape", "hexagon");
+		            		}
+		            	}
 					}
 					else if (tmp.getChildren().toArray()[j] instanceof TextField) {
+						
+						// Checks for text
 						TextField tmpText = (TextField) tmp.getChildren().toArray()[j];
 						tmpAtr.put("text", tmpText.getText());
 					}
@@ -591,35 +654,63 @@ public void updateTileArrayList(boardGrid root){
 		}
 	}
 	currBoard.update_tiles(tmpTilesArr);
-	System.out.println(currBoard.getDimensionX());
-	System.out.println(currBoard.getDimensionY());
-	System.out.println(currBoard.get_tiles());
+	for (Tile tmpTiles: tmpTilesArr) {
+		System.out.println(tmpTiles.get_attributes());
+	}
 }
 
 public Group startBoardEditor(Stage stage){
     scene = stage.getScene();
     Group root = new Group();
+    
+    boardGrid board = new boardGrid();
+    
+    // Testing localStorage
+    localStorage = LocalStorage.getInstance();
+    
     currBoard = new Board();
     currBoard.updateDimensions(5, 5);
-    boardGrid board = new boardGrid();
-    board.createBoard(5, 5);
+    Tile a = new Tile(1, 1, new ArrayList<Rule>(), new Hashtable<String,String>());
+    a.get_attributes().put("color", "0x000000ff");
+    a.get_attributes().put("shape", "circle");
+    a.get_attributes().put("text", "fu");
+    System.out.println(a.get_id());
+    ArrayList<Tile> tiles = new ArrayList<Tile>();
+    tiles.add(a);
+    currBoard.update_tiles(tiles);
+    
+    localStorage.storage.put("board", currBoard);
+    
+    if (localStorage.storage.containsKey("board")){
+    	currBoard = (Board) localStorage.storage.get("board");
+        board.addInitialPieces(currBoard.getDimensionX(), currBoard.getDimensionY());
+        board.createBoard(currBoard.get_tiles(), currBoard.getDimensionX(), currBoard.getDimensionX());
+    }
+    else {
+	    currBoard = new Board();
+	    currBoard.updateDimensions(5, 5);
+        board.createBoard(currBoard.get_tiles(),5, 5);
+        board.addInitialPieces(5, 5);
+	    localStorage.storage.put("board", currBoard);
+    }
+    // Testing End localStorage
+
     theBoardGrid = board;
     board.getBoard().setTranslateX(100);
     board.getBoard().setTranslateY(100);
     tabs(root);
-    board.addInitialPieces(5, 5);
-    // Testing
+    
     Button saveButton = new Button("Save Board");
     saveButton.setTranslateX(15);
     saveButton.setTranslateY(625);
-//    saveButton.setOnAction(new EventHandler<ActionEvent>() {
-//        public void handle(ActionEvent event) {
-//            localStorage =
-//        }
-//    });
-    
+    saveButton.setOnAction(new EventHandler<ActionEvent>() {
+        public void handle(ActionEvent event) {
+        	updateTileArrayList(board);
+            localStorage.storage.put("board", currBoard);
+            System.out.println(localStorage.storage);
+        }
+    });
     root.getChildren().add(saveButton);
-    // Testing
     
     root.getChildren().add(board.getBoard());
     return root;
