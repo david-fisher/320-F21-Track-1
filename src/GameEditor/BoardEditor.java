@@ -589,6 +589,19 @@ public Group startBoardEditor(Stage stage){
     board.getBoard().setTranslateY(100);
     tabs(root);
     board.addInitialPieces(5, 5);
+    // Testing
+    Button saveButton = new Button("Save Board");
+    saveButton.setTranslateX(15);
+    saveButton.setTranslateY(625);
+    saveButton.setOnAction(new EventHandler<ActionEvent>() {
+        public void handle(ActionEvent event) {
+            localStorage =
+        }
+    });
+    
+    root.getChildren().add(saveButton);
+    // Testing
+    
     root.getChildren().add(board.getBoard());
     return root;
 }

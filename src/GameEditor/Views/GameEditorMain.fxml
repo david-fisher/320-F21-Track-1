@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="GameEditor.Controllers.GameEditorMainController"
->
+<BorderPane  xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.GameEditorMainController">
 <top>
-    <TabPane minHeight="650.0" minWidth="700.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0" tabMaxWidth="118.0" tabMinHeight="50.0" tabMinWidth="118.0" BorderPane.alignment="CENTER">
+    <TabPane id="background" stylesheets="@main.css" minHeight="650.0" minWidth="700.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0" tabMaxWidth="118.0" tabMinHeight="50.0" tabMinWidth="118.0" BorderPane.alignment="CENTER">
         <tabs>
-            <Tab text="Board Editor" fx:id="boardEditor">
+            <Tab fx:id="boardEditor" text="Board Editor">
                 <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     </AnchorPane>
@@ -19,14 +20,14 @@
             <Tab text="Rule Editor">
                 <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <fx:include source="RuleEditor.fxml"></fx:include>
+                        <fx:include source="RuleEditor.fxml" />
                     </AnchorPane>
                 </content>
             </Tab>
             <Tab text="RNG">
                 <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <fx:include source="RNG.fxml"></fx:include>
+                        <fx:include source="RNG.fxml" />
                     </AnchorPane>
                 </content>
             </Tab>
@@ -37,13 +38,17 @@
                     </AnchorPane>
                 </content>
             </Tab>
-            <Tab text="Save">
+            <Tab text="Exit">
                 <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField layoutX="259.0" layoutY="120.0" text="Input Game Name" />
+                        <Button layoutX="235.0" layoutY="192.0" mnemonicParsing="false" onAction="#saveGame" text="Save" />
+                        <Button layoutX="359.0" layoutY="192.0" mnemonicParsing="false" text="Exit without saving" onAction="#exitToMainMenu"/>
+                     </children></AnchorPane>
                 </content>
             </Tab>
         </tabs>
     </TabPane>
 </top>
 </BorderPane>
-
