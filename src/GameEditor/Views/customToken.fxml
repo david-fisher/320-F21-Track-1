@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="130.0" tabMaxWidth="70.0" tabMinHeight="130.0" tabMinWidth="70.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.TokenController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="130.0" tabMaxWidth="70.0" tabMinHeight="130.0" tabMinWidth="70.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.CustomTokenController">
     <tabs>
         <Tab>
             <graphic>
@@ -57,10 +58,10 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="425.0">
                            <children>
-                              <Pane fx:id="deck1" layoutX="7.0" layoutY="7.0" prefHeight="281.0" prefWidth="412.0" style="-fx-border-color: #000000;">
+                              <Pane layoutX="7.0" layoutY="7.0" prefHeight="281.0" prefWidth="412.0" style="-fx-border-color: #000000;">
                                  <children>
-                                    <TextField fx:id="deck_name1" alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="26.0" prefWidth="119.0" promptText="Enter Name" text="Deck 1" />
-                                    <ImageView fx:id="deck_visuals1" fitHeight="100.0" fitWidth="100.0" layoutX="17.0" layoutY="39.0" opacity="0.5" pickOnBounds="true" smooth="false" />
+                                    <TextField alignment="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="26.0" prefWidth="119.0" promptText="Enter Name" text="Deck 1" />
+                                    <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="17.0" layoutY="39.0" opacity="0.5" pickOnBounds="true" smooth="false" />
                                     <Button layoutX="126.0" layoutY="46.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" text="+ Choose Image">
                                        <font>
                                           <Font size="10.0" />
@@ -363,7 +364,7 @@
                         </AnchorPane>
                      </content>
                   </ScrollPane>
-                  <Button fx:id="newDeckButton" layoutX="5.0" layoutY="66.0" mnemonicParsing="false" onAction="#displayNewDeck" prefHeight="26.0" prefWidth="97.0" text="+ New Deck" />
+                  <Button layoutX="5.0" layoutY="66.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="+ New Deck" />
                     </children>
                 </AnchorPane>
             </content>
@@ -384,221 +385,83 @@
                                 <Font size="15.0" />
                             </font>
                         </Label>
-                        <ButtonBar layoutX="230.0" prefHeight="48.0" prefWidth="224.0">
+                        <ButtonBar layoutX="231.0" layoutY="10.0" prefHeight="48.0" prefWidth="224.0">
                             <buttons>
                                 <Button mnemonicParsing="false" text="Save Tokens" />
                                 <Button mnemonicParsing="false" prefHeight="26.0" text="Cancel" />
                             </buttons>
                         </ButtonBar>
-                  <Button fx:id="newCustTokenButton" layoutX="5.0" layoutY="67.0" mnemonicParsing="false" onAction="#displayTokenEditor" prefHeight="26.0" prefWidth="156.0" text="+ New Custom Token" />
-                  <ScrollPane layoutX="5.0" layoutY="100.0" prefHeight="296.0" prefWidth="453.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="100.0">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="425.0">
+                  <Button fx:id="newCustTokenButton" layoutX="10.0" layoutY="58.0" mnemonicParsing="false" onAction="#toggleEditor" prefHeight="26.0" prefWidth="143.0" text="+ New Custom Token">
+                     <font>
+                        <Font size="12.0" />
+                     </font></Button>
+                  <ListView fx:id="tokensList" layoutX="6.0" layoutY="122.0" prefHeight="264.0" prefWidth="135.0" />
+                  <Button fx:id="editButton" layoutX="10.0" layoutY="99.0" mnemonicParsing="false" onAction="#toggleEditor" text="Edit">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="deleteButton" layoutX="90.0" layoutY="99.0" mnemonicParsing="false" onAction="#deleteToken" text="Delete">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <Pane layoutX="146.0" layoutY="99.0" prefHeight="286.0" prefWidth="305.0" style="-fx-border-color: #000000;">
+                     <children>
+                        <Pane fx:id="editorPane" layoutX="7.0" layoutY="8.0" prefHeight="273.0" prefWidth="302.0" visible="false">
                            <children>
-                              <Pane fx:id="ct0" layoutX="7.0" layoutY="8.0" prefHeight="79.0" prefWidth="412.0" style="-fx-border-color: #000000;" visible="false">
+                              <TextField fx:id="nameField" layoutX="5.0" layoutY="16.0" prefHeight="33.0" prefWidth="148.0" promptText="Enter Name" />
+                              <Button fx:id="cancelButton" layoutX="244.0" layoutY="5.0" mnemonicParsing="false" onAction="#cancelToken" text="Cancel">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="saveButton" layoutX="191.0" layoutY="5.0" mnemonicParsing="false" onAction="#saveToken" text="Save">
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="28.0" layoutY="180.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="87.0" text="Change Image" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Button>
+                              <Pane layoutX="15.0" layoutY="59.0" prefHeight="112.0" prefWidth="112.0" style="-fx-border-color: #000000;">
                                  <children>
-                                    <ImageView fx:id="ct_image" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label fx:id="ct_name0" alignment="CENTER" layoutX="93.0" layoutY="10.0" prefHeight="56.0" prefWidth="216.0" text="Token #" wrapText="true">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="ct_del0" alignment="CENTER" layoutX="315.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteToken" prefHeight="17.0" prefWidth="83.0" text="X Delete" textFill="RED">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Button>
-                                    <Button fx:id="ct_edit0" alignment="CENTER" layoutX="315.0" layoutY="39.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Edit">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
+                                    <ImageView fitHeight="106.0" fitWidth="106.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
-                              <Pane fx:id="ct1" layoutX="7.0" layoutY="87.0" prefHeight="79.0" prefWidth="412.0" style="-fx-border-color: #000000;" visible="false">
+                              <Label layoutX="153.0" layoutY="77.0" prefHeight="38.0" prefWidth="83.0" text="Quantity given to player:" wrapText="true">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="qtyField" layoutX="243.0" layoutY="83.0" prefHeight="26.0" prefWidth="43.0" />
+                              <Label layoutX="150.0" layoutY="137.0" prefHeight="23.0" prefWidth="83.0" text="Token Type:" underline="true" wrapText="true">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="playMoneyCheckBox" layoutX="153.0" layoutY="162.0" mnemonicParsing="false" onAction="#setPlayMoney" text="Play Money" />
+                              <CheckBox fx:id="miscCheckBox" layoutX="153.0" layoutY="219.0" mnemonicParsing="false" onAction="#setMiscToken" prefHeight="40.0" prefWidth="116.0" text="Miscellaneous Token" wrapText="true" />
+                              <Pane fx:id="valuePane" layoutX="165.0" layoutY="181.0" prefHeight="30.0" prefWidth="126.0">
                                  <children>
-                                    <ImageView fx:id="ct_image1" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label fx:id="ct_name1" alignment="CENTER" layoutX="93.0" layoutY="10.0" prefHeight="56.0" prefWidth="216.0" text="Token #" wrapText="true">
+                                    <Label layoutX="25.0" layoutY="3.0" prefHeight="23.0" prefWidth="43.0" text="Value:" wrapText="true">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font size="12.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="ct_del1" alignment="CENTER" layoutX="315.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteToken" prefHeight="17.0" prefWidth="83.0" text="X Delete" textFill="RED">
+                                    <TextField fx:id="valueField" layoutX="69.0" layoutY="3.0" prefHeight="20.0" prefWidth="53.0">
                                        <font>
-                                          <Font size="10.0" />
+                                          <Font size="11.0" />
                                        </font>
-                                    </Button>
-                                    <Button fx:id="ct_edit1" alignment="CENTER" layoutX="315.0" layoutY="39.0" mnemonicParsing="false" onAction="#displayTokenEditor" prefHeight="26.0" prefWidth="83.0" text="Edit">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="ct2" layoutX="7.0" layoutY="166.0" prefHeight="79.0" prefWidth="412.0" style="-fx-border-color: #000000;" visible="false">
-                                 <children>
-                                    <ImageView fx:id="ct_image2" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label fx:id="ct_name2" alignment="CENTER" layoutX="93.0" layoutY="10.0" prefHeight="56.0" prefWidth="216.0" text="Token #" wrapText="true">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="ct_del2" alignment="CENTER" layoutX="315.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteToken" prefHeight="17.0" prefWidth="83.0" text="X Delete" textFill="RED">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Button>
-                                    <Button fx:id="ct_edit2" alignment="CENTER" layoutX="315.0" layoutY="39.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Edit">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="ct3" layoutX="7.0" layoutY="245.0" prefHeight="79.0" prefWidth="412.0" style="-fx-border-color: #000000;" visible="false">
-                                 <children>
-                                    <ImageView fx:id="ct_image3" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label fx:id="ct_name3" alignment="CENTER" layoutX="93.0" layoutY="10.0" prefHeight="56.0" prefWidth="216.0" text="Token #" wrapText="true">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="ct_del3" alignment="CENTER" layoutX="315.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteToken" prefHeight="17.0" prefWidth="83.0" text="X Delete" textFill="RED">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Button>
-                                    <Button fx:id="ct_edit3" alignment="CENTER" layoutX="315.0" layoutY="39.0" mnemonicParsing="false" onAction="#displayTokenEditor" prefHeight="26.0" prefWidth="83.0" text="Edit">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="ct4" layoutX="7.0" layoutY="324.0" prefHeight="79.0" prefWidth="412.0" style="-fx-border-color: #000000;" visible="false">
-                                 <children>
-                                    <ImageView fx:id="ct_image4" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label fx:id="ct_name4" alignment="CENTER" layoutX="93.0" layoutY="10.0" prefHeight="56.0" prefWidth="216.0" text="Token #" wrapText="true">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="ct_del4" alignment="CENTER" layoutX="315.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteToken" prefHeight="17.0" prefWidth="83.0" text="X Delete" textFill="RED">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Button>
-                                    <Button fx:id="ct_edit4" alignment="CENTER" layoutX="315.0" layoutY="39.0" mnemonicParsing="false" onAction="#displayTokenEditor" prefHeight="26.0" prefWidth="83.0" text="Edit">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="ct5" layoutX="7.0" layoutY="403.0" prefHeight="79.0" prefWidth="412.0" style="-fx-border-color: #000000;" visible="false">
-                                 <children>
-                                    <ImageView fx:id="ct_image5" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label fx:id="ct_name5" alignment="CENTER" layoutX="93.0" layoutY="10.0" prefHeight="56.0" prefWidth="216.0" text="Token #" wrapText="true">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="ct_del5" alignment="CENTER" layoutX="315.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteToken" prefHeight="17.0" prefWidth="83.0" text="X Delete" textFill="RED">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Button>
-                                    <Button fx:id="ct_edit5" alignment="CENTER" layoutX="315.0" layoutY="39.0" mnemonicParsing="false" onAction="#displayTokenEditor" prefHeight="26.0" prefWidth="83.0" text="Edit">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="ct6" layoutX="7.0" layoutY="482.0" prefHeight="79.0" prefWidth="412.0" style="-fx-border-color: #000000;" visible="false">
-                                 <children>
-                                    <ImageView fx:id="ct_image6" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label fx:id="ct_name6" alignment="CENTER" layoutX="93.0" layoutY="10.0" prefHeight="56.0" prefWidth="216.0" text="Token #" wrapText="true">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="ct_del6" alignment="CENTER" layoutX="315.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteToken" prefHeight="17.0" prefWidth="83.0" text="X Delete" textFill="RED">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Button>
-                                    <Button fx:id="ct_edit6" alignment="CENTER" layoutX="315.0" layoutY="39.0" mnemonicParsing="false" onAction="#displayTokenEditor" prefHeight="26.0" prefWidth="83.0" text="Edit">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="ct7" layoutX="7.0" layoutY="561.0" prefHeight="79.0" prefWidth="412.0" style="-fx-border-color: #000000;" visible="false">
-                                 <children>
-                                    <ImageView fx:id="ct_image7" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label fx:id="ct_name7" alignment="CENTER" layoutX="93.0" layoutY="10.0" prefHeight="56.0" prefWidth="216.0" text="Token #" wrapText="true">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="ct_del7" alignment="CENTER" layoutX="315.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteToken" prefHeight="17.0" prefWidth="83.0" text="X Delete" textFill="RED">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Button>
-                                    <Button fx:id="ct_edit7" alignment="CENTER" layoutX="315.0" layoutY="39.0" mnemonicParsing="false" onAction="#displayTokenEditor" prefHeight="26.0" prefWidth="83.0" text="Edit">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="ct8" layoutX="7.0" layoutY="640.0" prefHeight="79.0" prefWidth="412.0" style="-fx-border-color: #000000;" visible="false">
-                                 <children>
-                                    <ImageView fx:id="ct_image8" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label fx:id="ct_name8" alignment="CENTER" layoutX="93.0" layoutY="10.0" prefHeight="56.0" prefWidth="216.0" text="Token #" wrapText="true">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="ct_del8" alignment="CENTER" layoutX="315.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteToken" prefHeight="17.0" prefWidth="83.0" text="X Delete" textFill="RED">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Button>
-                                    <Button fx:id="ct_edit8" alignment="CENTER" layoutX="315.0" layoutY="39.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Edit">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="ct9" layoutX="7.0" layoutY="719.0" prefHeight="79.0" prefWidth="412.0" style="-fx-border-color: #000000;" visible="false">
-                                 <children>
-                                    <ImageView fx:id="ct_image9" fitHeight="70.0" fitWidth="70.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label fx:id="ct_name9" alignment="CENTER" layoutX="93.0" layoutY="10.0" prefHeight="56.0" prefWidth="216.0" text="Token #" wrapText="true">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="ct_del9" alignment="CENTER" layoutX="315.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteToken" prefHeight="17.0" prefWidth="83.0" text="X Delete" textFill="RED">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Button>
-                                    <Button fx:id="ct_edit9" alignment="CENTER" layoutX="315.0" layoutY="39.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Edit">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
+                                    </TextField>
                                  </children>
                               </Pane>
                            </children>
-                        </AnchorPane>
-                    </content>
-                  </ScrollPane>
+                        </Pane>
+                     </children>
+                  </Pane>
                     </children>
                 </AnchorPane>
             </content>
