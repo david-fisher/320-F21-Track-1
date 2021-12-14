@@ -165,7 +165,7 @@
                                           <Rectangle fx:id="t2" arcHeight="5.0" arcWidth="5.0" fill="#101111" height="45.0" onMousePressed="#selectTile" stroke="BLACK" strokeType="INSIDE" translateY="100.0" width="45.0" />
                                        </children>
                                     </StackPane>
-                                    <Button fx:id="addTransition" mnemonicParsing="false" onMousePressed="#clickAddTransition" text="Add Transition" />
+                                    <Button fx:id="addTransition" mnemonicParsing="false" text="Add Transition" />
                                     <Label fx:id="addMessage" text="Select two tiles to add a transition." />
                                  </children>
                               </VBox>
@@ -194,7 +194,7 @@
                            <children>
                               <VBox prefHeight="276.0" prefWidth="155.0">
                                  <children>
-                                    <RadioButton mnemonicParsing="false" text="Allow multiple players on the same tile" wrapText="true" />
+                                    <RadioButton mnemonicParsing="false" style="-fx-text-fill: white;" text="Allow multiple players on the same tile" wrapText="true" />
                                  </children>
                               </VBox>
                               <VBox alignment="TOP_CENTER" prefHeight="276.0" prefWidth="328.0">
@@ -221,13 +221,13 @@
                                        <children>
                                           <HBox fx:id="addButtonContainer" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Button fx:id="addTransition" mnemonicParsing="false" onMousePressed="#clickAddTransition" text="Add Transition" />
+                                                <Button fx:id="addTransition" mnemonicParsing="false" onAction="#addTransition" text="Add Transition" />
                                              </children>
                                           </HBox>
-                                          <HBox fx:id="transitionButtonContainer" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                          <HBox fx:id="transitionButtonContainer" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                              <children>
-                                                <Button fx:id="changeTransition" mnemonicParsing="false" text="Change Transition" />
-                                                <Button fx:id="deleteTransition" mnemonicParsing="false" text="Delete Transition" />
+                                                <Button fx:id="changeTransition" mnemonicParsing="false" onAction="#changeTransition" text="Change Transition" />
+                                                <Button fx:id="deleteTransition" mnemonicParsing="false" onAction="#deleteTransition" text="Delete Transition" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -239,7 +239,8 @@
                                                 <Font size="10.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="addMessage" text="Select two tiles to add a transition." />
+                                          <Label fx:id="addMessage" style="-fx-text-fill: white;" text="Select two tiles to add a transition." />
+                                          <Button fx:id="doneEditingTransition" mnemonicParsing="false" onAction="#doneEditingTransition" text="Done" />
                                        </children>
                                     </StackPane>
                                  </children>

@@ -36,7 +36,7 @@ public class RuleEditorController {
     @FXML
     private Pane board;
     @FXML
-    private Button addTransition, changeTransition, deleteTransition;
+    private Button addTransition, changeTransition, deleteTransition, doneEditingTransition;
     @FXML
     private Label addMessage, transitionAlreadyExists;
     @FXML
@@ -45,8 +45,8 @@ public class RuleEditorController {
     private TextFlow takeFromPlayer, givePlayer, movePlayer, tileNum, numCards, numPoints;
     
     // hash table with array tile 1 tile 2 and value group
-    private Hashtable<List<Rectangle>, Polyline> tileMapping = new Hashtable<List<Rectangle>, Polyline>();
-    
+    private LinkedHashMap<List<Rectangle>, Polyline> tileMapping = new LinkedHashMap<List<Rectangle>, Polyline>();
+    private Polyline currentTransition;
     private boolean addTransitionSelected = false;
     
     @FXML
@@ -394,11 +394,12 @@ public class RuleEditorController {
     	addMessage.setVisible(false);
     	transitionAlreadyExists.setVisible(false);
     	transitionButtonContainer.setVisible(false);
+    	doneEditingTransition.setVisible(false);
     }
     
     // handles add transition and cancel buttons
     @FXML
-    void clickAddTransition(MouseEvent event) {
+    void addTransition() {
     	addTransitionSelected = !addTransitionSelected;
     	if (addTransitionSelected) {
     		transitionAlreadyExists.setVisible(false);
@@ -471,9 +472,12 @@ public class RuleEditorController {
 	                    @Override 
 	                    public void handle(MouseEvent e) { 
 	                    	Polyline transition = (Polyline) e.getSource();
+	                    	currentTransition = transition;
 	                    	transition.setStroke(Color.RED);
+	                    	transitionAlreadyExists.setVisible(false);
 	                    	addButtonContainer.setVisible(false);
 	                    	transitionButtonContainer.setVisible(true);
+	                    	doneEditingTransition.setVisible(true);
 	                    } 
 	                 };
 	                 arrow.setOnMousePressed(selectTransition);
@@ -494,16 +498,76 @@ public class RuleEditorController {
     	}
     }
     
-    //
+    // changes direction of the selected transition arrow 
     @FXML
-	void changeTransition(MouseEvent event) {
+	void changeTransition() {
+		ArrayList<List<Rectangle>> directions = new ArrayList<List<Rectangle>>();
+		for (Map.Entry<List<Rectangle>, Polyline> entry : tileMapping.entrySet()) {
+			if (entry.getValue().equals(currentTransition)) {
+			    directions.add(entry.getKey());
+			}
+		}
+		Rectangle newDirection[] = {directions.get(0).get(1), directions.get(0).get(0)};
 		
+		double arrowAngle = Math.toRadians(45.0);
+        double arrowLength = 10.0;
+
+        double lineAngle = Math.atan2(directions.get(0).get(1).getLayoutY() - directions.get(0).get(0).getLayoutY(), directions.get(0).get(1).getLayoutX() - directions.get(0).get(0).getLayoutX());
+		double x1 = Math.cos(lineAngle + arrowAngle) * arrowLength + directions.get(0).get(0).getLayoutX();
+        double y1 = Math.sin(lineAngle + arrowAngle) * arrowLength + directions.get(0).get(0).getLayoutY();
+
+        double x2 = Math.cos(lineAngle - arrowAngle) * arrowLength + directions.get(0).get(0).getLayoutX();
+        double y2 = Math.sin(lineAngle - arrowAngle) * arrowLength + directions.get(0).get(0).getLayoutY();
+		if (directions.size() == 1) {
+            // add second arrowHead
+            currentTransition.getPoints().addAll(new Double[]{
+            		directions.get(0).get(1).getLayoutX(), directions.get(0).get(1).getLayoutY(),
+            		directions.get(0).get(0).getLayoutX(), directions.get(0).get(0).getLayoutY(),
+            		x1, y1,
+            		directions.get(0).get(0).getLayoutX(), directions.get(0).get(0).getLayoutY(),
+            		x2, y2
+            });
+			tileMapping.put(Arrays.asList(newDirection), currentTransition);
+		} else {
+			Rectangle toRemove[] = {directions.get(0).get(0), directions.get(0).get(1)};
+			tileMapping.remove(Arrays.asList(toRemove));
+			Polyline newTransition = new Polyline();
+			newTransition.getPoints().addAll(new Double[]{
+					directions.get(0).get(1).getLayoutX(), directions.get(0).get(1).getLayoutY(), 
+            		directions.get(0).get(0).getLayoutX(), directions.get(0).get(0).getLayoutY(),
+            		directions.get(0).get(0).getLayoutX(), directions.get(0).get(0).getLayoutY(), 
+            		x1, y1,
+            		directions.get(0).get(0).getLayoutX(), directions.get(0).get(0).getLayoutY(), 
+            		x2, y2
+            });
+			newTransition.setStroke(Color.RED);
+			newTransition.setStrokeWidth(2);
+			newTransition.setTranslateX(directions.get(0).get(0).getWidth() / 2);
+            newTransition.setTranslateY(directions.get(0).get(0).getHeight() / 2);
+            board.getChildren().remove(currentTransition);
+            currentTransition = newTransition;
+            board.getChildren().add(currentTransition);
+            tileMapping.put(Arrays.asList(newDirection), currentTransition);
+		}
 	}
 	
-    //
+    // deletes the selected transition
 	@FXML
-	void deleteTransition(MouseEvent event) {
-		
+	void deleteTransition() {
+		tileMapping.values().remove(currentTransition);
+		board.getChildren().remove(currentTransition);
+		addButtonContainer.setVisible(true);
+    	transitionButtonContainer.setVisible(false);
+    	doneEditingTransition.setVisible(false);
+	}
+	
+	// deletes the selected transition
+	@FXML
+	void doneEditingTransition() {
+		addButtonContainer.setVisible(true);
+	   	transitionButtonContainer.setVisible(false);
+	   	doneEditingTransition.setVisible(false);
+	   	currentTransition.setStroke(Color.GREEN);
 	}	
 
 
