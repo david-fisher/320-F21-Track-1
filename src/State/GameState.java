@@ -16,11 +16,11 @@ public class GameState {
   private ArrayList<Choice> choices;
   private ArrayList<Rule> ruleQueue;
 
-  public GameState(List<Player> players, Board board, Deck cards, ArrayList<Rule> rules) {
+  public GameState(List<Player> players, Board board) {
     this.players = new ArrayList<Player>(players);
     this.curPlayer = this.players.get(0);
     this.board = board;
-    this.deck = cards;
+    this.deck = board.get_deck();
     this.rules = board.get_rules();
     this.curRule = this.rules.get(0);
 
