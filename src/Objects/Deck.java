@@ -38,7 +38,7 @@ public class Deck extends Saveable {
     }
 
     public Card pop() {
-        if (this.cardQueue.isEmpty()) {
+        if (this.cardQueue == null || this.cardQueue.isEmpty()) {
             resetDeck();
         }
         Card output = cardQueue.get(0);
@@ -47,7 +47,7 @@ public class Deck extends Saveable {
     }
 
     public void resetDeck() {
-        cardQueue = new ArrayList<Card>(cards);
+        cardQueue = cards.isEmpty() ? new ArrayList<Card>() : new ArrayList<Card>(cards);
         Collections.shuffle(cardQueue);
     }
 
