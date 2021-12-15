@@ -1,9 +1,13 @@
 package GameEditor.Controllers;
 
 import Objects.Board;
+import Objects.DrawCardRule;
 import Objects.JSONConverter;
+import Objects.MoveRule;
+import Objects.PlayCardRule;
 import Objects.Tile;
 import Objects.Token;
+import Objects.Rule;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -69,7 +73,14 @@ public class RuleEditorController {
     private ArrayList<Tile> tileObjs;
     private String currTile;
     private ArrayList<String> currentTiles = new ArrayList<String>();
-
+    private double startX, startY;
+    private HashMap<String, Double[]> positions = new HashMap<>();
+    
+    private HashMap<Tile, Tile> moveRules = new HashMap<>();
+    private HashMap<Tile, Integer> giveCards = new HashMap<>();
+    private HashMap<Tile, Integer> takeCards = new HashMap<>();
+    private HashMap<Tile, Integer> takePoints = new HashMap<>();
+    private HashMap<Tile, Integer> givePoints = new HashMap<>();
 
     @FXML
     private URL location;
@@ -102,41 +113,52 @@ public class RuleEditorController {
         dragAndDrop(numCards);
         dragAndDrop(tileNum);
         dragAndDrop(numPoints);
-		//TODO FIX backend call
-//        if(!initialized)
-//        {
-//
-//        	 Tile tile1 = new Tile("Tile 1", 1, 1, null, null, null);
-//             Tile tile2 = new Tile("Tile 2", 1, 2, null, null, null);
-//             Tile tile3 = new Tile("Tile 3", 2, 2, null, null, null);
-//             Tile tile4 = new Tile("Tile 4", 2, 1, null, null, null);
-//             tileObjs = new ArrayList<Tile>();
-//             tileObjs.add(tile1);
-//             tileObjs.add(tile2);
-//             tileObjs.add(tile3);
-//             tileObjs.add(tile4);
-//
-//        	newBoard = new Board("tempBoard", tileObjs);
-//            for(Tile tile: tileObjs)
-//            {
-//                tileOptions.getItems().add(tile.ID);
-//            	TextFlow tf = new TextFlow();
-//            	tf.setAccessibleText(tile.ID);
-//            	CheckBox cb = new CheckBox();
-//            	cb.setText(tile.ID);
-//            	cb.setAccessibleText(tile.ID);
-//            	tf.getChildren().add(cb);
-//            	tiles.getChildren().add(tf);
-//            	checked(tf);
-//            }
-//            initialized = true;
-//        }
+        if(!initialized)
+        {
+        	 Tile tile1 = new Tile("Tile 1", 1, 1, new ArrayList<Rule>(), null, null, null, 0);
+             Tile tile2 = new Tile("Tile 2", 1, 2, new ArrayList<Rule>(), null, null, null, 0);
+             Tile tile3 = new Tile("Tile 3", 2, 2, new ArrayList<Rule>(), null, null, null, 0);
+             Tile tile4 = new Tile("Tile 4", 2, 1, new ArrayList<Rule>(), null, null, null, 0);
+             tileObjs = new ArrayList<Tile>();
+             tileObjs.add(tile1);
+             tileObjs.add(tile2);
+             tileObjs.add(tile3);
+             tileObjs.add(tile4);
+        	newBoard = new Board(tileObjs);
+            for(Tile tile: tileObjs)
+            {
+                tileOptions.getItems().add(tile.get_id());
+            	TextFlow tf = new TextFlow();
+            	tf.setAccessibleText(tile.get_id());
+            	CheckBox cb = new CheckBox();
+            	cb.setText(tile.get_id());
+            	cb.setAccessibleText(tile.get_id());
+            	tf.getChildren().add(cb);
+            	tiles.getChildren().add(tf);
+            	checked(tf);
+            }
+            initialized = true;
+        }
     }
 
+    @FXML
+    void resetPositions()
+    {
+//    	TextFlow[] tfs = {takeFromPlayer, givePlayer, movePlayer, tileNum, numCards, numPoints};
+//    	for(TextFlow tf: tfs)
+//    	{
+//    		tf.setTranslateX(positions.get(tf.getAccessibleText())[0]);
+//    		tf.setTranslateY(positions.get(tf.getAccessibleText())[1]);
+//    		orgSceneX = positions.get(tf.getAccessibleText())[0];
+//            orgSceneY = positions.get(tf.getAccessibleText())[1];
+//    	}
+    }
+    
     //drag and drop for the actions in the tile rule editor
     @FXML
     void dragAndDrop(TextFlow action)
     {	
+    	positions.put(action.getAccessibleText(), new Double[] {action.getTranslateX(), action.getTranslateY()});
         action.setCursor(Cursor.HAND);
         action.setOnMousePressed((t) -> {
             orgSceneX = t.getSceneX();
@@ -173,6 +195,7 @@ public class RuleEditorController {
     @FXML
     void saveButton()
     {	
+    	String ruleType = "";
     	if(currentTiles.isEmpty())
     	{
     		invalidTileRule("Oops, please select one or more tiles");
@@ -189,12 +212,12 @@ public class RuleEditorController {
     		Boolean valid = true;
     		switch(rules[0])
     		{
-    		case "takeFromPlayer": if(!rules[1].equals("numCards") && !rules[1].equals("numPoints")) {valid = false;} break;
-    		case "tileNum": if(!rules[1].equals("movePlayer")) {valid = false;} break;
-    		case "givePlayer": if(!rules[1].equals("numCards") && !rules[1].equals("numPoints")) {valid = false;} break;
-    		case "numPoints": if(!rules[1].equals("takeFromPlayer") && !rules[1].equals("givePlayer")) {valid = false;} break;
-    		case "numCards": if(!rules[1].equals("takeFromPlayer") && !rules[1].equals("givePlayer")) {valid = false;} break;
-    		case "movePlayer": if(!rules[1].equals("tileNum")) {valid = false;} break;
+    		case "takeFromPlayer": ruleType="takeFromPlayer";  if(!rules[1].equals("numCards") && !rules[1].equals("numPoints")) {valid = false;} break;
+    		case "tileNum": ruleType="movePlayer"; if(!rules[1].equals("movePlayer")) {valid = false; } break;
+    		case "givePlayer": ruleType="givePlayer"; if(!rules[1].equals("numCards") && !rules[1].equals("numPoints")) {valid = false; } break;
+    		case "numPoints": ruleType=rules[1]; if(!rules[1].equals("takeFromPlayer") && !rules[1].equals("givePlayer")) {valid = false;} break;
+    		case "numCards": ruleType=rules[1];if(!rules[1].equals("takeFromPlayer") && !rules[1].equals("givePlayer")) {valid = false;} break;
+    		case "movePlayer": ruleType="movePlayer"; if(!rules[1].equals("tileNum")) {valid = false;} break;
     		}
     		if(!valid)
     		{
@@ -205,8 +228,10 @@ public class RuleEditorController {
     	String ruleToAdd = "";
     	for(TextFlow rule: draggedRules)
     	{
+    		String[] rules = {draggedRules.get(0).getId().toString(), draggedRules.get(1).getId().toString()};
     		if(!dialogContent.getItems().contains(rule.getId()))
     		{
+    			//the node is a label or the tile dropdown
     		    if (rule.getChildren().size()==1)
     		    {
     		    	if(rule.getChildren().get(0) instanceof Label)
@@ -218,19 +243,52 @@ public class RuleEditorController {
     		    		ComboBox tileOption = (ComboBox) rule.getChildren().get(0);
         				if(tileOption.getValue()== null) {invalidTileRule("Please choose a tile from the dropdown."); return; }
     		    		ruleToAdd = ruleToAdd + tileOption.getValue();
+        				for(String tile: currentTiles)
+        				{
+        					System.out.println(newBoard.tile_findByID(tile).get_id());
+            				System.out.println(tileOption.getValue().toString());
+        		    		moveRules.put(newBoard.tile_findByID(tile), newBoard.tile_findByID(tileOption.getValue().toString()));
+        				}
     		    	}
-    			}
-    			else if(rule.getChildren().get(0) instanceof Label)
-    			{
-    				TextField userInput = (TextField) rule.getChildren().get(1);
-    				if(userInput.getText()=="") {invalidTileRule("Please provide an input for the text field."); return; }
-    				ruleToAdd += rule.getChildren().get(0).getAccessibleText() + " " + userInput.getText();
-    			}
+    		    }
     			else if(rule.getChildren().get(0) instanceof TextField)
     			{
     				TextField userInput = (TextField) rule.getChildren().get(0);
     				if(userInput.getText()=="") {invalidTileRule("Please provide an input for the text field."); return; }
     				ruleToAdd += userInput.getText() + " " + rule.getChildren().get(1).getAccessibleText();
+    				
+    				if(rule.getChildren().get(1).getAccessibleText().toString().equals("points"))
+    				{
+						for(String tile: currentTiles)
+						{
+							//take points
+	    					if(ruleType.equals("takeFromPlayer"))
+	    					{
+	    						takePoints.put(newBoard.tile_findByID(tile), Integer.valueOf(userInput.getText()));
+	    					}
+	    					//give points
+	    					else
+	    					{
+	    						givePoints.put(newBoard.tile_findByID(tile), Integer.valueOf(userInput.getText()));
+	    					}
+						}
+    				}
+    				else
+    				{
+    					for(String tile: currentTiles)
+						{
+							//take cards
+	    					if(ruleType.equals("takeFromPlayer"))
+	    					{
+	    						takeCards.put(newBoard.tile_findByID(tile), Integer.valueOf(userInput.getText()));
+	    					}
+	    					//give cards
+	    					else
+	    					{
+	    						giveCards.put(newBoard.tile_findByID(tile), Integer.valueOf(userInput.getText()));
+	    					}
+						}
+    				}
     			}
     		}
     	}
@@ -239,6 +297,7 @@ public class RuleEditorController {
     		if(!dialogContent.getItems().contains(tile + ": " + ruleToAdd))
     		{
             	dialogContent.getItems().add(tile + ": " + ruleToAdd);
+            	resetPositions();
     		}
     		else
     		{
@@ -271,19 +330,36 @@ public class RuleEditorController {
     @FXML
     void saveTileRule() throws IOException
     {
-    	Token newgame = new Token("game1");
-    	newgame.update_gameboard(newBoard);
-    	newgame.get_gameboard().update_tiles(tileObjs);
-    	//TODO FIX backend call
-    	//System.out.println(newgame.get_gameboard().get_tiles().get(0).ID);
-        JSONConverter savedGames = new JSONConverter(newgame, "test.json");
-        savedGames.To_JSON();
-    	System.out.println(draggedRules);
+    	for(Tile tile: moveRules.keySet())
+    	{
+    		tile.addRule(new MoveRule(moveRules.get(tile)));
+    	}
+    	for(Tile tile: giveCards.keySet())
+    	{
+    		tile.addRule(new DrawCardRule(giveCards.get(tile)));
+    	}
+    	for(Tile tile: givePoints.keySet())
+    	{
+    		
+    	}
+    	for(Tile tile: takeCards.keySet())
+    	{
+    		System.out.println(tile);
+    		tile.addRule(new PlayCardRule());
+    	}
+    	for(Tile tile: takePoints.keySet())
+    	{
+    		
+    	}
+//    	Token newgame = new Token("temp");
+//    	newgame.update_gameboard(newBoard);
+//      JSONConverter savedGames = new JSONConverter(newgame, "test.json");
+//      savedGames.To_JSON();
     }
     
     //save the order of turn rules
     @FXML
-    void saveTurnRule()
+    void saveTurnRule() throws IOException
     {
     	int index =0;
     	turnList.removeAll(turnList);
@@ -314,6 +390,19 @@ public class RuleEditorController {
             addTurnsList.getDialogPane().getButtonTypes().add(type);
     		addTurnsList.showAndWait();
     	}
+    	for(String turn: turnList)
+    	{
+    		switch(turn)
+    		{
+    		case "Move": System.out.println("move"); newBoard.add_rule(new MoveRule(1)); break;
+    		case "Play Card": System.out.println("play card"); newBoard.add_rule(new PlayCardRule()); break;
+    		case "Draw Card": System.out.println("draw card"); newBoard.add_rule(new DrawCardRule()); break;
+    		}
+    	}
+//    	Token newgame = new Token("temp");
+//    	newgame.update_gameboard(newBoard);
+//    	JSONConverter savedGames = new JSONConverter(newgame, "test.json");
+//        savedGames.To_JSON();
     }
     
     
@@ -342,16 +431,13 @@ public class RuleEditorController {
     		{
     			currentTiles.add(c.getAccessibleText());
     			tileName.setText("Tile(s) Selected: " + String.join(", ", currentTiles));
-
     		}
     		else
     		{
     			currentTiles.remove(currentTiles.indexOf(c.getAccessibleText()));
     			tileName.setText("Tile(s) Selected: " + String.join(", ", currentTiles));
-
     		}
     	}));
-
     }
 
     //adding a drop down box for the turn rule editor
