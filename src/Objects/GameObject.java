@@ -18,7 +18,7 @@ public class GameObject extends Saveable {
     private ArrayList<Rule> rules;
     private RNG score;
 
-    public GameObject(ArrayList<Rule> rules, int constant) {
+	public GameObject(ArrayList<Rule> rules, int constant) {
         super();
         this.x = -1;
         this.y = -1;
@@ -118,6 +118,10 @@ public class GameObject extends Saveable {
     public int[] getScore() {
         return this.score.getRange();
     }
+    
+    public void setScore(RNG score) {
+		this.score = score;
+	}
 
     public ArrayList<Integer> getCoordinate() {
         ArrayList<Integer> result = new ArrayList<Integer>();
