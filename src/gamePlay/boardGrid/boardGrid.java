@@ -97,6 +97,18 @@ public class boardGrid {
     }
 
     /*
+    this function moves a piece from the original x and y on the grid to the destination x and y on the grid. Does not preserve the background of the board.
+    deletes everything in the destination square, leaves nothing in the origin
+    */
+    public static void movePiece(int origX, int origY, int destX, int destY){
+        StackPane origin = getBoardCell(origX, origY);
+        StackPane destination = getBoardCell(destX, destY);
+        destination.getChildren().removeAll();
+        destination.getChildren().addAll(origin.getChildren());
+        origin.getChildren().removeAll();
+    }
+
+    /*
     ********************************
     get cell based on the coordinate
      */
