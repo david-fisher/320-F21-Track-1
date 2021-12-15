@@ -21,7 +21,7 @@ public class GameState {
     this.curPlayer = this.players.get(0);
     this.board = board;
     this.deck = cards;
-    this.rules = rules;
+    this.rules = board.get_rules();
     this.curRule = this.rules.get(0);
 
     choices = new ArrayList<Choice>();
