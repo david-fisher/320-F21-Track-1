@@ -2,7 +2,10 @@ package GameEditor;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -412,6 +415,9 @@ public void rightClick_StackPane(StackPane sp, boardGrid root){
         //Store image path into sp
         //Can be retrieve using sp.getUserData()
         String imgPath = file.getAbsolutePath();
+        Label tmpLabel = new Label(imgPath);
+        tmpLabel.setVisible(false);
+        sp.getChildren().add(tmpLabel);
         if(imgPath!=null){sp.setUserData(imgPath);}
         try {
             BufferedImage bufferedImage = ImageIO.read(file);
@@ -485,34 +491,27 @@ public class boardGrid {
         StackPane tmp = null;
         for (Tile tmpTile: tiles) {
         	String shape = tmpTile.getAttributes().get("shape");
-        	String color = tmpTile.getAttributes().get("color");
-        	String text = tmpTile.getAttributes().get("text");
         	
         	switch (shape) {
         		case "circle":
         	    	tmp = createCircle(this, x, y);
-        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
-        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        	    	tmp = createBoardHelper(tmp, tmpTile);
         			break;
         		case "rectangle":
         	    	tmp = createRectangle(this, x, y);
-        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
-        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        	    	tmp = createBoardHelper(tmp, tmpTile);
         			break;
         		case "triangle":
         	    	tmp = createTriangle(this, x, y);
-        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
-        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        	    	tmp = createBoardHelper(tmp, tmpTile);
         			break;
         		case "pentagon":
         	    	tmp = createPentagon(this, x, y);
-        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
-        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        	    	tmp = createBoardHelper(tmp, tmpTile);
         			break;
         		case "hexagon":
         	    	tmp = createHexagon(this, x, y);
-        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
-        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        	    	tmp = createBoardHelper(tmp, tmpTile);
         			break;
         		default:
         			break;
@@ -521,6 +520,29 @@ public class boardGrid {
         	tmp.setTranslateY(tmpTile.getY() * 50);
     		this.board.add(tmp, 0, 0);	
         }
+    }
+    
+    public StackPane createBoardHelper(StackPane tmp, Tile tmpTile) {
+    	String color = tmpTile.getAttributes().get("color");
+    	String text = tmpTile.getAttributes().get("text");
+    	
+    	if (tmpTile.getAttributes().containsKey("file location")) {
+    		String imgPath = tmpTile.getAttributes().get("file location");
+    		
+    		try {
+				InputStream stream = new FileInputStream(imgPath);
+				Image tmpImage = new Image(stream);
+	    		((Shape) tmp.getChildren().get(0)).setFill(new ImagePattern(tmpImage));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println("File missing");
+			}
+    	} else {
+    		((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
+    	}
+    	((TextField) tmp.getChildren().get(1)).setText(text);
+    	
+    	return tmp;
     }
     
     public void addInitialPieces(int x, int y) {
@@ -647,6 +669,10 @@ public void updateTileArrayList(boardGrid root){
 						TextField tmpText = (TextField) tmp.getChildren().toArray()[j];
 						tmpAtr.put("text", tmpText.getText());
 					}
+					else if (tmp.getChildren().toArray()[j] instanceof Label) {
+						Label tmpLabel = (Label) tmp.getChildren().toArray()[j];
+						tmpAtr.put("file location", tmpLabel.getText());
+					}
 				}
 				Tile tmpTile = new Tile(tmpX, tmpY, new ArrayList<Rule>(), tmpAtr, 0);
 				tmpTilesArr.add(tmpTile);
@@ -673,9 +699,10 @@ public Group startBoardEditor(Stage stage){
     currBoard = new Board();
     currBoard.updateDimensions(6, 6);
     Tile a = new Tile(5, 5, new ArrayList<Rule>(), new Hashtable<String,String>(), 0);
-    a.getAttributes().put("color", "0x000000ff");
+    a.getAttributes().put("color", "0x994d66ff");
     a.getAttributes().put("shape", "circle");
     a.getAttributes().put("text", "fu");
+    a.getAttributes().put("file location", "/Users/oe-itstudent/Downloads/Screen Shot 2021-12-15 at 12.36.20 AM.png");
     ArrayList<Tile> tiles = new ArrayList<Tile>();
     tiles.add(a);
     currBoard.update_tiles(tiles);
