@@ -517,7 +517,9 @@ public class boardGrid {
         		default:
         			break;
         	}
-    		this.board.add(tmp, tmpTile.getX(), tmpTile.getY());	
+        	tmp.setTranslateX(tmpTile.getX() * 50);
+        	tmp.setTranslateY(tmpTile.getY() * 50);
+    		this.board.add(tmp, 0, 0);	
         }
     }
     
@@ -670,7 +672,7 @@ public Group startBoardEditor(Stage stage){
     
     currBoard = new Board();
     currBoard.updateDimensions(6, 6);
-    Tile a = new Tile(3, 3, new ArrayList<Rule>(), new Hashtable<String,String>(), 0);
+    Tile a = new Tile(5, 5, new ArrayList<Rule>(), new Hashtable<String,String>(), 0);
     a.getAttributes().put("color", "0x000000ff");
     a.getAttributes().put("shape", "circle");
     a.getAttributes().put("text", "fu");
