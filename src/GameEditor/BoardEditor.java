@@ -583,6 +583,9 @@ public class boardGrid {
         ComboBox<Integer> x_value = new ComboBox<Integer>();
         x_value.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
         x_value.setPromptText("X");
+        BackgroundFill bf = new BackgroundFill(Color.WHITE, null, null);
+        Background bg = new Background(bf);
+        x_value.setBackground(bg);
         x_value.setOnAction((event) -> {
             resize(x_value.getSelectionModel().getSelectedItem(), y);
         });
@@ -593,6 +596,7 @@ public class boardGrid {
         ComboBox<Integer> y_value = new ComboBox<Integer>();
         y_value.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
         y_value.setPromptText("Y");
+        x_value.setBackground(bg);
         y_value.setOnAction((event) -> {
             resize(x, y_value.getSelectionModel().getSelectedItem());
         });
