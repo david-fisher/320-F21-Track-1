@@ -1,8 +1,10 @@
 package Objects;
 
-import java.util.*;
+import State.GameState;
+import State.MoveChoice;
+import State.PassChoice;
 
-import State.*;
+import java.util.ArrayList;
 
 public class MoveRule extends Rule {
   private RNG stepCount; // Dice, Spinner
