@@ -5,6 +5,7 @@ import Objects.DrawCardRule;
 import Objects.JSONConverter;
 import Objects.MoveRule;
 import Objects.PlayCardRule;
+import Objects.RNG;
 import Objects.Tile;
 import Objects.Token;
 import Objects.Rule;
@@ -374,10 +375,10 @@ public class RuleEditorController {
 		}
 		for(Tile tile: givePoints.keySet())
 		{
-//			for(int number: givePoints.get(tile))
-//			{
-//				gameBoard.tile_findByID(tile.get_id()).setScore(number);;
-//			}
+			for(int number: givePoints.get(tile))
+			{
+				gameBoard.tile_findByID(tile.get_id()).setScore(new RNG(number));;
+			}
 		}
 		for(Tile tile: takeCards.keySet())
 		{
@@ -385,22 +386,17 @@ public class RuleEditorController {
 		}
 		for(Tile tile: takePoints.keySet())
 		{
-//			for(int number: takePoints.get(tile))
-//			{
-//				gameBoard.tile_findByID(tile.get_id()).setScore(number);;
-//			}
+			for(int number: takePoints.get(tile))
+			{
+				gameBoard.tile_findByID(tile.get_id()).setScore(new RNG(-number));;
+				System.out.println(-number);
+			}
 		}
-		ArrayList<Tile> tiles = gameBoard.get_tiles();
-		for(Tile tile: tiles)
-		{
-			System.out.println(tile.getAttributes().get("text"));
-			System.out.println(tile.getRules());
-		}
-		moveRules = new HashMap<Tile, ArrayList<Tile>>();
-		giveCards = new HashMap<Tile, ArrayList<Integer>>();
-		givePoints = new HashMap<Tile, ArrayList<Integer>>();
-		takeCards = new HashMap<Tile, ArrayList<Integer>>();
-		takePoints = new HashMap<Tile, ArrayList<Integer>>();
+		moveRules.clear();
+		giveCards.clear();
+		givePoints.clear();
+		takeCards.clear();
+		takePoints.clear();
 	}
 
 	//save the order of turn rules
