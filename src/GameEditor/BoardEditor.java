@@ -299,6 +299,10 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	        	return;
         	}
             double tile_size = 50;
+
+	        System.out.println(c.getTranslateX());
+	        System.out.println(c.getTranslateY());
+	        
 	        double snapX = (c.getTranslateX()) % tile_size;
 	        double snapY = (c.getTranslateY()) % tile_size;
 	        if (snapX > tile_size/2){
@@ -380,12 +384,6 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	        		}
 	        	}
 	        updateTileArrayList(root);
-	        // Work in progress, need to discuss
-//	        Token token = new Token();
-//			JSONConverter json = new JSONConverter(token, "Token.json");
-//			try {
-//				json.To_JSON();
-//			} catch (IOException e) {}
 	    });
 }
 
@@ -425,9 +423,9 @@ public void rightClick_StackPane(StackPane sp, boardGrid root){
 
     }
 };
-//Add the Upload function to the menuitem
-
-backgrounduploader_item.setOnAction(UploadEventHandler);
+	//Add the Upload function to the menuitem
+	
+	backgrounduploader_item.setOnAction(UploadEventHandler);
 
     MenuItem colorpicker_item = new MenuItem(null,colorssPicker);
     MenuItem deleter_item = new MenuItem(null, new Label("Delete Shape"));
@@ -670,23 +668,22 @@ public Group startBoardEditor(Stage stage){
     
     // Dummy data, use to test out localStorage
     
-//    currBoard = new Board();
-//    currBoard.updateDimensions(5, 5);
-//    Tile a = new Tile(0, 0, new ArrayList<Rule>(), new Hashtable<String,String>(), 0);
-//    a.getAttributes().put("color", "0x000000ff");
-//    a.getAttributes().put("shape", "circle");
-//    a.getAttributes().put("text", "fu");
-//    System.out.println(a.get_id());
-//    ArrayList<Tile> tiles = new ArrayList<Tile>();
-//    tiles.add(a);
-//    currBoard.update_tiles(tiles);
-//    
-//    localStorage.storage.put("board", currBoard);
+    currBoard = new Board();
+    currBoard.updateDimensions(6, 6);
+    Tile a = new Tile(3, 3, new ArrayList<Rule>(), new Hashtable<String,String>(), 0);
+    a.getAttributes().put("color", "0x000000ff");
+    a.getAttributes().put("shape", "circle");
+    a.getAttributes().put("text", "fu");
+    ArrayList<Tile> tiles = new ArrayList<Tile>();
+    tiles.add(a);
+    currBoard.update_tiles(tiles);
+    
+    localStorage.storage.put("board", currBoard);
     
     if (localStorage.storage.containsKey("board")){
     	currBoard = (Board) localStorage.storage.get("board");
         board.addInitialPieces(currBoard.getDimensionX(), currBoard.getDimensionY());
-        board.createBoard(currBoard.get_tiles(), currBoard.getDimensionX(), currBoard.getDimensionX());
+        board.createBoard(currBoard.get_tiles(), currBoard.getDimensionX(), currBoard.getDimensionY());
     }
     else {
 	    currBoard = new Board();
@@ -709,7 +706,6 @@ public Group startBoardEditor(Stage stage){
         public void handle(ActionEvent event) {
         	updateTileArrayList(board);
             localStorage.storage.replace("board", currBoard);
-            System.out.println(localStorage.storage);
         }
     });
     root.getChildren().add(saveButton);
