@@ -12,6 +12,7 @@ public class Board extends Saveable implements IBoard {
 	private ArrayList<Rule> rules;
 	private Deck deck;
 	private Tile startTile;
+	private int winCondition;
 	private int dimensionX;
 	private int dimensionY;
 
@@ -67,6 +68,14 @@ public class Board extends Saveable implements IBoard {
 
 	public Tile getStartTile() {
 		return this.startTile;
+	}
+
+	public void setWinCondition(int winCondition) {
+		this.winCondition = winCondition;
+	}
+
+	public int getWinCondition() {
+		return this.winCondition;
 	}
 
 	public boolean containsTile(Tile tile) {
