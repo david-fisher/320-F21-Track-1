@@ -533,6 +533,9 @@ public class boardGrid {
 				InputStream stream = new FileInputStream(imgPath);
 				Image tmpImage = new Image(stream);
 	    		((Shape) tmp.getChildren().get(0)).setFill(new ImagePattern(tmpImage));
+	    		Label tmpLabel = new Label(imgPath);
+	    		tmpLabel.setVisible(false);
+	    		tmp.getChildren().add(tmpLabel);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				System.out.println("File missing");
