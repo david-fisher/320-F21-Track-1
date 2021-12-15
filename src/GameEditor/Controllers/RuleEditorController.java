@@ -76,12 +76,12 @@ public class RuleEditorController {
     private double startX, startY;
     private HashMap<String, Double[]> positions = new HashMap<>();
     
-    private HashMap<Tile, Tile> moveRules = new HashMap<>();
-    private HashMap<Tile, Integer> giveCards = new HashMap<>();
-    private HashMap<Tile, Integer> takeCards = new HashMap<>();
-    private HashMap<Tile, Integer> takePoints = new HashMap<>();
-    private HashMap<Tile, Integer> givePoints = new HashMap<>();
-
+    private HashMap<Tile, ArrayList<Tile>> moveRules = new HashMap<>();
+    private HashMap<Tile, ArrayList<Integer>> giveCards = new HashMap<>();
+    private HashMap<Tile, ArrayList<Integer>> takeCards = new HashMap<>();
+    private HashMap<Tile, ArrayList<Integer>> takePoints = new HashMap<>();
+    private HashMap<Tile, ArrayList<Integer>> givePoints = new HashMap<>();
+    
     @FXML
     private URL location;
 
@@ -141,6 +141,7 @@ public class RuleEditorController {
         }
     }
 
+    //resets the positions of the drag and drop
     @FXML
     void resetPositions()
     {
@@ -160,12 +161,16 @@ public class RuleEditorController {
     {	
     	positions.put(action.getAccessibleText(), new Double[] {action.getTranslateX(), action.getTranslateY()});
         action.setCursor(Cursor.HAND);
+        
+        //when a node is clicjed on 
         action.setOnMousePressed((t) -> {
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
             Node c = (Node) (t.getSource());
             c.toFront();
         });
+        
+        //when the node is dragged
         action.setOnMouseDragged((t) -> {
             double offsetX = t.getSceneX() - orgSceneX;
             double offsetY = t.getSceneY() - orgSceneY;
@@ -176,6 +181,8 @@ public class RuleEditorController {
             orgSceneY = t.getSceneY();
             
         });
+        
+        //when the node is done dragging
         action.setOnMouseReleased((t) -> {
         	if (orgSceneX >385 && orgSceneX<540 && orgSceneY > 155 && orgSceneY <260)
     		{
@@ -196,16 +203,19 @@ public class RuleEditorController {
     void saveButton()
     {	
     	String ruleType = "";
+    	//error checking for no tiles selected
     	if(currentTiles.isEmpty())
     	{
     		invalidTileRule("Oops, please select one or more tiles");
     		return;
     	}
+    	//error checking for invalid number of nodes dragged
     	if(draggedRules.size()!=2)
 		{
     		invalidTileRule("Please drag two options to the rectangle to save the rule");
 	        return;
 		}
+    	//error checking for invalid combination of nodes dragged
     	else
     	{
     		String[] rules = {draggedRules.get(0).getId().toString(), draggedRules.get(1).getId().toString()};
@@ -231,7 +241,7 @@ public class RuleEditorController {
     		String[] rules = {draggedRules.get(0).getId().toString(), draggedRules.get(1).getId().toString()};
     		if(!dialogContent.getItems().contains(rule.getId()))
     		{
-    			//the node is a label or the tile dropdown
+    			//the node is a label or the tile drop down
     		    if (rule.getChildren().size()==1)
     		    {
     		    	if(rule.getChildren().get(0) instanceof Label)
@@ -247,16 +257,19 @@ public class RuleEditorController {
         				{
         					System.out.println(newBoard.tile_findByID(tile).get_id());
             				System.out.println(tileOption.getValue().toString());
-        		    		moveRules.put(newBoard.tile_findByID(tile), newBoard.tile_findByID(tileOption.getValue().toString()));
+            				ArrayList<Tile> value = moveRules.getOrDefault(newBoard.tile_findByID(tile), new ArrayList<Tile>());
+    						value.add(newBoard.tile_findByID(tileOption.getValue().toString()));
+    						moveRules.put(newBoard.tile_findByID(tile), value);
         				}
     		    	}
     		    }
+    		    //get the content of the text field
     			else if(rule.getChildren().get(0) instanceof TextField)
     			{
     				TextField userInput = (TextField) rule.getChildren().get(0);
     				if(userInput.getText()=="") {invalidTileRule("Please provide an input for the text field."); return; }
     				ruleToAdd += userInput.getText() + " " + rule.getChildren().get(1).getAccessibleText();
-    				
+    				//taking or giving points
     				if(rule.getChildren().get(1).getAccessibleText().toString().equals("points"))
     				{
 						for(String tile: currentTiles)
@@ -264,15 +277,20 @@ public class RuleEditorController {
 							//take points
 	    					if(ruleType.equals("takeFromPlayer"))
 	    					{
-	    						takePoints.put(newBoard.tile_findByID(tile), Integer.valueOf(userInput.getText()));
+	    						ArrayList<Integer> value = takePoints.getOrDefault(newBoard.tile_findByID(tile), new ArrayList<Integer>());
+	    						value.add(Integer.valueOf(userInput.getText()));
+	    						takePoints.put(newBoard.tile_findByID(tile), value);
 	    					}
 	    					//give points
 	    					else
 	    					{
-	    						givePoints.put(newBoard.tile_findByID(tile), Integer.valueOf(userInput.getText()));
+	    						ArrayList<Integer> value = givePoints.getOrDefault(newBoard.tile_findByID(tile), new ArrayList<Integer>());
+	    						value.add(Integer.valueOf(userInput.getText()));
+	    						givePoints.put(newBoard.tile_findByID(tile), value);
 	    					}
 						}
     				}
+    				//taking or giving cards
     				else
     				{
     					for(String tile: currentTiles)
@@ -280,18 +298,23 @@ public class RuleEditorController {
 							//take cards
 	    					if(ruleType.equals("takeFromPlayer"))
 	    					{
-	    						takeCards.put(newBoard.tile_findByID(tile), Integer.valueOf(userInput.getText()));
+	    						ArrayList<Integer> value = takeCards.getOrDefault(newBoard.tile_findByID(tile), new ArrayList<Integer>());
+	    						value.add(Integer.valueOf(userInput.getText()));
+	    						takeCards.put(newBoard.tile_findByID(tile), value);
 	    					}
 	    					//give cards
 	    					else
 	    					{
-	    						giveCards.put(newBoard.tile_findByID(tile), Integer.valueOf(userInput.getText()));
+	    						ArrayList<Integer> value = giveCards.getOrDefault(newBoard.tile_findByID(tile), new ArrayList<Integer>());
+	    						value.add(Integer.valueOf(userInput.getText()));
+	    						giveCards.put(newBoard.tile_findByID(tile), value);
 	    					}
 						}
     				}
     			}
     		}
     	}
+    	//add all the rules to the popup
     	for(String tile: currentTiles)
     	{
     		if(!dialogContent.getItems().contains(tile + ": " + ruleToAdd))
@@ -332,11 +355,17 @@ public class RuleEditorController {
     {
     	for(Tile tile: moveRules.keySet())
     	{
-    		tile.addRule(new MoveRule(moveRules.get(tile)));
+    		for(Tile dest: moveRules.get(tile))
+    		{
+        		tile.addRule(new MoveRule(dest));
+    		}
     	}
     	for(Tile tile: giveCards.keySet())
     	{
-    		tile.addRule(new DrawCardRule(giveCards.get(tile)));
+    		for(int number: giveCards.get(tile))
+    		{
+        		tile.addRule(new DrawCardRule(number));
+    		}
     	}
     	for(Tile tile: givePoints.keySet())
     	{
@@ -344,7 +373,6 @@ public class RuleEditorController {
     	}
     	for(Tile tile: takeCards.keySet())
     	{
-    		System.out.println(tile);
     		tile.addRule(new PlayCardRule());
     	}
     	for(Tile tile: takePoints.keySet())
@@ -371,6 +399,7 @@ public class RuleEditorController {
     		}
     	}
     	Dialog<String> addTurnsList = new Dialog<String>();
+    	//error checking for need to select from the list
     	if(turnList.size()==0)
     	{
     		addTurnsList.setTitle("Invalid Turn Rules");
@@ -379,6 +408,7 @@ public class RuleEditorController {
             addTurnsList.getDialogPane().setContentText("The turn list must have at least one rule, please choose an option for at least one dropdown!");
             addTurnsList.showAndWait();
     	}
+    	//show pop up
     	else
     	{
     		String content = "Here is the order of rules the player will follow on their turn: ";
