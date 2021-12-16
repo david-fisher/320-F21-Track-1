@@ -182,7 +182,7 @@ public class inventory {
 
                 StackPane temp = new StackPane();
                 temp.getChildren().add(card.getImage());
-                temp.getChildren().add(new Text("Test Text!"));
+                temp.getChildren().add(new Text("Move 3 Spaces"));
                 temp.setAlignment(Pos.CENTER);
 
                 hBox_card.getChildren().add(temp);
