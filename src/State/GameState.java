@@ -126,6 +126,7 @@ public class GameState {
     ArrayList<Rule> output = new ArrayList<Rule>(input);
     output.addAll(ruleQueue);
     ruleQueue = output;
+    curRule = ruleQueue.get(0);
   }
 
   // Removes and returns the top card from the deck.

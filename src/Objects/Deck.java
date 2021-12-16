@@ -11,11 +11,13 @@ public class Deck extends Savable {
     public Deck() {
         super();
         this.cards = new ArrayList<Card>();
+        resetDeck();
     }
 
     public Deck(ArrayList<Card> cards) {
         super();
         this.cards = cards;
+        resetDeck();
     }
 
     // Unused constructors
@@ -80,14 +82,15 @@ public class Deck extends Savable {
     }
 
     // remove a card from the deck, takes the card that needs removal of as parem
-    public ArrayList<Card> removeCard(Card input) {
-        try {
-            this.cards.remove(this.cards.indexOf(findCardByID(input.get_id())));
-        } catch (Exception e) {
-            System.out.println("Error: Unable to remove target card:");
-            System.out.println(e);
-        }
-        return this.cards;
+    public void removeCard(Card input) {
+        //try {
+            //this.cards.remove(this.cards.indexOf(findCardByID(input.get_id())));
+        // } catch (Exception e) {
+            // System.out.println("Error: Unable to remove target card:");
+            // System.out.println(e);
+        // }
+        // return this.cards;
+        cards.remove(input);
     }
 
     // Clear all cards from deck

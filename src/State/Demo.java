@@ -248,6 +248,7 @@ public class Demo {
 
             choices = gs.progressGame(option);
         }
+        System.out.println(((WinChoice) choices.get(0)).getPlayer().getAttributes().get("name") + " wins!");
         input.close();
     }
 
