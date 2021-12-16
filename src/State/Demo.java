@@ -57,7 +57,9 @@ public class Demo {
         Hashtable<String, String> tile5Attr = new Hashtable<String, String>();
         tile5Attr.put("name", "Tile 5");
         // t5
-        Tile t5 = new Tile(1, 3, null, tile5Attr, -5);
+        ArrayList<Rule> t5Rule = new ArrayList<Rule>();
+        t5Rule.add(new DrawCardRule(1));
+        Tile t5 = new Tile(1, 3, t5Rule, tile5Attr, -5);
 
         Hashtable<String, String> tile6Attr = new Hashtable<String, String>();
         tile6Attr.put("name", "Tile 6");
@@ -203,6 +205,8 @@ public class Demo {
         players.add(new Player(board.getStartTile(), player1Attr));
         players.add(new AIPlayer(board.getStartTile(), aiPlayerAttr));
 
+        players.get(0).getHand().addCard(new Card(4, null));
+
         GameState gs = new GameState(players, board);
 
         ArrayList<Choice> choices = gs.progressGame();
@@ -220,6 +224,7 @@ public class Demo {
             }
 
             System.out.println("Player: " + gs.getCurPlayer().getAttributes().get("name"));
+            System.out.println("Number of cards: " + gs.getCurPlayer().getHand().get().size());
             System.out.println("Current Tile: " + gs.getCurPlayer().getTile().getAttributes().get("name"));
             System.out.println("Total Points: " + gs.getCurPlayer().getScore());
 

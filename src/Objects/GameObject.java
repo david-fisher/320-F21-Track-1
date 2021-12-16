@@ -20,10 +20,7 @@ public class GameObject extends Savable {
     private RNG score;
 
     public GameObject(ArrayList<Rule> rules, int constant) {
-        super();
-        this.x = -1;
-        this.y = -1;
-        this.rules = rules;
+        this(rules, null, constant);
     }
 
     public GameObject(ArrayList<Rule> rules, Hashtable<String, String> attributes, int constant) {
