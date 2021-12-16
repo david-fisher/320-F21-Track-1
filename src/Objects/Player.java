@@ -52,6 +52,10 @@ public class Player extends Savable {
         this.hand.removeCard(card);
     }
 
+    public Hashtable<String, String> getAttributes() {
+        return attributes;
+    }
+
     // Prerequisite: the tile is on the board.
     public void moveTo(Tile tile) {
         this.currentTile = tile;
