@@ -16,9 +16,7 @@ public class MoveChoice extends Choice {
 
   public void execute(GameState state) {
     state.getCurPlayer().moveTo(this.tile);
-    if (tile.getRules() != null && !tile.getRules().isEmpty()) {
-      tile.executeRules(state);
-    }
+    tile.executeRules(state);
   }
 
   public String toString() {

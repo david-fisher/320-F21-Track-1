@@ -214,7 +214,7 @@ public class Demo {
                 continue;
             }
 
-            System.out.println("Choices: ");
+            System.out.println("\nChoices: ");
             for (int i = 0; i < choices.size(); i++) {
                 System.out.println(i + ": " + choices.get(i).toString());
             }

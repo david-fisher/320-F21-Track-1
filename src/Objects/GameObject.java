@@ -180,7 +180,9 @@ public class GameObject extends Savable {
     }
 
     public void executeRules(GameState state) {
-        state.enqueueRules(rules);
+        if (rules != null && !rules.isEmpty()) {
+            state.enqueueRules(rules);
+        }
         state.getCurPlayer().deltaScore(score.randInt());
     }
 
