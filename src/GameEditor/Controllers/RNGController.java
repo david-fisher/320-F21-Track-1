@@ -82,10 +82,6 @@ public class RNGController {
             localStorage.storage.remove("RNG");
         }
         localStorage.storage.put("RNG", vars);
-        if (localStorage.storage.containsKey("RNGnames")) {
-            localStorage.storage.remove("RNGnames");
-        }
-        localStorage.storage.put("RNGnames", map);
         a.setAlertType(Alert.AlertType.INFORMATION);
         a.setContentText("RNG saved");
         a.show();
@@ -157,9 +153,9 @@ public class RNGController {
     public void initialize() {
         if (localStorage.storage.containsKey("RNG")) {
             this.vars = (ArrayList<RNG>) localStorage.storage.get("RNG");
-        }
-        if (localStorage.storage.containsKey("RNGnames")) {
-            this.map = (HashMap<String, RNG>) localStorage.storage.get("RNGnames");
+            for (int i=0; i < this.vars.size(); i++) {
+                this.map.put(this.vars.get(i).get_id(), this.vars.get(i));
+            }
         }
         updateDeckSelection();
         Button b = new Button("Delete RNG");

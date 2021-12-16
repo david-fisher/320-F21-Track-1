@@ -1,6 +1,7 @@
 package GameEditor.Controllers;
 
 import Objects.Board;
+import Objects.RNG;
 import Objects.JSONConverter;
 import Objects.Token;
 import gamePlay.mainMenu.Main;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
@@ -49,6 +51,7 @@ public class GameEditorMainController {
         //save new game
         else {
             Token newGame = new Token(gameName, null, (Board) localStorage.storage.get("board"));
+            ArrayList<RNG> rng = (ArrayList<RNG>) localStorage.storage.get("RNG");
 
             //TODO check if game already exists in database
             new JSONConverter(newGame, "db/" + gameName + ".json").To_JSON();
