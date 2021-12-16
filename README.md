@@ -84,4 +84,4 @@ Maven:
 </dependency>
 ```
 
-Or Check [Official Github](https://github.com/google/gson)!
+Or check the [Official Github](https://github.com/google/gson)!
