@@ -156,5 +156,41 @@ public class Demo {
 
         return new Board(tiles, turnRules, deck);
     }
+
+    public static void main(String[] args) {
+        Board board = new Demo().getBoard();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+
+        Hashtable<String, String> player1Attr = new Hashtable<String, String>();
+        player1Attr.put("name", "Player 1");
+        Hashtable<String, String> aiPlayerAttr = new Hashtable<String, String>();
+        aiPlayerAttr.put("name", "Bot");
+        
+        players.add(new Player(board.getStartTile(), player1Attr));
+        players.add(new AIPlayer(board.getStartTile(), aiPlayerAttr));
+
+        GameState gs = new GameState(players, board);
+        
+        List<Choice> choices = gs.progressGame();
+        Scanner input = new Scanner(System.in);
+
+        while (!(choices.get(0) instanceof WinChoice)) {
+        
+            System.out.println("Choices: ");
+            for (int i = 0; i < choices.size(); i++) {
+                System.out.println(i + ": " + choices.get(i).toString());
+            }
+            
+            // System.out.println("Total Points: " + gs.getCurPlayer().ge);
+            System.out.println("Total Points: " + gs.getCurPlayer().getScore());
+
+            int option = input.nextInt();
+            
+            choices = gs.progressGame(option);
+        }
+        input.close();
+    }
+
 }
 
