@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="130.0" tabMaxWidth="70.0" tabMinHeight="130.0" tabMinWidth="70.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.CustomTokenController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="130.0" tabMaxWidth="70.0" tabMinHeight="130.0" tabMinWidth="70.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.CustomTokenController">
     <tabs>
         <Tab>
             <graphic>
@@ -85,16 +77,30 @@
                                     <Font size="11.0" />
                                  </font>
                               </Button>
-                              <Label layoutX="30.0" layoutY="55.0" prefHeight="83.0" prefWidth="160.0" text="Quantity given to player:" wrapText="true" />
-                              <TextField fx:id="qtyField" layoutX="190.0" layoutY="84.0" prefHeight="26.0" prefWidth="43.0" />
-                              <Label layoutX="30.0" layoutY="138.0" prefHeight="23.0" prefWidth="137.0" text="Token Type:" underline="true" wrapText="true">
+                              <Button layoutX="28.0" layoutY="180.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="87.0" text="Change Image" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Button>
+                              <Pane layoutX="15.0" layoutY="59.0" prefHeight="112.0" prefWidth="112.0" style="-fx-border-color: #000000;">
+                                 <children>
+                                    <ImageView fitHeight="106.0" fitWidth="106.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Label layoutX="153.0" layoutY="51.0" prefHeight="83.0" prefWidth="83.0" text="Quantity given to player:" wrapText="true">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
                               </Label>
-                              <CheckBox fx:id="playMoneyCheckBox" layoutX="41.0" layoutY="161.0" mnemonicParsing="false" onAction="#setPlayMoney" prefHeight="18.0" prefWidth="138.0" text="Play Money" />
-                              <CheckBox fx:id="miscCheckBox" layoutX="41.0" layoutY="219.0" mnemonicParsing="false" onAction="#setMiscToken" prefHeight="40.0" prefWidth="202.0" text="Miscellaneous Token" wrapText="true" />
-                              <Pane fx:id="valuePane" layoutX="116.0" layoutY="179.0" prefHeight="30.0" prefWidth="126.0">
+                              <TextField fx:id="qtyField" layoutX="243.0" layoutY="83.0" prefHeight="26.0" prefWidth="43.0" />
+                              <Label layoutX="150.0" layoutY="137.0" prefHeight="23.0" prefWidth="137.0" text="Token Type:" underline="true" wrapText="true">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="playMoneyCheckBox" layoutX="153.0" layoutY="162.0" mnemonicParsing="false" onAction="#setPlayMoney" prefHeight="18.0" prefWidth="138.0" text="Play Money" />
+                              <CheckBox fx:id="miscCheckBox" layoutX="153.0" layoutY="219.0" mnemonicParsing="false" onAction="#setMiscToken" prefHeight="40.0" prefWidth="116.0" text="Miscellaneous Token" wrapText="true" />
+                              <Pane fx:id="valuePane" layoutX="165.0" layoutY="181.0" prefHeight="30.0" prefWidth="126.0">
                                  <children>
                                     <Label layoutX="10.0" layoutY="3.0" prefHeight="23.0" prefWidth="58.0" text="Value:" wrapText="true">
                                        <font>
