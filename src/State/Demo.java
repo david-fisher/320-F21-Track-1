@@ -113,7 +113,7 @@ public class Demo {
         tiles.add(t14);
 
         ArrayList<Rule> turnRules = new ArrayList<Rule>();
-        turnRules.add(new MoveRule(new RNG(new int[] {0, 3})));
+        turnRules.add(new MoveRule(new RNG(new int[] {1, 3})));
         turnRules.add(new PlayCardRule());
                 
         Deck deck = new Deck();
