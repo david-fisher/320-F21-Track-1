@@ -1,5 +1,6 @@
 package gamePlay.boardGrid;
 
+import State.GameState;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
