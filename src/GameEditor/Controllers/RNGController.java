@@ -118,6 +118,7 @@ public class RNGController {
                 break;
             case "Cards":
                 String selectedDeck = (String)Decks.getSelectionModel().getSelectedItem();
+                // deck based RNG was not implemented by the Object Models team
 //                RNG rng1 = new RNG(name, ids.getVal(selectedDeck));
 //                vars.add(rng1);
 //                map.put(name, rng1);
