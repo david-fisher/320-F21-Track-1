@@ -115,6 +115,10 @@ public class GameObject extends Savable {
     public int[] getScore() {
         return this.score.getRange();
     }
+    
+    public void setScore(RNG score) {
+		this.score = score;
+	}
 
     public ArrayList<Integer> getCoordinate() {
         ArrayList<Integer> result = new ArrayList<Integer>();
