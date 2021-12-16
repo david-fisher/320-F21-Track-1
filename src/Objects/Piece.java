@@ -27,17 +27,7 @@ public class Piece extends GameObject {
         this.image = image;
     }
 
-<<<<<<< HEAD:Objects/src/main/java/objects/Piece.java
-    // card constructor, does not have coordination attributes 
-    Piece(ArrayList<Rule> rules, Hashtable<String,String> attributes, ImageView image){
-        super(rules, attributes);
-        this.image = image;
-    }
-    
-    public ImageView update_image(ImageView image){
-=======
     public ImageView update_image(ImageView image) {
->>>>>>> main:src/Objects/Piece.java
         this.image = image;
         return this.image;
     }
