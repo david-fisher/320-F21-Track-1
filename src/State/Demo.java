@@ -68,7 +68,7 @@ public class Demo {
         tile7Attr.put("name", "Tile 7");
         // t7
         ArrayList<Rule> t7Rule = new ArrayList<Rule>();
-        t7Rule.add(new MoveRule(new RNG(new int[] { 0, 3 })));
+        t7Rule.add(new MoveRule(new RNG(new int[] { 1, 3 })));
         Tile t7 = new Tile(3, 3, t7Rule, tile7Attr, 7);
 
         Hashtable<String, String> tile8Attr = new Hashtable<String, String>();
