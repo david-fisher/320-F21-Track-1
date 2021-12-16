@@ -21,20 +21,20 @@ public class Card extends GameObject {
     this(0, image);
   }
 
-  public Card(ArrayList<Rule> rules, ImageView image) {
+  public Card(boolean rules, ImageView image) {
     this(rules, 0, image);
   }
 
   public Card(int constant, ImageView image) {
-    this(new ArrayList<Rule>(), constant, image);
+    this(new ArrayList<Rule>(), new int[]{constant}, image);
   }
 
   public Card(int[] range, ImageView image) {
     this(new ArrayList<Rule>(), range, image);
   }
 
-  public Card(ArrayList<Rule> rules, int constant, ImageView image) {
-    super(rules, constant);
+  public Card(boolean rules, int constant, ImageView image) {
+    super(rules, new int[]{constant});
     this.image = image;
   }
 

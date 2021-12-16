@@ -152,7 +152,7 @@ public class Demo {
         deck.addCard(new Card(50, new ImageView()));
 
         // Add card that gives you 2 more cards but subtracts 10 points
-        deck.addCard(new Card(new ArrayList<Rule>().add(new DrawCardRule(2)), -10, new ImageViewer()));
+        deck.addCard(new Card(new ArrayList<Rule>().add(new DrawCardRule(2)), -10, new ImageView()));
 
         return new Board(tiles, turnRules, deck);
     }
