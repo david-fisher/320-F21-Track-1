@@ -1,11 +1,12 @@
 package GameEditor;
 
+import Objects.Deck;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.UUID;
 
 public final class DeckIds {
-    private Hashtable<UUID, String> DeckIds = new Hashtable<UUID, String>();
+    private Hashtable<String, Deck> DeckIds = new Hashtable<String, Deck>();
     private final static DeckIds INSTANCE = new DeckIds();
 
     private DeckIds() {}
@@ -14,21 +15,23 @@ public final class DeckIds {
         return INSTANCE;
     }
 
-    public UUID addId(String u) {
-        if (this.DeckIds.containsValue(u)) {
-            return null;
+    public void addId(String u, Deck obj) {
+        if (this.DeckIds.containsKey(u)) {
+            this.DeckIds.remove(u);
         }
-        UUID temp = UUID.randomUUID();
-        this.DeckIds.put(temp, u);
-        return temp;
+        this.DeckIds.put(u, obj);
+        return;
     }
 
-    public void changeId(UUID id, String newId) {
-        this.DeckIds.remove(id);
-        this.DeckIds.put(id, newId);
+    public void remove(String u) {
+        this.DeckIds.remove(u);
     }
 
     public ArrayList<String> Values() {
-        return new ArrayList<String>(this.DeckIds.values());
+        return new ArrayList<String>(this.DeckIds.keySet());
+    }
+
+    public Deck getVal(String id) {
+        return this.DeckIds.get(id);
     }
 }
