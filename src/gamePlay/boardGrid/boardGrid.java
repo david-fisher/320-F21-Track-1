@@ -3,11 +3,17 @@ package gamePlay.boardGrid;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import gamePlay.preGame.playerSelect;
+import Objects.*;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
+
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class boardGrid {
@@ -17,6 +23,7 @@ public class boardGrid {
     private static boardScore currentScore;
     private static turns currentTurn;
     private static ArrayList<String> playerList;
+    private static final ArrayList<Color> colors = new ArrayList<Color>(Arrays.asList(Color.ORANGE, Color.AQUA, Color.PINK,Color.GREEN));
 
     // load an arraylist to the grid
     private static void loadGrid(Stage primaryStage, ArrayList<ArrayList<boardCell>> table){
@@ -36,6 +43,18 @@ public class boardGrid {
                 );
                 setDrag(table.get(i).get(j));
             }
+        }
+    }
+
+    public static void updateBoard(List<Player> players) {
+
+        for (int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+            Tile tile = player.getTile();
+            //board.getChildren().remove(tile.get_x(),tile.get_y());
+            Rectangle rect = new Rectangle(80,80);
+            rect.setFill(colors.get(i % 4));
+            board.add(rect,tile.getX(),tile.getY());
         }
     }
 
