@@ -1,6 +1,7 @@
 package State;
 
 import Objects.*;
+import GameEditor.Controllers.*;
 
 import java.util.*;
 
@@ -190,6 +191,16 @@ public class Demo {
         return b;
     }
 
+    public Board getBoardFromStorage() {
+        Board gameBoard = new Board();
+		LocalStorage localStorage = LocalStorage.getInstance();
+        if(localStorage.storage.containsKey("board"))
+        {
+            gameBoard = (Board) localStorage.storage.get("board");
+        }
+        return gameBoard;
+    }
+    
     public static void main(String[] args) {
         Board board = new Demo().getBoard();
         board.setWinCondition(50);
