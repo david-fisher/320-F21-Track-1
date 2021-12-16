@@ -23,10 +23,6 @@ public class Demo {
         *     ^        v        |       v
         *   [t11] <- [t10] <- [t9] <- [t8]            
          */
-        */ 
-         */
-        */ 
-         */
 
         ArrayList<Tile> tiles = new ArrayList<Tile>();
         // ADD TILES TO BOARD  |
