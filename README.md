@@ -1,5 +1,7 @@
 # 320-F21-Track-1
 
+A simple board game editor, engine, and player written in Java by Track 1 of [David Fisher's](https://people.cs.umass.edu/~dfisher/) fall 2021 CS320 course taught at The University of Massachusetts Amherst.
+
 ## Teams
 
 -   [Omnicron](https://github.com/david-fisher/320-F21-Track-1/wiki/Team-Omnicron-Wiki)
@@ -16,6 +18,10 @@
 ## What is a Game Editor/Engine?
 
 A game editor and engine provide tools and an interface for a user to create video games with.
+
+## What is a Game Player
+
+A game player allows a user to run a created game and interact with it through a GUI.
 
 ## Structure
 
