@@ -37,6 +37,10 @@ A game player allows a user to run a created game and interact with it through a
 
 ## Setup
 
+### Requirements
+-   Java 17
+-   Javafx
+
 ### General Installation Guidelines
 
 1. Clone 320-F21-Track-1 from its [GitHub repo](https://github.com/david-fisher/320-F21-Track-1).
@@ -48,19 +52,17 @@ A game player allows a user to run a created game and interact with it through a
 
 ### Linux Specific Installation
 
-Java 17\
-Javafx
-
+##### Install openjdk-17-jre
 ```bash
 sudo apt-get install openjdk-17-jre
 ```
 
-zip the jar file
+-   Zip the jar file
 
 ### Mac Specific Installation
+For installation, we will be using [Homebrew](https://brew.sh).  
 
-Java 17 installation
-
+##### Install adoptopenjdk17
 ```bash
 brew install --cask adoptopenjdk17
 ```
