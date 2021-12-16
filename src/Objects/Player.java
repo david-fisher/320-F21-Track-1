@@ -2,7 +2,7 @@ package Objects;
 
 import java.util.Hashtable;
 
-public class Player extends Saveable {
+public class Player extends Savable {
     private int score;
     private Tile currentTile;
     private Deck hand;

@@ -5,6 +5,7 @@ import java.util.*;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
+// Do not touch, helper for saving
 public class TokenDeserializer implements JsonDeserializer<Token> {
 
 	@Override
