@@ -94,12 +94,12 @@
                         </Button>
                      </children>
                   </Pane>
-                  <Label alignment="CENTER" layoutX="115.0" layoutY="242.0" prefHeight="26.0" prefWidth="89.0" text="Deck Color:" wrapText="true">
+                  <Label alignment="CENTER" layoutX="115.0" layoutY="242.0" prefHeight="26.0" prefWidth="89.0" text="Deck Color:" visible="false" wrapText="true">
                      <font>
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="colorDropDown" layoutX="204.0" layoutY="242.0" onDragDetected="#setColorVisuals" prefHeight="26.0" prefWidth="67.0" />
+                  <ChoiceBox fx:id="colorDropDown" layoutX="204.0" layoutY="242.0" onDragDetected="#setColorVisuals" prefHeight="26.0" prefWidth="67.0" visible="false" />
                </children>
             </Pane>
          </children>
