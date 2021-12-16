@@ -5,9 +5,11 @@ import Objects.*;
 public class DrawCardChoice extends Choice {
   private Deck deck;
   private int amount;
+  private Player player;
 
-  public DrawCardChoice(Deck deck, int amount) {
+  public DrawCardChoice(Deck deck, int amount, Player player) {
     super();
+    this.player = player;
     this.deck = deck;
     this.amount = amount;
   }
@@ -22,7 +24,7 @@ public class DrawCardChoice extends Choice {
 
   public void execute(GameState state) {
     for (int i = 0; i < amount; i++) {
-      state.getCurPlayer().addCard(state.popDeck());
+      player.addCard(state.popDeck());
     }
   }
 

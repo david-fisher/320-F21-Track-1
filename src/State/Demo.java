@@ -240,9 +240,12 @@ public class Demo {
         player1Attr.put("name", "Player 1");
         Hashtable<String, String> player2Attr = new Hashtable<String, String>();
         player2Attr.put("name", "Player 2");
+        Hashtable<String, String> AIPlayerAttr = new Hashtable<String, String>();
+        AIPlayerAttr.put("name", "Bot");
 
         players.add(new Player(board.getStartTile(), player1Attr));
         players.add(new Player(board.getStartTile(), player2Attr));
+        players.add(new AIPlayer(board.getStartTile(), AIPlayerAttr));
 
         GameState gs = new GameState(players, board);
 

@@ -14,7 +14,7 @@ public class DrawCardRule extends Rule {
   }
 
   public void execute(GameState state) {
-    state.addChoice(new DrawCardChoice(state.getDeck(), repeat));
+    state.addChoice(new DrawCardChoice(state.getDeck(), repeat, state.getCurPlayer()));
   }
 
   public String prettyPrint() {
