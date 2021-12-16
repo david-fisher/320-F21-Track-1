@@ -13,9 +13,11 @@ import gamePlay.loadSave.saveGame;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Objects.*;
+import State.*;
 public class gamePlayUI {
 
-    public static Scene makeScene(Stage primaryStage, ArrayList<String> players, ArrayList<ArrayList<StackPane>> stackTable) {
+    public static Scene makeScene(Stage primaryStage, ArrayList<String> players, ArrayList<ArrayList<StackPane>> stackTable, GameState state) {
 
         ScrollPane scrollView = new ScrollPane();
         BorderPane mainScene = new BorderPane();

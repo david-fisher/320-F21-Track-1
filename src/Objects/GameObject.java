@@ -4,7 +4,6 @@ import State.GameState;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 
 // general class for a game object such as a game piece or a tile
 public class GameObject extends Savable {
@@ -19,11 +18,11 @@ public class GameObject extends Savable {
     private ArrayList<Rule> rules;
     private RNG score;
 
-    public GameObject(ArrayList<Rule> rules, int constant) {
+    public GameObject(boolean rules, int[] constant) {
         super();
         this.x = -1;
         this.y = -1;
-        this.rules = rules;
+//        this.rules = rules;
     }
 
     public GameObject(ArrayList<Rule> rules, Hashtable<String, String> attributes, int constant) {

@@ -24,7 +24,7 @@ public class boardScene {
         playerList.add("Fisher");
         playerList.add("Marius");
 
-        Scene scene = gamePlayUI.makeScene(stage, playerList, stackTable);
-        return scene;
+//        Scene scene = gamePlayUI.makeScene(stage, playerList, stackTable);
+          return null;
     }
 }
