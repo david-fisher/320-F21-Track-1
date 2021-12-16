@@ -4,6 +4,7 @@ import State.GameState;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 // general class for a game object such as a game piece or a tile
 public class GameObject extends Saveable {
@@ -189,5 +190,24 @@ public class GameObject extends Saveable {
 
     public Rule findByID(String ID) {
         return this.rules.stream().filter(rule -> rule.get_id() == ID).findFirst().orElse(null);
+    }
+
+    public String prettyPrint() {
+        String description = "";
+
+        for (Rule rule : this.rules) {
+            description.concat(rule.prettyPrint() + "\n");
+        }
+
+        int[] range = this.score.getRange();
+        if (range[0] != 0 || range[1] != 0) {
+            if (range[0] == range[1]) {
+                description.concat("Give the player " + range[0] + " points.");
+            } else {
+                description.concat("Give the player between " + range[0] + " and " + range[1] + " points.");
+            }
+        }
+
+        return description;
     }
 }

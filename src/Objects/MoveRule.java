@@ -15,7 +15,7 @@ public class MoveRule extends Rule {
     this.stepCount = null;
     this.destinations.add(destination);
   }
-  
+
   public MoveRule(RNG stepCount) {
     super();
     this.stepCount = stepCount;
@@ -34,6 +34,15 @@ public class MoveRule extends Rule {
     destinations.forEach(tile -> state.addChoice(new MoveChoice(tile)));
     if (destinations.size() == 0) {
       state.addChoice(new PassChoice());
+    }
+  }
+
+  public String prettyPrint() {
+    int[] range = stepCount.getRange();
+    if (range[0] == range[1]) {
+      return "Move " + range[0] + " spaces.";
+    } else {
+      return "Move " + range[0] + " - " + range[1] + " spaces";
     }
   }
 }
