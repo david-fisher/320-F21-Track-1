@@ -18,7 +18,7 @@ public class GameObject extends Savable {
     private ArrayList<Rule> rules;
     private RNG score;
 
-    public GameObject(ArrayList<Rule> rules, int constant) {
+	public GameObject(ArrayList<Rule> rules, int constant) {
         super();
         this.x = -1;
         this.y = -1;
@@ -118,6 +118,10 @@ public class GameObject extends Savable {
     public int[] getScore() {
         return this.score.getRange();
     }
+    
+    public void setScore(RNG score) {
+		this.score = score;
+	}
 
     public ArrayList<Integer> getCoordinate() {
         ArrayList<Integer> result = new ArrayList<Integer>();
@@ -185,5 +189,24 @@ public class GameObject extends Savable {
 
     public Rule findByID(String ID) {
         return this.rules.stream().filter(rule -> rule.get_id() == ID).findFirst().orElse(null);
+    }
+
+    public String prettyPrint() {
+        String description = "";
+
+        for (Rule rule : this.rules) {
+            description.concat(rule.prettyPrint() + "\n");
+        }
+
+        int[] range = this.score.getRange();
+        if (range[0] != 0 || range[1] != 0) {
+            if (range[0] == range[1]) {
+                description.concat("Give the player " + range[0] + " points.");
+            } else {
+                description.concat("Give the player between " + range[0] + " and " + range[1] + " points.");
+            }
+        }
+
+        return description;
     }
 }

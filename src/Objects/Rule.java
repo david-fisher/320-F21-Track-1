@@ -9,4 +9,6 @@ public abstract class Rule extends Savable {
     }
 
     public abstract void execute(GameState state);
+
+    public abstract String prettyPrint();
 }

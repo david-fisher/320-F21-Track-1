@@ -6,6 +6,10 @@ import State.*;
 
 public class AIPlayer extends Player {
 
+  public AIPlayer(Hashtable<String, String> attributes) {
+    super(attributes);
+  }
+
   public AIPlayer(Tile startPos, Hashtable<String, String> attributes) {
     super(startPos, attributes);
   }

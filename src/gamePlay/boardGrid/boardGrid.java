@@ -1,13 +1,20 @@
 package gamePlay.boardGrid;
 
+import State.GameState;
 import javafx.collections.ObservableList;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import gamePlay.preGame.playerSelect;
+import Objects.*;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
+
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class boardGrid {
@@ -17,6 +24,7 @@ public class boardGrid {
     private static boardScore currentScore;
     private static turns currentTurn;
     private static ArrayList<String> playerList;
+    private static final ArrayList<Color> colors = new ArrayList<>();
 
     // load an arraylist to the grid
     private static void loadGrid(Stage primaryStage, ArrayList<ArrayList<boardCell>> table){
@@ -60,6 +68,7 @@ public class boardGrid {
                 currentCell.loadCellImage(i % 2 == 0? "src/gamePlay/images/fish.jpeg": "src/gamePlay/images/marius.jpeg");
                 currentCell.setIndex(i + j * width + 1);
                 currentRow.add(currentCell);
+
             }
             cellTable.add(currentRow);
         }
@@ -93,6 +102,34 @@ public class boardGrid {
                     x,
                     y
             );
+        }
+    }
+
+    /*
+    Will move whatever is in the top of the stackpane to another location
+    */
+    public static void movePiece(int origX, int origY, int destX, int destY){
+        StackPane origin = getBoardCell(origX, origY);
+        StackPane destination = getBoardCell(destX, destY);
+        destination.getChildren().addAll(origin.getChildren().get(1));
+    }
+    //Add initial pieces to the board
+    public static void addInitialPlayers(List<Player> players) {
+        for (int i = 0; i < 5; i++) {
+            colors.add(Color.ORANGE);
+            colors.add(Color.AQUA);
+            colors.add(Color.PINK);
+            colors.add(Color.GREEN);
+            colors.add(Color.MAGENTA);
+            colors.add(Color.WHITE);
+        }
+        for (int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+            Tile tile = player.getTile();
+            StackPane destination = getBoardCell(tile.getX(), tile.getY());
+            Rectangle rect = new Rectangle(80,80);
+            rect.setFill(colors.get(i % 5));
+            destination.getChildren().addAll(rect);
         }
     }
 
@@ -188,9 +225,10 @@ public class boardGrid {
         loadGrid(primaryStage, stackToCell(cellTable));   // load from a 2d array
 
         // testing update board cell
-        StackPane a = getBoardCell(3, 3);
-        a.getChildren().remove(0, 2);
-        a.getChildren().addAll(getBoardCell(1, 0).getChildren());
+//        StackPane a = getBoardCell(3, 3);
+//        a.getChildren().remove(0, 2);
+//        a.getChildren().addAll(getBoardCell(1, 0).getChildren());
+        //movePiece(3, 3, 4, 4);
 
         return board;
     }

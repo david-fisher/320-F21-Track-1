@@ -25,7 +25,7 @@ public class CustomTokenController {
     @FXML
     private ListView tokensList;
     @FXML
-    private Button newCustTokenButton, editButton, deleteButton, saveButton, cancelButton;
+    private Button newCustTokenButton, editButton, deleteButton, saveButton, cancelButton, saveAllButton;
     @FXML
     private CheckBox playMoneyCheckBox, miscCheckBox;
 
@@ -48,6 +48,15 @@ public class CustomTokenController {
         numTokens = 0;
         tokenStorage = new ArrayList<TempToken>();
         isEditing = false;
+        valuePane.setDisable(true);
+        miscCheckBox.setSelected(true);             //by default, all tokens are miscellaneous tokens
+        playMoneyCheckBox.setDisable(true);
+    }
+
+    // IMPORTANT: This method saves all created tokens to the entire game
+    @FXML
+    void saveAllTokens() {
+        //Make pop-up indicating all tokens have been saved
     }
 
     @FXML
@@ -79,14 +88,22 @@ public class CustomTokenController {
                     if ((tokenStorage.get(i).getId() - 1) == editIdx) {
                         tokenToEdit = tokenStorage.get(i);
                     }
-
-                    editorPane.setVisible(true);
-                    nameField.setText(tokenToEdit.getName());
-                    qtyField.setText(Integer.toString(tokenToEdit.getQty()));
-                    //image stuff
-                    //checkbox stuff
-                    isEditing = true;
                 }
+
+                editorPane.setVisible(true);
+                nameField.setText(tokenToEdit.getName());
+                qtyField.setText(Integer.toString(tokenToEdit.getQty()));
+                //image stuff here
+                if (tokenToEdit.isPlayMoney()) {
+                    playMoneyCheckBox.setSelected(true);
+                    valuePane.setDisable(false);
+                    valueField.setText(Integer.toString(tokenToEdit.getValue()));
+                }
+                if (tokenToEdit.isMiscToken()) {
+                    miscCheckBox.setSelected(true);
+                }
+
+                isEditing = true;
             }
         }
 
@@ -94,12 +111,27 @@ public class CustomTokenController {
 
     @FXML
     void setPlayMoney() {
-
+        if (playMoneyCheckBox.isSelected()) {
+            valuePane.setDisable(false);
+            miscCheckBox.setDisable(true);
+        }
+        else {
+            valuePane.setDisable(true);
+            valueField.clear();
+            miscCheckBox.setDisable(false);
+        }
     }
 
     @FXML
     void setMiscToken() {
-
+        if (miscCheckBox.isSelected()) {
+            valuePane.setDisable(true);
+            playMoneyCheckBox.setDisable(true);
+            valueField.clear();
+        }
+        else {
+            playMoneyCheckBox.setDisable(false);
+        }
     }
 
     @FXML
@@ -111,13 +143,33 @@ public class CustomTokenController {
         /* Save edits to EXISTING token */
         if (isEditing) {
             int editIdx = tokensList.getSelectionModel().getSelectedIndex();
-
             names.set(editIdx, nameField.getText());
+
+            TempToken tokenToEdit = null;
+            for (int i = 0; i < tokenStorage.size(); i++) {
+                if ((tokenStorage.get(i).getId() - 1) == editIdx) {
+                    tokenToEdit = tokenStorage.get(i);
+                }
+            }
+
+            //save edits to the temp token
+            tokenToEdit.setName(nameField.getText());
+            tokenToEdit.setQty(Integer.parseInt(qtyField.getText()));
+            if (playMoneyCheckBox.isSelected()) {
+                tokenToEdit.setPlayMoney(true);
+                tokenToEdit.setValue(Integer.parseInt(valueField.getText()));
+            }
+            else {
+                tokenToEdit.setMiscToken(true);
+            }
+
             editorPane.setVisible(false);
             nameField.clear();
             qtyField.clear();
             //image stuff
-            //checkbox stuff
+            playMoneyCheckBox.setSelected(false);
+            valuePane.setDisable(true);
+            valueField.clear();
             isEditing = false;
         }
         /* Save NEW token */
@@ -125,12 +177,26 @@ public class CustomTokenController {
             numTokens++;
             names.add(nameField.getText());     //add to list view
             //TODO: assign visuals to new TempToken object
-            TempToken t = new TempToken(numTokens, nameField.getText(), null, Integer.parseInt(qtyField.getText()));
+
+            int value = 0;
+            if (valueField.getText().isEmpty()) {
+                value = -1;
+            }
+            else {
+                value = Integer.parseInt(valueField.getText());
+            }
+
+            TempToken t = new TempToken(numTokens, nameField.getText(), null, Integer.parseInt(qtyField.getText()),
+                                        playMoneyCheckBox.isSelected(), value, miscCheckBox.isSelected());
             tokenStorage.add(t);
 
             editorPane.setVisible(false);
             nameField.clear();
             qtyField.clear();
+            playMoneyCheckBox.setSelected(false);
+            valuePane.setDisable(true);
+            valueField.clear();
+            miscCheckBox.setSelected(true);
         }
     }
 
@@ -147,7 +213,11 @@ public class CustomTokenController {
         nameField.clear();
         qtyField.clear();
         //image stuff
-        //checkbox stuff
+        playMoneyCheckBox.setSelected(false);
+        playMoneyCheckBox.setDisable(true);
+        valuePane.setDisable(true);
+        valueField.clear();
+        miscCheckBox.setSelected(true);
     }
 
     @FXML
@@ -170,13 +240,19 @@ class TempToken {
     String name;
     ImageView visuals;
     int qty;
+    boolean playMoney;
+    int value;
+    boolean miscToken;
 
 
-    TempToken(int id, String name, ImageView visuals, int qty) {
+    TempToken(int id, String name, ImageView visuals, int qty, boolean playMoney, int value, boolean miscToken) {
         this.id = id;
         this.name = name;
         this.visuals = visuals;
         this.qty = qty;
+        this.playMoney = playMoney;
+        this.value = value;
+        this.miscToken = miscToken;
     }
 
     public void setName(String newName) {
@@ -189,6 +265,18 @@ class TempToken {
 
     public void setQty(int newQty) {
         qty = newQty;
+    }
+
+    public void setPlayMoney(boolean isPlay) {
+        playMoney = isPlay;
+    }
+
+    public void setValue(int val) {
+        value = val;
+    }
+
+    public void setMiscToken(boolean isMisc) {
+        miscToken = isMisc;
     }
 
     public int getId() {
@@ -205,6 +293,18 @@ class TempToken {
 
     public int getQty() {
         return qty;
+    }
+
+    public boolean isPlayMoney() {
+        return playMoney;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public boolean isMiscToken() {
+        return miscToken;
     }
 }
 

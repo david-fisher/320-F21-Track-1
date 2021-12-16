@@ -14,7 +14,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.Objects;
+
+import Objects.*;
+import State.*;
 
 public class playerSelect {
     private static Integer number;  // total number of players
@@ -27,6 +32,8 @@ public class playerSelect {
     private static Label warn;
     private static boolean forward = false;
     private static ArrayList<selectSwitch> aiSwitches = new ArrayList<>();
+    private static Hashtable<String, String> allPlayers = new Hashtable<>();
+    private static List<Player> playersList = new ArrayList<Player>();
 
     public playerSelect(){
         number = 0;
@@ -166,21 +173,29 @@ public class playerSelect {
         submitButton.setOnAction((event -> {
 
             warn.setVisible(false);
-
             for (int i = 0; i < inputList.size(); i++){
                 String currentName = inputList.get(i).getText();
                 nameList.add(currentName.isEmpty()? null : currentName);
                 boolean a = aiSwitches.get(i).switchState();
+                if (a == true) {
+                    allPlayers.put("name", inputList.get(i).getText());
+                    AIPlayer ai = new AIPlayer(allPlayers);
+                    playersList.add(ai);
+                }
+                else {
+                    allPlayers.put("name", inputList.get(i).getText());
+                    Player player = new Player(allPlayers);
+                    playersList.add(player);
+                }
                 AIList.add(aiSwitches.get(i).switchState());
             }
-
             for (int i = 0; i < inputList.size(); i++) {     // test printing call
                 System.out.println(inputList.get(i).getText());
                 System.out.print(AIList.get(i)? " I want AI" : " No AI");
             }
-
+            GameState startingBoard = GameManager.startGame(playersList);
             primaryStage.centerOnScreen();
-            primaryStage.setScene(gamePlay.boardGrid.gamePlayUI.makeScene(primaryStage, nameList, boardTable));
+            primaryStage.setScene(gamePlay.boardGrid.gamePlayUI.makeScene(primaryStage, nameList, boardTable, startingBoard));
         }));
 
         root.addRow(root.getRowCount(), backButton, new Label(), submitButton);
