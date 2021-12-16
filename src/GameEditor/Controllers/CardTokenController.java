@@ -202,6 +202,7 @@ public class CardTokenController {
         if (e.getSource() == editCardButton) {
             int deckIdx = 0;
             if (isEditingDeck) { deckIdx = deckList.getSelectionModel().getSelectedIndex(); }   //if editing a deck right now
+            else if ( numDecks == 0 ) { deckIdx = 0; }
             else { deckIdx = numDecks--; }
 
             //Find index of card we are editing
@@ -276,6 +277,7 @@ public class CardTokenController {
         else {
             int deckIdx = 0;
             if (isEditingDeck) { deckIdx = deckList.getSelectionModel().getSelectedIndex(); }   //if editing a deck right now
+            else if ( numDecks == 0 ) { deckIdx = 0; }
             else { deckIdx = numDecks--; }
 
             cardAmt[deckIdx]++;
@@ -295,15 +297,24 @@ public class CardTokenController {
 
     @FXML
     void deleteCard() {
-        int deckIdx = 0;
-        if (isEditingDeck) { deckIdx = deckList.getSelectionModel().getSelectedIndex(); }   //if editing a deck right now
-        else { deckIdx = numDecks--; }
+        if (cardList.getSelectionModel().getSelectedIndex() != -1) {
+            int deckIdx = 0;
+            if (isEditingDeck) {
+                deckIdx = deckList.getSelectionModel().getSelectedIndex();
+            }   //if editing a deck right now
+            else if (numDecks == 0) {
+                deckIdx = 0;
+            } else {
+                deckIdx = numDecks--;
+            }
 
-        int deleteIdx = cardList.getSelectionModel().getSelectedIndex();
+            int deleteIdx = cardList.getSelectionModel().getSelectedIndex();
 
-        cardStorage.get(deckIdx).remove(deleteIdx); //clear cards of deck
-        cardList.getItems().remove(deleteIdx);
-        namesStorage.get(deckIdx).remove(deleteIdx);
+            cardStorage.get(deckIdx).remove(deleteIdx); //clear cards of deck
+            cardList.getItems().remove(deleteIdx);
+            namesStorage.get(deckIdx).remove(deleteIdx);
+            cardEditorPane.setVisible(false);
+        }
     }
 }
 
