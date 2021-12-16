@@ -209,11 +209,11 @@ public class Demo {
 
         Hashtable<String, String> player1Attr = new Hashtable<String, String>();
         player1Attr.put("name", "Player 1");
-        Hashtable<String, String> aiPlayerAttr = new Hashtable<String, String>();
-        aiPlayerAttr.put("name", "Bot");
+        Hashtable<String, String> player2Attr = new Hashtable<String, String>();
+        player2Attr.put("name", "Player 2");
 
         players.add(new Player(board.getStartTile(), player1Attr));
-        players.add(new AIPlayer(board.getStartTile(), aiPlayerAttr));
+        players.add(new Player(board.getStartTile(), player2Attr));
 
         players.get(0).getHand().addCard(new Card(4, null));
 
@@ -228,15 +228,16 @@ public class Demo {
                 continue;
             }
 
+
+            System.out.println("\nPlayer: " + gs.getCurPlayer().getAttributes().get("name"));
+            System.out.println("Current Tile: " + gs.getCurPlayer().getTile().getAttributes().get("name"));
+            System.out.println("Number of cards: " + gs.getCurPlayer().getHand().get().size());
+            System.out.println("Total Points: " + gs.getCurPlayer().getScore());
+
             System.out.println("\nChoices: ");
             for (int i = 0; i < choices.size(); i++) {
                 System.out.println(i + ": " + choices.get(i).toString());
             }
-
-            System.out.println("Player: " + gs.getCurPlayer().getAttributes().get("name"));
-            System.out.println("Number of cards: " + gs.getCurPlayer().getHand().get().size());
-            System.out.println("Current Tile: " + gs.getCurPlayer().getTile().getAttributes().get("name"));
-            System.out.println("Total Points: " + gs.getCurPlayer().getScore());
 
             int option;
             Player player = gs.getCurPlayer();
