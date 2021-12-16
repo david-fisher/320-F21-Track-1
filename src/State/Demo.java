@@ -30,55 +30,83 @@ public class Demo {
         //                     |
         //                     V
 
+        Hashtable<String, String> tile1Attr = new Hashtable<String, String>();
+        tile1Attr.put("name", "Tile 1");
         // t1
-        Tile t1 = new Tile(0, 0, null, null, 0);
+        Tile t1 = new Tile(0, 0, null, tile1Attr, 0);
 
+        Hashtable<String, String> tile2Attr = new Hashtable<String, String>();
+        tile2Attr.put("name", "Tile 2");
         // t2
         ArrayList<Rule> t2Rule = new ArrayList<Rule>();
         t2Rule.add(new DrawCardRule(2));
-        Tile t2 = new Tile(0, 1, t2Rule, null, 0);
+        Tile t2 = new Tile(0, 1, t2Rule, tile2Attr, 0);
 
+        Hashtable<String, String> tile3Attr = new Hashtable<String, String>();
+        tile3Attr.put("name", "Tile 3");
         // t3
-        Tile t3 = new Tile(0, 2, null, null, 5);
+        Tile t3 = new Tile(0, 2, null, tile3Attr, 5);
 
+        Hashtable<String, String> tile4Attr = new Hashtable<String, String>();
+        tile4Attr.put("name", "Tile 4");
         // t4
         ArrayList<Rule> t4Rule = new ArrayList<Rule>();
         t4Rule.add(new DrawCardRule(1));
-        Tile t4 = new Tile(0, 3, t4Rule, null, 0);
+        Tile t4 = new Tile(0, 3, t4Rule, tile4Attr, 0);
 
+        Hashtable<String, String> tile5Attr = new Hashtable<String, String>();
+        tile5Attr.put("name", "Tile 5");
         // t5
-        Tile t5 = new Tile(1, 3, null, null, -5);
+        Tile t5 = new Tile(1, 3, null, tile5Attr, -5);
 
+        Hashtable<String, String> tile6Attr = new Hashtable<String, String>();
+        tile6Attr.put("name", "Tile 6");
         // t6
-        Tile t6 = new Tile(2, 3, null, null, -10);
+        Tile t6 = new Tile(2, 3, null, tile6Attr, -10);
 
+        Hashtable<String, String> tile7Attr = new Hashtable<String, String>();
+        tile7Attr.put("name", "Tile 7");
         // t7
         ArrayList<Rule> t7Rule = new ArrayList<Rule>();
         t7Rule.add(new MoveRule(new RNG(new int[] {0, 3})));
-        Tile t7 = new Tile(3, 3, t7Rule, null, 7);
+        Tile t7 = new Tile(3, 3, t7Rule, tile7Attr, 7);
 
+        Hashtable<String, String> tile8Attr = new Hashtable<String, String>();
+        tile8Attr.put("name", "Tile 8");
         // t8
-        Tile t8 = new Tile(4, 3, null, null, 0);
+        Tile t8 = new Tile(4, 3, null, tile8Attr, 0);
 
+        Hashtable<String, String> tile9Attr = new Hashtable<String, String>();
+        tile9Attr.put("name", "Tile 9");
         // t9
-        Tile t9 = new Tile(4, 2, null, null, 20);
+        Tile t9 = new Tile(4, 2, null, tile9Attr, 20);
 
+        Hashtable<String, String> tile10Attr = new Hashtable<String, String>();
+        tile10Attr.put("name", "Tile 10");
         // t10
-        Tile t10 = new Tile(4, 1, null, null, -1);
+        Tile t10 = new Tile(4, 1, null, tile10Attr, -1);
 
+        Hashtable<String, String> tile11Attr = new Hashtable<String, String>();
+        tile11Attr.put("name", "Tile 11");
         // t11
         ArrayList<Rule> t10Rule = new ArrayList<Rule>();
         t10Rule.add(new DrawCardRule(1));
-        Tile t11 = new Tile(4, 0, t10Rule, null, -1);
+        Tile t11 = new Tile(4, 0, t10Rule, tile11Attr, -1);
 
+        Hashtable<String, String> tile12Attr = new Hashtable<String, String>();
+        tile12Attr.put("name", "Tile 12");
         // t12
-        Tile t12 = new Tile(3, 0, null, null, 0);
+        Tile t12 = new Tile(3, 0, null, tile12Attr, 0);
 
+        Hashtable<String, String> tile13Attr = new Hashtable<String, String>();
+        tile13Attr.put("name", "Tile 13");
         // t13
-        Tile t13 = new Tile(2, 0, null, null, new int[] {0, 15});
+        Tile t13 = new Tile(2, 0, null, tile13Attr, new int[] {0, 15});
 
+        Hashtable<String, String> tile14Attr = new Hashtable<String, String>();
+        tile14Attr.put("name", "Tile 14");
         // t14
-        Tile t14 = new Tile(1, 0, null, null, 0);
+        Tile t14 = new Tile(1, 0, null, tile14Attr, 0);
 
         t1.update_neighbor(t2);
         t2.update_neighbor(t3);
