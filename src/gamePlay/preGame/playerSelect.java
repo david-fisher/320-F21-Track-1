@@ -193,7 +193,7 @@ public class playerSelect {
                 System.out.println(inputList.get(i).getText());
                 System.out.print(AIList.get(i)? " I want AI" : " No AI");
             }
-
+            // TODO: add start game call here
             primaryStage.centerOnScreen();
             primaryStage.setScene(gamePlay.boardGrid.gamePlayUI.makeScene(primaryStage, nameList, boardTable));
         }));
