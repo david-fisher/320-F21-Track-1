@@ -586,13 +586,14 @@ public class boardGrid {
     	board.add(tmp4, 0, 0);
     	tmp4.setTranslateX(-75);
     	tmp4.setTranslateY(300);
-    	
+        
     	StackPane tmp5 = createHexagon(this, x, y);
     	board.add(tmp5, 0, 0);
     	tmp5.setTranslateX(-75);
     	tmp5.setTranslateY(375);
 
-        Label l = new Label("Board Dimensions:");
+        Label l = new Label("Board Dimensions");
+        l.setStyle("-fx-font-size: 10.0 pt;-fx-text-fill:black;");//make the text smaller and set the color
         board.add(l, 0, 0);
         l.setMinWidth(100);
         l.setTranslateX(-100);
@@ -601,11 +602,22 @@ public class boardGrid {
         ComboBox<Integer> x_value = new ComboBox<Integer>();
         x_value.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
         x_value.setPromptText("X");
+        x_value.setUserData("x_value");//help us locate the node
+        x_value.setMinWidth(55.0);//set width that allow us to see the text
+        x_value.setStyle("-fx-font-size: 10.0 pt;");//make them smaller
         BackgroundFill bf = new BackgroundFill(Color.WHITE, null, null);
         Background bg = new Background(bf);
         x_value.setBackground(bg);
         x_value.setOnAction((event) -> {
             resize(x_value.getSelectionModel().getSelectedItem(), y);
+            // Show the current selected value in the ComboBox
+            // for(Node node : board.getChildren()){//find the y_value we want for setting this awesome feature
+            //     if(node.getUserData()=="x_value"){
+            //         ((ComboBox) node).setPromptText(Integer.toString(x));//change the PromptText to the current seleted value
+            //     }else if(node.getUserData()=="y_value"){
+            //         ((ComboBox) node).setPromptText(Integer.toString(y));//change the PromptText to the current seleted value
+            //     } 
+            // }
         });
         board.add(x_value, 0, 0);
         x_value.setTranslateX(-100);
@@ -614,9 +626,20 @@ public class boardGrid {
         ComboBox<Integer> y_value = new ComboBox<Integer>();
         y_value.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
         y_value.setPromptText("Y");
-        x_value.setBackground(bg);
+        y_value.setUserData("y_value");//help us locate the node
+        y_value.setMinWidth(50.0);//set width that allow us to see the text
+        y_value.setStyle("-fx-font-size: 10.0 pt;");//make them smaller
+        y_value.setBackground(bg);
         y_value.setOnAction((event) -> {
             resize(x, y_value.getSelectionModel().getSelectedItem());
+            // Show the current selected value in the ComboBox
+            // for(Node node : board.getChildren()){//find the y_value we want for setting this awesome feature
+            //     if(node.getUserData()=="y_value"){
+            //         ((ComboBox) node).setPromptText(Integer.toString(y));//change the PromptText to the current seleted value
+            //     }else if(node.getUserData()=="x_value"){
+            //         ((ComboBox) node).setPromptText(Integer.toString(x));//change the PromptText to the current seleted value
+            //     }
+            // }
         });
         board.add(y_value, 0, 0);
         y_value.setTranslateX(-50);
