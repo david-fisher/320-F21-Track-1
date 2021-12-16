@@ -86,6 +86,9 @@ public class RNGController {
             localStorage.storage.remove("RNGnames");
         }
         localStorage.storage.put("RNGnames", map);
+        a.setAlertType(Alert.AlertType.INFORMATION);
+        a.setContentText("RNG saved");
+        a.show();
     }
 
     // addNewRNG() checks the user inputs and adds a new RNG object
