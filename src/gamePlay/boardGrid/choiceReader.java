@@ -27,15 +27,24 @@ public class choiceReader {
     private ArrayList<Integer[]> cordList;
     private GameState gameState;
 
-    public choiceReader(boardGrid board, List<Player> playerList, Button spinner, Button deck, Button dice, List<Choice> choiceList, Button invButton, GameState gameState){
+    public choiceReader(boardGrid board, Button spinner, Button deck, Button dice,  Button invButton, GameState gameState){
+        update(board, spinner, deck, dice,  invButton, gameState);
+    }
+
+    public void update(boardGrid board, Button spinner, Button deck, Button dice, Button invButton, GameState gameState){
         this.board = board;
-        this.playerList = playerList;
+        this.playerList = gameState.getPlayers();
         this.spinner = spinner;
         this.deck = deck;
         this.dice = dice;
         this.choiceList = choiceList;
         this.invButton = invButton;
         this.gameState = gameState;
+        cordList.clear();
+        for(int i = 0; i < playerList.size(); i++){
+            Integer cord[] = {playerList.get(i).getTile().getX(), playerList.get(i).getTile().getY()};
+            cordList.add(cord);
+        }
     }
 
     private void nullActions(){
@@ -75,7 +84,7 @@ public class choiceReader {
             @Override
             public void handle(MouseEvent event) {
                 gameState.progressGame(choice);
-                //TODO: Update board from GameState
+                changeBoard();
             }
         });
     }
@@ -90,4 +99,12 @@ public class choiceReader {
         });
     }
 
+    private void changeBoard(){
+        for(int i = 0; i < playerList.size(); i++){
+            board.movePiece((int) cordList.get(i)[0], (int) cordList.get(i)[1], playerList.get(i).getTile().getX(), playerList.get(i).getTile().getY());
+            board.getBoardCell(playerList.get(i).getTile().getX(), playerList.get(i).getTile().getY()).setOnMouseClicked(null);
+        }
+        nullActions();
+        parseList();
+    }
 }
