@@ -397,6 +397,13 @@ public class RuleEditorController {
 		givePoints.clear();
 		takeCards.clear();
 		takePoints.clear();
+		Dialog<String> saved = new Dialog<String>();
+		String content = "Rules have been saved!";
+		saved.setTitle("Saving Tile Rules");
+		saved.getDialogPane().setContentText(content);
+		ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+		saved.getDialogPane().getButtonTypes().add(type);
+		saved.showAndWait();
 	}
 
 	//save the order of turn rules
