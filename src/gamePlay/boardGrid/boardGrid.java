@@ -217,9 +217,9 @@ public class boardGrid {
         loadGrid(primaryStage, stackToCell(cellTable));   // load from a 2d array
 
         // testing update board cell
-        StackPane a = getBoardCell(3, 3);
-        a.getChildren().remove(0, 2);
-        a.getChildren().addAll(getBoardCell(1, 0).getChildren());
+//        StackPane a = getBoardCell(3, 3);
+//        a.getChildren().remove(0, 2);
+//        a.getChildren().addAll(getBoardCell(1, 0).getChildren());
         //movePiece(3, 3, 4, 4);
 
         return board;
