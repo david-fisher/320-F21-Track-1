@@ -1,6 +1,8 @@
 package GameEditor.Controllers;
 
-import Objects.*;
+import Objects.Board;
+import Objects.JSONConverter;
+import Objects.Token;
 import gamePlay.mainMenu.Main;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -8,12 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
@@ -42,9 +45,11 @@ public class GameEditorMainController {
 
         //save new game
         Token newGame = new Token(gameName, null, (Board) localStorage.storage.get("board"));
+
+        //TODO check if game already exists in database
         new JSONConverter(newGame, "db/" + gameName +".json").To_JSON();
 
-        popup(event, "Game has been saved");
+        popup(event, gameName + " has been saved");
         exitToMainMenu(event);
     }
 
@@ -63,31 +68,17 @@ public class GameEditorMainController {
         LocalStorage.reset();
     }
 
-    //TODO getting the objects to save in the JSON
-    //takes all the objects from localStorage and stores them in the JSON
-    public void storeGameObjects(String game) throws IOException {
-        for (Map.Entry<String, Object> entry: localStorage.storage.entrySet()) {
-//            Rule rule = new Rule();
-//            rule.update_rng((RNG) entry.getValue());
-//            Board boardTemp  = new Board();
-//            boardTemp.add_rule(rule);
-//
-//            Token newgame = new Token();
-//            newgame.update_gameboard(boardTemp);
-//            JSONConverter savedGames = new JSONConverter(newgame, "test.json");
-//            savedGames.To_JSON();
-        }
-    }
 
     //creates a popup window
     @FXML
     public void popup(Event event, String argument) {
-        BorderPane borderPane = new BorderPane();
-        Scene scene = new Scene(borderPane, 300, 200);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle(argument);
-        stage.show();
+        Dialog<String> saved = new Dialog<String>();
+        String content = "Rules have been saved!";
+        saved.setTitle("Saving Tile Rules");
+        saved.getDialogPane().setContentText(content);
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        saved.getDialogPane().getButtonTypes().add(type);
+        saved.showAndWait();
     }
 
 }
