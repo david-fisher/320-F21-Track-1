@@ -2,7 +2,10 @@ package GameEditor;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -29,7 +32,7 @@ import javafx.scene.input.*;
 import Objects.*;
 
 public class BoardEditor {
-    double orgSceneX, orgSceneY, xTemp;
+    double orgSceneX, orgSceneY, xTemp, moveDist;
     boolean moved; 
     StackPane shapeToDelete;
     boardGrid theBoardGrid;
@@ -286,6 +289,7 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
             double offsetY = t.getSceneY() - orgSceneY;
             StackPane c = (StackPane) (t.getSource());
             moved = true;
+            moveDist += Math.max(Math.abs(offsetX), Math.abs(offsetY));
             c.setTranslateX(c.getTranslateX() + offsetX);
             c.setTranslateY(c.getTranslateY() + offsetY);
             orgSceneX = t.getSceneX();
@@ -295,10 +299,24 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	    sp.setOnMouseReleased((t) -> {
 	        StackPane c = (StackPane) (t.getSource());
 	        //checking if we are just clicked on a piece in spawn, not moving it
+	        boolean skipSnap = false;
+	        boolean spawnMove = moved;
+	        if (moveDist < 25) {
+	        	spawnMove = false;
+	        }
 	        if (xTemp < 75.0 && !moved) {
+	        	moveDist = 0;
 	        	return;
+        	} else if (xTemp < 75.0 && moveDist < 50) {
+        		spawnMove = true;
+        		skipSnap = true;
         	}
+	        moveDist = 0;
             double tile_size = 50;
+
+	        System.out.println(c.getTranslateX());
+	        System.out.println(c.getTranslateY());
+	        
 	        double snapX = (c.getTranslateX()) % tile_size;
 	        double snapY = (c.getTranslateY()) % tile_size;
 	        if (snapX > tile_size/2){
@@ -317,7 +335,12 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	        boolean deleted = false;
 	        ArrayList<Tile> currTiles = currBoard.get_tiles();
 	        for (int i = 0; i < currTiles.size(); i++) {
-	        	if (currTiles.get(i).getX() == (int) (snapX/50) && currTiles.get(i).getY() == (int) (snapY/50) && moved) {
+	        	if (skipSnap) {
+	        		root.getBoard().getChildren().remove(c);
+	        		deleted = true;
+	        		break;
+	        	}
+	        	if (currTiles.get(i).getX() == (int) (snapX/50) && currTiles.get(i).getY() == (int) (snapY/50) && spawnMove) {
 	        		root.getBoard().getChildren().remove(c);
 	        		deleted = true;
 	        	}
@@ -380,20 +403,16 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	        		}
 	        	}
 	        updateTileArrayList(root);
-	        // Work in progress, need to discuss
-//	        Token token = new Token();
-//			JSONConverter json = new JSONConverter(token, "Token.json");
-//			try {
-//				json.To_JSON();
-//			} catch (IOException e) {}
 	    });
 }
 
 public void rightClick_StackPane(StackPane sp, boardGrid root){
     //*****Color Picker function */
     ContextMenu contextMenu = new ContextMenu();
+    contextMenu.setStyle("-fx-background-color: black;");
     //Intial a colorpicker, display the current color on shape
     ColorPicker colorssPicker = new ColorPicker(Color.web(((Shape) sp.getChildren().get(0)).getFill().toString()));
+    colorssPicker.setStyle("-fx-background-color: black;");
     //*****Backgraound Uploader function */  
     MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
     
@@ -414,6 +433,9 @@ public void rightClick_StackPane(StackPane sp, boardGrid root){
         //Store image path into sp
         //Can be retrieve using sp.getUserData()
         String imgPath = file.getAbsolutePath();
+        Label tmpLabel = new Label(imgPath);
+        tmpLabel.setVisible(false);
+        sp.getChildren().add(tmpLabel);
         if(imgPath!=null){sp.setUserData(imgPath);}
         try {
             BufferedImage bufferedImage = ImageIO.read(file);
@@ -425,13 +447,13 @@ public void rightClick_StackPane(StackPane sp, boardGrid root){
 
     }
 };
-//Add the Upload function to the menuitem
-
-backgrounduploader_item.setOnAction(UploadEventHandler);
+	//Add the Upload function to the menuitem
+	
+	backgrounduploader_item.setOnAction(UploadEventHandler);
 
     MenuItem colorpicker_item = new MenuItem(null,colorssPicker);
     MenuItem deleter_item = new MenuItem(null, new Label("Delete Shape"));
-  
+    
     //Handle right click
     colorpicker_item.setOnAction(new EventHandler<ActionEvent>(){
         @Override
@@ -487,40 +509,61 @@ public class boardGrid {
         StackPane tmp = null;
         for (Tile tmpTile: tiles) {
         	String shape = tmpTile.getAttributes().get("shape");
-        	String color = tmpTile.getAttributes().get("color");
-        	String text = tmpTile.getAttributes().get("text");
         	
         	switch (shape) {
         		case "circle":
         	    	tmp = createCircle(this, x, y);
-        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
-        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        	    	tmp = createBoardHelper(tmp, tmpTile);
         			break;
         		case "rectangle":
         	    	tmp = createRectangle(this, x, y);
-        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
-        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        	    	tmp = createBoardHelper(tmp, tmpTile);
         			break;
         		case "triangle":
         	    	tmp = createTriangle(this, x, y);
-        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
-        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        	    	tmp = createBoardHelper(tmp, tmpTile);
         			break;
         		case "pentagon":
         	    	tmp = createPentagon(this, x, y);
-        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
-        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        	    	tmp = createBoardHelper(tmp, tmpTile);
         			break;
         		case "hexagon":
         	    	tmp = createHexagon(this, x, y);
-        	    	((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
-        	    	((TextField) tmp.getChildren().get(1)).setText(text);
+        	    	tmp = createBoardHelper(tmp, tmpTile);
         			break;
         		default:
         			break;
         	}
-    		this.board.add(tmp, tmpTile.getX(), tmpTile.getY());	
+        	tmp.setTranslateX(tmpTile.getX() * 50);
+        	tmp.setTranslateY(tmpTile.getY() * 50);
+    		this.board.add(tmp, 0, 0);	
         }
+    }
+    
+    public StackPane createBoardHelper(StackPane tmp, Tile tmpTile) {
+    	String color = tmpTile.getAttributes().get("color");
+    	String text = tmpTile.getAttributes().get("text");
+    	
+    	if (tmpTile.getAttributes().containsKey("file location")) {
+    		String imgPath = tmpTile.getAttributes().get("file location");
+    		
+    		try {
+				InputStream stream = new FileInputStream(imgPath);
+				Image tmpImage = new Image(stream);
+	    		((Shape) tmp.getChildren().get(0)).setFill(new ImagePattern(tmpImage));
+	    		Label tmpLabel = new Label(imgPath);
+	    		tmpLabel.setVisible(false);
+	    		tmp.getChildren().add(tmpLabel);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println("File missing");
+			}
+    	} else {
+    		((Shape) tmp.getChildren().get(0)).setFill(Paint.valueOf(color));
+    	}
+    	((TextField) tmp.getChildren().get(1)).setText(text);
+    	
+    	return tmp;
     }
     
     public void addInitialPieces(int x, int y) {
@@ -543,13 +586,14 @@ public class boardGrid {
     	board.add(tmp4, 0, 0);
     	tmp4.setTranslateX(-75);
     	tmp4.setTranslateY(300);
-    	
+        
     	StackPane tmp5 = createHexagon(this, x, y);
     	board.add(tmp5, 0, 0);
     	tmp5.setTranslateX(-75);
     	tmp5.setTranslateY(375);
 
-        Label l = new Label("Board Dimensions:");
+        Label l = new Label("Board Dimensions");
+        l.setStyle("-fx-font-size: 10.0 pt;-fx-text-fill:black;");//make the text smaller and set the color
         board.add(l, 0, 0);
         l.setMinWidth(100);
         l.setTranslateX(-100);
@@ -558,8 +602,22 @@ public class boardGrid {
         ComboBox<Integer> x_value = new ComboBox<Integer>();
         x_value.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
         x_value.setPromptText("X");
+        x_value.setUserData("x_value");//help us locate the node
+        x_value.setMinWidth(55.0);//set width that allow us to see the text
+        x_value.setStyle("-fx-font-size: 10.0 pt;");//make them smaller
+        BackgroundFill bf = new BackgroundFill(Color.WHITE, null, null);
+        Background bg = new Background(bf);
+        x_value.setBackground(bg);
         x_value.setOnAction((event) -> {
             resize(x_value.getSelectionModel().getSelectedItem(), y);
+            // Show the current selected value in the ComboBox
+            // for(Node node : board.getChildren()){//find the y_value we want for setting this awesome feature
+            //     if(node.getUserData()=="x_value"){
+            //         ((ComboBox) node).setPromptText(Integer.toString(x));//change the PromptText to the current seleted value
+            //     }else if(node.getUserData()=="y_value"){
+            //         ((ComboBox) node).setPromptText(Integer.toString(y));//change the PromptText to the current seleted value
+            //     } 
+            // }
         });
         board.add(x_value, 0, 0);
         x_value.setTranslateX(-100);
@@ -568,8 +626,20 @@ public class boardGrid {
         ComboBox<Integer> y_value = new ComboBox<Integer>();
         y_value.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
         y_value.setPromptText("Y");
+        y_value.setUserData("y_value");//help us locate the node
+        y_value.setMinWidth(50.0);//set width that allow us to see the text
+        y_value.setStyle("-fx-font-size: 10.0 pt;");//make them smaller
+        y_value.setBackground(bg);
         y_value.setOnAction((event) -> {
             resize(x, y_value.getSelectionModel().getSelectedItem());
+            // Show the current selected value in the ComboBox
+            // for(Node node : board.getChildren()){//find the y_value we want for setting this awesome feature
+            //     if(node.getUserData()=="y_value"){
+            //         ((ComboBox) node).setPromptText(Integer.toString(y));//change the PromptText to the current seleted value
+            //     }else if(node.getUserData()=="x_value"){
+            //         ((ComboBox) node).setPromptText(Integer.toString(x));//change the PromptText to the current seleted value
+            //     }
+            // }
         });
         board.add(y_value, 0, 0);
         y_value.setTranslateX(-50);
@@ -647,6 +717,10 @@ public void updateTileArrayList(boardGrid root){
 						TextField tmpText = (TextField) tmp.getChildren().toArray()[j];
 						tmpAtr.put("text", tmpText.getText());
 					}
+					else if (tmp.getChildren().toArray()[j] instanceof Label) {
+						Label tmpLabel = (Label) tmp.getChildren().toArray()[j];
+						tmpAtr.put("file location", tmpLabel.getText());
+					}
 				}
 				Tile tmpTile = new Tile(tmpX, tmpY, new ArrayList<Rule>(), tmpAtr, 0);
 				tmpTilesArr.add(tmpTile);
@@ -665,28 +739,12 @@ public Group startBoardEditor(Stage stage){
     
     boardGrid board = new boardGrid();
     
-    // Testing localStorage
     localStorage = LocalStorage.getInstance();
-    
-    // Dummy data, use to test out localStorage
-    
-//    currBoard = new Board();
-//    currBoard.updateDimensions(5, 5);
-//    Tile a = new Tile(0, 0, new ArrayList<Rule>(), new Hashtable<String,String>(), 0);
-//    a.getAttributes().put("color", "0x000000ff");
-//    a.getAttributes().put("shape", "circle");
-//    a.getAttributes().put("text", "fu");
-//    System.out.println(a.get_id());
-//    ArrayList<Tile> tiles = new ArrayList<Tile>();
-//    tiles.add(a);
-//    currBoard.update_tiles(tiles);
-//    
-//    localStorage.storage.put("board", currBoard);
     
     if (localStorage.storage.containsKey("board")){
     	currBoard = (Board) localStorage.storage.get("board");
         board.addInitialPieces(currBoard.getDimensionX(), currBoard.getDimensionY());
-        board.createBoard(currBoard.get_tiles(), currBoard.getDimensionX(), currBoard.getDimensionX());
+        board.createBoard(currBoard.get_tiles(), currBoard.getDimensionX(), currBoard.getDimensionY());
     }
     else {
 	    currBoard = new Board();
@@ -695,7 +753,6 @@ public Group startBoardEditor(Stage stage){
         board.addInitialPieces(5, 5);
 	    localStorage.storage.put("board", currBoard);
     }
-    // Testing End localStorage
 
     theBoardGrid = board;
     board.getBoard().setTranslateX(100);
@@ -709,7 +766,6 @@ public Group startBoardEditor(Stage stage){
         public void handle(ActionEvent event) {
         	updateTileArrayList(board);
             localStorage.storage.replace("board", currBoard);
-            System.out.println(localStorage.storage);
         }
     });
     root.getChildren().add(saveButton);

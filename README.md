@@ -2,6 +2,10 @@
 
 A simple board game editor, engine, and player written in Java by Track 1 of [David Fisher's](https://people.cs.umass.edu/~dfisher/) fall 2021 CS320 course taught at The University of Massachusetts Amherst. Hosted at https://github.com/david-fisher/320-F21-Track-1.
 
+## Demo-or-Die Info
+
+-   Te4m used the branch [`demo-or-die`](https://github.com/david-fisher/320-F21-Track-1/tree/demo-or-die) during their portion of the presentation as it contained the console demo file that was used as the demo frontend for the game engine that they created since the UI frontend was not integrated with it in time for the demonstration.
+
 ## Teams
 
 -   [Omnicron](https://github.com/david-fisher/320-F21-Track-1/wiki/Team-Omnicron-Wiki)
