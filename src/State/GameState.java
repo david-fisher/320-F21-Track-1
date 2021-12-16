@@ -10,21 +10,19 @@ public class GameState {
   private Board board;
   private Deck deck;
   private ArrayList<Rule> rules;
-  private int winCondition;
 
   private Rule curRule;
 
   private ArrayList<Choice> choices;
   private ArrayList<Rule> ruleQueue;
 
-  public GameState(List<Player> players, Board board, Deck cards, ArrayList<Rule> rules, int winCondition) {
+  public GameState(List<Player> players, Board board) {
     this.players = new ArrayList<Player>(players);
     this.curPlayer = this.players.get(0);
     this.board = board;
-    this.deck = cards;
-    this.rules = rules;
+    this.deck = board.get_deck();
+    this.rules = board.get_rules();
     this.curRule = this.rules.get(0);
-    this.winCondition = winCondition;
 
     choices = new ArrayList<Choice>();
     resetRuleQueue();
@@ -40,7 +38,7 @@ public class GameState {
     choices.get(choice).execute(this); // Execute the choice the last player has made.
     choices.clear();
     for (Player p : players) {
-      if (p.getScore() > winCondition) {
+      if (p.getScore() > board.getWinCondition()) {
         choices.add(new WinChoice(p));
         return choices;
       }
