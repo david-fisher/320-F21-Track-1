@@ -142,26 +142,6 @@ public class RuleEditorController {
 
 	}
 
-	//resets the positions of the drag and drop
-	@FXML
-	void resetRules()
-	{
-		LocalStorage localStorage = LocalStorage.getInstance();
-		Board newBoard = (Board) localStorage.storage.get("board");
-		System.out.println(newBoard.get_tiles().size());
-		System.out.println(gameBoard.get_tiles().size());
-		System.out.println("Clearing");
-		moveRules.clear();
-		giveCards.clear();
-		givePoints.clear();
-		takeCards.clear();
-		takePoints.clear();
-		currentTiles.clear();
-		tiles.getChildren().clear();
-		tileOptions.getItems().clear();
-		dialogContent.getItems().clear();
-	}
-
 	//drag and drop for the actions in the tile rule editor
 	@FXML
 	void dragAndDrop(TextFlow action)
@@ -169,7 +149,7 @@ public class RuleEditorController {
 		positions.put(action.getAccessibleText(), new Double[] {action.getTranslateX(), action.getTranslateY()});
 		action.setCursor(Cursor.HAND);
 
-		//when a node is clicjed on 
+		//when a node is clicked on 
 		action.setOnMousePressed((t) -> {
 			orgSceneX = t.getSceneX();
 			orgSceneY = t.getSceneY();
