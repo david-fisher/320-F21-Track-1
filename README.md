@@ -64,7 +64,7 @@ Java 17 installation
 brew install --cask adoptopenjdk17
 ```
 
-### GSON installation if Jar is not available
+### GSON installation if gson.jar is not available
 
 Gradle:
 
