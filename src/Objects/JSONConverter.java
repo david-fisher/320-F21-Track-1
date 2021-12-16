@@ -19,6 +19,8 @@ public class JSONConverter {
 		this.fileLocation = fileLocation;
 		this.token = token;
 		gsonBuilder = new GsonBuilder();
+		//gsonBuilder.registerTypeAdapter(Rule.class, new RuleDeserializer());
+		//gsonBuilder.registerTypeAdapter(DrawCardRule.class, new DCRDeserializer());
 		gsonBuilder.registerTypeAdapter(Tile.class, new TileSerializer());
 		gsonBuilder.registerTypeAdapter(Tile.class, new TileDeserializer());
 		gsonBuilder.registerTypeAdapter(Board.class, new BoardDeserializer());

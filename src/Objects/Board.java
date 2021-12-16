@@ -69,6 +69,10 @@ public class Board extends Saveable implements IBoard {
 	public Tile getStartTile() {
 		return this.startTile;
 	}
+	
+	public void setStartTile(Tile startTile) {
+		this.startTile = startTile;
+	}
 
 	public void setWinCondition(int winCondition) {
 		this.winCondition = winCondition;

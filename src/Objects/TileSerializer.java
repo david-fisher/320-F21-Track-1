@@ -9,7 +9,7 @@ public class TileSerializer implements JsonSerializer<Tile> {
 	@Override
 	public JsonElement serialize(Tile tile, Type type, JsonSerializationContext context) {
 		JsonObject obj = new JsonObject();
-
+		
 		JsonArray neighbors = new JsonArray();
 		for (Tile neighbor : tile.get_neighbors()) {
 			neighbors.add(neighbor.get_id());

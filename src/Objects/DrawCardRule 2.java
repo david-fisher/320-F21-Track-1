@@ -12,11 +12,6 @@ public class DrawCardRule extends Rule {
   public DrawCardRule(int repeat) {
     this.repeat = repeat;
   }
-  
-  public DrawCardRule(String id, int repeat) {
-	  	super(id);
-	    this.repeat = repeat;
-	  }
 
   public void execute(GameState state) {
     state.addChoice(new DrawCardChoice(state.getDeck(), repeat));

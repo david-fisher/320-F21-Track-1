@@ -6,6 +6,10 @@ public class PlayCardRule extends Rule {
   public PlayCardRule() {
     super();
   }
+  
+  public PlayCardRule(String id) {
+	  super(id);
+  }
 
   public void execute(GameState state) {
     if (state.getCurPlayer().getHand().get().size() == 0) {
