@@ -20,7 +20,6 @@
       <ButtonBar layoutX="227.0" layoutY="20.0" prefHeight="48.0" prefWidth="224.0">
          <buttons>
             <Button fx:id="saveAllButton" mnemonicParsing="false" onAction="#saveAllDecks" text="Save Decks" />
-            <Button mnemonicParsing="false" prefHeight="26.0" text="Cancel" />
          </buttons>
       </ButtonBar>
       <Button fx:id="newDeckButton" layoutX="16.0" layoutY="44.0" mnemonicParsing="false" onAction="#toggleEditor" prefHeight="26.0" prefWidth="116.0" text="+ New Deck">
