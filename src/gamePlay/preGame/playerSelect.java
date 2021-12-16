@@ -193,9 +193,9 @@ public class playerSelect {
                 System.out.println(inputList.get(i).getText());
                 System.out.print(AIList.get(i)? " I want AI" : " No AI");
             }
-            // TODO: add start game call here
+            GameState startingBoard = GameManager.startGame(playersList);
             primaryStage.centerOnScreen();
-            primaryStage.setScene(gamePlay.boardGrid.gamePlayUI.makeScene(primaryStage, nameList, boardTable));
+            primaryStage.setScene(gamePlay.boardGrid.gamePlayUI.makeScene(primaryStage, nameList, boardTable, startingBoard));
         }));
 
         root.addRow(root.getRowCount(), backButton, new Label(), submitButton);

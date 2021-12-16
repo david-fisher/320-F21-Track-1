@@ -23,7 +23,7 @@ public class boardGrid {
     private static boardScore currentScore;
     private static turns currentTurn;
     private static ArrayList<String> playerList;
-    private static final ArrayList<Color> colors = new ArrayList<Color>(Arrays.asList(Color.ORANGE, Color.AQUA, Color.PINK,Color.GREEN,java.awt.Color.MAGENTA,java.awt.Color.WHITE));
+    private static final ArrayList<Color> colors = new ArrayList<>();
 
     // load an arraylist to the grid
     private static void loadGrid(Stage primaryStage, ArrayList<ArrayList<boardCell>> table){
@@ -112,9 +112,16 @@ public class boardGrid {
         StackPane destination = getBoardCell(destX, destY);
         destination.getChildren().addAll(origin.getChildren().get(1));
     }
-
     //Add initial pieces to the board
     public static void addInitialPlayers(List<Player> players) {
+        for (int i = 0; i < 5; i++) {
+            colors.add(Color.ORANGE);
+            colors.add(Color.AQUA);
+            colors.add(Color.PINK);
+            colors.add(Color.GREEN);
+            colors.add(Color.MAGENTA);
+            colors.add(Color.WHITE);
+        }
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             Tile tile = player.getTile();
