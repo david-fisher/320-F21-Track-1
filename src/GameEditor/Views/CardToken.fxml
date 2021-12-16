@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="390.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.CardTokenController">
+   <children>
+      <Label layoutX="23.0" layoutY="20.0" text="Cards Editor">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ButtonBar layoutX="227.0" layoutY="20.0" prefHeight="48.0" prefWidth="224.0">
+         <buttons>
+            <Button fx:id="saveAllButton" mnemonicParsing="false" onAction="#saveAllDecks" text="Save Decks" />
+         </buttons>
+      </ButtonBar>
+      <Button fx:id="newDeckButton" layoutX="16.0" layoutY="44.0" mnemonicParsing="false" onAction="#toggleEditor" prefHeight="26.0" prefWidth="116.0" text="+ New Deck">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+      <ListView fx:id="deckList" layoutX="9.0" layoutY="118.0" prefHeight="203.0" prefWidth="131.0" />
+      <Button fx:id="editButton" layoutX="12.0" layoutY="88.0" mnemonicParsing="false" onAction="#toggleEditor" prefHeight="17.0" prefWidth="44.0" text="Edit">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="deleteButton" layoutX="67.0" layoutY="88.0" mnemonicParsing="false" onAction="#deleteDeck" prefHeight="21.0" prefWidth="67.0" text="Delete">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
+      <Pane layoutX="148.0" layoutY="94.0" prefHeight="286.0" prefWidth="305.0" style="-fx-border-color: #000000;">
+         <children>
+            <Pane fx:id="editorPane" layoutX="7.0" layoutY="8.0" prefHeight="273.0" prefWidth="302.0">
+               <children>
+                  <TextField fx:id="nameField" layoutX="4.0" layoutY="-1.0" prefHeight="33.0" prefWidth="148.0" promptText="Enter Name" />
+                  <Button fx:id="cancelDeckButton" layoutX="226.0" layoutY="5.0" mnemonicParsing="false" onAction="#cancelDeck" prefHeight="21.0" prefWidth="64.0" text="Cancel">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="saveDeckButton" layoutX="170.0" layoutY="5.0" mnemonicParsing="false" onAction="#saveDeck" prefHeight="21.0" prefWidth="49.0" text="Save">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <ListView fx:id="cardList" layoutX="4.0" layoutY="110.0" prefHeight="128.0" prefWidth="105.0" />
+                  <Label layoutX="-1.0" layoutY="31.0" prefHeight="48.0" prefWidth="296.0" text="Below is a list of cards in the deck. You can make new cards, and edit/delete existing ones." textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="editCardButton" layoutX="4.0" layoutY="241.0" mnemonicParsing="false" onAction="#toggleCardEditor" prefHeight="17.0" prefWidth="44.0" text="Edit">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="deleteCardButton" layoutX="59.0" layoutY="241.0" mnemonicParsing="false" onAction="#deleteCard" prefHeight="21.0" prefWidth="67.0" text="Delete">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="newCardButton" layoutX="4.0" layoutY="81.0" mnemonicParsing="false" onAction="#toggleCardEditor" prefHeight="26.0" prefWidth="105.0" text="+ New Card" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <Pane fx:id="cardEditorPane" layoutX="115.0" layoutY="82.0" prefHeight="155.0" prefWidth="177.0" style="-fx-border-color: #000000;">
+                     <children>
+                        <Label layoutX="4.0" layoutY="3.0" prefHeight="41.0" prefWidth="167.0" text="Select rule(s) for this card:" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="rollAgainCheckBox" layoutX="14.0" layoutY="44.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="148.0" text="Roll Again" />
+                        <CheckBox fx:id="takePointsCheckBox" layoutX="14.0" layoutY="71.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="148.0" text="Take points" />
+                        <CheckBox fx:id="givePointsCheckBox" layoutX="14.0" layoutY="99.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="148.0" text="Give points" />
+                        <CheckBox fx:id="moveToCheckBox" layoutX="14.0" layoutY="128.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="148.0" text="Move to" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

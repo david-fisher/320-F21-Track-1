@@ -37,7 +37,6 @@
                            <children>
                               <Button mnemonicParsing="false" onAction="#viewRules" text="View Current Rules" />
                               <Button mnemonicParsing="false" onAction="#saveTileRule" text="Save Rule" />
-                              <Button mnemonicParsing="false" text="Cancel" />
                            </children>
                         </HBox>
                         <HBox layoutX="21.0" layoutY="62.0" prefHeight="276.0" prefWidth="460.0">
@@ -195,7 +194,6 @@
                         <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
                            <children>
                               <Button mnemonicParsing="false" text="Save Rule" />
-                              <Button mnemonicParsing="false" text="Cancel" />
                            </children>
                         </HBox>
                         <HBox layoutX="21.0" layoutY="61.0" prefHeight="291.0" prefWidth="460.0">
@@ -351,7 +349,6 @@
                         <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#saveTurnRule" text="Save Rule" />
-                              <Button mnemonicParsing="false" text="Cancel" />
                            </children>
                         </HBox>
                   </children>
@@ -374,7 +371,6 @@
                               <HBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="454.0" spacing="5.0">
                                  <children>
                                     <Button mnemonicParsing="false" text="Save Rule" />
-                                    <Button mnemonicParsing="false" text="Cancel" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="40.0" prefWidth="454.0" spacing="5.0">

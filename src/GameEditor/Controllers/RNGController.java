@@ -21,6 +21,7 @@ public class RNGController {
 
     private ArrayList<RNG> vars = new ArrayList<RNG>();
     private HashMap<String, RNG> map = new HashMap<String, RNG>();
+    LocalStorage localStorage = LocalStorage.getInstance();
 
     // DeckIds is a final class that is also used in TokenController to
     // maintain a list of Deck objects between controllers
@@ -74,6 +75,14 @@ public class RNGController {
 
     @FXML
     private ComboBox<String> TypeSelection;
+
+    @FXML
+    private void save() {
+        if (localStorage.storage.containsKey("RNG")) {
+            localStorage.storage.remove("RNG");
+        }
+        localStorage.storage.put("RNG", vars);
+    }
 
     // addNewRNG() checks the user inputs and adds a new RNG object
     @FXML

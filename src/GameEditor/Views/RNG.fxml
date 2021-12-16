@@ -40,7 +40,7 @@
                   <ComboBox fx:id="Decks" prefWidth="150.0" />
                </graphic>
             </Label>
-            <Button fx:id="Save" layoutX="404.0" layoutY="5.0" mnemonicParsing="false" text="Save" />
+            <Button fx:id="Save" layoutX="404.0" layoutY="5.0" mnemonicParsing="false" text="Save" onAction="#save" />
             <Button fx:id="CardCreation" layoutX="429.0" layoutY="341.0" mnemonicParsing="false" text="Card Creation" visible="false" />
             <Button fx:id="AddNewRNG" layoutX="177.0" layoutY="214.0" mnemonicParsing="false" onAction="#addNewRNG" text="Add New RNG" />
             <Label fx:id="Name" contentDisplay="RIGHT" layoutX="65.0" layoutY="7.0" prefHeight="44.0" prefWidth="318.0" style="-fx-padding:10;" text="Name             ">
@@ -48,7 +48,6 @@
                   <TextField fx:id="NameField" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="170.0" text="Enter Name" />
                </graphic>
             </Label>
-            <Button fx:id="Cancel" layoutX="460.0" layoutY="5.0" mnemonicParsing="false" text="Cancel" />
             <Button fx:id="ViewRNG" layoutX="445.0" layoutY="93.0" mnemonicParsing="false" onAction="#viewRNG" text="View RNG" />
          </children>
       </AnchorPane>
