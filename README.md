@@ -5,6 +5,7 @@ A simple board game editor, engine, and player written in Java by Track 1 of [Da
 ## Demo-or-Die Info
 
 -   Te4m used the branch [`demo-or-die`](https://github.com/david-fisher/320-F21-Track-1/tree/demo-or-die) during their portion of the presentation as it contained the console demo file that was used as the demo frontend for the game engine that they created since the UI frontend was not integrated with it in time for the demonstration.
+-   Team Omnicron used the branch [`team-omnicron`](https://github.com/david-fisher/320-F21-Track-1/tree/team-omnicron) during their portion of the presentation as it had some changes to the inventory's functionality and also the game baord itself that was shown today as we were not able to push these changes to main in eenough time to run everything from the main branch.
 
 ## Teams
 

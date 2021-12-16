@@ -1,5 +1,7 @@
 package gamePlay.boardGrid;
 
+import Objects.Card;
+import Objects.Deck;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -21,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -44,6 +47,8 @@ public class inventory {
 
     private static final ImageView background = new ImageView();
     private static Button closeButton = new Button("Close");
+    private static Button playCardButton = new Button("Play");
+    private static int cardIndex = -1;
 
     private static boolean contentsUpdated = true;
 
@@ -144,6 +149,16 @@ public class inventory {
         });
     }
 
+    private static void setupContentPlay(Stage stage, StackPane blurBackground){
+
+        playCardButton.setOnAction(event -> {
+            System.out.println("Index: " + cardIndex);
+            blurBackground.getChildren().clear();
+            stage.close();
+
+        });
+    }
+
 
     //TODO: Get an array list and loop through that to add all images and add scroll bar
     //highlight selected card
@@ -153,23 +168,29 @@ public class inventory {
         if (!contentsUpdated) { return; }   // don't duplicate contents
 
         try {
-            ArrayList<ImageView> cardTest = getDummyData();
+            //TODO: REPLACE WITH CURRENT PLAYER'S DECK
+            Deck cardTest = getDummyData();
+
             AnchorPane cards = new AnchorPane();
             ArrayList<HBox> hboxes = new ArrayList<>();
             ArrayList<Boolean> selectedList = new ArrayList<>();
-
             double spacing = 200.0;
-            for(ImageView card : cardTest){
+            for(Card card : cardTest.get()){
                 HBox hBox_card = new HBox();
                 selectedList.add(false);
                 hBox_card.setStyle("-fx-border-color: black;" + "-fx-border-width: 5;");
-                hBox_card.getChildren().add(card);
 
-                // TODO: Varsha, I replaced the events handler here
+                StackPane temp = new StackPane();
+                temp.getChildren().add(card.getImage());
+                temp.getChildren().add(new Text("Move 3 Spaces"));
+                temp.setAlignment(Pos.CENTER);
+
+                hBox_card.getChildren().add(temp);
+
                 hBox_card.setOnMouseClicked(event -> {
-                    int index = getCardIndex(hBox_card, hboxes);
+                    cardIndex = getCardIndex(hBox_card, hboxes);
 
-                    boolean currentMode = selectedList.get(index);
+                    boolean currentMode = selectedList.get(cardIndex);
 
                     hBox_card.setStyle((currentMode?
                             "-fx-border-color: black;"
@@ -177,13 +198,12 @@ public class inventory {
                             + "-fx-border-width: 5;"
                     );
 
-                    selectedList.set(index, !currentMode);
+                    selectedList.set(cardIndex, !currentMode);
 
-                    System.out.println("INDEX: " + index);
                 });
 
                 AnchorPane.setRightAnchor(hBox_card, spacing);
-                spacing += 100.0;
+                spacing += 150.0;
                 hboxes.add(hBox_card);
                 cards.getChildren().addAll(hBox_card);
             }
@@ -197,29 +217,7 @@ public class inventory {
             canvas.getChildren().add(scrollView);
             contentsUpdated = false;
 
-            // TODO: onclick method --> get the index in array list as well
-//            cards.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//                @Override
-//                public void handle(MouseEvent event) {
-//                    System.out.println("mouse click detected! "+event.getSource());
-//                    System.out.println(event.getX());
-//
-//                    if (event.getTarget() != cards) {
-//
-//                        if (event.getTarget() instanceof ImageView){
-//
-//                            return;
-//                        }
-//
-//                        Node target = (Node) event.getTarget();
-//                        target.setStyle("-fx-border-color: red;" + "-fx-border-width: 5;");
-//                        int index = getCardIndex(target, hboxes);
-//                        System.out.println("INDEX: " + index);
-//                    }
-//
-//                }
-//            });
-            // TODO: Add cavas.getChildren.addAll --> button for playing the card
+            // TODO: Add canvas.getChildren.addAll --> button for playing the card
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -245,6 +243,7 @@ public class inventory {
         StackPane blurBackground = new StackPane();
 
         setupContentClose(popStage, blurBackground);
+        setupContentPlay(popStage, blurBackground);
 
         showCards();
 
@@ -278,6 +277,18 @@ public class inventory {
         popStage.setY( primaryStage.getY() + (primaryStage.getHeight() / 2) - (height / 2));
 
         popStage.show();
+
+        closeButton.setId("close_popout");
+        HBox temp = new HBox(closeButton);
+        temp.setAlignment(Pos.CENTER);
+
+        playCardButton.setId("play_card");
+        HBox temp2 = new HBox(playCardButton);
+        temp2.setAlignment(Pos.CENTER);
+
+        canvas.getChildren().add(temp);
+        canvas.getChildren().add(temp2);
+
     }
 
     public Button getInventoryButton(Stage primaryStage){
@@ -289,41 +300,47 @@ public class inventory {
             showInventory(primaryStage);
         });
 
-        closeButton.setId("close_popout");
-        HBox temp = new HBox(closeButton);
-        temp.setAlignment(Pos.TOP_LEFT);
-
-        if (canvas.getChildren().size() == 0){
-            canvas.getChildren().add(temp);
-        }
-
         return inventoryButton;
     }
 
-    public static ArrayList<ImageView> getDummyData() throws FileNotFoundException {
-        ImageView cardTest = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Dice.png", 70, 70);
-        ImageView cardTest2 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
-        ImageView cardTest3 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
-        ImageView cardTest4 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
-        ImageView cardTest5 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
-        ImageView cardTest6 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
-        ImageView cardTest7 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
-        ImageView cardTest8 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
-        ImageView cardTest9 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 70, 70);
-        ImageView cardTest10 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Dice.png", 70, 70);
+    private static Deck getDummyData() throws FileNotFoundException {
+        ImageView cardTest = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 100, 100);
+        ImageView cardTest2 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 100, 100);
+        ImageView cardTest3 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 100, 100);
+        ImageView cardTest4 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 100, 100);
+        ImageView cardTest5 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 100, 100);
+        ImageView cardTest6 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 100, 100);
+        ImageView cardTest7 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 100, 100);
+        ImageView cardTest8 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 100, 100);
+        ImageView cardTest9 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 100, 100);
+        ImageView cardTest10 = gamePlay.mainMenu.Helpers.Helper.imageMaker("src/gamePlay/images/Deck.png", 100, 100);
 
-        ArrayList<ImageView> cardList = new ArrayList<>();
-        cardList.add(cardTest);
-        cardList.add(cardTest2);
-        cardList.add(cardTest3);
-        cardList.add(cardTest4);
-        cardList.add(cardTest5);
-        cardList.add(cardTest6);
-        cardList.add(cardTest7);
-        cardList.add(cardTest8);
-        cardList.add(cardTest9);
-        cardList.add(cardTest10);
-        return cardList;
+        Card card1 = new Card(cardTest);
+        Card card2 = new Card(cardTest2);
+        Card card3 = new Card(cardTest3);
+        Card card4 = new Card(cardTest4);
+        Card card5 = new Card(cardTest5);
+        Card card6 = new Card(cardTest6);
+        Card card7 = new Card(cardTest7);
+        Card card8 = new Card(cardTest8);
+        Card card9 = new Card(cardTest9);
+        Card card10 = new Card(cardTest10);
+
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        cards.add(card4);
+        cards.add(card5);
+        cards.add(card6);
+        cards.add(card7);
+        cards.add(card8);
+        cards.add(card9);
+        cards.add(card10);
+
+
+
+        return new Deck(cards);
     }
 
 
