@@ -20,7 +20,7 @@ public class MoveChoice extends Choice {
   }
 
   public String toString() {
-    return "(" + getPoints()[0] + " - " + getPoints()[1] + " Points) Move to " + tile.getAttributes().get("name");
+    return "(" + getPoints()[0] + " to " + getPoints()[1] + " Points) Move to " + tile.getAttributes().get("name");
   }
 
   public int[] getPoints() {

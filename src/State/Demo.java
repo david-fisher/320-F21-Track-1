@@ -213,7 +213,7 @@ public class Demo {
         Scanner input = new Scanner(System.in);
 
         while (!(choices.get(0) instanceof WinChoice)) {
-            if (choices.get(0) instanceof PassChoice) {
+            if (choices.get(0) instanceof PassChoice && choices.size() == 1) {
                 choices = gs.progressGame(0);
                 continue;
             }
