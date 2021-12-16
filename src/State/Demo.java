@@ -209,6 +209,10 @@ public class Demo {
         Scanner input = new Scanner(System.in);
 
         while (!(choices.get(0) instanceof WinChoice)) {
+            if (choices.get(0) instanceof PassChoice) {
+                choices = gs.progressGame(0);
+                continue;
+            }
 
             System.out.println("Choices: ");
             for (int i = 0; i < choices.size(); i++) {
