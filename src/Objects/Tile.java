@@ -69,14 +69,15 @@ public class Tile extends GameObject {
         return this.neighbors;
     }
 
-    public ArrayList<Tile> update_neighbor(Tile new_neighbor) {
-        try {
-            int index = this.neighbors.indexOf(tile_findByID(new_neighbor.get_id()));
-            this.neighbors.set(index, new_neighbor);
-        } catch (Exception e) {
-            this.neighbors.add(new_neighbor);
-        }
-        return this.neighbors;
+    public void update_neighbor(Tile new_neighbor) {
+        // This fails to ensure that no two tiles exist in the board with the same IDs
+        //try {
+        //    int index = this.neighbors.indexOf(tile_findByID(new_neighbor.get_id()));
+        //    this.neighbors.set(index, new_neighbor);
+       // } catch (Exception e) {
+        this.neighbors.add(new_neighbor);
+        //}
+        //return this.neighbors;
     }
 
     public ArrayList<Tile> remove_neighbor(Tile input) {

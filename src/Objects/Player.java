@@ -78,4 +78,8 @@ public class Player extends Savable {
     public void updateTile(Tile new_tile) {
         this.currentTile = new_tile;
     }
+
+    public Hashtable<String, String> getAttributes() {
+        return this.attributes;
+    }
 }

@@ -53,13 +53,10 @@ public class Deck extends Savable {
 
     // Add a new card into the deck
     public ArrayList<Card> addCard(Card updatedCard) {
-        try {
-            this.cards.indexOf(findCardByID(updatedCard.get_id()));
-            System.out.println("Card already exists");
-        } catch (Exception e) {
-            // If there is an error finding the card then we know that it can be added
-            this.cards.add(updatedCard);
-        }
+        // This fails to ensure that no cards exist in the deck with the same ID
+
+        this.cards.add(updatedCard);
+
         return this.cards;
     }
 

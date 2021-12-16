@@ -159,6 +159,7 @@ public class Demo {
 
     public static void main(String[] args) {
         Board board = new Demo().getBoard();
+        board.setWinCondition(50);
         
         ArrayList<Player> players = new ArrayList<Player>();
 
@@ -182,7 +183,7 @@ public class Demo {
                 System.out.println(i + ": " + choices.get(i).toString());
             }
             
-            // System.out.println("Total Points: " + gs.getCurPlayer().ge);
+            System.out.println("Total Points: " + gs.getCurPlayer().getAttributes().get("name"));
             System.out.println("Total Points: " + gs.getCurPlayer().getScore());
 
             int option = input.nextInt();
