@@ -42,4 +42,8 @@ public class Card extends GameObject {
     super(rules, range);
     this.image = image;
   }
+
+  public ImageView getImage() {
+    return this.image;
+  }
 }
