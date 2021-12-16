@@ -28,13 +28,14 @@ A game editor and engine provide tools and an interface for a user to create vid
 
 ### General Installation Guidelines
 
+1. Clone 320-F21-Track-1 from its [GitHub repo](https://github.com/david-fisher/320-F21-Track-1).
 1. Install [JDK](https://www.oracle.com/java/technologies/downloads/) (version 8)
-2. Download [JavaFX .jar files](https://gluonhq.com/products/javafx/).
-3. Download [gson .jar file](https://github.com/google/gson).
-4. Add JavaFX and gson .jar filepaths to IDE reference library (ensure module imports are correct for JavaFX).
-5. Compile program using java from the `/src/gamePlay/mainMenu/main.java` file.
+1. Download [JavaFX .jar files](https://gluonhq.com/products/javafx/).
+1. Download [gson .jar file](https://github.com/google/gson).
+1. Add JavaFX and gson .jar filepaths to IDE reference library (ensure module imports are correct for JavaFX).
+1. Compile program using java from the `/src/gamePlay/mainMenu/main.java` file.
 
-### Linux Installation
+### Linux Specific Installation
 
 Java 8+\
 Javafx
@@ -45,14 +46,10 @@ sudo apt-get install openjdk-8-jre
 
 zip the jar file
 
-### Mac Installation
+### Mac Specific Installation
 
 Java 8 installation
 
 ```bash
 brew install --cask adoptopenjdk8
 ```
-
-## Play
-
-> user stories
