@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="130.0" tabMaxWidth="70.0" tabMinHeight="130.0" tabMinWidth="70.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.CustomTokenController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="130.0" tabMaxWidth="70.0" tabMinHeight="130.0" tabMinWidth="70.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.CustomTokenController">
     <tabs>
         <Tab>
             <graphic>
@@ -59,7 +68,6 @@
                         <ButtonBar layoutX="231.0" layoutY="10.0" prefHeight="48.0" prefWidth="224.0">
                             <buttons>
                                 <Button fx:id="saveAllButton" mnemonicParsing="false" onAction="#saveAllTokens" text="Save Tokens" />
-                                <Button mnemonicParsing="false" prefHeight="26.0" text="Cancel" />
                             </buttons>
                         </ButtonBar>
                   <Button fx:id="newCustTokenButton" layoutX="10.0" layoutY="52.0" mnemonicParsing="false" onAction="#toggleEditor" prefHeight="26.0" prefWidth="174.0" text="+ New Custom Token">
