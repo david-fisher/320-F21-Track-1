@@ -14,7 +14,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Objects;
+
+import Objects.*;
 
 public class playerSelect {
     private static Integer number;  // total number of players
@@ -27,6 +30,8 @@ public class playerSelect {
     private static Label warn;
     private static boolean forward = false;
     private static ArrayList<selectSwitch> aiSwitches = new ArrayList<>();
+    private static Hashtable<String, String> allPlayers = new Hashtable<>();
+    private static ArrayList<Player> playersList = new ArrayList<Player>();
 
     public playerSelect(){
         number = 0;
@@ -166,14 +171,16 @@ public class playerSelect {
         submitButton.setOnAction((event -> {
 
             warn.setVisible(false);
-
             for (int i = 0; i < inputList.size(); i++){
+                allPlayers.put("name", inputList.get(i).getText());
+                Player player = new Player(allPlayers);
                 String currentName = inputList.get(i).getText();
                 nameList.add(currentName.isEmpty()? null : currentName);
+                playersList.add(player);
                 boolean a = aiSwitches.get(i).switchState();
                 AIList.add(aiSwitches.get(i).switchState());
             }
-
+            System.out.println(playersList);
             for (int i = 0; i < inputList.size(); i++) {     // test printing call
                 System.out.println(inputList.get(i).getText());
                 System.out.print(AIList.get(i)? " I want AI" : " No AI");
