@@ -46,14 +46,14 @@ public class boardGrid {
         }
     }
 
-    public static void addPlayers(List<Player> players) {
+    public static void addInitialPlayers(List<Player> players) {
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             Tile tile = player.getTile();
-            //board.getChildren().remove(tile.get_x(),tile.get_y());
+            StackPane destination = getBoardCell(tile.getX(), tile.getY());
             Rectangle rect = new Rectangle(80,80);
             rect.setFill(colors.get(i % 5));
-            board.add(rect,tile.getX(),tile.getY());
+            destination.getChildren().addAll(rect);
         }
     }
 
