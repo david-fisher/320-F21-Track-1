@@ -32,7 +32,7 @@ import javafx.scene.input.*;
 import Objects.*;
 
 public class BoardEditor {
-    double orgSceneX, orgSceneY, xTemp;
+    double orgSceneX, orgSceneY, xTemp, moveDist;
     boolean moved; 
     StackPane shapeToDelete;
     boardGrid theBoardGrid;
@@ -289,6 +289,7 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
             double offsetY = t.getSceneY() - orgSceneY;
             StackPane c = (StackPane) (t.getSource());
             moved = true;
+            moveDist += Math.max(Math.abs(offsetX), Math.abs(offsetY));
             c.setTranslateX(c.getTranslateX() + offsetX);
             c.setTranslateY(c.getTranslateY() + offsetY);
             orgSceneX = t.getSceneX();
@@ -298,9 +299,19 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	    sp.setOnMouseReleased((t) -> {
 	        StackPane c = (StackPane) (t.getSource());
 	        //checking if we are just clicked on a piece in spawn, not moving it
+	        boolean skipSnap = false;
+	        boolean spawnMove = moved;
+	        if (moveDist < 25) {
+	        	spawnMove = false;
+	        }
 	        if (xTemp < 75.0 && !moved) {
+	        	moveDist = 0;
 	        	return;
+        	} else if (xTemp < 75.0 && moveDist < 50) {
+        		spawnMove = true;
+        		skipSnap = true;
         	}
+	        moveDist = 0;
             double tile_size = 50;
 
 	        System.out.println(c.getTranslateX());
@@ -324,7 +335,12 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 	        boolean deleted = false;
 	        ArrayList<Tile> currTiles = currBoard.get_tiles();
 	        for (int i = 0; i < currTiles.size(); i++) {
-	        	if (currTiles.get(i).getX() == (int) (snapX/50) && currTiles.get(i).getY() == (int) (snapY/50) && moved) {
+	        	if (skipSnap) {
+	        		root.getBoard().getChildren().remove(c);
+	        		deleted = true;
+	        		break;
+	        	}
+	        	if (currTiles.get(i).getX() == (int) (snapX/50) && currTiles.get(i).getY() == (int) (snapY/50) && spawnMove) {
 	        		root.getBoard().getChildren().remove(c);
 	        		deleted = true;
 	        	}
