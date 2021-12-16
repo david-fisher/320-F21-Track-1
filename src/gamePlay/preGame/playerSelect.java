@@ -178,7 +178,7 @@ public class playerSelect {
                 nameList.add(currentName.isEmpty()? null : currentName);
                 boolean a = aiSwitches.get(i).switchState();
                 if (a == true) {
-                    allPlayers.put("ai", inputList.get(i).getText());
+                    allPlayers.put("name", inputList.get(i).getText());
                     AIPlayer ai = new AIPlayer(allPlayers);
                     playersList.add(ai);
                 }
