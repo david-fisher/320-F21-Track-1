@@ -165,7 +165,9 @@ public class RNGController {
         Button b = new Button("Delete RNG");
         b.setOnAction(event);
         dialogContent.getItems().add(b);
-        TypeSelection.getItems().setAll("Dice", "Spinner", "Cards");
+        // Card based RNG is not implemented
+//        TypeSelection.getItems().setAll("Dice", "Spinner", "Cards");
+        TypeSelection.getItems().setAll("Dice", "Spinner");
 
         // add the event listerner for type changes
         TypeSelection.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
