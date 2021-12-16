@@ -1,5 +1,6 @@
 package gamePlay.boardGrid;
 
+import State.GameState;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -17,13 +18,15 @@ public class turns {
     private StackPane turnsBoard;
     private ArrayList<String> colors;
     private int colorIndex;
+    private GameState gameState;
 
-    public turns(boardScore bs){
+    public turns(boardScore bs /*, GameState gameState*/){
         this.playerList = bs.getPlayerList();
         this.currentIndex = 0;
         this.turnsBoard = new StackPane();
         this.colors = bs.getColorList();
         this.colorIndex = 0;
+        //this.gameState = gameState;
     }
 
     public void next(){
@@ -51,7 +54,7 @@ public class turns {
         return output;
     }
 
-    public String getCurrentPlayer() { return this.playerList.get(this.currentIndex); }
+    public String getCurrentPlayer() { /*return this.gameState.getCurPlayer().getAttributes().get("name");*/ return this.playerList.get(this.currentIndex); }
 
     public StackPane displayTurns(){
 

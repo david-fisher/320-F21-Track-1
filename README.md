@@ -31,6 +31,3 @@ brew install --cask adoptopenjdk8
 ## Play
 >user stories
 
-## Github
-https://github.com/david-fisher/320-F21-Track-1
-

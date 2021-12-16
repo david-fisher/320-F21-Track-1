@@ -2,7 +2,7 @@ package Objects;
 
 import java.util.Hashtable;
 
-public class Player extends Saveable {
+public class Player extends Savable {
     private int score;
     private Tile currentTile;
     private Deck hand;
@@ -50,6 +50,10 @@ public class Player extends Saveable {
 
     public void removeCard(Card card) {
         this.hand.removeCard(card);
+    }
+
+    public Hashtable<String, String> getAttributes() {
+        return attributes;
     }
 
     // Prerequisite: the tile is on the board.

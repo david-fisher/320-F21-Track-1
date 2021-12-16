@@ -2,7 +2,7 @@ package Objects;
 
 import java.util.*;
 
-public class Board extends Saveable implements IBoard {
+public class Board extends Savable implements IBoard {
 	/*
 	 * parem: tiles - an array list of tiles on the board
 	 * rules - an array list of rules on the board

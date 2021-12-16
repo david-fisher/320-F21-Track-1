@@ -18,7 +18,6 @@ public class boardCell {
     private Integer cellIndex;
     private Integer x;
     private Integer y;
-    private ImageView icon;
     private StackPane stack;
 
     public boardCell(){
@@ -53,7 +52,7 @@ public class boardCell {
     public void loadCellImage(String fileName){
         if (fileName == null) { return; }   // check null
 
-        icon = Helper.imageMaker(fileName, 70, 70);
+        //icon = Helper.imageMaker(fileName, 70, 70);
     }
 
 
@@ -88,7 +87,7 @@ public class boardCell {
             }
 
             stack.getChildren().add(square);    // background
-            stack.getChildren().add(icon);  // image
+            //stack.getChildren().add(icon);  // image
             stack.getChildren().add(setText());
         }
 
@@ -113,7 +112,7 @@ public class boardCell {
 
         stack.setOnDragDetected( // drag starts
                 e -> {  // TODO: set drag motion
-                    icon.setVisible(false);
+                    //icon.setVisible(false);
                     score.updateScore(currentTurn.getCurrentPlayer(), -1);
                     currentTurn.next();
                 }
