@@ -7,6 +7,7 @@ import java.util.*;
 // This class is a singleton that coordinates between different parts of the application.
 public class Manager {
     private static Manager instance = null;
+    private Board board;
 
     private Manager() {
 
@@ -32,6 +33,14 @@ public class Manager {
     // For Omnicron to give us the players, and we'll give them a GameState to
     // work with.
     public GameState startGame(List<Player> players) {
-        return null;
+        if (board == null) {
+            return null;
+        }
+
+        for (Player player : players) {
+            player.updateTile(board.getStartTile());
+        }
+
+        return new GameState(players, this.board);
     }
 }
