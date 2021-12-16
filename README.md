@@ -19,10 +19,10 @@ A game editor and engine provide tools and an interface for a user to create vid
 
 ## Structure
 
--   [game play](src/gamePlay/README.md)
--   [game editor](src/GameEditor)
--   [objects](src/Objects)
--   [state](src/State)
+-   [Gameplay UI](src/gamePlay/README.md)
+-   [Game Editor Files](src/GameEditor)
+-   [Core Game Object Files](src/Objects)
+-   [Gamestate Specific Files](src/State)
 
 ## Setup
 
