@@ -1,6 +1,6 @@
 # 320-F21-Track-1
 
-A simple board game editor, engine, and player written in Java by Track 1 of [David Fisher's](https://people.cs.umass.edu/~dfisher/) fall 2021 CS320 course taught at The University of Massachusetts Amherst.
+A simple board game editor, engine, and player written in Java by Track 1 of [David Fisher's](https://people.cs.umass.edu/~dfisher/) fall 2021 CS320 course taught at The University of Massachusetts Amherst. Hosted at https://github.com/david-fisher/320-F21-Track-1.
 
 ## Teams
 
@@ -35,7 +35,7 @@ A game player allows a user to run a created game and interact with it through a
 ### General Installation Guidelines
 
 1. Clone 320-F21-Track-1 from its [GitHub repo](https://github.com/david-fisher/320-F21-Track-1).
-1. Install [JDK](https://www.oracle.com/java/technologies/downloads/) (version 8).
+1. Install [JDK](https://www.oracle.com/java/technologies/downloads/) (version 17).
 1. Download [JavaFX .jar files](https://gluonhq.com/products/javafx/).
 1. Download [gson .jar file](https://github.com/google/gson).
 1. Add JavaFX and gson .jar filepaths to IDE reference library (ensure module imports are correct for JavaFX).
@@ -43,19 +43,19 @@ A game player allows a user to run a created game and interact with it through a
 
 ### Linux Specific Installation
 
-Java 8+\
+Java 17\
 Javafx
 
 ```bash
-sudo apt-get install openjdk-8-jre
+sudo apt-get install openjdk-17-jre
 ```
 
 zip the jar file
 
 ### Mac Specific Installation
 
-Java 8 installation
+Java 17 installation
 
 ```bash
-brew install --cask adoptopenjdk8
+brew install --cask adoptopenjdk17
 ```
