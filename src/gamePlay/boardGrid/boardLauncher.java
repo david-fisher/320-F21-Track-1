@@ -28,12 +28,12 @@ public class boardLauncher extends Application {
         playerList.add("Fisher");
         playerList.add("Marius");
 
-        Scene scene = gamePlayUI.makeScene(stage, playerList, stackTable);
-        stage.setTitle("Game Board");
-
-
-        stage.setScene(scene);
-        stage.show();
+        //Scene scene = gamePlayUI.makeScene(stage, playerList, stackTable);
+//        stage.setTitle("Game Board");
+//
+//
+//        stage.setScene(scene);
+//        stage.show();
     }
 
     public static void main(String[] args) {

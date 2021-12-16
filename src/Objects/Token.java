@@ -2,7 +2,7 @@ package Objects;
 
 import java.util.*;
 
-public class Token extends Saveable implements IToken {
+public class Token extends Savable implements IToken {
 
 	private Board board;
 	private ArrayList<Player> players;
@@ -12,19 +12,16 @@ public class Token extends Saveable implements IToken {
 		this.board = new Board();
 		this.players = new ArrayList<Player>();
 	}
-
 	public Token(String ID) {
 		super(ID);
 		this.board = new Board();
 		this.players = new ArrayList<Player>();
 	}
-
 	public Token(String ID, ArrayList<Player> players) {
 		super(ID);
 		this.board = new Board();
 		this.players = players;
 	}
-
 	public Token(String ID, ArrayList<Player> players, Board board) {
 		super(ID);
 		this.board = board;
@@ -58,7 +55,6 @@ public class Token extends Saveable implements IToken {
 	public Board get_gameboard() {
 		return board;
 	}
-
 	@Override
 	public Board update_gameboard(Board new_board) {
 		this.board = new_board;
