@@ -11,24 +11,24 @@ public class Demo {
     public Demo() {
     }
 
-    public Board getBoard() {
+    public Board getBoard () {
         /*
-         * [t1] -> [t2] -> [t3] -> [t4]
-         * ^ | ^ v
-         * [t14] | | [t5]
-         * ^ | | v
-         * [t13] | | [t6]
-         * ^ | | v
-         * [t12] | | [t7]
-         * ^ v | v
-         * [t11] <- [t10] <- [t9] <- [t8]
-         */
-
+        *   [t1]  -> [t2] -> [t3] ->  [t4]
+        *     ^        |        ^       v
+        *   [t14]      |        |      [t5] 
+        *     ^        |        |      v
+        *   [t13]      |        |     [t6] 
+        *     ^        |        |      v
+        *   [t12]      |        |      [t7] 
+        *     ^        v        |       v
+        *   [t11] <- [t10] <- [t9] <- [t8]            
+        */ 
+        
         ArrayList<Tile> tiles = new ArrayList<Tile>();
-        // ADD TILES TO BOARD |
-        // |
-        // |
-        // V
+        // ADD TILES TO BOARD  |
+        //                     |
+        //                     |
+        //                     V
 
         // t1
         Tile t1 = new Tile(0, 0, null, null, 0);
@@ -54,7 +54,7 @@ public class Demo {
 
         // t7
         ArrayList<Rule> t7Rule = new ArrayList<Rule>();
-        t7Rule.add(new MoveRule(new RNG(new int[] { 0, 3 })));
+        t7Rule.add(new MoveRule(new RNG(new int[] {0, 3})));
         Tile t7 = new Tile(3, 3, t7Rule, null, 7);
 
         // t8
@@ -75,7 +75,7 @@ public class Demo {
         Tile t12 = new Tile(3, 0, null, null, 0);
 
         // t13
-        Tile t13 = new Tile(2, 0, null, null, new int[] { 0, 15 });
+        Tile t13 = new Tile(2, 0, null, null, new int[] {0, 15});
 
         // t14
         Tile t14 = new Tile(1, 0, null, null, 0);
@@ -113,15 +113,16 @@ public class Demo {
         tiles.add(t14);
 
         ArrayList<Rule> turnRules = new ArrayList<Rule>();
-        turnRules.add(new MoveRule(new RNG(new int[] { 0, 3 })));
+        turnRules.add(new MoveRule(new RNG(new int[] {0, 3})));
         turnRules.add(new PlayCardRule());
-
+                
         Deck deck = new Deck();
 
-        // ADD CARDS TO DECK |
-        // |
-        // |
-        // V
+        
+        // ADD CARDS TO DECK  |
+        //                     |
+        //                     |
+        //                     V
 
         // Add card that moves you to the starting tile
         deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(t1))), new ImageView()));
