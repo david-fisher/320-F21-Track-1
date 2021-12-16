@@ -54,5 +54,9 @@ out
 320-F21-Track-1.iml
 .metadata
 
+#include db folder but not files within
+db/*
+!db/.gitkeep
+
 #test files
 test.json
