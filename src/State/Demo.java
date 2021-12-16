@@ -155,36 +155,65 @@ public class Demo {
         //                     V
 
         // Add card that moves you to the starting tile
-        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(t1))), new ImageView()));
+        Hashtable<String, String> card1Attr = new Hashtable<String, String>();
+        card1Attr.put("name", "Card 1");
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(t1))), new ImageView(), card1Attr));
 
         // Add card that moves you 4 tiles
-        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(4)))), new ImageView()));
+        Hashtable<String, String> card2Attr = new Hashtable<String, String>();
+        card2Attr.put("name", "Card 2");
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(4)))), new ImageView(), card2Attr));
 
         // Add card that moves you 2 tiles
-        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(2)))), new ImageView()));
+        Hashtable<String, String> card3Attr = new Hashtable<String, String>();
+        card3Attr.put("name", "Card 3");
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(2)))), new ImageView(), card3Attr));
 
         // Add card that moves you 5-7 tiles
-        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(new int[] { 5, 7 })))),
-                new ImageView()));
+        Hashtable<String, String> card4Attr = new Hashtable<String, String>();
+        card4Attr.put("name", "Card 4");
+        deck.addCard(
+            new Card(
+                new ArrayList<Rule>(
+                    Arrays.asList(
+                        new MoveRule(new RNG(new int[] { 5, 7 }))
+                        )
+                    ),
+                new ImageView(), card4Attr
+                )
+                );
 
         // Add card that moves you 2-5 tiles
-        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(new int[] { 2, 5 })))),
-                new ImageView()));
+        Hashtable<String, String> card5Attr = new Hashtable<String, String>();
+        card5Attr.put("name", "Card 5");
+        deck.addCard(new Card(
+            new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(new int[] { 2, 5 })))), new ImageView(), card5Attr
+            ));
 
         // Add card that gives you 5 points
-        deck.addCard(new Card(5, new ImageView()));
+        Hashtable<String, String> card6Attr = new Hashtable<String, String>();
+        card6Attr.put("name", "Card 6");
+        deck.addCard(new Card(5, new ImageView(), card6Attr));
 
         // Add card that gives you 10 points
-        deck.addCard(new Card(10, new ImageView()));
+        Hashtable<String, String> card7Attr = new Hashtable<String, String>();
+        card7Attr.put("name", "Card 7");
+        deck.addCard(new Card(10, new ImageView(), card7Attr));
 
         // Add card that gives you 15 points
-        deck.addCard(new Card(15, new ImageView()));
+        Hashtable<String, String> card8Attr = new Hashtable<String, String>();
+        card8Attr.put("name", "Card 8");
+        deck.addCard(new Card(15, new ImageView(), card8Attr));
 
         // Add card that gives you 50 points
-        deck.addCard(new Card(50, new ImageView()));
+        Hashtable<String, String> card9Attr = new Hashtable<String, String>();
+        card9Attr.put("name", "Card 9");
+        deck.addCard(new Card(50, new ImageView(), card9Attr));
 
         // Add card that gives you 2 more cards but subtracts 10 points
-        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new DrawCardRule(2))), -10, new ImageView()));
+        Hashtable<String, String> card10Attr = new Hashtable<String, String>();
+        card10Attr.put("name", "Card 10");
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new DrawCardRule(2))), -10, new ImageView(), card10Attr));
 
         Board b = new Board(tiles, turnRules, deck);
         b.setStartTile(t1);
@@ -214,8 +243,6 @@ public class Demo {
 
         players.add(new Player(board.getStartTile(), player1Attr));
         players.add(new Player(board.getStartTile(), player2Attr));
-
-        players.get(0).getHand().addCard(new Card(4, null));
 
         GameState gs = new GameState(players, board);
 

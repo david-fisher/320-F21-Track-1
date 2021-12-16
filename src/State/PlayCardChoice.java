@@ -24,7 +24,7 @@ public class PlayCardChoice extends Choice {
   }
 
   public String toString() {
-    return "(" + getPoints()[0] + " to " + getPoints()[1] + " Points) Play " + card.toString();
+    return "(" + getPoints()[0] + " to " + getPoints()[1] + " Points) Play " + card.getAttributes().get("name");
   }
 
   public int[] getPoints() {

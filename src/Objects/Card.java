@@ -14,32 +14,32 @@ public class Card extends GameObject {
     private transient ImageView image;
 
     public Card() {
-        this(0, new ImageView());
+        this(0, new ImageView(), null);
     }
 
     public Card(ImageView image) {
-        this(0, image);
+        this(0, image, null);
     }
 
-    public Card(ArrayList<Rule> rules, ImageView image) {
-        this(rules, 0, image);
+    public Card(ArrayList<Rule> rules, ImageView image, Hashtable<String, String> attributes) {
+        this(rules, 0, image, attributes);
     }
 
-    public Card(int constant, ImageView image) {
-        this(new ArrayList<Rule>(), constant, image);
+    public Card(int constant, ImageView image, Hashtable<String,String> attributes) {
+        this(new ArrayList<Rule>(), constant, image, attributes);
     }
 
     public Card(int[] range, ImageView image) {
-        this(new ArrayList<Rule>(), range, image);
+        this(new ArrayList<Rule>(), range, null, image);
     }
 
-    public Card(ArrayList<Rule> rules, int constant, ImageView image) {
-        super(rules, constant);
+    public Card(ArrayList<Rule> rules, int constant, ImageView image, Hashtable<String, String> attributes) {
+        super(rules,  attributes, constant);
         this.image = image;
     }
 
-    public Card(ArrayList<Rule> rules, int[] range, ImageView image) {
-        super(rules, range);
+    public Card(ArrayList<Rule> rules, int[] range, Hashtable<String, String> attributes, ImageView image) {
+        super(rules, attributes, range);
         this.image = image;
     }
 

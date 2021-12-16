@@ -27,7 +27,7 @@ public class DrawCardChoice extends Choice {
   }
 
   public String toString() {
-    return "Draw " + amount + " from " + deck.toString();
+    return "Draw " + amount + " from the deck.";
   }
 
   public int[] getPoints() {
