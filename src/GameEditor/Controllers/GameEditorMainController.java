@@ -43,14 +43,19 @@ public class GameEditorMainController {
             gameName = "Game" + new Random().nextInt(10000);
         }
 
+        //checks if required game objects are created
+        if (localStorage.storage.isEmpty()) popup(event, "must create game objects");
+
         //save new game
-        Token newGame = new Token(gameName, null, (Board) localStorage.storage.get("board"));
+        else {
+            Token newGame = new Token(gameName, null, (Board) localStorage.storage.get("board"));
 
-        //TODO check if game already exists in database
-        new JSONConverter(newGame, "db/" + gameName +".json").To_JSON();
+            //TODO check if game already exists in database
+            new JSONConverter(newGame, "db/" + gameName + ".json").To_JSON();
 
-        popup(event, gameName + " has been saved");
-        exitToMainMenu(event);
+            popup(event, gameName + " has been saved");
+            exitToMainMenu(event);
+        }
     }
 
     //TODO modifying an existing game would open it up in localStorage, edit, and do the same thing
@@ -73,9 +78,7 @@ public class GameEditorMainController {
     @FXML
     public void popup(Event event, String argument) {
         Dialog<String> saved = new Dialog<String>();
-        String content = "Rules have been saved!";
-        saved.setTitle("Saving Tile Rules");
-        saved.getDialogPane().setContentText(content);
+        saved.getDialogPane().setContentText(argument);
         ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
         saved.getDialogPane().getButtonTypes().add(type);
         saved.showAndWait();
