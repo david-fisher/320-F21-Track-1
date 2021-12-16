@@ -85,7 +85,7 @@
                         <Font size="11.0" />
                      </font>
                   </Button>
-                  <Pane layoutX="146.0" layoutY="99.0" prefHeight="286.0" prefWidth="305.0" style="-fx-border-color: #000000;">
+                  <Pane layoutX="146.0" layoutY="99.0" prefHeight="286.0" prefWidth="305.0" style="-fx-border-color: #000000; -fx-background-color: #ADD8E6;">
                      <children>
                         <Pane fx:id="editorPane" layoutX="7.0" layoutY="8.0" prefHeight="273.0" prefWidth="302.0" visible="false">
                            <children>
