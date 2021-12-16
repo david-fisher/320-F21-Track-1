@@ -40,7 +40,7 @@ public class RNG extends Savable {
     }
 
     public RNG(String id, int[] range) {
-        super();
+        super(id);
         this.range = range;
         this.seed = -1;
         this.rand = new Random();
