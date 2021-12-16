@@ -47,12 +47,15 @@ public class RuleEditorController {
 	@FXML
 	private HBox addButtonContainer, transitionButtonContainer;
 	@FXML
+	private TextField pointsToWin;
+	@FXML
 	private TextFlow takeFromPlayer, givePlayer, movePlayer, tileNum, numCards, numPoints;
 
 	// hash table with array tile 1 tile 2 and value group
 	private LinkedHashMap<List<Rectangle>, Polyline> tileMapping = new LinkedHashMap<List<Rectangle>, Polyline>();
 	private Polyline currentTransition;
 	private boolean addTransitionSelected = false;
+	private HashMap<Rectangle, Tile> tileMap = new HashMap<Rectangle, Tile>();
 
 	@FXML
 	private ComboBox<String>[] dropdowns = new ComboBox[5];
@@ -527,6 +530,32 @@ public class RuleEditorController {
 		transitionAlreadyExists.setVisible(false);
 		transitionButtonContainer.setVisible(false);
 		doneEditingTransition.setVisible(false);
+		
+		// get current board from local storage and display tiles
+		ArrayList<Tile> boardTiles = new ArrayList<Tile>();
+		LocalStorage localStorage = LocalStorage.getInstance();
+		if(localStorage.storage.containsKey("board")) {
+			gameBoard = (Board) localStorage.storage.get("board");
+			boardTiles = gameBoard.get_tiles();
+			for(Tile tile: boardTiles) {
+				Rectangle t = new Rectangle();
+				t.setX(tile.getCoordinate().get(0)*40);
+				t.setY(tile.getCoordinate().get(1)*40);
+				t.setWidth(30);
+				t.setHeight(30);
+				EventHandler<MouseEvent> clickTile = new EventHandler<MouseEvent>() { 
+					@Override 
+					public void handle(MouseEvent e) { 
+						selectTile(e);
+					} 
+				};
+				tileMap.put(t, tile);
+				t.setOnMousePressed(clickTile);
+				board.getChildren().add(t);
+			}
+		}
+		// TODO: get current board transitions and display them
+		
 	}
 
 	// handles add transition and cancel buttons
@@ -570,21 +599,21 @@ public class RuleEditorController {
 				double arrowAngle = Math.toRadians(45.0);
 				double arrowLength = 10.0;
 
-				double lineAngle = Math.atan2(selectedTile1.getLayoutY() - selectedTile2.getLayoutY(), selectedTile1.getLayoutX() - selectedTile2.getLayoutX());
+				double lineAngle = Math.atan2(selectedTile1.getY() - selectedTile2.getY(), selectedTile1.getX() - selectedTile2.getX());
 
-				double x1 = Math.cos(lineAngle + arrowAngle) * arrowLength + selectedTile2.getLayoutX();
-				double y1 = Math.sin(lineAngle + arrowAngle) * arrowLength + selectedTile2.getLayoutY();
+				double x1 = Math.cos(lineAngle + arrowAngle) * arrowLength + selectedTile2.getX();
+				double y1 = Math.sin(lineAngle + arrowAngle) * arrowLength + selectedTile2.getY();
 
-				double x2 = Math.cos(lineAngle - arrowAngle) * arrowLength + selectedTile2.getLayoutX();
-				double y2 = Math.sin(lineAngle - arrowAngle) * arrowLength + selectedTile2.getLayoutY();
+				double x2 = Math.cos(lineAngle - arrowAngle) * arrowLength + selectedTile2.getX();
+				double y2 = Math.sin(lineAngle - arrowAngle) * arrowLength + selectedTile2.getY();
 
 				Polyline arrow = new Polyline();
 				arrow.getPoints().addAll(new Double[]{
-						selectedTile1.getLayoutX(), selectedTile1.getLayoutY(), 
-						selectedTile2.getLayoutX(), selectedTile2.getLayoutY(),
-						selectedTile2.getLayoutX(), selectedTile2.getLayoutY(), 
+						selectedTile1.getX(), selectedTile1.getY(), 
+						selectedTile2.getX(), selectedTile2.getY(),
+						selectedTile2.getX(), selectedTile2.getY(), 
 						x1, y1,
-						selectedTile2.getLayoutX(), selectedTile2.getLayoutY(), 
+						selectedTile2.getX(), selectedTile2.getY(), 
 						x2, y2
 				});
 				arrow.setStroke(Color.GREEN);
@@ -603,13 +632,15 @@ public class RuleEditorController {
 					EventHandler<MouseEvent> selectTransition = new EventHandler<MouseEvent>() { 
 						@Override 
 						public void handle(MouseEvent e) { 
-							Polyline transition = (Polyline) e.getSource();
-							currentTransition = transition;
-							transition.setStroke(Color.RED);
-							transitionAlreadyExists.setVisible(false);
-							addButtonContainer.setVisible(false);
-							transitionButtonContainer.setVisible(true);
-							doneEditingTransition.setVisible(true);
+							if (!addTransitionSelected) {
+								Polyline transition = (Polyline) e.getSource();
+								currentTransition = transition;
+								transition.setStroke(Color.RED);
+								transitionAlreadyExists.setVisible(false);
+								addButtonContainer.setVisible(false);
+								transitionButtonContainer.setVisible(true);
+								doneEditingTransition.setVisible(true);
+							}
 						} 
 					};
 					arrow.setOnMousePressed(selectTransition);
@@ -644,19 +675,19 @@ public class RuleEditorController {
 		double arrowAngle = Math.toRadians(45.0);
 		double arrowLength = 10.0;
 
-		double lineAngle = Math.atan2(directions.get(0).get(1).getLayoutY() - directions.get(0).get(0).getLayoutY(), directions.get(0).get(1).getLayoutX() - directions.get(0).get(0).getLayoutX());
-		double x1 = Math.cos(lineAngle + arrowAngle) * arrowLength + directions.get(0).get(0).getLayoutX();
-		double y1 = Math.sin(lineAngle + arrowAngle) * arrowLength + directions.get(0).get(0).getLayoutY();
+		double lineAngle = Math.atan2(directions.get(0).get(1).getY() - directions.get(0).get(0).getY(), directions.get(0).get(1).getX() - directions.get(0).get(0).getX());
+		double x1 = Math.cos(lineAngle + arrowAngle) * arrowLength + directions.get(0).get(0).getX();
+		double y1 = Math.sin(lineAngle + arrowAngle) * arrowLength + directions.get(0).get(0).getY();
 
-		double x2 = Math.cos(lineAngle - arrowAngle) * arrowLength + directions.get(0).get(0).getLayoutX();
-		double y2 = Math.sin(lineAngle - arrowAngle) * arrowLength + directions.get(0).get(0).getLayoutY();
+		double x2 = Math.cos(lineAngle - arrowAngle) * arrowLength + directions.get(0).get(0).getX();
+		double y2 = Math.sin(lineAngle - arrowAngle) * arrowLength + directions.get(0).get(0).getY();
 		if (directions.size() == 1) {
 			// add second arrowHead
 			currentTransition.getPoints().addAll(new Double[]{
-					directions.get(0).get(1).getLayoutX(), directions.get(0).get(1).getLayoutY(),
-					directions.get(0).get(0).getLayoutX(), directions.get(0).get(0).getLayoutY(),
+					directions.get(0).get(1).getX(), directions.get(0).get(1).getY(),
+					directions.get(0).get(0).getX(), directions.get(0).get(0).getY(),
 					x1, y1,
-					directions.get(0).get(0).getLayoutX(), directions.get(0).get(0).getLayoutY(),
+					directions.get(0).get(0).getX(), directions.get(0).get(0).getY(),
 					x2, y2
 			});
 			tileMapping.put(Arrays.asList(newDirection), currentTransition);
@@ -665,11 +696,11 @@ public class RuleEditorController {
 			tileMapping.remove(Arrays.asList(toRemove));
 			Polyline newTransition = new Polyline();
 			newTransition.getPoints().addAll(new Double[]{
-					directions.get(0).get(1).getLayoutX(), directions.get(0).get(1).getLayoutY(), 
-					directions.get(0).get(0).getLayoutX(), directions.get(0).get(0).getLayoutY(),
-					directions.get(0).get(0).getLayoutX(), directions.get(0).get(0).getLayoutY(), 
+					directions.get(0).get(1).getX(), directions.get(0).get(1).getY(), 
+					directions.get(0).get(0).getX(), directions.get(0).get(0).getY(),
+					directions.get(0).get(0).getX(), directions.get(0).get(0).getY(), 
 					x1, y1,
-					directions.get(0).get(0).getLayoutX(), directions.get(0).get(0).getLayoutY(), 
+					directions.get(0).get(0).getX(), directions.get(0).get(0).getY(), 
 					x2, y2
 			});
 			newTransition.setStroke(Color.RED);
@@ -686,7 +717,11 @@ public class RuleEditorController {
 	// deletes the selected transition
 	@FXML
 	void deleteTransition() {
-		tileMapping.values().remove(currentTransition);
+		for (List<Rectangle> tilePair : tileMapping.keySet()) {
+			if (tileMapping.get(tilePair).equals(currentTransition)) {
+				tileMapping.remove(tilePair);
+			}
+		}
 		board.getChildren().remove(currentTransition);
 		addButtonContainer.setVisible(true);
 		transitionButtonContainer.setVisible(false);
@@ -701,6 +736,49 @@ public class RuleEditorController {
 		doneEditingTransition.setVisible(false);
 		currentTransition.setStroke(Color.GREEN);
 	}	
+	
+	@FXML
+	void saveMovementRule() {
+		// remove all neighbors in local storage
+		ArrayList<Tile> boardTiles = new ArrayList<Tile>();
+		LocalStorage localStorage = LocalStorage.getInstance();
+		if (localStorage.storage.containsKey("board")) {
+			gameBoard = (Board) localStorage.storage.get("board");
+			boardTiles = gameBoard.get_tiles();
+			for (Tile tile: boardTiles) {
+				tile.remove_neighbors();
+			}
+		}
+		// re-add tile neighbors to local storage
+		for (List<Rectangle> tiles: tileMapping.keySet()) {
+			Tile tileToEdit = tileMap.get(tiles.get(0));
+			tileToEdit.update_neighbor(tileMap.get(tiles.get(1)));
+		}
+		Dialog<String> saved = new Dialog<String>();
+		String content = "Rules have been saved!";
+		saved.setTitle("Saving Movement Rules");
+		saved.getDialogPane().setContentText(content);
+		ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+		saved.getDialogPane().getButtonTypes().add(type);
+		saved.showAndWait();
+	}
+	
+	@FXML
+	void saveWinCondition() {
+		int points = Integer.parseInt(pointsToWin.getText());
+		LocalStorage localStorage = LocalStorage.getInstance();
+		if(localStorage.storage.containsKey("board")) {
+			gameBoard = (Board) localStorage.storage.get("board");
+			gameBoard.setWinCondition(points);
+		}
+		Dialog<String> saved = new Dialog<String>();
+		String content = "Rules have been saved!";
+		saved.setTitle("Saving Movement Rules");
+		saved.getDialogPane().setContentText(content);
+		ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+		saved.getDialogPane().getButtonTypes().add(type);
+		saved.showAndWait();
+	}
 
 
 }
