@@ -1,6 +1,7 @@
 package GameEditor.Controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -10,6 +11,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class TokenController {
+
+
+    //ignore for now - Card Stuff
+    @FXML
+    void displayNewDeck(ActionEvent event) {
+
+    }
+
+    //Movement Piece Stuff
     public void changeTokenMenu(ActionEvent event) throws IOException {
         Node node = (Node) event.getSource();
         String tokenType = (String) node.getUserData();
@@ -23,26 +33,16 @@ public class TokenController {
         else {}
     }
 
+    //displays popup for creating a new movement piece
     public void addMovementPiece(ActionEvent event) throws IOException {
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        Parent addMovementPiece = FXMLLoader.load(getClass().getResource("../Views/AddMovementPiece.fxml"));
-        app_stage.setScene(new Scene (addMovementPiece));
-
+        Parent root = FXMLLoader.load(getClass().getResource("../Views/NewMovementPiece.fxml"));
+        Stage customTokenEditor = new Stage();
+        customTokenEditor.setTitle("New Movement Piece");
+        customTokenEditor.setScene(new Scene(root));
+        customTokenEditor.show();
     }
 
-    public void onClick(ActionEvent event) throws IOException {
-        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    public void saveMovementPiece(ActionEvent event) throws IOException {}
 
-        Parent addMovementPiece = FXMLLoader.load(getClass().getResource("Views/AddMovementPiece.fxml"));
-        app_stage.setScene(new Scene (addMovementPiece));
-    }
 
-    public void changeScene(Scene in, Scene out){};
-
-    public  void displayNewDeck(){}
-
-    public  void displayNewToken(){}
-
-    public void enableValue(){}
 }

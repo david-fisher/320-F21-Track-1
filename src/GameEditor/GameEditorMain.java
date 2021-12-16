@@ -15,7 +15,7 @@ public class GameEditorMain extends Application {
         launch(args);
     }
 
-
+    
     /*
       main Stage for the GameEditor.
       Integrates the boardEditor into the GameEditor menu.
@@ -25,8 +25,8 @@ public class GameEditorMain extends Application {
         Parent menu = FXMLLoader.load(getClass().getResource("Views/GameEditorMain.fxml"));
         Scene mainMenu = new Scene(menu);
         TabPane tabpane = (TabPane) menu.getChildrenUnmodifiable().get(0);
-        tabpane.getTabs().get(0).setContent(new BoardEditor().startBoardEditor());
         primaryStage.setScene(mainMenu);
+        tabpane.getTabs().get(0).setContent(new BoardEditor().startBoardEditor(primaryStage));
         primaryStage.show();
     }
 }

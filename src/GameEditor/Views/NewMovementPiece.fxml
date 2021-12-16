@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameEditor.Controllers.TokenController">
+    <children>
+        <TextField fx:id="nameField" layoutX="7.0" layoutY="6.0" prefHeight="26.0" prefWidth="164.0" promptText="Enter Name" />
+        <ImageView fx:id="image" fitHeight="125.0" fitWidth="125.0" layoutX="27.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+        <Button layoutX="47.0" layoutY="169.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="84.0" text="Choose Image" textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font size="10.0" />
+            </font>
+        </Button>
+        <Label layoutX="197.0" layoutY="60.0" text="Quantity given to player:" />
+        <Label layoutX="194.0" layoutY="91.0" text="Movement Restrictions" underline="true">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Button fx:id="cancelButton" layoutX="376.0" layoutY="8.0" mnemonicParsing="false" onAction="#cancelToken" prefWidth="60.0" text="Cancel" />
+        <Button fx:id="saveButton" layoutX="309.0" layoutY="8.0" mnemonicParsing="false" onAction="#saveToken" prefWidth="60.0" text="Save" />
+        <CheckBox layoutX="197.0" layoutY="160.0" mnemonicParsing="false" text="Forward Only" />
+        <CheckBox layoutX="197.0" layoutY="115.0" mnemonicParsing="false" text="None" />
+        <Pane fx:id="valuePane" disable="true" layoutX="258.0" layoutY="131.0" prefHeight="32.0" prefWidth="125.0" />
+        <TextField fx:id="quantity" layoutX="355.0" layoutY="56.0" prefHeight="26.0" prefWidth="43.0" />
+      <CheckBox layoutX="197.0" layoutY="138.0" mnemonicParsing="false" text="Diagonal Only" />
+    </children>
+</AnchorPane>
