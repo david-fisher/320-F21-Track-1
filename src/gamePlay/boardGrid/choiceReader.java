@@ -3,15 +3,15 @@ package gamePlay.boardGrid;
 import Objects.Deck;
 import Objects.Player;
 import Objects.Tile;
-import State.Choice;
-import State.GameState;
-import State.MoveChoice;
+import State.*;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +50,20 @@ public class choiceReader {
 
     private void parseList(){
         for(int i = 0; i < choiceList.size(); i++){
-            if(choiceList.get(0) instanceof MoveChoice){
+            if(choiceList.get(i) instanceof MoveChoice){
                 move((MoveChoice) choiceList.get(i), i);
+                continue;
+            }
+            if(choiceList.get(i) instanceof DrawCardChoice){
+                draw((DrawCardChoice) choiceList.get(0), i);
+                continue;
+            }
+            if(choiceList.get(i) instanceof PassChoice){
+                System.out.println("We didn't implement a pass button");
+                continue;
+            }
+            if(choiceList.get(i) instanceof WinChoice){
+                //Stage primaryStage = spinner.getScene().getWindow();
             }
         }
     }
@@ -63,6 +75,17 @@ public class choiceReader {
             @Override
             public void handle(MouseEvent event) {
                 gameState.progressGame(choice);
+                //TODO: Update board from GameState
+            }
+        });
+    }
+
+    private void draw(DrawCardChoice c, int choice){
+        deck.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameState.progressGame(choice);
+                //TODO: Update board from GameState
             }
         });
     }
