@@ -11,7 +11,7 @@ public class Demo {
     public Demo() {
     }
 
-    public Board getBoard () {
+    public Board getBoard() {
         /*
         *   [t1]  -> [t2] -> [t3] ->  [t4]
         *     ^        |        ^       v
@@ -22,8 +22,12 @@ public class Demo {
         *   [t12]      |        |      [t7] 
         *     ^        v        |       v
         *   [t11] <- [t10] <- [t9] <- [t8]            
+         */
         */ 
-        
+         */
+        */ 
+         */
+
         ArrayList<Tile> tiles = new ArrayList<Tile>();
         // ADD TILES TO BOARD  |
         //                     |
@@ -68,7 +72,7 @@ public class Demo {
         tile7Attr.put("name", "Tile 7");
         // t7
         ArrayList<Rule> t7Rule = new ArrayList<Rule>();
-        t7Rule.add(new MoveRule(new RNG(new int[] {0, 3})));
+        t7Rule.add(new MoveRule(new RNG(new int[] { 0, 3 })));
         Tile t7 = new Tile(3, 3, t7Rule, tile7Attr, 7);
 
         Hashtable<String, String> tile8Attr = new Hashtable<String, String>();
@@ -101,7 +105,7 @@ public class Demo {
         Hashtable<String, String> tile13Attr = new Hashtable<String, String>();
         tile13Attr.put("name", "Tile 13");
         // t13
-        Tile t13 = new Tile(2, 0, null, tile13Attr, new int[] {0, 15});
+        Tile t13 = new Tile(2, 0, null, tile13Attr, new int[] { 0, 15 });
 
         Hashtable<String, String> tile14Attr = new Hashtable<String, String>();
         tile14Attr.put("name", "Tile 14");
@@ -141,9 +145,9 @@ public class Demo {
         tiles.add(t14);
 
         ArrayList<Rule> turnRules = new ArrayList<Rule>();
-        turnRules.add(new MoveRule(new RNG(new int[] {1, 3})));
+        turnRules.add(new MoveRule(new RNG(new int[] { 1, 3 })));
         turnRules.add(new PlayCardRule());
-                
+
         Deck deck = new Deck();
 
         
@@ -162,10 +166,12 @@ public class Demo {
         deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(2)))), new ImageView()));
 
         // Add card that moves you 5-7 tiles
-        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(new int[] { 5, 7 })))), new ImageView()));
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(new int[] { 5, 7 })))),
+                new ImageView()));
 
         // Add card that moves you 2-5 tiles
-        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(new int[] { 2, 5 })))), new ImageView()));
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(new int[] { 2, 5 })))),
+                new ImageView()));
 
         // Add card that gives you 5 points
         deck.addCard(new Card(5, new ImageView()));
@@ -190,39 +196,44 @@ public class Demo {
     public static void main(String[] args) {
         Board board = new Demo().getBoard();
         board.setWinCondition(50);
-        
+
         ArrayList<Player> players = new ArrayList<Player>();
 
         Hashtable<String, String> player1Attr = new Hashtable<String, String>();
         player1Attr.put("name", "Player 1");
         Hashtable<String, String> aiPlayerAttr = new Hashtable<String, String>();
         aiPlayerAttr.put("name", "Bot");
-        
+
         players.add(new Player(board.getStartTile(), player1Attr));
         players.add(new AIPlayer(board.getStartTile(), aiPlayerAttr));
 
         GameState gs = new GameState(players, board);
-        
-        List<Choice> choices = gs.progressGame();
+
+        ArrayList<Choice> choices = gs.progressGame();
         Scanner input = new Scanner(System.in);
 
         while (!(choices.get(0) instanceof WinChoice)) {
-        
+
             System.out.println("Choices: ");
             for (int i = 0; i < choices.size(); i++) {
                 System.out.println(i + ": " + choices.get(i).toString());
             }
-            
+
             System.out.println("Player: " + gs.getCurPlayer().getAttributes().get("name"));
             System.out.println("Current Tile: " + gs.getCurPlayer().getTile().getAttributes().get("name"));
             System.out.println("Total Points: " + gs.getCurPlayer().getScore());
-            
-            int option = input.nextInt();
-            
+
+            int option;
+            Player player = gs.getCurPlayer();
+            if (player instanceof AIPlayer) {
+                option = ((AIPlayer) player).choose(choices);
+            } else {
+                option = input.nextInt();
+            }
+
             choices = gs.progressGame(option);
         }
         input.close();
     }
 
 }
-

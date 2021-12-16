@@ -34,7 +34,7 @@ public class GameState {
    * Takes in the choice the last player has made and returns a new list of
    * choices for the next player. This is the public-facing API of GameState.
    */
-  public List<Choice> progressGame(int choice) {
+  public ArrayList<Choice> progressGame(int choice) {
     choices.get(choice).execute(this); // Execute the choice the last player has made.
     choices.clear();
     for (Player p : players) {
@@ -49,7 +49,7 @@ public class GameState {
   }
 
   // Initial turn.
-  public List<Choice> progressGame() {
+  public ArrayList<Choice> progressGame() {
     curRule.execute(this);
     curRule = nextRule();
     return choices;
