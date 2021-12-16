@@ -99,11 +99,22 @@ public class choiceReader {
         });
     }
 
+    private void invChoice(PlayCardChoice p, int choice){
+        invButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //if()
+            }
+        });
+    }
+
     private void changeBoard(){
         for(int i = 0; i < playerList.size(); i++){
             board.movePiece((int) cordList.get(i)[0], (int) cordList.get(i)[1], playerList.get(i).getTile().getX(), playerList.get(i).getTile().getY());
             board.getBoardCell(playerList.get(i).getTile().getX(), playerList.get(i).getTile().getY()).setOnMouseClicked(null);
+            board.updatePlayerScore(playerList.get(i).getAttributes().get("name"), playerList.get(i).getScore());
         }
+
         nullActions();
         parseList();
     }

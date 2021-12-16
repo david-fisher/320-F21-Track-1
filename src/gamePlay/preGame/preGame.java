@@ -16,7 +16,7 @@ public class preGame{
     }
 
     private static ArrayList<ArrayList<StackPane>> generateTestCell(){
-        int[] size = {8, 7};
+        int[] size = {5, 5};
         ArrayList<ArrayList<StackPane>> stackTable = new ArrayList<>();
         for (int i = 0; i < size[0]; i++){
             ArrayList<StackPane> row = new ArrayList<>();
