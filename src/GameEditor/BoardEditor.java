@@ -393,8 +393,10 @@ public void dragNDrop_StackPane(StackPane sp, boardGrid root, int x, int y) {
 public void rightClick_StackPane(StackPane sp, boardGrid root){
     //*****Color Picker function */
     ContextMenu contextMenu = new ContextMenu();
+    contextMenu.setStyle("-fx-background-color: black;");
     //Intial a colorpicker, display the current color on shape
     ColorPicker colorssPicker = new ColorPicker(Color.web(((Shape) sp.getChildren().get(0)).getFill().toString()));
+    colorssPicker.setStyle("-fx-background-color: black;");
     //*****Backgraound Uploader function */  
     MenuItem backgrounduploader_item = new MenuItem(null, new Label("Upload image"));
     
@@ -435,7 +437,7 @@ public void rightClick_StackPane(StackPane sp, boardGrid root){
 
     MenuItem colorpicker_item = new MenuItem(null,colorssPicker);
     MenuItem deleter_item = new MenuItem(null, new Label("Delete Shape"));
-  
+    
     //Handle right click
     colorpicker_item.setOnAction(new EventHandler<ActionEvent>(){
         @Override
