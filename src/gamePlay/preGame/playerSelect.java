@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Objects;
 
 import Objects.*;
@@ -31,7 +32,7 @@ public class playerSelect {
     private static boolean forward = false;
     private static ArrayList<selectSwitch> aiSwitches = new ArrayList<>();
     private static Hashtable<String, String> allPlayers = new Hashtable<>();
-    private static ArrayList<Player> playersList = new ArrayList<Player>();
+    private static List<Player> playersList = new ArrayList<Player>();
 
     public playerSelect(){
         number = 0;
