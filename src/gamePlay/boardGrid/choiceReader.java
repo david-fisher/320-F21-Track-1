@@ -94,7 +94,6 @@ public class choiceReader {
             @Override
             public void handle(ActionEvent event) {
                 gameState.progressGame(choice);
-                //TODO: Update board from GameState
             }
         });
     }
