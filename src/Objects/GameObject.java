@@ -7,7 +7,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 // general class for a game object such as a game piece or a tile
-public class GameObject extends Saveable {
+public class GameObject extends Savable {
     /*
      * param: x - the x coordinate of the object
      * y - the y coordinate of the object
