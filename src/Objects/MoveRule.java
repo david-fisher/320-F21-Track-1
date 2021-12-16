@@ -27,6 +27,7 @@ public class MoveRule extends Rule {
   }
 
   public void execute(GameState state) {
+    destinations.clear();
     Player player = state.getCurPlayer();
     if (stepCount != null) {
       destinations.addAll(state.getNextTiles(player.getTile(), stepCount.randInt()));
