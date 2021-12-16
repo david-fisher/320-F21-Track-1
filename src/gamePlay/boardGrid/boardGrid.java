@@ -60,6 +60,7 @@ public class boardGrid {
                 currentCell.loadCellImage(i % 2 == 0? "src/gamePlay/images/fish.jpeg": "src/gamePlay/images/marius.jpeg");
                 currentCell.setIndex(i + j * width + 1);
                 currentRow.add(currentCell);
+
             }
             cellTable.add(currentRow);
         }
@@ -97,15 +98,12 @@ public class boardGrid {
     }
 
     /*
-    this function moves a piece from the original x and y on the grid to the destination x and y on the grid. Does not preserve the background of the board.
-    deletes everything in the destination square, leaves nothing in the origin
+    Will move whatever is in the top of the stackpane to another location
     */
     public static void movePiece(int origX, int origY, int destX, int destY){
         StackPane origin = getBoardCell(origX, origY);
         StackPane destination = getBoardCell(destX, destY);
-        destination.getChildren().removeAll();
-        destination.getChildren().addAll(origin.getChildren());
-        origin.getChildren().removeAll();
+        destination.getChildren().addAll(origin.getChildren().get(1));
     }
 
     /*
@@ -203,6 +201,7 @@ public class boardGrid {
         StackPane a = getBoardCell(3, 3);
         a.getChildren().remove(0, 2);
         a.getChildren().addAll(getBoardCell(1, 0).getChildren());
+        //movePiece(3, 3, 4, 4);
 
         return board;
     }
