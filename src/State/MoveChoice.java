@@ -1,4 +1,5 @@
 package State;
+
 import Objects.*;
 
 public class MoveChoice extends Choice {
@@ -15,7 +16,9 @@ public class MoveChoice extends Choice {
 
   public void execute(GameState state) {
     state.getCurPlayer().moveTo(this.tile);
-    tile.executeRules(state);
+    if (tile.getRules() != null && !tile.getRules().isEmpty()) {
+      tile.executeRules(state);
+    }
   }
 
   public String toString() {
