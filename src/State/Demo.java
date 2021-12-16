@@ -124,19 +124,19 @@ public class Demo {
         // V
 
         // Add card that moves you to the starting tile
-        deck.addCard(new Card(new ArrayList<Rule>().add(new MoveRule(t1)), new ImageView()));
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(t1))), new ImageView()));
 
         // Add card that moves you 4 tiles
-        deck.addCard(new Card(new ArrayList<Rule>().add(new MoveRule(new RNG(4))), new ImageView()));
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(4)))), new ImageView()));
 
         // Add card that moves you 2 tiles
-        deck.addCard(new Card(new ArrayList<Rule>().add(new MoveRule(new RNG(2))), new ImageView()));
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(2)))), new ImageView()));
 
         // Add card that moves you 5-7 tiles
-        deck.addCard(new Card(new ArrayList<Rule>().add(new MoveRule(new RNG(new int[] { 5, 7 }))), new ImageView()));
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(new int[] { 5, 7 })))), new ImageView()));
 
         // Add card that moves you 2-5 tiles
-        deck.addCard(new Card(new ArrayList<Rule>().add(new MoveRule(new RNG(new int[] { 2, 5 }))), new ImageView()));
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new MoveRule(new RNG(new int[] { 2, 5 })))), new ImageView()));
 
         // Add card that gives you 5 points
         deck.addCard(new Card(5, new ImageView()));
@@ -151,8 +151,9 @@ public class Demo {
         deck.addCard(new Card(50, new ImageView()));
 
         // Add card that gives you 2 more cards but subtracts 10 points
-        deck.addCard(new Card(new ArrayList<Rule>().add(new DrawCardRule(2)), -10, new ImageViewer()));
+        deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new DrawCardRule(2))), -10, new ImageView()));
 
         return new Board(tiles, turnRules, deck);
     }
 }
+
