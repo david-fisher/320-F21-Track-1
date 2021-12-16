@@ -21,6 +21,7 @@ public class RNGController {
 
     private ArrayList<RNG> vars = new ArrayList<RNG>();
     private HashMap<String, RNG> map = new HashMap<String, RNG>();
+    private LocalStorage localStorage = LocalStorage.getInstance();
 
     // DeckIds is a final class that is also used in TokenController to
     // maintain a list of Deck objects between controllers
@@ -75,15 +76,26 @@ public class RNGController {
     @FXML
     private ComboBox<String> TypeSelection;
 
+    @FXML
+    private void save() {
+        if (localStorage.storage.containsKey("RNG")) {
+            localStorage.storage.remove("RNG");
+        }
+        localStorage.storage.put("RNG", vars);
+        a.setAlertType(Alert.AlertType.INFORMATION);
+        a.setContentText("RNG saved");
+        a.show();
+    }
+
     // addNewRNG() checks the user inputs and adds a new RNG object
     @FXML
     private void addNewRNG() {
         // get the selected type from the fxml file
         String type = TypeSelection.getSelectionModel().getSelectedItem();
+        String name = NameField.getText();
         switch (type) {
             case "Dice":
             case "Spinner":
-                String name = NameField.getText();
                 int[] temp = new int[2];
                 // the try-catch is to make sure that the inputs are proper
                 try {
@@ -97,14 +109,20 @@ public class RNGController {
                 }
 
                 // this object is from the Objects folder
-                RNG rng = new RNG(temp);
+                RNG rng = new RNG(name, temp);
                 vars.add(rng);
                 map.put(name, rng);
-                String stringView = "";
                 Label label = new Label(name + " Type:  \nMin: " + temp[0] + " Max: " + temp[1]);
                 dialogContent.getItems().add(0, label);
                 break;
             case "Cards":
+                String selectedDeck = (String)Decks.getSelectionModel().getSelectedItem();
+                // deck based RNG was not implemented by the Object Models team
+//                RNG rng1 = new RNG(name, ids.getVal(selectedDeck));
+//                vars.add(rng1);
+//                map.put(name, rng1);
+                Label label1 = new Label(name + " Type:  \nDeck Name: " +selectedDeck);
+                dialogContent.getItems().add(0, label1);
                 break;
             default:
                 a.setAlertType(Alert.AlertType.ERROR);
@@ -133,11 +151,19 @@ public class RNGController {
 
     // initialize() is called at the startup for JavaFX applications
     public void initialize() {
+        if (localStorage.storage.containsKey("RNG")) {
+            this.vars = (ArrayList<RNG>) localStorage.storage.get("RNG");
+            for (int i=0; i < this.vars.size(); i++) {
+                this.map.put(this.vars.get(i).get_id(), this.vars.get(i));
+            }
+        }
         updateDeckSelection();
         Button b = new Button("Delete RNG");
         b.setOnAction(event);
         dialogContent.getItems().add(b);
-        TypeSelection.getItems().setAll("Dice", "Spinner", "Cards");
+        // Card based RNG is not implemented
+//        TypeSelection.getItems().setAll("Dice", "Spinner", "Cards");
+        TypeSelection.getItems().setAll("Dice", "Spinner");
 
         // add the event listerner for type changes
         TypeSelection.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
