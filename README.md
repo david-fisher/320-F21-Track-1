@@ -35,7 +35,7 @@ A game player allows a user to run a created game and interact with it through a
 ### General Installation Guidelines
 
 1. Clone 320-F21-Track-1 from its [GitHub repo](https://github.com/david-fisher/320-F21-Track-1).
-1. Install [JDK](https://www.oracle.com/java/technologies/downloads/) (version 8)
+1. Install [JDK](https://www.oracle.com/java/technologies/downloads/) (version 8).
 1. Download [JavaFX .jar files](https://gluonhq.com/products/javafx/).
 1. Download [gson .jar file](https://github.com/google/gson).
 1. Add JavaFX and gson .jar filepaths to IDE reference library (ensure module imports are correct for JavaFX).
