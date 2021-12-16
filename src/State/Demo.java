@@ -154,7 +154,9 @@ public class Demo {
         // Add card that gives you 2 more cards but subtracts 10 points
         deck.addCard(new Card(new ArrayList<Rule>(Arrays.asList(new DrawCardRule(2))), -10, new ImageView()));
 
-        return new Board(tiles, turnRules, deck);
+        Board b = new Board(tiles, turnRules, deck);
+        b.setStartTile(t1);
+        return b;
     }
 
     public static void main(String[] args) {
@@ -183,7 +185,8 @@ public class Demo {
                 System.out.println(i + ": " + choices.get(i).toString());
             }
             
-            System.out.println("Total Points: " + gs.getCurPlayer().getAttributes().get("name"));
+            System.out.println("Player: " + gs.getCurPlayer().getAttributes().get("name"));
+            System.out.println("Current Tile: " + gs.getCurPlayer().getTile());
             System.out.println("Total Points: " + gs.getCurPlayer().getScore());
 
             int option = input.nextInt();

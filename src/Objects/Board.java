@@ -70,6 +70,10 @@ public class Board extends Savable implements IBoard {
 		return this.startTile;
 	}
 
+	public void setStartTile(Tile t) {
+		this.startTile = t;
+	}
+
 	public void setWinCondition(int winCondition) {
 		this.winCondition = winCondition;
 	}
