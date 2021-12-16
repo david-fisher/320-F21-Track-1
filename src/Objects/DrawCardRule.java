@@ -16,4 +16,8 @@ public class DrawCardRule extends Rule {
   public void execute(GameState state) {
     state.addChoice(new DrawCardChoice(state.getDeck(), repeat));
   }
+
+  public String prettyPrint() {
+    return "Draw " + repeat + " card" + (repeat > 1 ? "s" : "") + " from the deck.";
+  }
 }

@@ -13,4 +13,8 @@ public class PlayCardRule extends Rule {
     }
     state.getCurPlayer().getHand().get().forEach(card -> state.addChoice(new PlayCardChoice(card)));
   }
+
+  public String prettyPrint() {
+    return "Play a card from your hand.";
+  }
 }
