@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 import Objects.*;
+import State.*;
 
 public class playerSelect {
     private static Integer number;  // total number of players
@@ -173,15 +174,21 @@ public class playerSelect {
 
             warn.setVisible(false);
             for (int i = 0; i < inputList.size(); i++){
-                allPlayers.put("name", inputList.get(i).getText());
-                Player player = new Player(allPlayers);
                 String currentName = inputList.get(i).getText();
                 nameList.add(currentName.isEmpty()? null : currentName);
-                playersList.add(player);
                 boolean a = aiSwitches.get(i).switchState();
+                if (a == true) {
+                    allPlayers.put("ai", inputList.get(i).getText());
+                    AIPlayer ai = new AIPlayer(allPlayers);
+                    playersList.add(ai);
+                }
+                else {
+                    allPlayers.put("name", inputList.get(i).getText());
+                    Player player = new Player(allPlayers);
+                    playersList.add(player);
+                }
                 AIList.add(aiSwitches.get(i).switchState());
             }
-            System.out.println(playersList);
             for (int i = 0; i < inputList.size(); i++) {     // test printing call
                 System.out.println(inputList.get(i).getText());
                 System.out.print(AIList.get(i)? " I want AI" : " No AI");
