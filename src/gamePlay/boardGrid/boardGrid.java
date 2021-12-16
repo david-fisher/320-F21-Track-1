@@ -46,17 +46,6 @@ public class boardGrid {
         }
     }
 
-    public static void addInitialPlayers(List<Player> players) {
-        for (int i = 0; i < players.size(); i++) {
-            Player player = players.get(i);
-            Tile tile = player.getTile();
-            StackPane destination = getBoardCell(tile.getX(), tile.getY());
-            Rectangle rect = new Rectangle(80,80);
-            rect.setFill(colors.get(i % 5));
-            destination.getChildren().addAll(rect);
-        }
-    }
-
     // convert possible stackPane table to boardCell table
     // TODO: work with Binary-Brothers
     private static ArrayList<ArrayList<boardCell>> stackToCell(ArrayList<ArrayList<StackPane>> stackTable){
@@ -122,6 +111,18 @@ public class boardGrid {
         StackPane origin = getBoardCell(origX, origY);
         StackPane destination = getBoardCell(destX, destY);
         destination.getChildren().addAll(origin.getChildren().get(1));
+    }
+
+    //Add initial pieces to the board
+    public static void addInitialPlayers(List<Player> players) {
+        for (int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+            Tile tile = player.getTile();
+            StackPane destination = getBoardCell(tile.getX(), tile.getY());
+            Rectangle rect = new Rectangle(80,80);
+            rect.setFill(colors.get(i % 5));
+            destination.getChildren().addAll(rect);
+        }
     }
 
     /*
