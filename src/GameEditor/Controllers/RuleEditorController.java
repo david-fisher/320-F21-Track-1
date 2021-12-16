@@ -772,8 +772,8 @@ public class RuleEditorController {
 			gameBoard.setWinCondition(points);
 		}
 		Dialog<String> saved = new Dialog<String>();
-		String content = "Rules have been saved!";
-		saved.setTitle("Saving Movement Rules");
+		String content = "Rule has been saved!";
+		saved.setTitle("Saving Win Condition");
 		saved.getDialogPane().setContentText(content);
 		ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
 		saved.getDialogPane().getButtonTypes().add(type);

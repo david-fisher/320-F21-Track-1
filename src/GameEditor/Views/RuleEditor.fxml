@@ -175,7 +175,7 @@
                   </AnchorPane>
                </content>
                <graphic>
-                  <StackPane onMouseClicked="#intializeMovementRule" prefHeight="150.0" prefWidth="200.0" rotate="90.0">
+                  <StackPane fx:id="saveMovementRule" onMouseClicked="#intializeMovementRule" prefHeight="150.0" prefWidth="200.0" rotate="90.0">
                      <children>
                         <Label maxWidth="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="104.0" rotate="90.0" text="Movement Rule" StackPane.alignment="CENTER" />
                      </children>
@@ -186,7 +186,7 @@
                      <children>
                         <HBox alignment="TOP_RIGHT" layoutX="-7.0" layoutY="19.0" prefHeight="40.0" prefWidth="492.0" spacing="5.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Save Rule" />
+                              <Button mnemonicParsing="false" onAction="#saveMovementRule" text="Save Rule" />
                            </children>
                         </HBox>
                         <HBox layoutX="21.0" layoutY="61.0" prefHeight="302.0" prefWidth="465.0">
@@ -349,7 +349,7 @@
                            <children>
                               <HBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="454.0" spacing="5.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Save Rule" />
+                                    <Button mnemonicParsing="false" onAction="#saveWinCondition" text="Save Rule" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="40.0" prefWidth="454.0" spacing="5.0">
