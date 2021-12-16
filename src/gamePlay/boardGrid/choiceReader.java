@@ -37,7 +37,7 @@ public class choiceReader {
         this.spinner = spinner;
         this.deck = deck;
         this.dice = dice;
-        this.choiceList = choiceList;
+        this.choiceList = gameState.getChoices();
         this.invButton = invButton;
         this.gameState = gameState;
         cordList.clear();

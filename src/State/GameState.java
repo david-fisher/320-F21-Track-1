@@ -137,7 +137,9 @@ public class GameState {
     return this.deck;
   }
 
-  public List<Player> getPlayers(){return this.players;};
+  public List<Player> getPlayers(){return this.players;}
+
+  public ArrayList<Choice> getChoices(){return this.choices;}
 
   public Board getBoard() {
     return this.board;
