@@ -89,9 +89,9 @@ public class Demo {
         Hashtable<String, String> tile11Attr = new Hashtable<String, String>();
         tile11Attr.put("name", "Tile 11");
         // t11
-        ArrayList<Rule> t10Rule = new ArrayList<Rule>();
-        t10Rule.add(new DrawCardRule(1));
-        Tile t11 = new Tile(4, 0, t10Rule, tile11Attr, -1);
+        ArrayList<Rule> t11Rule = new ArrayList<Rule>();
+        t11Rule.add(new DrawCardRule(1));
+        Tile t11 = new Tile(4, 0, t11Rule, tile11Attr, -1);
 
         Hashtable<String, String> tile12Attr = new Hashtable<String, String>();
         tile12Attr.put("name", "Tile 12");
@@ -216,7 +216,7 @@ public class Demo {
             System.out.println("Player: " + gs.getCurPlayer().getAttributes().get("name"));
             System.out.println("Current Tile: " + gs.getCurPlayer().getTile().getAttributes().get("name"));
             System.out.println("Total Points: " + gs.getCurPlayer().getScore());
-
+            
             int option = input.nextInt();
             
             choices = gs.progressGame(option);
