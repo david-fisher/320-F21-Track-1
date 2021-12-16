@@ -186,7 +186,7 @@ public class Demo {
             }
             
             System.out.println("Player: " + gs.getCurPlayer().getAttributes().get("name"));
-            System.out.println("Current Tile: " + gs.getCurPlayer().getTile());
+            System.out.println("Current Tile: " + gs.getCurPlayer().getTile().getAttributes().get("name"));
             System.out.println("Total Points: " + gs.getCurPlayer().getScore());
 
             int option = input.nextInt();
