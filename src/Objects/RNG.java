@@ -5,7 +5,7 @@ import java.util.*;
 /* 
 Class return an array of generated random elements
 */
-public class RNG extends Saveable {
+public class RNG extends Savable {
     private int seed;
     private int[] range;
     // private transient Random rand;

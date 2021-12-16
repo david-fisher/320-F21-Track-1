@@ -1,7 +1,7 @@
 package Objects;
 
 //Score class that can used to store and update a player's score
-public class Score extends Saveable {
+public class Score extends Savable {
     int cur_score;
 
     public Score() {

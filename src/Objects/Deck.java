@@ -2,7 +2,7 @@ package Objects;
 
 import java.util.*;
 
-public class Deck extends Saveable {
+public class Deck extends Savable {
     // cards: list of cards in the deck
     // cardQueue: list of cards in order to be drawn
     private ArrayList<Card> cards;

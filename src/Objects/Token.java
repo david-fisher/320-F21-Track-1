@@ -6,7 +6,7 @@ package Objects;
 
 import java.util.*;
 
-public class Token extends Saveable implements IToken {
+public class Token extends Savable implements IToken {
 <<<<<<< HEAD:src/Objects/Token.java
 	
 	private Board board;
