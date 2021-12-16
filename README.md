@@ -41,9 +41,9 @@ A game player allows a user to run a created game and interact with it through a
 1. Clone 320-F21-Track-1 from its [GitHub repo](https://github.com/david-fisher/320-F21-Track-1).
 1. Install [JDK](https://www.oracle.com/java/technologies/downloads/) (version 17).
 1. Download [JavaFX .jar files](https://gluonhq.com/products/javafx/).
-1. Download [gson .jar file](https://search.maven.org/artifact/com.google.code.gson/gson/2.8.9/jar).
-1. Add JavaFX and gson .jar filepaths to IDE reference library (ensure module imports are correct for JavaFX).
-1. Compile program using java from the `/src/gamePlay/mainMenu/main.java` file.
+2. Download [gson .jar file](https://search.maven.org/artifact/com.google.code.gson/gson/2.8.9/jar). [if not available](#GSON-installation-if-Jar-is-not-available)
+3. Add JavaFX and gson .jar filepaths to IDE reference library (ensure module imports are correct for JavaFX).
+4. Compile program using java from the `/src/gamePlay/mainMenu/main.java` file.
 
 ### Linux Specific Installation
 
@@ -63,3 +63,25 @@ Java 17 installation
 ```bash
 brew install --cask adoptopenjdk17
 ```
+
+### GSON installation if Jar is not available
+
+Gradle:
+
+```bash
+dependencies {
+  implementation 'com.google.code.gson:gson:2.8.9'
+}
+```
+
+Maven:
+
+```bash
+<dependency>
+  <groupId>com.google.code.gson</groupId>
+  <artifactId>gson</artifactId>
+  <version>2.8.9</version>
+</dependency>
+```
+
+Or Check [Official Github](https://github.com/google/gson)!
