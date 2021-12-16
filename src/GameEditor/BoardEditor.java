@@ -739,23 +739,7 @@ public Group startBoardEditor(Stage stage){
     
     boardGrid board = new boardGrid();
     
-    // Testing localStorage
     localStorage = LocalStorage.getInstance();
-    
-    // Dummy data, use to test out localStorage
-    
-    currBoard = new Board();
-    currBoard.updateDimensions(6, 6);
-    Tile a = new Tile(5, 5, new ArrayList<Rule>(), new Hashtable<String,String>(), 0);
-    a.getAttributes().put("color", "0x994d66ff");
-    a.getAttributes().put("shape", "circle");
-    a.getAttributes().put("text", "fu");
-    a.getAttributes().put("file location", "/Users/oe-itstudent/Downloads/Screen Shot 2021-12-15 at 12.36.20 AM.png");
-    ArrayList<Tile> tiles = new ArrayList<Tile>();
-    tiles.add(a);
-    currBoard.update_tiles(tiles);
-    
-    localStorage.storage.put("board", currBoard);
     
     if (localStorage.storage.containsKey("board")){
     	currBoard = (Board) localStorage.storage.get("board");
@@ -769,7 +753,6 @@ public Group startBoardEditor(Stage stage){
         board.addInitialPieces(5, 5);
 	    localStorage.storage.put("board", currBoard);
     }
-    // Testing End localStorage
 
     theBoardGrid = board;
     board.getBoard().setTranslateX(100);
