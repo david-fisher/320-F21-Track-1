@@ -40,9 +40,9 @@ public class MoveRule extends Rule {
   public String prettyPrint() {
     int[] range = stepCount.getRange();
     if (range[0] == range[1]) {
-      return "Move " + range[0] + " spaces";
+      return "Move " + range[0] + " spaces.";
     } else {
-      return "Move " + range[0] + " - " + range[1] + " spaces";
+      return "Move " + range[0] + " - " + range[1] + " spaces.";
     }
   }
 }
