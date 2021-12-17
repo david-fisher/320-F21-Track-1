@@ -57,8 +57,6 @@ A game player allows a user to run a created game and interact with it through a
 sudo apt-get install openjdk-17-jre
 ```
 
--   Zip the jar file
-
 ### Mac Specific Installation
 For installation, we will be using [Homebrew](https://brew.sh).  
 
